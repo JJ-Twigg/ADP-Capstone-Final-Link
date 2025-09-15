@@ -8,12 +8,16 @@ Date: 26 March 2025
 package com.college.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Guest {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int guestID;
+
     private String name;
     private String surname;
     private String contactNumber;

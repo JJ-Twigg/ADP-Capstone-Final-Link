@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
+
+    <!-- Heading -->
+    <Label alignment="CENTER" layoutY="20.0" prefHeight="49.5" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;-fx-text-fill: white;" text="Room Service" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+    <!-- Table -->
+    <TableView fx:id="paymentTable" layoutX="40.0" layoutY="71.0" prefHeight="349.0" prefWidth="926.0">
+        <columns>
+            <TableColumn fx:id="colId" prefWidth="469.0" text="Employee ID" />
+            <TableColumn fx:id="colAmount" prefWidth="456.0" />
+        </columns>
+    </TableView>
+
+    <!-- Buttons -->
+    <HBox layoutX="40.0" layoutY="440.0" spacing="20.0" />
+    <Button layoutX="666.0" layoutY="470.0" onAction="#handleDeletePayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #C20010;" text="Delete Payment" textFill="WHITE" />
+    <Button layoutX="435.0" layoutY="470.0" onAction="#handleUpdatePayment" prefHeight="40.0" prefWidth="150.0" styleClass="button" text="Update Payment" textFill="WHITE" />
+    <Button layoutX="210.0" layoutY="470.0" onAction="#handleAddPayment" prefHeight="40.0" prefWidth="150.0" styleClass="button" text="Add Payment" textFill="WHITE" />
+
+</AnchorPane>

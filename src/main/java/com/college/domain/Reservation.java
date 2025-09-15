@@ -12,17 +12,8 @@ import jakarta.persistence.*;
 @Table(name="Reservation")
 public class Reservation {
     @Id
-
-//    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
-
-//    @OneToOne
-//    @MapsId("roomID")
-//    @JoinColumn(name= "room_id")
-//    private Room room;
-    // -----------------------------------
-
     private String reservationDateTimeStart;
     private String reservationDateTimeEnd;
     // -----------------------------------

@@ -10,11 +10,12 @@ package com.college.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name="Housekeeper")
+@Table(name="Housekeeper")
 public class Housekeeper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int housekeeperId;
+
     private String housekeeperName;
     private String housekeeperSurname;
 
