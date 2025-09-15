@@ -1,4 +1,3 @@
-
 package com.college;
 
 import com.college.utilities.ApplicationContextProvider;
@@ -11,7 +10,7 @@ import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class AppEmployee extends Application {
+public class Home extends Application {
     private ConfigurableApplicationContext springContext;
 
     @Override
@@ -22,10 +21,7 @@ public class AppEmployee extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        stage.initStyle(StageStyle.UNDECORATED);
-//        String sceneName = "/scenes/window-dashboard.fxml";
-
-        String sceneName = "/scenes/window-reservation.fxml";
+        String sceneName = "/scenes/home-more.fxml";
         System.out.println("\n>>> Loading scene from '" + sceneName + "'...");
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
 
@@ -35,17 +31,14 @@ public class AppEmployee extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
-        Image icon = new Image(getClass().getResourceAsStream("/images/icons/app-icon.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/images/icons/bed.png"));
         stage.getIcons().add(icon);
 
-        stage.setTitle("HMS - Reservations");
-
-
+        stage.setTitle("HMS");
         stage.setScene(scene);
         stage.setResizable(false);
-//        stage.setWidth(1000);
-//        stage.setHeight(600);
-
+        stage.setWidth(1000);
+        stage.setHeight(600);
         stage.show();
     }
 
