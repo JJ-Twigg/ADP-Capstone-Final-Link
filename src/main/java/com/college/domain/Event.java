@@ -1,31 +1,60 @@
 package com.college.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-//import lombok.Getter;
-//import lombok.Setter;
+import jakarta.persistence.*;  // Only if you're using JPA/Hibernate, otherwise remove
 
-//@Setter
-//@Getter
 @Entity
+@Table(name="Event")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int eventId;
 
-    private String eventName;
-    private int numberOfPeople;
+//    @Column(nullable = false)
+    private String reason;   // e.g. Holiday, Work, Family, Business
 
-    // FK
-//    private int reservationId;
+//    @Column(length = 500)
+    private String description;  // Optional details about the event
 
-    public Event(){}
-    public Event(String eventName, int numberOfPeople) {
-        this.eventName = eventName;
-        this.numberOfPeople = numberOfPeople;
+    // -------- Constructors --------
+    public Event() {}
+    public Event(int eventId, String reason, String description) {
+        this.eventId = eventId;
+        this.reason = reason;
+        this.description = description;
     }
-    // ----------------------------------
 
+    // -------- Getters & Setters --------
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    // -------- toString --------
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventId=" + eventId +
+                ", reason='" + reason + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

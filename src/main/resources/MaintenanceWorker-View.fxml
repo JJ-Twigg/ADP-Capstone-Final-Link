@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.MaintenanceWorkerViewController">
+
+    <Label layoutX="300.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Maintenance Workers"/>
+
+    <TableView fx:id="table" layoutX="50.0" layoutY="70.0" prefWidth="700.0" prefHeight="420.0">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="100.0"/>
+            <TableColumn fx:id="colExternal" text="External" prefWidth="100.0"/>
+            <TableColumn fx:id="colCompany" text="Company" prefWidth="250.0"/>
+            <TableColumn fx:id="colType" text="Type" prefWidth="250.0"/>
+        </columns>
+    </TableView>
+
+    <Button layoutX="200.0" layoutY="520.0"  text="Add" onAction="#handleAdd" style="-fx-background-color: #26AD00" textFill="white"/>
+    <Button layoutX="360.0" layoutY="520.0" text="Update" onAction="#handleUpdate" style="-fx-background-color: #26AD00" textFill="white"/>
+    <Button layoutX="520.0" layoutY="520.0" text="Delete" onAction="#handleDelete" style="-fx-background-color: #C20010" textFill="white"/>
+</AnchorPane>

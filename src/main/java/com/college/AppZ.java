@@ -19,7 +19,11 @@ public class AppZ extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scenes/window-guest.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scenes/window-event.fxml"));
+
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scenes/window-guest.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/scenes/guest-view.fxml"));
+
         fxmlLoader.setControllerFactory(springContext::getBean);
         Parent root = fxmlLoader.load();
 

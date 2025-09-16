@@ -1,0 +1,36 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--<?import javafx.scene.control.Button?>-->
+<!--<?import javafx.scene.control.ChoiceBox?>-->
+<!--<?import javafx.scene.control.DatePicker?>-->
+<!--<?import javafx.scene.control.Label?>-->
+<!--<?import javafx.scene.control.TextField?>-->
+<!--<?import javafx.scene.layout.AnchorPane?>-->
+
+<!--<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentUpdateController">-->
+
+<!--    &lt;!&ndash; Heading &ndash;&gt;-->
+<!--    <Label layoutX="400.0" layoutY="40.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Update Payment" />-->
+
+<!--    &lt;!&ndash; Amount &ndash;&gt;-->
+<!--    <Label layoutX="300.0" layoutY="120.0" text="Amount:" />-->
+<!--    <TextField fx:id="txtAmount" layoutX="400.0" layoutY="115.0" prefWidth="200.0" />-->
+
+<!--    &lt;!&ndash; Method &ndash;&gt;-->
+<!--    <Label layoutX="300.0" layoutY="180.0" text="Method:" />-->
+<!--    <ChoiceBox fx:id="choiceMethod" layoutX="400.0" layoutY="175.0" prefWidth="200.0" />-->
+
+<!--    &lt;!&ndash; Status &ndash;&gt;-->
+<!--    <Label layoutX="300.0" layoutY="240.0" text="Status:" />-->
+<!--    <ChoiceBox fx:id="choiceStatus" layoutX="400.0" layoutY="235.0" prefWidth="200.0" />-->
+
+<!--    &lt;!&ndash; Date &ndash;&gt;-->
+<!--    <Label layoutX="300.0" layoutY="300.0" text="Date:" />-->
+<!--    <DatePicker fx:id="datePicker" layoutX="400.0" layoutY="295.0" prefWidth="200.0" />-->
+
+<!--    &lt;!&ndash; Buttons &ndash;&gt;-->
+<!--    <Button fx:id="btnSave" layoutX="356.0" layoutY="380.0" onAction="#handleSave" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #26AD00;" text="Save" textFill="WHITE" />-->
+
+<!--    <Button fx:id="btnCancel" layoutX="540.0" layoutY="380.0" onAction="#handleCancel" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #C20010;" text="Cancel" textFill="WHITE" />-->
+
+<!--</AnchorPane>-->
