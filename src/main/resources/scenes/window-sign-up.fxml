@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0"
+           prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.college.controller.UserRegisterController">
    <children>
       <Pane fx:id="pane2" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
@@ -34,11 +36,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <PasswordField alignment="CENTER" minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" promptText="Confirm password">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </PasswordField>
+
                </children>
             </VBox>
             <ButtonBar layoutX="55.0" layoutY="310.0" prefHeight="54.0" prefWidth="490.0">
@@ -64,7 +62,7 @@
             </Label>
             <VBox layoutX="320.0" layoutY="87.0" prefHeight="200.0" prefWidth="220.0">
                <children>
-                  <TextField fx:id="username" alignment="CENTER" prefHeight="38.0" prefWidth="179.0" promptText="Username">
+                  <TextField fx:id="username" alignment="CENTER" prefHeight="38.0" prefWidth="179.0" promptText="Email">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -83,18 +81,20 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </PasswordField>
-                  <PasswordField fx:id="password1" alignment="CENTER" prefHeight="50.0" prefWidth="179.0" promptText="Confirm Password">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </PasswordField>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #66BB6A;" text="Sign up" textFill="WHITE">
+
+                  <!--                        <PasswordField fx:id="password1" alignment="CENTER" prefHeight="50.0" prefWidth="179.0" promptText="Confirm Password">-->
+                  <!--                            <font>-->
+                  <!--                                <Font size="12.0" />-->
+                  <!--                            </font>-->
+                  <!--                            <VBox.margin>-->
+                  <!--                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />-->
+                  <!--                            </VBox.margin>-->
+                  <!--                            <padding>-->
+                  <!--                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />-->
+                  <!--                            </padding>-->
+                  <!--                        </PasswordField>-->
+
+                  <Button mnemonicParsing="false" onAction="#handleSignUp" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #66BB6A;" text="Sign up" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -135,7 +135,7 @@
                <children>
                   <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
                      <image>
-                        <Image url="@images/c.png" />
+                        <Image url="@../images/c.png" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" prefHeight="21.0" prefWidth="187.0" text="Hotel Management System" textAlignment="CENTER" textFill="WHITE">

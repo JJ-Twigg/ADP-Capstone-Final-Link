@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.EmployeeControllerView">
 
     <!-- Heading -->
-    <Label alignment="CENTER" layoutY="20.0" prefHeight="49.5" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;-fx-text-fill: white;" text="Employee" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <Label alignment="CENTER" layoutY="20.0" prefHeight="49.5" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;-fx-text-fill: white;" text="Employee" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
     <!-- Table -->
     <TableView fx:id="foodWorkerTable" layoutX="40.0" layoutY="71.0" prefHeight="349.0" prefWidth="926.0">

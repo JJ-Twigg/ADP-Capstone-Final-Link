@@ -6,19 +6,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/24.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.college.controller.GuestUIController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.GuestUIController">
 
     <!-- Heading -->
-    <Label layoutX="40.0" layoutY="20.0"
-           style="-fx-font-size: 24px; -fx-font-weight: bold;"
-           text="Guests" />
+    <Label alignment="CENTER" layoutY="20.0" prefHeight="60.0" prefWidth="1040.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;" text="Guests" textFill="WHITE" AnchorPane.topAnchor="0.0" />
 
     <!-- Table -->
-    <TableView fx:id="guestTable" layoutX="40.0" layoutY="70.0"
-               prefHeight="350.0" prefWidth="920.0">
+    <TableView fx:id="guestTable" layoutX="40.0" layoutY="70.0" prefHeight="350.0" prefWidth="920.0">
         <columns>
             <TableColumn fx:id="colGuestID" prefWidth="60" text="ID" />
             <TableColumn fx:id="colName" prefWidth="150" text="Name" />
@@ -30,25 +24,13 @@
     </TableView>
 
     <!-- Buttons -->
-    <Button layoutX="666.0" layoutY="470.0"
-            onAction="#handleDeleteGuest"
-            prefHeight="40.0" prefWidth="150.0"
-            style="-fx-background-color: #C20010;"
-            text="Delete Guest" textFill="WHITE" />
+    <Button layoutX="666.0" layoutY="470.0" onAction="#handleDeleteGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #C20010;" text="Delete Guest" textFill="WHITE" />
 
-    <Button layoutX="435.0" layoutY="470.0"
-            onAction="#handleEditGuest"
-            prefHeight="40.0" prefWidth="150.0"
-            style="-fx-background-color: #26AD00;"
-            text="Edit Guest" textFill="WHITE" />
+    <Button layoutX="435.0" layoutY="470.0" onAction="#handleEditGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #26AD00;" text="Edit Guest" textFill="WHITE" />
 
-    <Button layoutX="210.0" layoutY="470.0"
-            onAction="#handleAddGuest"
-            prefHeight="40.0" prefWidth="150.0"
-            style="-fx-background-color: #26AD00;"
-            text="Add Guest" textFill="WHITE" />
+    <Button layoutX="210.0" layoutY="470.0" onAction="#handleAddGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #26AD00;" text="Add Guest" textFill="WHITE" />
 
-    <Button text="View Events" onAction="#handleOpenEventScreen"/>
+    <Button layoutX="40.0" layoutY="478.0" onAction="#handleOpenEventScreen" text="View Events" />
 
 
 </AnchorPane>

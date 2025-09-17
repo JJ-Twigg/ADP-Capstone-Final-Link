@@ -59,10 +59,16 @@
         </dependency>
 
         <!-- Example for Maven with jBCrypt -->
+<!--        <dependency>-->
+<!--            <groupId>org.mindrot</groupId>-->
+<!--            <artifactId>jbcrypt</artifactId>-->
+<!--&lt;!&ndash;            <version>0.4</version>&ndash;&gt;-->
+<!--        </dependency>-->
+
+        <!--  Spring Boot Security  -->
         <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-<!--            <version>0.4</version>-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
     <build>

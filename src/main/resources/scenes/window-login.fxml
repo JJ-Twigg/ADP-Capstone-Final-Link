@@ -15,7 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0"
+           minWidth="600.0" prefHeight="400.0" prefWidth="600.0"
+           xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.college.controller.UserLoginController">
    <children>
       <Pane fx:id="pane2" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
@@ -90,7 +92,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </PasswordField>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #66BB6A;" text="Log in" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="227.0"  onAction="#handleLoginAuth"  style="-fx-background-color: #66BB6A;" text="Log in" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -131,7 +133,7 @@
                <children>
                   <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
                      <image>
-                        <Image url="@images/c.png" />
+                        <Image url="@../images/c.png" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" prefHeight="21.0" prefWidth="187.0" text="Hotel Management System" textAlignment="CENTER" textFill="WHITE">
