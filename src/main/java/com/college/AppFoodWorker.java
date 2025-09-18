@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class AppAEmployee extends Application {
+public class AppFoodWorker extends Application {
 
     private ConfigurableApplicationContext springContext;
 
@@ -19,13 +19,15 @@ public class AppAEmployee extends Application {
 
     @Override
     public void init() {
-        springContext = new SpringApplicationBuilder(Main.class).run();
+        // Start Spring before JavaFX
+        springContext = new SpringApplicationBuilder(Main.class)
+                .run(); // your SpringBootApplication class
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println("\nLoading Employee scene...");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-employee.fxml"));
+        System.out.println("\nLoading FoodWorker scene...");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-foodWorker.fxml"));
 
         // Give FXMLLoader access to Spring beans
         loader.setControllerFactory(springContext::getBean);
@@ -41,7 +43,7 @@ public class AppAEmployee extends Application {
         stage.getIcons().add(icon);
 
         stage.setScene(scene);
-        stage.setTitle("HMS - Employee Management");
+        stage.setTitle("HMS - FoodWorker Management");
         stage.setWidth(1000);
         stage.setHeight(600);
         stage.setResizable(false);

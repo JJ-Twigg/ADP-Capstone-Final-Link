@@ -51,14 +51,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class AppT extends Application {
+public class AppPayment extends Application {
 
     private ConfigurableApplicationContext springContext;
 
     @Override
     public void init() throws Exception {
         // Start Spring Boot context
-        springContext = SpringApplication.run(AppT.class);
+        springContext = SpringApplication.run(AppPayment.class);
     }
 
     @Override
@@ -97,6 +97,6 @@ public class AppT extends Application {
 //        System.setProperty("spring.main.web-application-type", "none");
 
         // Launch JavaFX application
-        Application.launch(AppT.class, args);
+        Application.launch(AppPayment.class, args);
     }
 }

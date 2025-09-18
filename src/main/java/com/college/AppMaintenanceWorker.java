@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class MaintenanceWorkerLauncher extends Application {
+public class AppMaintenanceWorker extends Application {
 
     private ConfigurableApplicationContext context;
 

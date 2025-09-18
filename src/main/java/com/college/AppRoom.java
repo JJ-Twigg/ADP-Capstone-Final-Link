@@ -71,7 +71,7 @@ import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class AppJ extends Application {
+public class AppRoom extends Application {
 
     private ConfigurableApplicationContext springContext;
 

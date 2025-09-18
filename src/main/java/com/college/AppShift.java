@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class ShiftMain extends Application {
+public class AppShift extends Application {
 
     private ConfigurableApplicationContext springContext;
 
@@ -47,7 +47,7 @@ public class ShiftMain extends Application {
 
         // Launch JavaFX application
 //        Application.launch(Main.class, args);
-        Application.launch(ShiftMain.class, args);
+        Application.launch(AppShift.class, args);
 
     }
 }

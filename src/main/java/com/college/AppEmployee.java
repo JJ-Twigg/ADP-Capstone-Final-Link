@@ -1,6 +1,5 @@
 package com.college;
 
-import com.college.utilities.ApplicationContextProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,20 +9,23 @@ import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class AppA extends Application {
+public class AppEmployee extends Application {
+
     private ConfigurableApplicationContext springContext;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void init() {
-        springContext = new SpringApplicationBuilder(com.college.MainApp.class).run();
-        ApplicationContextProvider.setApplicationContext(springContext);
+        springContext = new SpringApplicationBuilder(Main.class).run();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        String sceneName = "/scenes/window-reservation.fxml";
-        System.out.println("\n>>> Loading scene from '" + sceneName + "'...");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+        System.out.println("\nLoading Employee scene...");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-employee.fxml"));
 
         // Give FXMLLoader access to Spring beans
         loader.setControllerFactory(springContext::getBean);
@@ -31,29 +33,24 @@ public class AppA extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
+        // Apply CSS for FoodWorker scene
         scene.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
-//        scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
 
+        // FoodWorker icon
         Image icon = new Image(getClass().getResourceAsStream("/images/icons/bed.png"));
         stage.getIcons().add(icon);
 
-        stage.setTitle("HMS - Reservations Management");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setTitle("HMS - Employee Management");
         stage.setWidth(1000);
         stage.setHeight(600);
+        stage.setResizable(false);
         stage.show();
     }
 
     @Override
     public void stop() {
+        // Shutdown Spring when JavaFX exits
         springContext.close();
     }
-
-    // =============================================
-    // MAIN //
-    public static void main(String[] args) {
-        launch(args);
-    }
-    // =============================================
 }

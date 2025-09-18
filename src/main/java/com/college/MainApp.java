@@ -16,7 +16,7 @@ public class MainApp {
         springContext = SpringApplication.run(MainApp.class, args);
 
         // Once Spring Boot is ready, start JavaFX
-        Application.launch(AppZ.class, args);
+        Application.launch(AppGuest.class, args);
 
     }
 

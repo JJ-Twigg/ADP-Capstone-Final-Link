@@ -21,22 +21,22 @@ public class Room {
     private String features;
 
     // FK to Reservation
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId")
-    private Reservation reservation;
+//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId")
+//    private Reservation reservation;
 
     // FK to Housekeeper
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "housekeeper_id", referencedColumnName = "housekeeperId")
     private Housekeeper housekeeper;
 
-    public Reservation getReservation() {
-        return reservation;
-    }
+//    public Reservation getReservation() {
+//        return reservation;
+//    }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
+//    public void setReservation(Reservation reservation) {
+//        this.reservation = reservation;
+//    }
 
     public Housekeeper getHousekeeper() {
         return housekeeper;

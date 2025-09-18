@@ -6,7 +6,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.GuestUIController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.GuestUIController">
 
     <!-- Heading -->
     <Label alignment="CENTER" layoutY="20.0" prefHeight="60.0" prefWidth="1040.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;" text="Guests" textFill="WHITE" AnchorPane.topAnchor="0.0" />

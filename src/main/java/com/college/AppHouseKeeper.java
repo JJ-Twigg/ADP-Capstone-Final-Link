@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class AppM extends Application {
+public class AppHouseKeeper extends Application {
     private ConfigurableApplicationContext context;
 
     @Override
@@ -18,7 +18,7 @@ public class AppM extends Application {
     public void init() throws Exception{
 //        context = new SpringApplicationBuilder(BootApp.class).run();
 //        context = new SpringApplicationBuilder(Main.class).run();
-        context = SpringApplication.run(AppM.class);
+        context = SpringApplication.run(AppHouseKeeper.class);
     }
 
 
@@ -62,6 +62,6 @@ public class AppM extends Application {
 //        System.setProperty("spring.main.web-application-type", "none");
 
         // Launch JavaFX application
-        Application.launch(AppM.class, args);
+        Application.launch(AppHouseKeeper.class, args);
     }
 }
