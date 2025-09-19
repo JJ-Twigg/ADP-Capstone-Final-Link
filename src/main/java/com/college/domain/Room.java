@@ -20,31 +20,27 @@ public class Room {
     private Boolean availability;
     private String features;
 
+
+
+
+
+
     // FK to Reservation
-//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId")
-//    private Reservation reservation;
+    @OneToOne
+    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId")
+    private Reservation reservation;
 
-    // FK to Housekeeper
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "housekeeper_id", referencedColumnName = "housekeeperId")
-    private Housekeeper housekeeper;
 
-//    public Reservation getReservation() {
-//        return reservation;
-//    }
 
-//    public void setReservation(Reservation reservation) {
-//        this.reservation = reservation;
-//    }
 
-    public Housekeeper getHousekeeper() {
-        return housekeeper;
-    }
 
-    public void setHousekeeper(Housekeeper housekeeper) {
-        this.housekeeper = housekeeper;
-    }
+
+
+
+
+
+
+
 
     public Room(){}
     public Room(int roomID, String roomType, float pricePerNight, Boolean availability, String features) {

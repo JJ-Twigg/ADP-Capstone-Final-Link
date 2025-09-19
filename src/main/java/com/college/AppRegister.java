@@ -49,7 +49,6 @@ public class AppRegister extends Application {
         stage.setResizable(false);
         stage.show();
 
-
     }
 
     @Override

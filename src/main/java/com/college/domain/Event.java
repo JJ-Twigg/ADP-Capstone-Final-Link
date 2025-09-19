@@ -5,16 +5,44 @@ import jakarta.persistence.*;  // Only if you're using JPA/Hibernate, otherwise 
 @Entity
 @Table(name="Event")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int eventId;
 
-//    @Column(nullable = false)
-    private String reason;   // e.g. Holiday, Work, Family, Business
 
-//    @Column(length = 500)
-    private String description;  // Optional details about the event
+    private String reason;
 
+
+    private String description;
+
+
+
+
+
+
+    //FK Relationship to reservation
+    @OneToOne
+    @JoinColumn(name = "reservation_id") // FK column in Event table
+    private Reservation reservation;
+
+//getter and setter for gaining access to fk
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+
+
+
+
+
+
+
+    
     // -------- Constructors --------
     public Event() {}
     public Event(int eventId, String reason, String description) {

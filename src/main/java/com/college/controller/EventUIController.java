@@ -1,6 +1,7 @@
 package com.college.controller;
 
 import com.college.domain.Event;
+import com.college.domain.Reservation;
 import com.college.service.EventUIService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,14 @@ public class EventUIController {
 
     private final EventUIService eventService = new EventUIService();
     private final ObservableList<Event> eventList = FXCollections.observableArrayList();
+
+
+    private Integer reservationId; // FK for Event
+
+    public void setReservationId(Integer reservationId) {
+        this.reservationId = reservationId;
+    }
+
 
     @FXML
     public void initialize() {
@@ -50,6 +59,11 @@ public class EventUIController {
         Event event = new Event();
         event.setReason(reason);
         event.setDescription(description);
+
+        // SET FK HERE
+        Reservation reservation = new Reservation();
+        reservation.setReservationId(reservationId); // only ID
+        event.setReservation(reservation);
 
         try {
             eventService.addEvent(event);
