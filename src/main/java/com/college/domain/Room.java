@@ -12,7 +12,6 @@ import jakarta.persistence.*;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roomID;
 
     private String roomType;
@@ -32,11 +31,15 @@ public class Room {
 
 
 
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
 
 
 
-
-
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
 
 
 

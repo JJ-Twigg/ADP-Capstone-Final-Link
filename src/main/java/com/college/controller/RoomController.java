@@ -29,6 +29,12 @@ import java.util.Set;
 @Component
 public class RoomController {
 
+    private Integer reservationId; // FK for Event
+
+    public void setReservationId(Integer reservationId) {
+        this.reservationId = reservationId;
+    }
+
     @Autowired
     private RoomService roomService;
 

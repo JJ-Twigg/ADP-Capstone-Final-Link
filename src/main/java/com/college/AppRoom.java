@@ -62,27 +62,67 @@
 
 package com.college;
 
+import com.college.domain.Room;
+import com.college.factory.RoomFactory;
+import com.college.repository.RoomRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public class AppRoom extends Application {
 
     private ConfigurableApplicationContext springContext;
 
+    @Autowired
+    RoomRepository roomRepository;
+
     public static void main(String[] args) {
         launch(args);
     }
+
+
+
 
     @Override
     public void init() {
         // Start Spring before JavaFX
         springContext = new SpringApplicationBuilder(com.college.MainApp.class).run();
+
+        seedRooms();
+
+
+    }
+
+    @Transactional
+    private void seedRooms() {
+        RoomRepository roomRepository = springContext.getBean(RoomRepository.class);
+
+        // Optional: clear table if you want a fresh start every launch
+        roomRepository.deleteAll();
+
+        // Create and save rooms
+        List<Room> rooms = List.of(
+                RoomFactory.createRoom(51, "VIP", 2000f, true, "WiFi, TV, Room service"),
+                RoomFactory.createRoom(52, "VIP", 2000f, true, "WiFi, TV, Balcony"),
+                RoomFactory.createRoom(53, "Standard", 1500f, false, "WiFi, TV"),
+                RoomFactory.createRoom(54, "Economy", 1200f, true, "Basic Amenities"),
+                RoomFactory.createRoom(55, "VIP", 1800f, true, "WiFi, TV, Balcony"),
+                RoomFactory.createRoom(56, "Standard", 1600f, false, "WiFi, TV"),
+                RoomFactory.createRoom(57, "VIP", 2000f, true, "WiFi, TV"),
+                RoomFactory.createRoom(58, "Economy", 1400f, true, "WiFi, TV, Balcony"),
+                RoomFactory.createRoom(59, "Standard", 1700f, false, "WiFi, TV")
+        );
+
+        roomRepository.saveAll(rooms); // batch save is safer than multiple save()
     }
 
     @Override

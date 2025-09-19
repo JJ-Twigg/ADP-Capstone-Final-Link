@@ -1,7 +1,9 @@
 package com.college.controller;
 
 import com.college.domain.Reservation;
+import com.college.domain.Room;
 import com.college.service.ReservationService;
+import com.college.service.RoomService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +18,9 @@ import java.io.IOException;
 
 @Component
 public class AddReservationController {
+
+    @Autowired
+    private RoomService roomService;
 
     @FXML private TextField startTimeField;
     @FXML private TextField endTimeField;
@@ -32,6 +37,13 @@ public class AddReservationController {
         this.stage = stage;
     }
 
+
+
+
+
+
+
+    //save reservation with event window coming after
     @FXML
     private void saveReservation() {
         String startTime = startTimeField.getText();
@@ -47,12 +59,104 @@ public class AddReservationController {
 
             System.out.println("New reservation saved: " + newReservation);
 
+            //for now these are the 2 method calls for fk working.
+            //waiting for activity flow which will decide if someone says event, call event fk method page otherwise no event and call room only
+
+            //---ammar needs to add id to his reservation, so we know which room to book!
+            int roomChosen = 54;
+
+
+
+
+
+            Room roomToUpdate = roomService.read(roomChosen);
+
+
+
+            roomToUpdate.setReservation(savedReservation);
+
+            //if room is available make it unavailable otherwise print its already taken and cant be booked
+            if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
+                // Room is available, so toggle to unavailable
+                roomToUpdate.setAvailability(false);
+                roomService.update(roomToUpdate);
+            } else {
+                System.out.println("Room already taken");
+            }
+
+
+            roomService.update(roomToUpdate);
+
+            // Mark the room as unavailable
+
+
+//            openRoomDialog(reservationId);
+
+            //WORKING ROOM CODE
+//            saveReservationNoEvent(savedReservation.getReservationId());
+
+            //WORKING EVENT CODE
             openAddEventDialog(savedReservation.getReservationId());
 
             stage.close();
         }
         else {
             System.out.println("Please fill in all fields.");
+        }
+    }
+
+
+
+
+//not needed cause we dont need to see the room list afterwards necessarily
+
+//    //save reservation with event window coming after
+//    @FXML
+//    private void saveReservationNoEvent(Integer reservationId) {
+//        String startTime = startTimeField.getText();
+//        String endTime = endTimeField.getText();
+//
+//        if (!startTime.isEmpty() && !endTime.isEmpty()) {
+//            Reservation newReservation = new Reservation(startTime, endTime);
+//
+//            //1 GET THE VALUE OF THE PK AUTO GEN, save to variable. so that it can be used with event controller as fk
+//            //2 run event window
+//            Reservation savedReservation = reservationService.create(newReservation);
+//            System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
+//
+//            System.out.println("New reservation saved: " + newReservation);
+//
+//
+//
+//            openRoomDialog(savedReservation.getReservationId());
+//
+//            stage.close();
+//        }
+//        else {
+//            System.out.println("Please fill in all fields.");
+//        }
+//    }
+
+
+    //method to open event window
+    private void openRoomDialog(Integer reservationId) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-room-page1"));
+            Parent root = loader.load();
+
+            // Get the controller of Event UI
+            RoomController roomController = loader.getController();
+            roomController.setReservationId(reservationId); // you need a setter in RoomController
+
+            // Show Event form as modal
+            Stage modalStage = new Stage();
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            modalStage.setTitle("Add Event for Reservation ID: " + reservationId);
+            modalStage.setScene(new Scene(root));
+            modalStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -65,7 +169,7 @@ public class AddReservationController {
 
             // Get the controller of Event UI
             EventUIController eventController = loader.getController();
-            eventController.setReservationId(reservationId); // pass the FK
+            eventController.setReservationId(reservationId); // pass the FK // you need a setter in eventController
 
             // Show Event form as modal
             Stage modalStage = new Stage();
