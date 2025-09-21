@@ -20,9 +20,10 @@ public class EventUIController {
     private final EventUIService eventService = new EventUIService();
     private final ObservableList<Event> eventList = FXCollections.observableArrayList();
 
+    // FK for Event
+    private Integer reservationId;
 
-    private Integer reservationId; // FK for Event
-
+    // FK for Event
     public void setReservationId(Integer reservationId) {
         this.reservationId = reservationId;
     }

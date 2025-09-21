@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.Housekeeper;
 import com.college.service.HousekeeperService;
 import javafx.application.Platform;
@@ -33,6 +34,19 @@ public class HousekeeperViewController {
     private ApplicationContext applicationContext;
 
     private final ObservableList<Housekeeper> housekeepers = FXCollections.observableArrayList();
+
+
+    //will store FK object from employee
+    private Employee employee;  // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+    }
+
+
+
 
     @FXML
     public void initialize() {
@@ -100,8 +114,17 @@ public class HousekeeperViewController {
             stage.setTitle(hk == null ? "Add Housekeeper" : "Update Housekeeper");
             stage.setScene(new Scene(loader.load()));
             HousekeeperFormController controller = loader.getController();
+
+            //FOREIGN KEY ADD
+            controller.setEmployee(this.employee);
+
+
             controller.setHousekeeper(hk);
             stage.showAndWait();
+
+
+
+
             load();
         } catch (Exception e) {
             e.printStackTrace();

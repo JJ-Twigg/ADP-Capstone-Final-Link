@@ -11,7 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 public class AppEmployee extends Application {
 
-    private ConfigurableApplicationContext springContext;
+    private static ConfigurableApplicationContext springContext;
 
     public static void main(String[] args) {
         launch(args);
@@ -20,6 +20,10 @@ public class AppEmployee extends Application {
     @Override
     public void init() {
         springContext = new SpringApplicationBuilder(Main.class).run();
+    }
+
+    public static ConfigurableApplicationContext getSpringContext() {
+        return springContext;
     }
 
     @Override

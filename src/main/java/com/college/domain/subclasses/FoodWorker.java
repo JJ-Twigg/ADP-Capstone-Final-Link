@@ -18,7 +18,13 @@ public class FoodWorker {
     @JoinColumn(name = "employee_id", unique = true) // foreign key to Employee
     private Employee employee;
 
+    public Employee getEmployee() {
+        return employee;
+    }
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     // Default constructor
     public FoodWorker() {}

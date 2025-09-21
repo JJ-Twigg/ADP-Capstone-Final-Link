@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.HousekeeperViewController">
+<AnchorPane prefHeight="600.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.HousekeeperViewController">
 
     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="1000.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;" text="Housekeepers" textFill="WHITE">
       <padding>

@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.MaintenanceWorker;
 import com.college.service.MaintenanceWorkerService;
 import javafx.application.Platform;
@@ -26,6 +27,22 @@ public class MaintenanceWorkerViewController {
     @FXML private TableColumn<MaintenanceWorker, Boolean> colExternal;
     @FXML private TableColumn<MaintenanceWorker, String> colCompany;
     @FXML private TableColumn<MaintenanceWorker, String> colType;
+
+
+
+
+    //will store FK object from employee
+    private Employee employee;  // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+    }
+
+
+
+
 
     @Autowired
     private MaintenanceWorkerService service;
@@ -80,6 +97,12 @@ public class MaintenanceWorkerViewController {
             stage.setTitle(worker == null ? "Add Worker" : "Update Worker");
             stage.setScene(new Scene(loader.load()));
             MaintenanceWorkerFormController controller = loader.getController();
+
+            //FOREIGN KEY ADD
+            controller.setEmployee(this.employee);
+
+
+
             controller.setWorker(worker);
             stage.showAndWait();
             load();

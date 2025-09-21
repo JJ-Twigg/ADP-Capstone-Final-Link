@@ -1,24 +1,29 @@
 package com.college.controller;
 
+import com.college.AppEmployee;
 import com.college.domain.Employee;
 import com.college.domain.subclasses.FoodWorker;
 import com.college.repository.EmployeeRepository;
+import com.college.service.EmployeeService;
 import com.college.service.IFoodWorkerService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextInputDialog;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -38,6 +43,9 @@ public class EmployeeControllerView {
 
     @Autowired
     private EmployeeRepository repo;
+
+    @Autowired
+    private EmployeeService employeeService;
 //    private IFoodWorkerService foodWorkerService;
 
     private ObservableList<Employee> workers = FXCollections.observableArrayList();
@@ -63,10 +71,10 @@ public class EmployeeControllerView {
     private void loadWorkers() {
         workers.clear();
 
-        System.out.println("\nAll EMPLOYEE records");
-        for (Employee e : repo.findAll()){
-            System.out.println("- " + e);
-        }
+//        System.out.println("\nAll EMPLOYEE records");
+//        for (Employee e : repo.findAll()){
+//            System.out.println("- " + e);
+//        }
         workers.addAll(repo.findAll());
         foodWorkerTable.setItems(workers);
     }
@@ -86,20 +94,22 @@ public class EmployeeControllerView {
 //        Optional<String> specResult = dialog.show();
         if (specResult.isEmpty()) return;
 
-//        FoodWorker worker = new FoodWorker.FoodWorkerBuilder()
-//                .type(typeResult.get())
-//                .specialization(specResult.get())
-//                .build();
 
-//        LocalDate currentDate = LocalDate.now();
-//        LocalTime currentTime = LocalTime.now();
-//        LocalDateTime currentDateTime = LocalDateTime.now();
+        // Worker type dropdown
+        List<String> workerTypes = List.of("Maintenance Worker", "Housekeeper", "Food Worker");
+        ChoiceDialog<String> choiceDialog = new ChoiceDialog<>(workerTypes.get(0), workerTypes);
+        choiceDialog.setTitle("Select Worker Type");
+        choiceDialog.setHeaderText("Choose the type of worker:");
+        Optional<String> workerType = choiceDialog.showAndWait();
+        if (workerType.isEmpty()) return;
+
+        System.out.println("worker type selected: " + workerType);
 
         // formatted date and time
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
         String formattedDateTime = now.format(formatter);
-        System.out.println("Current Date and Time: " + formattedDateTime);
+//        System.out.println("Current Date and Time: " + formattedDateTime);
 
         Employee employee = new Employee(
                 typeResult.get(),
@@ -107,8 +117,76 @@ public class EmployeeControllerView {
 //                currentDateTime,
                 formattedDateTime
         );
-        repo.save(employee);
+
+        String workerTypeStr = workerType.get().trim();
+
+        //save PK to use as FK
+        Employee employeePk = employeeService.create(employee);
+        System.out.println("Employee ID (FK for 3 other entities): " + employeePk.getId());
+
+        if (workerTypeStr.equalsIgnoreCase("Food Worker")) {
+            System.out.println("adding food worker FK");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-foodWorker.fxml"));
+                loader.setControllerFactory(AppEmployee.getSpringContext()::getBean);
+                Parent root = loader.load();
+
+                FoodWorkerControllerView foodWorkerController = loader.getController();
+                foodWorkerController.setEmployee(employeePk);
+
+                Stage stage = new Stage();
+                stage.setTitle("Food Worker Management");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (workerTypeStr.equalsIgnoreCase("Housekeeper")) {
+            System.out.println("adding housekeeper FK");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-housekeeper-d1.fxml"));
+                loader.setControllerFactory(AppEmployee.getSpringContext()::getBean);
+                Parent root = loader.load();
+
+                HousekeeperViewController hkController = loader.getController();
+                hkController.setEmployee(employeePk);
+
+                Stage stage = new Stage();
+                stage.setTitle("Housekeeper Management");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            System.out.println("adding maintenance FK");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/MaintenanceWorker-View.fxml"));
+                loader.setControllerFactory(AppEmployee.getSpringContext()::getBean);
+                Parent root = loader.load();
+
+                MaintenanceWorkerViewController mwController = loader.getController();
+                mwController.setEmployee(employeePk);
+
+                Stage stage = new Stage();
+                stage.setTitle("Maintenance Worker Management");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+
+
+
         loadWorkers();
+
     }
 
     @FXML

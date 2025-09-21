@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.Housekeeper;
 import com.college.service.HousekeeperService;
 import javafx.fxml.FXML;
@@ -13,6 +14,21 @@ public class HousekeeperFormController {
 
     @FXML private TextField txtName;
     @FXML private TextField txtSurname;
+
+
+    //will store FK object from employee
+    private Employee employee;  // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+    }
+
+
+
+
+
 
     @Autowired
     private HousekeeperService housekeeperService;
@@ -42,7 +58,12 @@ public class HousekeeperFormController {
                     .setHousekeeperName(name)
                     .setHousekeeperSurname(surname)
                     .build();
+
+            //setFK to be saved
+            hk.setEmployee(employee);
+
             housekeeperService.create(hk);
+
             showAlert(Alert.AlertType.INFORMATION, "Success", "Housekeeper created.");
         } else {
             Housekeeper updated = new Housekeeper.HousekeeperBuilder()

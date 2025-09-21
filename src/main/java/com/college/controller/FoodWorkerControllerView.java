@@ -1,5 +1,7 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
+import com.college.domain.Reservation;
 import com.college.domain.subclasses.FoodWorker;
 import com.college.service.IFoodWorkerService;
 import javafx.collections.FXCollections;
@@ -32,6 +34,18 @@ public class FoodWorkerControllerView {
 
     private ObservableList<FoodWorker> workers = FXCollections.observableArrayList();
 
+    //will store FK object from employee
+    private Employee employee;   // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee);
+    }
+
+
+
+
     @FXML
     public void initialize() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -59,11 +73,18 @@ public class FoodWorkerControllerView {
         Optional<String> specResult = dialog.showAndWait();
         if (specResult.isEmpty()) return;
 
+
         FoodWorker worker = new FoodWorker.FoodWorkerBuilder()
                 .type(typeResult.get())
                 .specialization(specResult.get())
                 .build();
+
+        // SET FK HERE from employeeId integer setter at top we passed
+        //set the EMPLOYEE attribute in domain of this particular object with unique attributes we just made, to the pk passed.
+        worker.setEmployee(employee);
+
         foodWorkerService.create(worker);
+
         loadWorkers();
     }
 

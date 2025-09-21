@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.MaintenanceWorker;
 import com.college.service.MaintenanceWorkerService;
 import javafx.fxml.FXML;
@@ -19,6 +20,23 @@ public class MaintenanceWorkerFormController {
     private MaintenanceWorkerService service;
 
     private MaintenanceWorker worker;
+
+
+
+
+
+    //will store FK object from employee
+    private Employee employee;  // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+    }
+
+
+
+
 
     public void setWorker(MaintenanceWorker worker) {
         this.worker = worker;
@@ -45,6 +63,10 @@ public class MaintenanceWorkerFormController {
                     .setCompany(company)
                     .setType(type)
                     .build();
+
+            //setFK to be saved
+            newWorker.setEmployee(employee);
+
             service.create(newWorker);
         } else {
             MaintenanceWorker updated = new MaintenanceWorker.MaintenanceWorkerBuilder()
