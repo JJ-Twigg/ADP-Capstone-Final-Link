@@ -1,9 +1,7 @@
 package com.college.domain.subclasses;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.college.domain.Employee;
+import jakarta.persistence.*;
 
 @Entity
 public class FoodWorker {
@@ -13,6 +11,14 @@ public class FoodWorker {
 
     private String type;
     private String specialization;
+
+
+    //FK to Employee
+    @OneToOne
+    @JoinColumn(name = "employee_id", unique = true) // foreign key to Employee
+    private Employee employee;
+
+
 
     // Default constructor
     public FoodWorker() {}

@@ -1,25 +1,35 @@
 package com.college.domain.subclasses;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.college.domain.Employee;
+import jakarta.persistence.*;
 //import lombok.Getter;
 //import lombok.Setter;
 
+
+
 //@Getter
 //@Setter
-@Entity
+//@Entity
+
+@Deprecated
 public class MaintananceWorker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private boolean isExternal;
+
     private String company;
-//    private enum type;
+
     private String type;
 
-    // FK
-//    private int employeeId;
+
+    //FK to Employee
+    @OneToOne
+    @JoinColumn(name = "employee_id", unique = true) // foreign key to Employee
+    private Employee employee;
+
+
+
+
 }

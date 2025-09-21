@@ -1,5 +1,6 @@
 package com.college.domain;
 
+import com.college.domain.subclasses.FoodWorker;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 //import lombok.Getter;
@@ -13,27 +14,54 @@ import java.time.LocalTime;
 //@Setter
 @Entity
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String firstNames;
+
     private String lastName;
+
 //    private LocalTime startDate;
 //    private LocalDateTime registerDateTime;
+
     private String formattedDateTime;
 
-
     private String gender;
+
     private int age;
 
+    //FK to Shift
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    private Shift shift;
+
+    //FK to FoodWorker
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    private FoodWorker foodWorker;
+
+    //FK to maintenanceWorker
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    private MaintenanceWorker maintenanceWorker;
+
+    //FK to houseKeeper
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    private Housekeeper housekeeper;
+
+
+
+
+
     public Employee(){}
+
     public Employee(String empFirstName, String empLastName, String dateTime) {
         this.firstNames = empFirstName;
         this.lastName = empLastName;
 //        this.registerDateTime = dateTime;
         this.formattedDateTime = dateTime;
     }
+
+
 
 //    public Employee(String empFirstName, String empLastName) {
 //        this.firstNames = empFirstName;

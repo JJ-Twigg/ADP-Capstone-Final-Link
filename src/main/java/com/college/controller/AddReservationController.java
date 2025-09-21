@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -82,6 +83,7 @@ public class AddReservationController {
                 roomService.update(roomToUpdate);
             } else {
                 System.out.println("Room already taken");
+                alertRoomTaken();
             }
 
 
@@ -103,6 +105,14 @@ public class AddReservationController {
         else {
             System.out.println("Please fill in all fields.");
         }
+    }
+
+    public void alertRoomTaken(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Room Status");
+        alert.setHeaderText(null);
+        alert.setContentText("Room already taken");
+        alert.showAndWait();
     }
 
 

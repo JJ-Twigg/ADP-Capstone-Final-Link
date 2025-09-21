@@ -12,6 +12,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="Housekeeper")
 public class Housekeeper {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int housekeeperId;
@@ -19,7 +20,21 @@ public class Housekeeper {
     private String housekeeperName;
     private String housekeeperSurname;
 
+
+
+    //FK to Employee
+    @OneToOne
+    @JoinColumn(name = "employee_id", unique = true) // foreign key to Employee
+    private Employee employee;
+
+
+
+
+
+
+
     protected Housekeeper() {}
+
     private Housekeeper(HousekeeperBuilder builder) {
         this.housekeeperId = builder.housekeeperId;
         this.housekeeperName = builder.housekeeperName;

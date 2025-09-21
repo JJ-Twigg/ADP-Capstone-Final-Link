@@ -25,6 +25,17 @@ public class Shift {
     private boolean shiftOvertime;
 
 
+
+
+    //FK to Employee
+    @OneToOne
+    @JoinColumn(name = "employee_id", unique = true) // foreign key to Employee
+    private Employee employee;
+
+
+
+
+
     public Shift() {}
 
     // Full constructor
