@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,6 +27,9 @@ public class AddReservationController {
     @FXML private TextField startTimeField;
     @FXML private TextField endTimeField;
 
+    @FXML
+    private ComboBox<Integer> comboBoxNumbers;
+
     private final ReservationService reservationService;
     private Stage stage;
 
@@ -38,6 +42,14 @@ public class AddReservationController {
         this.stage = stage;
     }
 
+    @FXML
+    public void initialize() {
+        // Populate ComboBox with numbers 51-59
+        for (int i = 51; i <= 59; i++) {
+            comboBoxNumbers.getItems().add(i);
+        }
+        comboBoxNumbers.setValue(51); // default value
+    }
 
 
 
@@ -64,7 +76,15 @@ public class AddReservationController {
             //waiting for activity flow which will decide if someone says event, call event fk method page otherwise no event and call room only
 
             //---ammar needs to add id to his reservation, so we know which room to book!
-            int roomChosen = 54;
+
+            //            int roomChosen = 54;
+
+            Integer roomChosen = comboBoxNumbers.getValue();
+            if (roomChosen == null) {
+                System.out.println("Please select a room.");
+                return;
+            }
+
 
 
 

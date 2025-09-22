@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.ComboBox?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.college.controller.AddReservationController"
@@ -22,7 +23,12 @@
     <Label text="End Date:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="endTimeField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <!-- New ComboBox for 51-59 -->
+    <Label text="Select Number:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <ComboBox fx:id="comboBoxNumbers" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+    <!-- Buttons -->
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <Button fx:id="saveButton" text="Save" onAction="#saveReservation"/>
         <Button fx:id="cancelButton" text="Cancel" onAction="#cancel"/>
     </HBox>

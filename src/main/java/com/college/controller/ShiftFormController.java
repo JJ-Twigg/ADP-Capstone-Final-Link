@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.Shift;
 import com.college.service.ShiftService;
 import javafx.fxml.FXML;
@@ -25,6 +26,25 @@ public class ShiftFormController {
     private ShiftService shiftService;
 
     private Shift shift;
+
+
+
+
+
+
+    //will store FK object from employee
+    private Employee employee;  // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+    }
+
+
+
+
+
 
     @FXML
     public void initialize() {
@@ -77,7 +97,14 @@ public class ShiftFormController {
                         .setShiftOvertime(overtime)
                         .build();
 
+                //put fk here
+                newShift.setEmployee(employee);
+
+
                 shiftService.create(newShift);
+
+
+
                 showAlert(Alert.AlertType.INFORMATION, "Shift created successfully!");
             } else {
                 // Update existing shift

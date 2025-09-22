@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.Shift;
 import com.college.service.ShiftService;
 import javafx.application.Platform;
@@ -37,6 +38,18 @@ public class ShiftViewController {
     private ApplicationContext applicationContext;
 
     private ObservableList<Shift> shifts = FXCollections.observableArrayList();
+
+
+
+    //will store FK object from employee
+    private Employee employee;  // hold the FK reference
+
+    //FK setter from employee
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+    }
+
 
     @FXML
     public void initialize() {

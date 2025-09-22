@@ -116,6 +116,9 @@ public class ReservationUIController implements Initializable {
             Parent root = loader.load();
             AddReservationController addController = loader.getController();
 
+
+
+
             Stage modalStage = new Stage();
             modalStage.initModality(Modality.APPLICATION_MODAL);
             modalStage.setTitle("Add New Reservation");
