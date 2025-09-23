@@ -1,0 +1,42 @@
+/* styles.css */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-alignment: center-left;
+    -fx-padding: 12 20;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill:  #398F6C;
+}
+
+.exit-button {
+    -fx-background-color: #E02850;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-min-width: 80px;
+}
+
+.exit-button:hover {
+    -fx-background-color: #B0203F;
+}
+
+/* Optional: Style the scroll bar */
+.scroll-pane {
+    -fx-background-color: white;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: white;
+}
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #95a5a6;
+    -fx-background-radius: 5px;
+}

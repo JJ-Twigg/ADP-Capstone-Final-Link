@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.college.controller.DashboardController">
+
+    <left>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    style="-fx-background: #FFFFFF; -fx-border-color: #FFFFFF;">
+
+            <AnchorPane>
+                <VBox prefWidth="220" spacing="20" style="-fx-background-color: #398F6C; -fx-padding: 20;"
+                      AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                      AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+                    <!-- User Profile -->
+                    <VBox spacing="10" alignment="CENTER">
+                        <Label text="👤" style="-fx-text-fill: white; -fx-font-size: 40px;" />
+                        <Label text="John Doe" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                        <Label text="Administrator" style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" />
+                    </VBox>
+
+                    <Separator />
+
+                    <!-- Menu Items -->
+                    <VBox spacing="5">
+                        <Button text="Overview" onAction="#showOverview" styleClass="menu-button" />
+                        <Button text="Add Reservation" onAction="#showReservation" styleClass="menu-button" />
+                        <Button text="Guests" onAction="#showGuests" styleClass="menu-button" />
+                        <Button text="Payments" onAction="#showPayments" styleClass="menu-button" />
+                        <Button text="Employees" onAction="#showEmployees" styleClass="menu-button" />
+                        <Button text="Rooms" onAction="#showRooms" styleClass="menu-button" />
+                        <Button text="Venues" onAction="#showVenues" styleClass="menu-button" />
+                        <Button text="Shifts" onAction="#showVenues" styleClass="menu-button" />
+                    </VBox>
+
+                    <!-- Spacer to push Exit button down -->
+                    <Region VBox.vgrow="ALWAYS" />
+
+                    <!-- Exit Button -->
+                    <VBox alignment="CENTER" spacing="10">
+                        <Separator />
+                        <Button text="Exit" onAction="#exitApplication" styleClass="exit-button" />
+                    </VBox>
+                </VBox>
+            </AnchorPane>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #ecf0f1;" />
+    </center>
+</BorderPane>

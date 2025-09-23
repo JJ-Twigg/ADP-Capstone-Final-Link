@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0"
-           prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.college.controller.UserRegisterController">
+<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.UserRegisterController">
    <children>
       <Pane fx:id="pane2" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
@@ -60,7 +58,7 @@
                   <Font name="DejaVuMathTeXGyre-Regular" size="30.0" />
                </font>
             </Label>
-            <VBox layoutX="320.0" layoutY="87.0" prefHeight="200.0" prefWidth="220.0">
+            <VBox layoutX="332.0" layoutY="110.0" prefHeight="200.0" prefWidth="220.0">
                <children>
                   <TextField fx:id="username" alignment="CENTER" prefHeight="38.0" prefWidth="179.0" promptText="Email">
                      <VBox.margin>
@@ -108,6 +106,22 @@
                         <Blend />
                      </effect>
                   </Button>
+
+
+
+                   <HBox alignment="CENTER">
+                   <Hyperlink alignment="CENTER" contentDisplay="CENTER" onAction="#goToLogin" text="Already have an account?" textAlignment="CENTER">
+                       <font>
+                           <Font size="12.0" />
+                       </font>
+                       <cursor>
+                           <Cursor fx:constant="HAND" />
+                       </cursor>
+                   </Hyperlink>
+                   </HBox>
+
+
+
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="230.0" text="I have an account" textFill="WHITE" underline="true">
                      <font>
                         <Font name="DejaVuMathTeXGyre-Regular" size="12.0" />
@@ -123,7 +137,7 @@
                   <Font name="C059-Bold" size="14.0" />
                </font>
             </Label>
-            <Button layoutX="355.0" layoutY="335.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #cc000a;" text="Exit" textFill="WHITE">
+            <Button layoutX="367.0" layoutY="334.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #cc000a;" text="Exit" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

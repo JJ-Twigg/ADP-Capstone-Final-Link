@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.college.controller.OverviewController"
+            fitToWidth="true" fitToHeight="true"
+            style="-fx-background: white; -fx-background-color: white;">
+
+    <AnchorPane style="-fx-padding: 20; -fx-background-color: white;">
+        <VBox spacing="40" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+              style="-fx-background-color: white;">
+
+            <!-- Header -->
+            <Label text="Dashboard Overview"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #398F6C;" />
+
+            <!-- Top Row: 3 Statistic Blocks -->
+            <HBox spacing="30" alignment="CENTER">
+                <!-- Total Guests -->
+                <VBox spacing="10" alignment="CENTER">
+                    <VBox style="-fx-background-color: #398F6C; -fx-padding: 20; -fx-spacing: 10; -fx-min-width: 200; -fx-alignment: center; -fx-background-radius: 8;">
+                        <Label text="👥" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+                        <Label text="Total Guests" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                        <Label text="1,247" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" />
+                        <Label text="12,000 total guests" style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" />
+                    </VBox>
+                </VBox>
+
+                <!-- Total Revenue -->
+                <VBox spacing="10" alignment="CENTER">
+                    <VBox style="-fx-background-color: #398F6C; -fx-padding: 20; -fx-spacing: 10; -fx-min-width: 200; -fx-alignment: center; -fx-background-radius: 8;">
+                        <Label text="💰" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+                        <Label text="Total Revenue" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                        <Label text="R 245,800" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" />
+                        <Label text="R 1,200,000 total revenue" style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" />
+                    </VBox>
+                </VBox>
+
+                <!-- Occupancy Rate -->
+                <VBox spacing="10" alignment="CENTER">
+                    <VBox style="-fx-background-color: #398F6C; -fx-padding: 20; -fx-spacing: 10; -fx-min-width: 200; -fx-alignment: center; -fx-background-radius: 8;">
+                        <Label text="📊" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+                        <Label text="Occupancy Rate" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                        <Label text="72%" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" />
+                        <Label text="Avg. last 12 months" style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" />
+                    </VBox>
+                </VBox>
+            </HBox>
+
+            <!-- Bottom Row: 3 Charts -->
+            <HBox spacing="30" alignment="CENTER">
+                <!-- Total Guests Chart -->
+                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                    <BarChart fx:id="totalGuestsChart" prefWidth="300" prefHeight="250" title="Total Guests">
+                        <xAxis>
+                            <CategoryAxis label="Month" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Number of Guests" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- Revenue Chart -->
+                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                    <BarChart fx:id="revenueBarChart" prefWidth="300" prefHeight="250" title="Revenue">
+                        <xAxis>
+                            <CategoryAxis label="Month" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Revenue (R)" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- Occupancy Chart -->
+                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                    <PieChart fx:id="occupancyPieChart" prefWidth="300" prefHeight="250" title="Occupancy Breakdown" />
+                </VBox>
+            </HBox>
+
+
+        </VBox>
+    </AnchorPane>
+</ScrollPane>
