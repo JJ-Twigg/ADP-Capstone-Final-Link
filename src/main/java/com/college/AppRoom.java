@@ -130,7 +130,7 @@ public class AppRoom extends Application {
         System.out.println("\nloading...");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-room-page1.fxml"));
 
-        // Give FXMLLoader access to Spring beans
+        // access to Spring beans
         loader.setControllerFactory(springContext::getBean);
 
         Parent root = loader.load();

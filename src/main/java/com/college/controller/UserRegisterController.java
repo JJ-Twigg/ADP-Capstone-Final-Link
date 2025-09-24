@@ -101,15 +101,32 @@ public class UserRegisterController {
 
             System.out.println("already has an account, transferring to login page");
 
-            // Get current scene
             Stage stage = (Stage) username.getScene().getWindow();
+
+            Scene scene = stage.getScene();
+
             stage.getScene().setRoot(loginPage);
 
+            String stylesheet = getClass().getResource("/css/buttonStyle.css").toExternalForm();
+            if (!scene.getStylesheets().contains(stylesheet)) {
+                scene.getStylesheets().add(stylesheet);
+            }
+
             System.out.println("Switched to Login page");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleExit(ActionEvent event) {
+        // Get the current window and close
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+
 
 
 }

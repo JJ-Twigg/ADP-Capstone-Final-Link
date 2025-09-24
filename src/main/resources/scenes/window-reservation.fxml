@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="section-reservation" minHeight="600.0" minWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.ReservationUIController">
+<AnchorPane id="section-reservation" minHeight="600.0" minWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.ReservationUIController">
 <!--            fx:controller="com.college.controller.ReservationController">-->
 
    <children>

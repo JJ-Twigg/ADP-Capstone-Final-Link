@@ -125,4 +125,25 @@ public class UserLoginController {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    private void handleGoBack(ActionEvent event) throws IOException {
+        // Load the register window FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-sign-up.fxml"));
+        loader.setControllerFactory(com.college.MainFinal.getSpringContext()::getBean); // spring context aware
+        Parent registerRoot = loader.load();
+
+        // Get current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Replace scene with the register window
+        Scene scene = new Scene(registerRoot);
+        scene.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm()); // keep styling
+
+        stage.setScene(scene);
+        stage.setTitle("HMS - User Login");
+        stage.show();
+    }
+
 }

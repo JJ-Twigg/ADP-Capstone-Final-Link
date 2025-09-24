@@ -55,7 +55,7 @@
             </ButtonBar>
          </children>
       </Pane>
-      <Pane fx:id="pane1" prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: white; -fx-blend-mode: multiple;">
+      <Pane fx:id="pane1" prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: white;">
          <children>
             <Label alignment="CENTER" layoutX="218.0" layoutY="32.0" prefHeight="35.0" prefWidth="169.0" text="Sign up" textFill="WHITE">
                <font>
@@ -83,7 +83,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </PasswordField>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginAuth" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #66BB6A;" text="Log in" textFill="WHITE">
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginAuth" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #66BA88;" text="Log in" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -93,9 +93,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                     <effect>
-                        <Blend />
-                     </effect>
+
                   </Button>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="230.0" text="I have an account" textFill="WHITE" underline="true">
                      <font>
@@ -112,7 +110,7 @@
                   <Font name="C059-Bold" size="14.0" />
                </font>
             </Label>
-            <Button layoutX="367.0" layoutY="334.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #cc000a;" text="Close" textFill="WHITE">
+            <Button layoutX="367.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #cc000a;" text="Back" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -120,7 +118,7 @@
                   <Font name="DejaVuMathTeXGyre-Regular" size="18.0" />
                </font>
             </Button>
-            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="284.0" style="-fx-background-color: #66BB6A;">
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="284.0" style="-fx-background-color: #66BA88;">
                <children>
                   <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
                      <image>
