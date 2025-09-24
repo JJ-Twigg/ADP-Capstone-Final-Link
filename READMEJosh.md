@@ -62,3 +62,10 @@ why
 easy fix, i removed extra cols, so tableview witdth needs to
 be reduced to reemove ugfly ui grapgical glitch or u need columns
 to take taht space. either or,
+
+
+1 need to finish combobox booking type
+then if they chose room, only then run event pane.
+
+2 also once add event is cliekd once, button add
+must be made unusable, to prevent duplciate fk

@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.MainFinal;
 import com.college.domain.Reservation;
 import com.college.domain.Room;
 import com.college.service.ReservationService;
@@ -30,6 +31,9 @@ public class AddReservationController {
     @FXML
     private ComboBox<Integer> comboBoxNumbers;
 
+    @FXML
+    private ComboBox<String> comboBoxRoomType;
+
     private final ReservationService reservationService;
     private Stage stage;
 
@@ -49,6 +53,11 @@ public class AddReservationController {
             comboBoxNumbers.getItems().add(i);
         }
         comboBoxNumbers.setValue(52); // default value
+
+
+        // Room Type ComboBox
+        comboBoxRoomType.getItems().addAll("Food", "Maintenance", "Housekeeping");
+        comboBoxRoomType.setValue("Food"); // default value
     }
 
 
@@ -195,19 +204,20 @@ public class AddReservationController {
     private void openAddEventDialog(Integer reservationId) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/eventFinal.fxml"));
+
+            // Tell FXMLLoader to get controllers from Spring
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+
             Parent root = loader.load();
 
-            // Get the controller of Event UI
             EventUIController eventController = loader.getController();
-            eventController.setReservationId(reservationId); // pass the FK // you need a setter in eventController
+            eventController.setReservationId(reservationId);
 
-            // Show Event form as modal
             Stage modalStage = new Stage();
             modalStage.initModality(Modality.APPLICATION_MODAL);
             modalStage.setTitle("Add Event for Reservation ID: " + reservationId);
             modalStage.setScene(new Scene(root));
             modalStage.showAndWait();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

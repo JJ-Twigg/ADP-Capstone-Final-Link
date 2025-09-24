@@ -3,11 +3,14 @@ package com.college.controller;
 import com.college.domain.Event;
 import com.college.domain.Reservation;
 import com.college.service.EventUIService;
+import com.college.service.EventUIServiceNaked;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EventUIController {
 
     @FXML private TextField reasonField;
@@ -17,7 +20,13 @@ public class EventUIController {
     @FXML private TableColumn<Event, String> colReason;
     @FXML private TableColumn<Event, String> colDescription;
 
-    private final EventUIService eventService = new EventUIService();
+    private final EventUIServiceNaked eventService;
+
+    // ✅ Constructor injection
+    public EventUIController(EventUIServiceNaked eventService) {
+        this.eventService = eventService;
+    }
+
     private final ObservableList<Event> eventList = FXCollections.observableArrayList();
 
     // FK for Event

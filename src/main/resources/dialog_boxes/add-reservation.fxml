@@ -3,11 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 
-<?import javafx.scene.control.ComboBox?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.college.controller.AddReservationController"
@@ -17,18 +17,24 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
+    <!-- Start Date -->
     <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
     <TextField fx:id="startTimeField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
+    <!-- End Date -->
     <Label text="End Date:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="endTimeField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <!-- New ComboBox for 51-59 -->
-    <Label text="Select Number:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <ComboBox fx:id="comboBoxNumbers" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+    <!-- Booking Type -->
+    <Label text="Select Booking Type:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <ComboBox fx:id="comboBoxBookingType" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="150"/>
+
+    <!-- Number Selection -->
+    <Label text="Select Room Number:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <ComboBox fx:id="comboBoxNumbers" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
 
     <!-- Buttons -->
-    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button fx:id="saveButton" text="Save" onAction="#saveReservation"/>
         <Button fx:id="cancelButton" text="Cancel" onAction="#cancel"/>
     </HBox>
