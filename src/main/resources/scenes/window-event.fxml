@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.EventUIController">
+<BorderPane prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.EventUIController">
 
     <top>
         <Label alignment="CENTER" prefHeight="55.0" prefWidth="1000.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10; -fx-background-color: #26AD00;" text="Event Management" textFill="WHITE" />

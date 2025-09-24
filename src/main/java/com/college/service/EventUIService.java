@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 
 public class EventUIService {
@@ -76,6 +77,12 @@ public class EventUIService {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod(method);
         conn.setRequestProperty("Content-Type", "application/json");
+
+        // ADD THIS: Basic Auth
+        String userCredentials = "user:123"; // your Spring Security username and password
+        String basicAuth = "Basic " + Base64.getEncoder().encodeToString(userCredentials.getBytes());
+        conn.setRequestProperty("Authorization", basicAuth);
+
         conn.setDoOutput(true);
         return conn;
     }

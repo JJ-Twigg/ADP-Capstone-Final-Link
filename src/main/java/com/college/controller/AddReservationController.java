@@ -45,10 +45,10 @@ public class AddReservationController {
     @FXML
     public void initialize() {
         // Populate ComboBox with numbers 51-59
-        for (int i = 51; i <= 59; i++) {
+        for (int i = 52; i <= 59; i++) {
             comboBoxNumbers.getItems().add(i);
         }
-        comboBoxNumbers.setValue(51); // default value
+        comboBoxNumbers.setValue(52); // default value
     }
 
 
@@ -194,7 +194,7 @@ public class AddReservationController {
     //method to open event window
     private void openAddEventDialog(Integer reservationId) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-event.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/eventFinal.fxml"));
             Parent root = loader.load();
 
             // Get the controller of Event UI

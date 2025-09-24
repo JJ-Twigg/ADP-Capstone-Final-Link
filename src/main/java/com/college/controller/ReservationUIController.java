@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.MainFinal;
 import com.college.domain.Reservation;
 import com.college.service.ReservationService;
 import com.college.utilities.ApplicationContextProvider;
@@ -111,7 +112,7 @@ public class ReservationUIController implements Initializable {
     private void add() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dialog_boxes/add-reservation.fxml"));
-            loader.setControllerFactory(ApplicationContextProvider.getApplicationContext()::getBean);
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
             Parent root = loader.load();
             AddReservationController addController = loader.getController();

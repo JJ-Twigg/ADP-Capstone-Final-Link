@@ -1,12 +1,16 @@
 package com.college.controller;
 
+import com.college.MainFinal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
 import java.util.Optional;
@@ -41,35 +45,35 @@ public class DashboardController {
 
     @FXML
     public void showReservation() {
-        safeLoadView("/scenes/window-reservation.fxml", "Reservation");
+        safeLoadViewOtherPages("/scenes/reservationFinal.fxml", "Reservation");
     }
 
 
 
     @FXML
     public void showGuests() {
-        safeLoadView("/scenes/guest-view.fxml", "Guests");
+        safeLoadViewOtherPages("/scenes/guest-view.fxml", "Guests");
     }
 
 
     @FXML
     public void showPayments() {
-        safeLoadView("/scenes/payment-view.fxml", "Payments");
+        safeLoadViewOtherPages("/scenes/payment-view.fxml", "Payments");
     }
 
     @FXML
     public void showEmployees() {
-        safeLoadView("/scenes/employee-view.fxml", "Employees");
+        safeLoadViewOtherPages("/scenes/employee-view.fxml", "Employees");
     }
 
     @FXML
     public void showRooms() {
-        safeLoadView("/scenes/room-view.fxml", "Rooms");
+        safeLoadViewOtherPages("/scenes/room-view.fxml", "Rooms");
     }
 
     @FXML
     public void showVenues() {
-        safeLoadView("/scenes/venue-view.fxml", "Venues");
+        safeLoadViewOtherPages("/scenes/venue-view.fxml", "Venues");
     }
 
 
@@ -94,6 +98,60 @@ public class DashboardController {
             contentArea.getChildren().add(messageLabel);
         }
     }
+
+
+    private void safeLoadViewOtherPages(String fxmlPath, String viewName) {
+        try {
+            if (getClass().getResource(fxmlPath) == null) {
+                throw new Exception("File not found: " + fxmlPath);
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean); // <-- Spring injection
+            Parent view = loader.load();
+
+            contentArea.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            System.out.println("Error loading " + viewName + " view: " + e.getMessage());
+            e.printStackTrace();
+            contentArea.getChildren().clear();
+            Label messageLabel = new Label(viewName + " view is under construction");
+            messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #2c3e50;");
+            contentArea.getChildren().add(messageLabel);
+        }
+    }
+
+    private void openInNewWindow(String fxmlPath, String viewName) {
+        try {
+            if (getClass().getResource(fxmlPath) == null) {
+                throw new Exception("File not found: " + fxmlPath);
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean); // Spring injection
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(viewName);
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); // blocks other windows until closed (optional)
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println("Error opening " + viewName + " window: " + e.getMessage());
+            e.printStackTrace();
+
+            // fallback: show a minimal popup
+            Stage errorStage = new Stage();
+            VBox box = new VBox(new Label(viewName + " window could not be loaded"));
+            box.setStyle("-fx-padding: 20; -fx-font-size: 16;");
+            errorStage.setScene(new Scene(box));
+            errorStage.show();
+        }
+    }
+
+
 
 
 
