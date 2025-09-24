@@ -49,10 +49,9 @@ public class DashboardController {
     }
 
 
-
     @FXML
-    public void showGuests() {
-        safeLoadViewOtherPages("/scenes/guest-view.fxml", "Guests");
+    public void showRooms() {
+        safeLoadViewOtherPages("/scenes/window-room-page1.fxml", "Rooms");
     }
 
 
@@ -67,8 +66,8 @@ public class DashboardController {
     }
 
     @FXML
-    public void showRooms() {
-        safeLoadViewOtherPages("/scenes/room-view.fxml", "Rooms");
+    public void showGuests() {
+        safeLoadViewOtherPages("/scenes/window-guest.fxml", "Guests");
     }
 
     @FXML

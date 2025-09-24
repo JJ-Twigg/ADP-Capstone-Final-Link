@@ -20,6 +20,9 @@ public class EventUIController {
     @FXML private TableColumn<Event, String> colReason;
     @FXML private TableColumn<Event, String> colDescription;
 
+    @FXML
+    private Button addButton;
+
     private final EventUIServiceNaked eventService;
 
     // ✅ Constructor injection
@@ -80,10 +83,16 @@ public class EventUIController {
             reasonField.clear();
             descriptionField.clear();
             loadEvents();
+
+            addButton.setDisable(true);
+
         } catch (Exception e) {
             showAlert("Error", "Failed to add event: " + e.getMessage());
         }
     }
+
+
+
 
     @FXML
     private void handleEditEvent() {
@@ -96,18 +105,29 @@ public class EventUIController {
         String newReason = reasonField.getText().trim();
         String newDescription = descriptionField.getText().trim();
 
-        // Keep the ID so backend knows which record to update
-        Event updatedEvent = new Event();
-        updatedEvent.setEventId(selected.getEventId());
-        updatedEvent.setReason(!newReason.isEmpty() ? newReason : selected.getReason());
-        updatedEvent.setDescription(!newDescription.isEmpty() ? newDescription : selected.getDescription());
-
         try {
-            eventService.updateEvent(updatedEvent);
+            // Fetch managed entity
+            Event managedEvent = eventService.getEvent(selected.getEventId());
+            if (managedEvent == null) {
+                showAlert("Error", "Event not found in database.");
+                return;
+            }
+
+            // Update fields
+            if (!newReason.isEmpty()) managedEvent.setReason(newReason);
+            if (!newDescription.isEmpty()) managedEvent.setDescription(newDescription);
+
+            // Save updated managed entity
+            eventService.updateEvent(managedEvent);
+
             reasonField.clear();
             descriptionField.clear();
             loadEvents();
+
+            showAlert("Success", "Event updated successfully!");
+
         } catch (Exception e) {
+            e.printStackTrace();
             showAlert("Error", "Failed to update event: " + e.getMessage());
         }
     }
@@ -120,10 +140,27 @@ public class EventUIController {
             return;
         }
 
+        System.out.println("Attempting to delete event ID: " + selected.getEventId());
+
         try {
-            eventService.deleteEvent(selected.getEventId());
+            // First, fetch the managed entity from the repository
+            Event eventToDelete = eventService.getEvent(selected.getEventId());
+            if (eventToDelete == null) {
+                System.out.println("Event not found in DB");
+                showAlert("Error", "Event not found in database.");
+                return;
+            }
+
+            // Delete using managed entity
+            eventService.deleteEvent(eventToDelete.getEventId());
+
+            System.out.println("Deleted successful");
+
+            // Refresh table
             loadEvents();
+
         } catch (Exception e) {
+            e.printStackTrace(); // <-- will show actual DB/JPA error
             showAlert("Error", "Failed to delete event: " + e.getMessage());
         }
     }

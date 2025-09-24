@@ -22,7 +22,7 @@ public class Event {
 
 
     //FK Relationship to reservation
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "reservation_id") // FK column in Event table
     private Reservation reservation;
 

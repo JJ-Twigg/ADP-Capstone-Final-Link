@@ -55,17 +55,32 @@ also for every file load from now on needs
 loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 GETTING SPRINGBOOT FROM MAINFINAL.  ITS THE ONLY ENTRY TO PROGRAM
 
+
+---
+FIXES ive needed to use more than once
+---
+1. changing loader.applciaton.getcontext
+to mainFinal.context method call. so in old controller
+u just need to tell it, use new mainFinal springboot context.
+simple
+
+2. if u have cascade on resrvation and delte from there
+it works fine, but if u delete from child view, so event,
+event entity will also need cascade. then it fixed
+deleting in event page.
+
+----
+CURRENT BUGS AND LOGIC ERRs
 ---
 style="-fx-background-color: white;" causes right graphical glitch
 why
 
-easy fix, i removed extra cols, so tableview witdth needs to
+1 easy fix, i removed extra cols, so tableview witdth needs to
 be reduced to reemove ugfly ui grapgical glitch or u need columns
 to take taht space. either or,
 
 
-1 need to finish combobox booking type
-then if they chose room, only then run event pane.
+2 delete from reservation deletes
+room of id whatever when u delete a reservation
+so then u end up with no rooms in room table. big logic err
 
-2 also once add event is cliekd once, button add
-must be made unusable, to prevent duplciate fk

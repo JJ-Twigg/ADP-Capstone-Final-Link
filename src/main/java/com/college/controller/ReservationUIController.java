@@ -179,7 +179,7 @@ public class ReservationUIController implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dialog_boxes/edit-reservation.fxml")); // Use a dedicated FXML for editing
-            loader.setControllerFactory(ApplicationContextProvider.getApplicationContext()::getBean);
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
             Parent root = loader.load();
             EditReservationController editController = loader.getController();

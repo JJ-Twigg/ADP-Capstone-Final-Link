@@ -22,6 +22,9 @@ import java.io.IOException;
 @Component
 public class AddReservationController {
 
+
+    Reservation savedReservation;
+
     @Autowired
     private RoomService roomService;
 
@@ -32,7 +35,7 @@ public class AddReservationController {
     private ComboBox<Integer> comboBoxNumbers;
 
     @FXML
-    private ComboBox<String> comboBoxRoomType;
+    private ComboBox<String> comboBoxBookingType;
 
     private final ReservationService reservationService;
     private Stage stage;
@@ -56,8 +59,13 @@ public class AddReservationController {
 
 
         // Room Type ComboBox
-        comboBoxRoomType.getItems().addAll("Food", "Maintenance", "Housekeeping");
-        comboBoxRoomType.setValue("Food"); // default value
+        comboBoxBookingType.getItems().addAll("Room", "Event");
+
+        comboBoxBookingType.setOnAction(e -> {
+            String type = comboBoxBookingType.getValue();
+            comboBoxNumbers.setVisible(!"Event".equals(type));
+        });
+
     }
 
 
@@ -72,25 +80,18 @@ public class AddReservationController {
         String endTime = endTimeField.getText();
 
         if (!startTime.isEmpty() && !endTime.isEmpty()) {
-            Reservation newReservation = new Reservation(startTime, endTime);
 
-            //1 GET THE VALUE OF THE PK AUTO GEN, save to variable. so that it can be used with event controller as fk
-            //2 run event window
-            Reservation savedReservation = reservationService.create(newReservation);
-            System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
 
-            System.out.println("New reservation saved: " + newReservation);
-
-            //for now these are the 2 method calls for fk working.
-            //waiting for activity flow which will decide if someone says event, call event fk method page otherwise no event and call room only
-
-            //---ammar needs to add id to his reservation, so we know which room to book!
-
-            //            int roomChosen = 54;
 
             Integer roomChosen = comboBoxNumbers.getValue();
             if (roomChosen == null) {
                 System.out.println("Please select a room.");
+                return;
+            }
+
+            String bookingTypeSelected = comboBoxBookingType.getValue();
+            if (bookingTypeSelected == null) {
+                System.out.println("Please select a booking type.");
                 return;
             }
 
@@ -99,24 +100,42 @@ public class AddReservationController {
 
 
 
-            Room roomToUpdate = roomService.read(roomChosen);
+            if ("Event".equals(bookingTypeSelected)) {
+                // 🔹 Event flow: skip room entirely
+                savedReservation = reservationService.create(new Reservation(startTime, endTime));
+                System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
+                openAddEventDialog(savedReservation.getReservationId());
+                stage.close();
+            } else if ("Room".equals(bookingTypeSelected)) {
+                // 🔹 Room flow
+                 roomChosen = comboBoxNumbers.getValue();
+                if (roomChosen == null) {
+                    System.out.println("Please select a room.");
+                    return;
+                }
 
+                Room roomToUpdate = roomService.read(roomChosen);
 
+                if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
+                    roomToUpdate.setAvailability(false);
+                    savedReservation = reservationService.create(new Reservation(startTime, endTime));
+                    roomToUpdate.setReservation(savedReservation);
+                    roomService.update(roomToUpdate);
 
-            roomToUpdate.setReservation(savedReservation);
-
-            //if room is available make it unavailable otherwise print its already taken and cant be booked
-            if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
-                // Room is available, so toggle to unavailable
-                roomToUpdate.setAvailability(false);
-                roomService.update(roomToUpdate);
-            } else {
-                System.out.println("Room already taken");
-                alertRoomTaken();
+                    alertReservationSuccess(roomChosen);
+                    stage.close();
+                } else {
+                    alertRoomTaken();
+                }
             }
 
 
-            roomService.update(roomToUpdate);
+
+
+
+
+
+
 
             // Mark the room as unavailable
 
@@ -126,8 +145,8 @@ public class AddReservationController {
             //WORKING ROOM CODE
 //            saveReservationNoEvent(savedReservation.getReservationId());
 
-            //WORKING EVENT CODE
-            openAddEventDialog(savedReservation.getReservationId());
+
+
 
             stage.close();
         }
@@ -140,7 +159,15 @@ public class AddReservationController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Room Status");
         alert.setHeaderText(null);
-        alert.setContentText("Room already taken");
+        alert.setContentText("Room already taken, please book another");
+        alert.showAndWait();
+    }
+
+    private void alertReservationSuccess(int roomNum) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Reservation Successful");
+        alert.setHeaderText(null);
+        alert.setContentText("Reservation ID " + roomNum + " saved successfully!");
         alert.showAndWait();
     }
 
