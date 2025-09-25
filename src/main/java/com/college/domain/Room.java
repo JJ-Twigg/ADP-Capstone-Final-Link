@@ -26,7 +26,7 @@ public class Room {
 
     // FK to Reservation
     @OneToOne
-    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId")
+    @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId", nullable = true)
     private Reservation reservation;
 
 

@@ -16,11 +16,20 @@
             <HBox alignment="CENTER" spacing="30">
                 <!-- Total Guests -->
                 <VBox alignment="CENTER" spacing="10">
-                    <VBox style="-fx-background-color: #66BA88; -fx-padding: 20; -fx-spacing: 10; -fx-min-width: 200; -fx-alignment: center; -fx-background-radius: 8;">
-                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="👥" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Guests" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="1,247" />
-                        <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="12,000 total guests" />
+                    <VBox style="
+        -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, rgba(255,255,255,0.8), rgba(102,186,136,0.9));
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        -fx-min-width: 220;
+        -fx-pref-height: 180;
+        -fx-alignment: center;
+        -fx-background-radius: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
+
+                        <Label style="-fx-font-size: 40px; -fx-text-fill: white;" text="👥" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Total Guests" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 36px; -fx-font-weight: bold;" text="1,247" />
+                        <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 12px;" text="12,000 total guests" />
                     </VBox>
                 </VBox>
 

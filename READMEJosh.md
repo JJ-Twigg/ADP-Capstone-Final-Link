@@ -75,15 +75,35 @@ CURRENT BUGS AND LOGIC ERRs
 style="-fx-background-color: white;" causes right graphical glitch
 why
 
+---
+can be easy fix
+--
 1 easy fix, i removed extra cols, so tableview witdth needs to
 be reduced to reemove ugfly ui grapgical glitch or u need columns
 to take taht space. either or,
 
-
+---
+fixed
+--
 2 delete from reservation deletes
 room of id whatever when u delete a reservation
-so then u end up with no rooms in room table. big logic err
+so then u end up with no rooms in room table. big logic 
 
+fixed, had to change room and reservatgion entity
+from cascade. had to make room object null when deleting
+reservation. had to edit resrvationservice delet emethod
+and roomreposiory and add things to top of resrvatioinservice
+its complicted
+
+-fix im guessing remove deletecascade within that relationsip.
+then when u delte from reservation, run update avaialbity
+in room?
+
+
+4. now if u use view rooms udpate button
+it removes fk. thats proglm 1. problem2 room
+page doesnt mirror db so theres no point to it
+shoul dbe able to see whats booked via room page
 
 3 whats stopping people adding reservation
 without adding guest first. on dashboard

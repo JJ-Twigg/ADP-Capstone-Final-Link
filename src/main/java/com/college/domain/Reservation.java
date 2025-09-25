@@ -36,7 +36,7 @@ public class Reservation {
 
 
     //FK Relationship to Room
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "reservation", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private Room room;
 
     //FK Relationship to event
