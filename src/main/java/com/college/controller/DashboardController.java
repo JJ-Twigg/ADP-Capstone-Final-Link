@@ -41,7 +41,10 @@ public class DashboardController {
         safeLoadView("/scenes/overview1.fxml", "Overview");
     }
 
-
+    @FXML
+    public void showGuests() {
+        safeLoadViewOtherPages("/scenes/guestFinal.fxml", "Guests");
+    }
 
     @FXML
     public void showReservation() {
@@ -65,10 +68,6 @@ public class DashboardController {
         safeLoadViewOtherPages("/scenes/employee-view.fxml", "Employees");
     }
 
-    @FXML
-    public void showGuests() {
-        safeLoadViewOtherPages("/scenes/window-guest.fxml", "Guests");
-    }
 
     @FXML
     public void showVenues() {

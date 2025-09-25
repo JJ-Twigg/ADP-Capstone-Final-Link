@@ -17,12 +17,22 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int guestID;
-
     private String name;
     private String surname;
     private String contactNumber;
     private String email;
     private String paymentDetails;
+
+
+
+
+
+
+
+
+
+
+
 
     protected Guest() {}
     private Guest(GuestBuilder builder) {

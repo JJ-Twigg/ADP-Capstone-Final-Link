@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.GuestUIController">
+
+
+    <!-- Table -->
+    <TableView fx:id="guestTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: transparent;">
+        <columns>
+            <TableColumn fx:id="colGuestID" prefWidth="60" style="-fx-background-color: white;" text="ID" />
+            <TableColumn fx:id="colName" prefWidth="150" style="-fx-background-color: white;" text="Amount" />
+            <TableColumn fx:id="colSurname" prefWidth="150" style="-fx-background-color: white;" text="Method" />
+            <TableColumn fx:id="colEmail" prefWidth="150" style="-fx-background-color: white;" text="Status" />
+            <TableColumn fx:id="colContact" prefWidth="200" style="-fx-background-color: white;" text="Date" />
+            <TableColumn fx:id="colPayment" prefWidth="200" style="-fx-background-color: white;"  text="Payment Details" />
+        </columns>
+    </TableView>
+        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+    <children>
+
+
+
+
+
+
+    <!-- Buttons -->
+    <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeleteGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #E02850; -fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Delete Guest" textFill="WHITE" />
+        <ImageView layoutX="63.0" layoutY="26.0">
+            <image>
+                <Image url="/images/c.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="40.0" layoutY="275.0"  onAction="#handleEditGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Update Guest" textFill="WHITE" />
+        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Guest" textFill="WHITE" />
+
+
+
+
+
+
+    </children>
+        </Pane>
+    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guests" textAlignment="CENTER" wrappingWidth="188.34881591796875">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Text>
+</AnchorPane>

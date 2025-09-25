@@ -1,18 +1,19 @@
 package com.college.controller;
 
 import com.college.domain.Guest;
-import com.college.service.GuestUIService;
+import com.college.repository.GuestRepository;
+import com.college.service.GuestUIServiceNaked;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
 import java.util.List;
-import java.util.Random;
 
 public class AddEditGuestDialog extends Dialog<Guest> {
 
-    private final GuestUIService guestService = new GuestUIService();
+    private final GuestUIServiceNaked guestService;
 
     private final TextField txtID = new TextField();
     private final TextField txtName = new TextField();
@@ -21,7 +22,9 @@ public class AddEditGuestDialog extends Dialog<Guest> {
     private final TextField txtContact = new TextField();
     private final ComboBox<String> cbPayment = new ComboBox<>();
 
-    public AddEditGuestDialog(Guest guest) {
+    public AddEditGuestDialog(GuestRepository guestRepository, Guest guest) {
+        this.guestService = new GuestUIServiceNaked(guestRepository);
+
         setTitle(guest == null ? "Add Guest" : "Edit Guest");
 
         // Header label
@@ -70,7 +73,7 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         cbPayment.getItems().addAll("Cash", "Credit Card", "Debit Card", "EFT", "PayPal");
         cbPayment.setEditable(false);
 
-        // Pre-fill or generate new ID
+        // Pre-fill or generate default values
         if (guest != null) {
             txtID.setText(String.valueOf(guest.getGuestID()));
             txtID.setDisable(true);
@@ -80,11 +83,13 @@ public class AddEditGuestDialog extends Dialog<Guest> {
             txtContact.setText(formatPhone(guest.getContactNumber()));
             cbPayment.setValue(guest.getPaymentDetails());
         } else {
-            txtID.setText(generateUniqueID());
+            txtID.setText("Auto"); // Hibernate generates ID
             txtID.setDisable(true);
+            txtEmail.setText("guest@example.com");
+            txtContact.setText("000 000 0000");
         }
 
-        // Auto-format phone number while typing
+        // Auto-format phone number
         txtContact.textProperty().addListener((obs, oldVal, newVal) -> {
             String digits = newVal.replaceAll("\\D", "");
             if (digits.length() > 10) digits = digits.substring(0, 10);
@@ -111,11 +116,9 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         getDialogPane().lookupButton(submitButtonType).setStyle("-fx-background-color: #26AD00; -fx-text-fill: white;");
         getDialogPane().lookupButton(cancelButtonType).setStyle("-fx-background-color: #C20010; -fx-text-fill: white;");
 
-        // Validation using event filter (prevents dialog from closing on error)
+        // Validation
         Button saveButton = (Button) getDialogPane().lookupButton(submitButtonType);
         saveButton.addEventFilter(javafx.event.ActionEvent.ACTION, event -> {
-
-            // Name & Surname
             String name = capitalizeFirst(txtName.getText().trim());
             String surname = capitalizeFirst(txtSurname.getText().trim());
             if (name.isEmpty() || surname.isEmpty()) {
@@ -123,29 +126,22 @@ public class AddEditGuestDialog extends Dialog<Guest> {
                 event.consume();
                 return;
             }
-
-            // Email
             String email = txtEmail.getText().trim();
             if (!email.contains("@") || email.length() < 5) {
                 showAlert("Validation Error", "Email must be valid and contain '@'.");
                 event.consume();
                 return;
             }
-
-            // Phone number
             String rawContact = txtContact.getText().replaceAll("\\s", "");
             if (!rawContact.matches("\\d{10}")) {
                 showAlert("Validation Error", "Contact number must be exactly 10 digits.");
                 event.consume();
                 return;
             }
-
-            // Payment method
             String payment = cbPayment.getValue();
             if (payment == null || payment.isEmpty()) {
                 showAlert("Validation Error", "Please select a payment method.");
                 event.consume();
-                return;
             }
 
             // Email uniqueness
@@ -170,22 +166,25 @@ public class AddEditGuestDialog extends Dialog<Guest> {
                 String formattedContact = txtContact.getText().replaceAll("\\s", "")
                         .replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
                 String payment = cbPayment.getValue();
-                int guestID = Integer.parseInt(txtID.getText());
 
-                return new Guest.GuestBuilder()
-                        .setGuestID(guestID)
+                Guest.GuestBuilder builder = new Guest.GuestBuilder()
                         .setName(name)
                         .setSurname(surname)
                         .setEmail(email)
                         .setContactNumber(formattedContact)
-                        .setPaymentDetails(payment)
-                        .build();
+                        .setPaymentDetails(payment);
+
+                // Only set ID if editing
+                if (guest != null) {
+                    builder.setGuestID(guest.getGuestID());
+                }
+
+                return builder.build();
             }
             return null;
         });
     }
 
-    // -------------------- Helpers --------------------
     private String capitalizeFirst(String text) {
         text = text.trim();
         if (text.isEmpty()) return text;
@@ -200,23 +199,6 @@ public class AddEditGuestDialog extends Dialog<Guest> {
             formatted.append(digits.charAt(i));
         }
         return formatted.toString();
-    }
-
-    private String generateUniqueID() {
-        Random rand = new Random();
-        try {
-            List<Guest> allGuests = guestService.getAllGuests();
-            int id;
-            boolean unique;
-            do {
-                id = rand.nextInt(9000) + 1000; // 4-digit
-                final int finalId = id;
-                unique = allGuests.stream().noneMatch(g -> g.getGuestID() == finalId);
-            } while (!unique);
-            return String.valueOf(id);
-        } catch (Exception e) {
-            return String.valueOf(rand.nextInt(9000) + 1000);
-        }
     }
 
     private void showAlert(String title, String message) {

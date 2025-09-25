@@ -84,3 +84,12 @@ to take taht space. either or,
 room of id whatever when u delete a reservation
 so then u end up with no rooms in room table. big logic err
 
+
+3 whats stopping people adding reservation
+without adding guest first. on dashboard
+they can do any order. so we have to prevent
+that cause fk err if they add reservation with no guest
+??? should the flow be, dont show addres.
+only show add guest, which then after adding
+guest it opens res then event.??
+

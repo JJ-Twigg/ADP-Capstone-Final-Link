@@ -23,11 +23,11 @@
                     <!-- Menu Items -->
                     <VBox spacing="5">
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
+                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guests" />
                         <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
                         <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
                         <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
-                        <Button onAction="#showGuests" styleClass="menu-button" text="Guests" />
                         <Button onAction="#showVenues" styleClass="menu-button" text="Venues" />
                         <Button onAction="#showVenues" styleClass="menu-button" text="Shifts" />
                     </VBox>

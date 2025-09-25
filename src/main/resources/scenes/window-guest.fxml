@@ -9,7 +9,8 @@
 
 <!--            xmlns="http://javafx.com/javafx/24.0.1"-->
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.GuestUIController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.GuestUIController">
 
     <!-- Heading -->
     <Label alignment="CENTER" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-background-color: #26AD00;-fx-text-fill: white;" text="Guests" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

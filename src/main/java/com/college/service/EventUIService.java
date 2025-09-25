@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.Base64;
 import java.util.List;
 
+@Deprecated
 public class EventUIService {
 
     private static final String BASE_URL = "http://localhost:8080/event";
