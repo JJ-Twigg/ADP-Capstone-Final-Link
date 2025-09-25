@@ -7,10 +7,10 @@ Date: 26 March 2025
 
 package com.college.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Guest {
@@ -25,6 +25,19 @@ public class Guest {
 
 
 
+
+
+//    //FK to Reservation
+//    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
+//    private List<Reservation> reservations = new ArrayList<>();
+//
+//    public List<Reservation> getReservations() {
+//        return reservations;
+//    }
+//
+//    public void setReservations(List<Reservation> reservations) {
+//        this.reservations = reservations;
+//    }
 
 
 

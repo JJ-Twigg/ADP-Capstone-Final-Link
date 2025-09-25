@@ -60,7 +60,7 @@ public class DashboardController {
 
     @FXML
     public void showPayments() {
-        safeLoadViewOtherPages("/scenes/payment-view.fxml", "Payments");
+        safeLoadViewOtherPages("/scenes/paymentFinal.fxml", "Payments");
     }
 
     @FXML

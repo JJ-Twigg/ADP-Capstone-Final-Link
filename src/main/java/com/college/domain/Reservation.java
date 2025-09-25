@@ -21,6 +21,18 @@ public class Reservation {
 
 
 
+//    // FK Relationship to Guest
+//    @ManyToOne
+//    @JoinColumn(name = "guest_id", nullable = false)
+//    private Guest guest;
+//
+//    public Guest getGuest() {
+//        return guest;
+//    }
+//
+//    public void setGuest(Guest guest) {
+//        this.guest = guest;
+//    }
 
 
     //FK Relationship to Room

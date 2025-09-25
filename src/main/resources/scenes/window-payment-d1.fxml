@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="600.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
+<AnchorPane maxHeight="600.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
    <VBox maxHeight="600.0" prefHeight="600.0" prefWidth="1000.0">
       <children>
       
@@ -36,7 +37,11 @@
                <Insets bottom="30.0" left="20.0" right="20.0" />
             </VBox.margin>
           </TableView>
-      
+
+
+
+
+
           <!-- Buttons -->
           <HBox alignment="CENTER" prefHeight="50.0" spacing="20.0">
             <children>
