@@ -6,6 +6,7 @@ Started:    20.05.25
 
 package com.college.controller;
 
+import com.college.domain.Guest;
 import com.college.domain.Reservation;
 import com.college.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,6 @@ public class ReservationController {
     public boolean delete(@RequestBody int id){
         return service.delete(id);
     }
-    // --------------------
+
 
 }

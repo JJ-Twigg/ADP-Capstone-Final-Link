@@ -27,17 +27,17 @@ public class Guest {
 
 
 
-//    //FK to Reservation
-//    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
-//    private List<Reservation> reservations = new ArrayList<>();
-//
-//    public List<Reservation> getReservations() {
-//        return reservations;
-//    }
-//
-//    public void setReservations(List<Reservation> reservations) {
-//        this.reservations = reservations;
-//    }
+    //FK to Reservation
+    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
 
 

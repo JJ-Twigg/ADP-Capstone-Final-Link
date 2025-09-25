@@ -105,6 +105,15 @@ it removes fk. thats proglm 1. problem2 room
 page doesnt mirror db so theres no point to it
 shoul dbe able to see whats booked via room page
 
+
+5 new flow needs to be,
+on add guestresrvaitons, remove
+update and delete or something buttons
+then i ndash u still need to beable to atleasy
+viwe and update reservaiton. even if u cant add new
+
+
+
 3 whats stopping people adding reservation
 without adding guest first. on dashboard
 they can do any order. so we have to prevent

@@ -1,6 +1,7 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.domain.Guest;
 import com.college.domain.Reservation;
 import com.college.service.ReservationService;
 import com.college.utilities.ApplicationContextProvider;
@@ -43,13 +44,43 @@ public class ReservationUIController implements Initializable {
     @FXML private TextField searchbar;
     @FXML private Label labelFeedback;
 
+
+
+
+
+
+
+
     private final ReservationService reservationService;
     private ObservableList<Reservation> reservationList;
+
+
+
+
+
+
 
     @Autowired
     public ReservationUIController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
+
+
+    //FK GUEST SET HERE
+    private Guest guest; // field to hold the actual Guest object
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -118,6 +149,7 @@ public class ReservationUIController implements Initializable {
             Parent root = loader.load();
             AddReservationController addController = loader.getController();
 
+            addController.setGuest(this.guest);
 
 
 

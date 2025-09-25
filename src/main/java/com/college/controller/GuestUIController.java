@@ -63,6 +63,18 @@ public class GuestUIController {
         loadGuests();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     private void loadGuests() {
         try {
             List<Guest> guests = guestService.getAllGuests();
@@ -72,20 +84,77 @@ public class GuestUIController {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @FXML
     private void handleAddGuest() {
-        Dialog<Guest> dialog = new AddEditGuestDialog(guestRepository, null); // pass repository
+        AddEditGuestDialog dialog = new AddEditGuestDialog(guestRepository, null);
 
-
+        // Show dialog and handle the result
         dialog.showAndWait().ifPresent(guest -> {
             try {
-                guestService.addGuest(guest);
+                // SAVE GUEST FIRST
+                Guest savedGuest = guestService.addGuest(guest);
+
+                // Refresh guest table
                 loadGuests();
+
+                // THEN open reservation page
+                openReservationPage(savedGuest);
+
             } catch (Exception e) {
                 showAlert("Error", "Failed to add guest: " + e.getMessage());
             }
         });
     }
+
+    private void openReservationPage(Guest guest) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/reservationFinal.fxml"));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+            Stage stage = new Stage();
+            stage.setTitle("Reservation");
+            stage.setScene(new Scene(loader.load()));
+
+            // Pass the guest object to Reservation controller
+            ReservationUIController controller = loader.getController();
+            controller.setGuest(guest);
+
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Could not open Reservation page: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     private void handleEditGuest() {
@@ -127,6 +196,18 @@ public class GuestUIController {
         });
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     @FXML
     private void handleOpenEventScreen() {
         try {
@@ -142,6 +223,16 @@ public class GuestUIController {
             showAlert("Error", "Could not open Event screen: " + e.getMessage());
         }
     }
+
+
+
+
+
+
+
+
+
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

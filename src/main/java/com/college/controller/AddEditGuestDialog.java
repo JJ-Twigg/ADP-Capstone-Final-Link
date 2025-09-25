@@ -1,13 +1,18 @@
 package com.college.controller;
 
+import com.college.MainFinal;
 import com.college.domain.Guest;
 import com.college.repository.GuestRepository;
 import com.college.service.GuestUIServiceNaked;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -21,6 +26,23 @@ public class AddEditGuestDialog extends Dialog<Guest> {
     private final TextField txtEmail = new TextField();
     private final TextField txtContact = new TextField();
     private final ComboBox<String> cbPayment = new ComboBox<>();
+
+
+    private Guest savedGuest; // add this field
+
+    public Guest getSavedGuest() {
+        return savedGuest;
+    }
+
+
+    private Runnable onSaveCallback;
+
+    public void setOnSaveCallback(Runnable callback) {
+        this.onSaveCallback = callback;
+    }
+
+
+
 
     public AddEditGuestDialog(GuestRepository guestRepository, Guest guest) {
         this.guestService = new GuestUIServiceNaked(guestRepository);
@@ -157,7 +179,6 @@ public class AddEditGuestDialog extends Dialog<Guest> {
             } catch (Exception ignored) {}
         });
 
-        // Result converter
         setResultConverter(dialogButton -> {
             if (dialogButton == submitButtonType) {
                 String name = capitalizeFirst(txtName.getText().trim());
@@ -174,16 +195,52 @@ public class AddEditGuestDialog extends Dialog<Guest> {
                         .setContactNumber(formattedContact)
                         .setPaymentDetails(payment);
 
-                // Only set ID if editing
                 if (guest != null) {
                     builder.setGuestID(guest.getGuestID());
                 }
 
-                return builder.build();
+                savedGuest = builder.build(); // store built Guest
+                return savedGuest;
             }
             return null;
         });
     }
+
+
+
+
+
+
+    public void openReservationPage(Guest guest) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/reservationFinal.fxml"));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Reservation");
+
+            // Pass the Guest object to ReservationUIController
+            ReservationUIController controller = loader.getController();
+            controller.setGuest(guest); // now passing full Guest object
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not open Reservation page: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     private String capitalizeFirst(String text) {
         text = text.trim();

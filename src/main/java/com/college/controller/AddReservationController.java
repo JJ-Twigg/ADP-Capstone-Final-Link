@@ -1,6 +1,7 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.domain.Guest;
 import com.college.domain.Reservation;
 import com.college.domain.Room;
 import com.college.service.ReservationService;
@@ -45,6 +46,27 @@ public class AddReservationController {
         this.reservationService = reservationService;
     }
 
+
+    //GUEST FK PASSED from ReservationUI controller class. Too many classes calling each other,
+    private Guest guest; // hold the Guest object
+
+    // Setter to pass Guest from ReservationUIController
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -79,36 +101,32 @@ public class AddReservationController {
         String startTime = startTimeField.getText();
         String endTime = endTimeField.getText();
 
-        if (!startTime.isEmpty() && !endTime.isEmpty()) {
+        if (startTime.isEmpty() || endTime.isEmpty()) {
+            System.out.println("Please fill in all fields.");
+            return;
+        }
 
+        Integer roomChosen = comboBoxNumbers.getValue();
+        String bookingTypeSelected = comboBoxBookingType.getValue();
 
+        if (bookingTypeSelected == null) {
+            System.out.println("Please select a booking type.");
+            return;
+        }
 
-            Integer roomChosen = comboBoxNumbers.getValue();
-            if (roomChosen == null) {
-                System.out.println("Please select a room.");
-                return;
-            }
-
-            String bookingTypeSelected = comboBoxBookingType.getValue();
-            if (bookingTypeSelected == null) {
-                System.out.println("Please select a booking type.");
-                return;
-            }
-
-
-
-
-
-
+        try {
             if ("Event".equals(bookingTypeSelected)) {
                 // 🔹 Event flow: skip room entirely
-                savedReservation = reservationService.create(new Reservation(startTime, endTime));
+                Reservation reservation = new Reservation(startTime, endTime);
+                reservation.setGuest(this.guest); // attach guest FK
+                savedReservation = reservationService.create(reservation);
+
                 System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
                 openAddEventDialog(savedReservation.getReservationId());
                 stage.close();
+
             } else if ("Room".equals(bookingTypeSelected)) {
                 // 🔹 Room flow
-                 roomChosen = comboBoxNumbers.getValue();
                 if (roomChosen == null) {
                     System.out.println("Please select a room.");
                     return;
@@ -118,7 +136,11 @@ public class AddReservationController {
 
                 if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
                     roomToUpdate.setAvailability(false);
-                    savedReservation = reservationService.create(new Reservation(startTime, endTime));
+
+                    Reservation reservation = new Reservation(startTime, endTime);
+                    reservation.setGuest(this.guest); // attach guest FK
+                    savedReservation = reservationService.create(reservation);
+
                     roomToUpdate.setReservation(savedReservation);
                     roomService.update(roomToUpdate);
 
@@ -128,32 +150,12 @@ public class AddReservationController {
                     alertRoomTaken();
                 }
             }
-
-
-
-
-
-
-
-
-
-            // Mark the room as unavailable
-
-
-//            openRoomDialog(reservationId);
-
-            //WORKING ROOM CODE
-//            saveReservationNoEvent(savedReservation.getReservationId());
-
-
-
-
-            stage.close();
-        }
-        else {
-            System.out.println("Please fill in all fields.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error saving reservation: " + e.getMessage());
         }
     }
+
 
     public void alertRoomTaken(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
