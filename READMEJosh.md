@@ -105,6 +105,10 @@ need to add payment window to
 event after event added, also go to payment
 like room does
 
+u must insert into db now otherwise room page
+will break. it pulls rooms from db to work now
+so ui mirrors db in room page
+
 
 
 
@@ -139,3 +143,24 @@ in employeecontrollerview, its probs important for future things
 
 - So basically, Spring Security is only being used 
 - as a backend authentication framework, not as a web filter chain.
+
+
+
+talias one service iservice i had to rename
+to emplyeesalaryservice cause she named it wrong.
+keep in mind if the methods dont work
+cause they calling wrong service or something
+
+
+
+
+
+---
+todo:
+---
+add payment after event like for room
+insert register must be connected to employee insert there same time
+connect upper erd other stuff.
+make windows close when making res to stop desolate records
+cards get data from a table
+when login have image and get name from user table and display it
