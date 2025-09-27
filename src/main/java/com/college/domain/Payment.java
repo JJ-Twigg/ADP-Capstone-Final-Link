@@ -132,6 +132,17 @@ public class Payment {
     private String paymentStatus;
     private LocalDate paymentDate;
 
+
+
+    //FK To Guest
+    @ManyToOne(fetch = FetchType.LAZY)  // Many payments can belong to one guest
+    @JoinColumn(name = "guest_id", nullable = false) // FK column
+    private Guest guest;
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
     public Payment() {}
 
     // Full constructor

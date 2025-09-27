@@ -47,15 +47,32 @@ public class DashboardController {
     }
 
     @FXML
-    public void showReservation() {
-        safeLoadViewOtherPages("/scenes/reservationFinal.fxml", "Reservation");
+    public void showGuestSolo() {
+        safeLoadViewOtherPages("/scenes/guestFinalAll.fxml", "Reservation");
     }
 
+    @FXML
+    public void showReservationSolo() {
+        safeLoadViewOtherPages("/scenes/reservationFinalAll.fxml", "Reservation");
+    }
+
+    @FXML
+    public void showEventsSolo() {
+        safeLoadViewOtherPages("/scenes/eventFinalAll.fxml", "Reservation");
+    }
+
+    @FXML
+    public void showPaymentsSolo() {
+        safeLoadViewOtherPages("/scenes/paymentFinalAll.fxml", "Reservation");
+    }
 
     @FXML
     public void showRooms() {
         safeLoadViewOtherPages("/scenes/window-room-page1.fxml", "Rooms");
     }
+
+
+
 
 
     @FXML
@@ -107,6 +124,13 @@ public class DashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean); // <-- Spring injection
             Parent view = loader.load();
+
+            if ("/scenes/window-room-page1.fxml".equals(fxmlPath)) {
+                view.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
+            }else if("/scenes/window-room-page2.fxml".equals(fxmlPath)){
+                view.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
+            }
+
 
             contentArea.getChildren().setAll(view);
 

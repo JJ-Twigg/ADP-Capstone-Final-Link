@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Guest;
 import com.college.domain.Payment;
 import com.college.service.PaymentService;
 import javafx.application.Platform;
@@ -36,6 +37,21 @@ public class PaymentViewController {
     private ApplicationContext applicationContext;
 
     private ObservableList<Payment> payments = FXCollections.observableArrayList();
+
+
+
+    //FK TO GUEST
+    private Guest guest;
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+
+
+
+
+
 
     @FXML
     public void initialize() {
@@ -119,6 +135,8 @@ public class PaymentViewController {
 
             PaymentFormController controller = loader.getController();
             controller.setPayment(payment);
+
+            controller.setGuest(this.guest);
 
             stage.showAndWait();
             loadPayments(); // Refresh the table

@@ -122,7 +122,7 @@ public class AddReservationController {
                 savedReservation = reservationService.create(reservation);
 
                 System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
-                openAddEventDialog(savedReservation.getReservationId());
+                openAddEventDialog(savedReservation);
                 stage.close();
 
             } else if ("Room".equals(bookingTypeSelected)) {
@@ -145,6 +145,10 @@ public class AddReservationController {
                     roomService.update(roomToUpdate);
 
                     alertReservationSuccess(roomChosen);
+
+                    //SET FK VALUE OF PAYMENT CALL ITS ENTITY METHOD
+                    openAddPaymentPage(this.guest);
+
                     stage.close();
                 } else {
                     alertRoomTaken();
@@ -230,7 +234,7 @@ public class AddReservationController {
 
 
     //method to open event window
-    private void openAddEventDialog(Integer reservationId) {
+    private void openAddEventDialog(Reservation reservation) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/eventFinal.fxml"));
 
@@ -240,17 +244,50 @@ public class AddReservationController {
             Parent root = loader.load();
 
             EventUIController eventController = loader.getController();
-            eventController.setReservationId(reservationId);
+            eventController.setReservation(reservation);
 
             Stage modalStage = new Stage();
             modalStage.initModality(Modality.APPLICATION_MODAL);
-            modalStage.setTitle("Add Event for Reservation ID: " + reservationId);
+            modalStage.setTitle("Add Event for Reservation ID: " );
             modalStage.setScene(new Scene(root));
             modalStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
+
+    // method to open payment window
+    private void openAddPaymentPage(Guest guest) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/paymentFinal.fxml"));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+
+            Parent root = loader.load();
+
+            PaymentViewController paymentController = loader.getController();
+
+            //  Pass only the Guest ID
+            paymentController.setGuest(guest);
+
+            Stage modalStage = new Stage();
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            modalStage.setTitle("Payments for Guest ID: ");
+            modalStage.setScene(new Scene(root));
+            modalStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
 
     @FXML
     private void cancel() {

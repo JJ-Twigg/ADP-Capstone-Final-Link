@@ -1,6 +1,6 @@
 package com.college.controller;
 
-import com.college.AppRegister;
+
 import com.college.MainFinal;
 import com.college.service.UserService;
 import javafx.event.ActionEvent;

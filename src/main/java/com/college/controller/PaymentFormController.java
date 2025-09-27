@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.domain.Guest;
 import com.college.domain.Payment;
 import com.college.service.PaymentService;
 import javafx.fxml.FXML;
@@ -22,6 +23,18 @@ public class PaymentFormController {
     private PaymentService paymentService;
 
     private Payment payment;
+
+
+
+    //FK TO GUEST
+    private Guest guest;
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+
+
 
     @FXML
     public void initialize() {
@@ -82,8 +95,13 @@ public class PaymentFormController {
                         .setPaymentDate(datePicker.getValue())
                         .build();
 
+                newPayment.setGuest(guest);
+
                 paymentService.create(newPayment);
+
                 showAlert(Alert.AlertType.INFORMATION, "Payment created successfully!");
+
+
             } else {
                 // Update existing payment
                 payment.setPaymentAmount(amount);

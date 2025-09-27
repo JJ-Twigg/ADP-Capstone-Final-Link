@@ -1,18 +1,13 @@
 .button {
     /*-fx-background-color: #4CAF50;   !* hex colour*!*/
-   -fx-background-color: #26AD00;
-       -fx-text-fill: white;
-       -fx-font-size: 14px;
-       -fx-background-radius: 10;
-       -fx-padding: 10 20 10 20;
-
-
+    -fx-background-color: #66BA88;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
 }
 
-
-
 .button:hover {
-    -fx-background-color: #20A000;
+    -fx-background-color: #317A57;;
     -fx-cursor: hand;
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
@@ -23,7 +18,41 @@
     -fx-scale-y: 0.95;
 }
 
+.room-card {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-alignment: top_center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 2, 2);
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.room-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 3, 3);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.room-button {
+    -fx-background-color: #66BA88;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 0 5 0; /* less top & bottom padding */
+    -fx-background-radius: 0; /* square edges */
+}
+
+
 .room-title {
     -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+.next-page-button {
+    -fx-background-color: #66BA88;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
     -fx-font-size: 14px;
+    -fx-background-radius: 0; /* Sharp edges */
+    -fx-padding: 4 20;
 }

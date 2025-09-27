@@ -33,11 +33,11 @@ public class EventUIController {
     private final ObservableList<Event> eventList = FXCollections.observableArrayList();
 
     // FK for Event
-    private Integer reservationId;
+    private Reservation reservation;
 
-    // FK for Event
-    public void setReservationId(Integer reservationId) {
-        this.reservationId = reservationId;
+    // FK for Event setter
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
 
@@ -74,8 +74,6 @@ public class EventUIController {
         event.setDescription(description);
 
         // SET FK HERE
-        Reservation reservation = new Reservation();
-        reservation.setReservationId(reservationId); // only ID
         event.setReservation(reservation);
 
         try {

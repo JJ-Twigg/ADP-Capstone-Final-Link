@@ -24,7 +24,14 @@
                     <VBox spacing="5">
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
                         <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />
-<!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
+
+
+                        <Button onAction="#showGuestSolo" styleClass="menu-button" text="Manage Guests" />
+                        <Button onAction="#showReservationSolo" styleClass="menu-button" text="Manage Reservation" />
+                        <Button onAction="#showEventsSolo" styleClass="menu-button" text="Manage Events" />
+                        <Button onAction="#showPaymentsSolo" styleClass="menu-button" text="Manage Payments" />
+
+
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
                         <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
                         <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
