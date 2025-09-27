@@ -100,10 +100,13 @@ then when u delte from reservation, run update avaialbity
 in room?
 
 
-4. now if u use view rooms udpate button
-it removes fk. thats proglm 1. problem2 room
-page doesnt mirror db so theres no point to it
-shoul dbe able to see whats booked via room page
+
+need to add payment window to
+event after event added, also go to payment
+like room does
+
+
+
 
 
 5 new flow needs to be,

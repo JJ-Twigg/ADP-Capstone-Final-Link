@@ -94,7 +94,17 @@ public class Room {
                 '}';
     }
 
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
 
+    public void setPricePerNight(float pricePerNight) {
+        this.pricePerNight = pricePerNight;
+    }
+
+    public void setFeatures(String features) {
+        this.features = features;
+    }
 
     /// Builder pattern
     public static class RoomBuilder{

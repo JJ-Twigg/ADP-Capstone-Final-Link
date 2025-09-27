@@ -26,66 +26,32 @@ import java.io.IOException;
 @Component
 public class AddReservationController {
 
-
-    Reservation savedReservation;
+    private Reservation savedReservation;
+    private Guest guest;
+    private Stage stage;
 
     @Autowired
     private RoomService roomService;
 
-    @FXML private TextField startTimeField;
-    @FXML private TextField endTimeField;
-
-    @FXML
-    private ComboBox<Integer> comboBoxNumbers;
-
-    @FXML
-    private ComboBox<String> comboBoxBookingType;
-
-
-    //----------------------------------------
-    //HERE autowire employeeService, to retrieve the list of all emp in the employee table.
     @Autowired
     private EmployeeService employeeService;
 
-    @FXML
-    private ComboBox<Employee> comboBoxEmployee;
-
-
-
-
-
-
-
-    //-------------------------------
-
     private final ReservationService reservationService;
-    private Stage stage;
+
+    @FXML private TextField startTimeField;
+    @FXML private TextField endTimeField;
+    @FXML private ComboBox<Integer> comboBoxNumbers;
+    @FXML private ComboBox<String> comboBoxBookingType;
+    @FXML private ComboBox<Employee> comboBoxEmployee;
 
     @Autowired
     public AddReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
 
-
-    //GUEST FK PASSED from ReservationUI controller class. Too many classes calling each other,
-    private Guest guest; // hold the Guest object
-
-    // Setter to pass Guest from ReservationUIController
     public void setGuest(Guest guest) {
         this.guest = guest;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -93,25 +59,22 @@ public class AddReservationController {
 
     @FXML
     public void initialize() {
-        // Populate ComboBox with numbers 51-59
+        // Populate room numbers (51-59)
         for (int i = 52; i <= 59; i++) {
             comboBoxNumbers.getItems().add(i);
         }
-        comboBoxNumbers.setValue(52); // default value
+        comboBoxNumbers.setValue(52);
 
-
-        // Room Type ComboBox
+        // Booking type
         comboBoxBookingType.getItems().addAll("Room", "Event");
-
         comboBoxBookingType.setOnAction(e -> {
             String type = comboBoxBookingType.getValue();
             comboBoxNumbers.setVisible(!"Event".equals(type));
             comboBoxEmployee.setVisible(!"Event".equals(type));
         });
 
-
         // Employee ComboBox
-        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees()); // fetch all employees
+        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees());
         comboBoxEmployee.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Employee emp, boolean empty) {
@@ -120,22 +83,12 @@ public class AddReservationController {
             }
         });
         comboBoxEmployee.setButtonCell(comboBoxEmployee.getCellFactory().call(null));
-
     }
 
-
-
-
-
-
-    //save reservation with event window coming after
     @FXML
     private void saveReservation() {
         String startTime = startTimeField.getText();
         String endTime = endTimeField.getText();
-
-
-
 
         if (startTime.isEmpty() || endTime.isEmpty()) {
             System.out.println("Please fill in all fields.");
@@ -151,29 +104,20 @@ public class AddReservationController {
         }
 
         try {
-
-
-
             if ("Event".equals(bookingTypeSelected)) {
-                // 🔹 Event flow: skip room entirely
                 Reservation reservation = new Reservation(startTime, endTime);
-                reservation.setGuest(this.guest); // attach guest FK
+                reservation.setGuest(this.guest);
                 savedReservation = reservationService.create(reservation);
 
-                System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
-
-
-
+                System.out.println("Reservation ID (Event): " + savedReservation.getReservationId());
 
                 openAddEventDialog(savedReservation);
 
+
+
                 stage.close();
 
-
-
-
             } else if ("Room".equals(bookingTypeSelected)) {
-                // 🔹 Room flow
                 if (roomChosen == null) {
                     System.out.println("Please select a room.");
                     return;
@@ -185,23 +129,17 @@ public class AddReservationController {
                     roomToUpdate.setAvailability(false);
 
                     Reservation reservation = new Reservation(startTime, endTime);
-                    reservation.setGuest(this.guest); // attach guest FK
+                    reservation.setGuest(this.guest);
                     savedReservation = reservationService.create(reservation);
 
+                    // Link reservation to room and save
                     roomToUpdate.setReservation(savedReservation);
                     roomService.update(roomToUpdate);
 
                     alertReservationSuccess(roomChosen);
-
-                    //SET FK VALUE OF PAYMENT CALL ITS ENTITY METHOD
                     openAddPaymentPage(this.guest);
 
                     stage.close();
-
-
-
-
-
                 } else {
                     alertRoomTaken();
                 }
@@ -212,8 +150,7 @@ public class AddReservationController {
         }
     }
 
-
-    public void alertRoomTaken(){
+    private void alertRoomTaken() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Room Status");
         alert.setHeaderText(null);
@@ -229,78 +166,18 @@ public class AddReservationController {
         alert.showAndWait();
     }
 
-
-
-
-//not needed cause we dont need to see the room list afterwards necessarily
-
-//    //save reservation with event window coming after
-//    @FXML
-//    private void saveReservationNoEvent(Integer reservationId) {
-//        String startTime = startTimeField.getText();
-//        String endTime = endTimeField.getText();
-//
-//        if (!startTime.isEmpty() && !endTime.isEmpty()) {
-//            Reservation newReservation = new Reservation(startTime, endTime);
-//
-//            //1 GET THE VALUE OF THE PK AUTO GEN, save to variable. so that it can be used with event controller as fk
-//            //2 run event window
-//            Reservation savedReservation = reservationService.create(newReservation);
-//            System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
-//
-//            System.out.println("New reservation saved: " + newReservation);
-//
-//
-//
-//            openRoomDialog(savedReservation.getReservationId());
-//
-//            stage.close();
-//        }
-//        else {
-//            System.out.println("Please fill in all fields.");
-//        }
-//    }
-
-
-    //method to open event window
-    private void openRoomDialog(Integer reservationId) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-room-page1"));
-            Parent root = loader.load();
-
-            // Get the controller of Event UI
-            RoomController roomController = loader.getController();
-            roomController.setReservationId(reservationId); // you need a setter in RoomController
-
-            // Show Event form as modal
-            Stage modalStage = new Stage();
-            modalStage.initModality(Modality.APPLICATION_MODAL);
-            modalStage.setTitle("Add Event for Reservation ID: " + reservationId);
-            modalStage.setScene(new Scene(root));
-            modalStage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    //method to open event window
     private void openAddEventDialog(Reservation reservation) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/eventFinal.fxml"));
-
-            // Tell FXMLLoader to get controllers from Spring
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
             Parent root = loader.load();
-
             EventUIController eventController = loader.getController();
             eventController.setReservation(reservation);
 
             Stage modalStage = new Stage();
             modalStage.initModality(Modality.APPLICATION_MODAL);
-            modalStage.setTitle("Add Event for Reservation ID: " );
+            modalStage.setTitle("Add Event for Reservation ID: " + reservation.getReservationId());
             modalStage.setScene(new Scene(root));
             modalStage.showAndWait();
         } catch (IOException e) {
@@ -308,38 +185,24 @@ public class AddReservationController {
         }
     }
 
-
-
-    // method to open payment window
     private void openAddPaymentPage(Guest guest) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/paymentFinal.fxml"));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
             Parent root = loader.load();
-
             PaymentViewController paymentController = loader.getController();
-
-            //  Pass only the Guest ID
             paymentController.setGuest(guest);
 
             Stage modalStage = new Stage();
             modalStage.initModality(Modality.APPLICATION_MODAL);
-            modalStage.setTitle("Payments for Guest ID: ");
+
             modalStage.setScene(new Scene(root));
             modalStage.showAndWait();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
 
     @FXML
     private void cancel() {

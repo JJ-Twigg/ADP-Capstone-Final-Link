@@ -1,282 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="1600.0" prefWidth="900.0"
-            xmlns="http://javafx.com/javafx/24.0.1"
+<AnchorPane xmlns="http://javafx.com/javafx/24.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.college.controller.RoomController">
+            fx:controller="com.college.controller.RoomController"
+            prefWidth="900.0" prefHeight="1600.0">
 
-    <children>
+    <!-- Scrollable container for dynamic room cards -->
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+                AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="50">
+        <content>
+            <VBox fx:id="roomContainer" spacing="20" style="-fx-padding: 20;">
+                <!-- Room cards will be added here dynamically by RoomController -->
+            </VBox>
+        </content>
+    </ScrollPane>
 
-        <!-- ScrollPane with padding -->
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
-                    AnchorPane.topAnchor="0"
-                    AnchorPane.leftAnchor="0"
-                    AnchorPane.rightAnchor="0"
-                    AnchorPane.bottomAnchor="50">
-            <content>
-                <GridPane hgap="20" vgap="20" prefWidth="900.0" style="-fx-padding: 20 20 20 20;">
-                    <columnConstraints>
-                        <ColumnConstraints percentWidth="33.33" />
-                        <ColumnConstraints percentWidth="33.33" />
-                        <ColumnConstraints percentWidth="33.33" />
-                    </columnConstraints>
-
-                    <!-- ROW 0: Rooms A, B, C -->
-                    <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="room-card">
-                        <ImageView fitWidth="200" fitHeight="150" preserveRatio="false">
-                            <image><Image url="@/images/rooms/a.jpg"/></image>
-                        </ImageView>
-                        <Label text="Room A" styleClass="room-title"/>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="priceLabelA" text="Price Per Night: R2000" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="priceTextFieldA" visible="false" managed="false" onKeyPressed="#priceTextFieldOnEnter"/>
-                            <ImageView fx:id="priceIconA" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editPrice">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="typeLabelA" text="Room Type: VIP" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="typeTextFieldA" visible="false" managed="false" onKeyPressed="#typeTextFieldOnEnter"/>
-                            <ImageView fx:id="typeIconA" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editType">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="availabilityLabelA" text="Availability: Yes" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="availabilityTextFieldA" visible="false" managed="false" onKeyPressed="#availabilityTextFieldOnEnter"/>
-                            <ImageView fx:id="availabilityIconA" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editAvailability">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="featuresLabelA" text="Features: WiFi, TV, Room service" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="featuresTextFieldA" visible="false" managed="false" onKeyPressed="#featuresTextFieldOnEnter"/>
-                            <ImageView fx:id="featuresIconA" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editFeatures">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <Button fx:id="buttonA" text="Update Room" onAction="#handleBookClick" styleClass="room-button" maxWidth="Infinity"/>
-                    </VBox>
-
-                    <!-- Room B -->
-                    <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="room-card">
-                        <ImageView fitWidth="200" fitHeight="150" preserveRatio="false">
-                            <image><Image url="@/images/rooms/b.jpg"/></image>
-                        </ImageView>
-                        <Label text="Room B" styleClass="room-title"/>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="priceLabelB" text="Price Per Night: R2000" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="priceTextFieldB" visible="false" managed="false" onKeyPressed="#priceTextFieldOnEnter"/>
-                            <ImageView fx:id="priceIconB" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editPrice">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="typeLabelB" text="Room Type: VIP" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="typeTextFieldB" visible="false" managed="false" onKeyPressed="#typeTextFieldOnEnter"/>
-                            <ImageView fx:id="typeIconB" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editType">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="availabilityLabelB" text="Availability: Yes" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="availabilityTextFieldB" visible="false" managed="false" onKeyPressed="#availabilityTextFieldOnEnter"/>
-                            <ImageView fx:id="availabilityIconB" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editAvailability">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="featuresLabelB" text="Features: WiFi, TV, Balcony" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="featuresTextFieldB" visible="false" managed="false" onKeyPressed="#featuresTextFieldOnEnter"/>
-                            <ImageView fx:id="featuresIconB" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editFeatures">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <Button fx:id="buttonB" text="Update Room" onAction="#handleBookClick" styleClass="room-button" maxWidth="Infinity"/>
-                    </VBox>
-
-                    <!-- Room C -->
-                    <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="room-card">
-                        <ImageView fitWidth="200" fitHeight="150" preserveRatio="true">
-                            <image><Image url="@/images/rooms/c.jpg"/></image>
-                        </ImageView>
-                        <Label text="Room C" styleClass="room-title"/>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="priceLabelC" text="Price Per Night: R1500" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="priceTextFieldC" visible="false" managed="false" onKeyPressed="#priceTextFieldOnEnter"/>
-                            <ImageView fx:id="priceIconC" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editPrice">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="typeLabelC" text="Room Type: Standard" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="typeTextFieldC" visible="false" managed="false" onKeyPressed="#typeTextFieldOnEnter"/>
-                            <ImageView fx:id="typeIconC" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editType">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="availabilityLabelC" text="Availability: No" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="availabilityTextFieldC" visible="false" managed="false" onKeyPressed="#availabilityTextFieldOnEnter"/>
-                            <ImageView fx:id="availabilityIconC" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editAvailability">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="featuresLabelC" text="Features: WiFi, TV" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="featuresTextFieldC" visible="false" managed="false" onKeyPressed="#featuresTextFieldOnEnter"/>
-                            <ImageView fx:id="featuresIconC" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editFeatures">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <Button fx:id="buttonC" text="Update Room" onAction="#handleBookClick" styleClass="room-button" maxWidth="Infinity"/>
-                    </VBox>
-
-                    <!-- ROW 1: Rooms D, E, F -->
-                    <!-- Room D -->
-                    <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="room-card">
-                        <ImageView fitWidth="200" fitHeight="150" preserveRatio="false">
-                            <image><Image url="@/images/rooms/d.jpg"/></image>
-                        </ImageView>
-                        <Label text="Room D" styleClass="room-title"/>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="priceLabelD" text="Price Per Night: R1200" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="priceTextFieldD" visible="false" managed="false" onKeyPressed="#priceTextFieldOnEnter"/>
-                            <ImageView fx:id="priceIconD" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editPrice">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="typeLabelD" text="Room Type: Economy" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="typeTextFieldD" visible="false" managed="false" onKeyPressed="#typeTextFieldOnEnter"/>
-                            <ImageView fx:id="typeIconD" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editType">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="availabilityLabelD" text="Availability: Yes" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="availabilityTextFieldD" visible="false" managed="false" onKeyPressed="#availabilityTextFieldOnEnter"/>
-                            <ImageView fx:id="availabilityIconD" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editAvailability">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="featuresLabelD" text="Features: Basic Amenities" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="featuresTextFieldD" visible="false" managed="false" onKeyPressed="#featuresTextFieldOnEnter"/>
-                            <ImageView fx:id="featuresIconD" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editFeatures">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <Button fx:id="buttonD" text="Update Room" onAction="#handleBookClick" styleClass="room-button" maxWidth="Infinity"/>
-                    </VBox>
-
-                    <!-- Room E -->
-                    <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="room-card">
-                        <ImageView fitWidth="200" fitHeight="150" preserveRatio="false">
-                            <image><Image url="@/images/rooms/e.jpg"/></image>
-                        </ImageView>
-                        <Label text="Room E" styleClass="room-title"/>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="priceLabelE" text="Price Per Night: R1800" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="priceTextFieldE" visible="false" managed="false" onKeyPressed="#priceTextFieldOnEnter"/>
-                            <ImageView fx:id="priceIconE" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editPrice">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="typeLabelE" text="Room Type: VIP" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="typeTextFieldE" visible="false" managed="false" onKeyPressed="#typeTextFieldOnEnter"/>
-                            <ImageView fx:id="typeIconE" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editType">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="availabilityLabelE" text="Availability: Yes" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="availabilityTextFieldE" visible="false" managed="false" onKeyPressed="#availabilityTextFieldOnEnter"/>
-                            <ImageView fx:id="availabilityIconE" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editAvailability">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="featuresLabelE" text="Features: WiFi, TV, Balcony" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="featuresTextFieldE" visible="false" managed="false" onKeyPressed="#featuresTextFieldOnEnter"/>
-                            <ImageView fx:id="featuresIconE" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editFeatures">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <Button fx:id="buttonE" text="Update Room" onAction="#handleBookClick" styleClass="room-button" maxWidth="Infinity"/>
-
-                    </VBox>
-
-                    <!-- Room F -->
-                    <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="room-card">
-                        <ImageView fitWidth="200" fitHeight="150" preserveRatio="false">
-                            <image><Image url="@/images/rooms/f.jpg"/></image>
-                        </ImageView>
-                        <Label text="Room F" styleClass="room-title"/>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="priceLabelF" text="Price Per Night: R1600" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="priceTextFieldF" visible="false" managed="false" onKeyPressed="#priceTextFieldOnEnter"/>
-                            <ImageView fx:id="priceIconF" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editPrice">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="typeLabelF" text="Room Type: Standard" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="typeTextFieldF" visible="false" managed="false" onKeyPressed="#typeTextFieldOnEnter"/>
-                            <ImageView fx:id="typeIconF" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editType">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="availabilityLabelF" text="Availability: No" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="availabilityTextFieldF" visible="false" managed="false" onKeyPressed="#availabilityTextFieldOnEnter"/>
-                            <ImageView fx:id="availabilityIconF" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editAvailability">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label fx:id="featuresLabelF" text="Features: WiFi, TV" minWidth="130" alignment="CENTER_LEFT"/>
-                            <TextField fx:id="featuresTextFieldF" visible="false" managed="false" onKeyPressed="#featuresTextFieldOnEnter"/>
-                            <ImageView fx:id="featuresIconF" fitWidth="16" fitHeight="16" preserveRatio="true" onMouseClicked="#editFeatures">
-                                <image><Image url="@/images/icons/green.png"/></image>
-                            </ImageView>
-                        </HBox>
-                        <Button fx:id="buttonF" text="Update Room" onAction="#handleBookClick" styleClass="room-button" maxWidth="Infinity"/>
-                    </VBox>
-
-                </GridPane>
-            </content>
-        </ScrollPane>
-
-        <!-- Bottom Next Page Button -->
-        <HBox alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="30">
-            <Button fx:id="nextPageButton" text="Next Page" onAction="#nextPage"
-                    styleClass="next-page-button"
-                    prefHeight="25" prefWidth="160"/>
-        </HBox>
-    </children>
+    <!-- Bottom navigation buttons -->
+    <HBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="30" alignment="CENTER_RIGHT">
+<!--        <Button text="Go Back" onAction="#goBack" styleClass="navigation-button"/>-->
+<!--        <Button fx:id="nextPageButton" text="Next Page" onAction="#nextPage" styleClass="navigation-button"/>-->
+    </HBox>
 </AnchorPane>
