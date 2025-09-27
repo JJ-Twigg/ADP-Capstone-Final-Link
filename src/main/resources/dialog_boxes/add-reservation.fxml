@@ -33,8 +33,13 @@
     <Label text="Select Room Number:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     <ComboBox fx:id="comboBoxNumbers" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
 
+    <!-- Employee Selection -->
+    <Label text="Select Employee:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <ComboBox fx:id="comboBoxEmployee" GridPane.columnIndex="1" GridPane.rowIndex="4" prefWidth="200"/>
+
+
     <!-- Buttons -->
-    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="5">
         <Button fx:id="saveButton" text="Save" onAction="#saveReservation"/>
         <Button fx:id="cancelButton" text="Cancel" onAction="#cancel"/>
     </HBox>

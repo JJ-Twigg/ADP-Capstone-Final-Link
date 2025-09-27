@@ -122,3 +122,14 @@ that cause fk err if they add reservation with no guest
 only show add guest, which then after adding
 guest it opens res then event.??
 
+5. also i think reservation, needs number of guests
+cause 1 reseration could be for a group/family for a room
+so currently we only take single people so maybe fix this
+----
+to add muaaths and make mine run i commented out had to
+return new javafx.beans.property.SimpleIntegerProperty(
+//                emp.getUser() != null ? emp.getUser().getId() : 0
+).asObject();
+});
+in employeecontrollerview, its probs important for future things
+

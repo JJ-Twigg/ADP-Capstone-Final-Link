@@ -2,43 +2,50 @@ package com.college.service;
 
 import com.college.domain.Employee;
 import com.college.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class EmployeeService implements IEmployeeService {
+public class EmployeeService {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
-    @Override
-    public List<Employee> getAll() {
-        return employeeRepository.findAll();
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
-    @Override
-    public Employee create(Employee employee) {
+    // CREATE
+    public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    @Override
-    public Employee read(Integer id) {
-        return employeeRepository.findById(id).orElse(null);
+    // READ
+    public Optional<Employee> getEmployeeById(int employeeId) {
+        return employeeRepository.findById(employeeId);
     }
 
-    @Override
-    public Employee update(Employee employee) {
+    // UPDATE
+    public Employee updateEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    @Override
-    public boolean delete(Integer id) {
-        if (employeeRepository.existsById(id)) {
-            employeeRepository.deleteById(id);
+    // DELETE
+    public boolean deleteEmployee(int employeeId) {
+        if (employeeRepository.existsById(employeeId)) {
+            employeeRepository.deleteById(employeeId);
             return true;
         }
         return false;
+    }
+
+    // GET ALL
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public Employee findAll() {
+        return null;
     }
 }

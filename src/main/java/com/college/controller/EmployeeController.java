@@ -1,9 +1,7 @@
 package com.college.controller;
 
 import com.college.domain.Employee;
-import com.college.domain.subclasses.FoodWorker;
 import com.college.repository.EmployeeRepository;
-import com.college.service.IFoodWorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,52 +11,50 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
+
     @Autowired
-    private EmployeeRepository repo;
+    private EmployeeRepository employeeRepository;
 
-
-    // Get all food workers
+    // Get all employees
     @GetMapping
     public List<Employee> getAll() {
-        return repo.findAll();
+        return employeeRepository.findAll();
     }
 
-    // Create a new food worker
+    // Create a new employee
     @PostMapping
     public Employee create(@RequestBody Employee employee) {
-        return repo.save(employee);
+        return employeeRepository.save(employee);
     }
 
-    // Read a food worker by ID
+    // Read an employee by ID
     @GetMapping("/{id}")
     public ResponseEntity<Employee> read(@PathVariable Integer id) {
-        Employee worker = repo.findById(id).orElse(null);
-        if (worker != null) {
-            return ResponseEntity.ok(worker);
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
         }
         return ResponseEntity.notFound().build();
     }
 
-    // Update a food worker
+    // Update an employee
     @PutMapping("/{id}")
     public ResponseEntity<Employee> update(
             @PathVariable Integer id,
             @RequestBody Employee employee
     ) {
-        employee.setId(id); // ensure the ID matches the path
-        Employee updated = repo.save(employee);
+        employee.setEmployeeId(id); // ensure the ID matches the path
+        Employee updated = employeeRepository.save(employee);
         return ResponseEntity.ok(updated);
     }
 
-    // Delete a food worker
+    // Delete an employee
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        repo.deleteById(id);
-//        return true;
-//
-//        if (deleted) {
-//            return ResponseEntity.ok().build();
-//        }
+        if (employeeRepository.existsById(id)) {
+            employeeRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
         return ResponseEntity.notFound().build();
     }
 }

@@ -1,157 +1,67 @@
 package com.college.domain;
 
-import com.college.domain.subclasses.FoodWorker;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
-//import lombok.Getter;
-//import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-//@Getter
-//@Setter
 @Entity
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int employeeId;
 
-    private String firstNames;
+    private String jobType;
+    private LocalDate startDate;
 
-    private String lastName;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    private User user; // FK to User entity
 
-//    private LocalTime startDate;
-//    private LocalDateTime registerDateTime;
+    public Employee() {}
 
-    private String formattedDateTime;
+    public Employee(String jobType, LocalDate startDate, User user) {
+        this.jobType = jobType;
+        this.startDate = startDate;
 
-    private String gender;
+    }
 
-    private int age;
+    // Getters
+    public int getEmployeeId() {
+        return employeeId;
+    }
 
-    //FK to Shift
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Shift shift;
+    public String getJobType() {
+        return jobType;
+    }
 
-    //FK to FoodWorker
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private FoodWorker foodWorker;
-
-    //FK to maintenanceWorker
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private MaintenanceWorker maintenanceWorker;
-
-    //FK to houseKeeper
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Housekeeper housekeeper;
-
-
-
-
-
-    public Employee(){}
-
-    public Employee(String empFirstName, String empLastName, String dateTime) {
-        this.firstNames = empFirstName;
-        this.lastName = empLastName;
-//        this.registerDateTime = dateTime;
-        this.formattedDateTime = dateTime;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
 
 
-//    public Employee(String empFirstName, String empLastName) {
-//        this.firstNames = empFirstName;
-//        this.lastName = empLastName;
-//    }
-
-//    public Employee(
-//            String firstNames,
-//            String lastName,
-//            String gender,
-//            int age,
-//            LocalTime empStartDate
-//    ) {
-//        this.firstNames = firstNames;
-//        this.lastName = lastName;
-//        this.gender = gender;
-//        this.age = age;
-//        this.empStartDate = empStartDate;
-//    }
-    // -------------------------------------
-
-    // getters
-
-    public String getFormattedDateTime() {
-        return formattedDateTime;
+    // Setters
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public void setFormattedDateTime(String formattedDateTime) {
-        this.formattedDateTime = formattedDateTime;
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getFirstNames() {
-        return firstNames;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public int getAge() {
-        return age;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
 
-//    public LocalDateTime getRegisterDateTime() {
-//        return registerDateTime;
-//    }
-
-//    public void setRegisterDateTime(LocalDateTime registerDateTime) {
-//        this.registerDateTime = registerDateTime;
-//    }
-
-
-    // setters
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFirstNames(String firstNames) {
-        this.firstNames = firstNames;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "formattedDateTime=" + formattedDateTime +
-                ", lastName='" + lastName + '\'' +
-                ", firstNames='" + firstNames + '\'' +
-                ", id=" + id +
+                "employeeId=" + employeeId +
+                ", jobType='" + jobType + '\'' +
+                ", startDate=" + startDate +
                 '}';
     }
 }

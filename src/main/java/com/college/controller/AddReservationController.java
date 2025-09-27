@@ -1,9 +1,11 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.domain.Employee;
 import com.college.domain.Guest;
 import com.college.domain.Reservation;
 import com.college.domain.Room;
+import com.college.service.EmployeeService;
 import com.college.service.ReservationService;
 import com.college.service.RoomService;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +40,23 @@ public class AddReservationController {
 
     @FXML
     private ComboBox<String> comboBoxBookingType;
+
+
+    //----------------------------------------
+    //HERE autowire employeeService, to retrieve the list of all emp in the employee table.
+    @Autowired
+    private EmployeeService employeeService;
+
+    @FXML
+    private ComboBox<Employee> comboBoxEmployee;
+
+
+
+
+
+
+
+    //-------------------------------
 
     private final ReservationService reservationService;
     private Stage stage;
@@ -86,7 +106,20 @@ public class AddReservationController {
         comboBoxBookingType.setOnAction(e -> {
             String type = comboBoxBookingType.getValue();
             comboBoxNumbers.setVisible(!"Event".equals(type));
+            comboBoxEmployee.setVisible(!"Event".equals(type));
         });
+
+
+        // Employee ComboBox
+        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees()); // fetch all employees
+        comboBoxEmployee.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Employee emp, boolean empty) {
+                super.updateItem(emp, empty);
+                setText(empty || emp == null ? "" : emp.getJobType() + " - " + emp.getEmployeeId());
+            }
+        });
+        comboBoxEmployee.setButtonCell(comboBoxEmployee.getCellFactory().call(null));
 
     }
 

@@ -35,7 +35,15 @@
 
                 <!-- Total Revenue -->
                 <VBox alignment="CENTER" spacing="10">
-                    <VBox style="-fx-background-color: #66BA88; -fx-padding: 20; -fx-spacing: 10; -fx-min-width: 200; -fx-alignment: center; -fx-background-radius: 8;">
+                    <VBox style="
+        -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, rgba(255,255,255,0.8), rgba(102,186,136,0.9));
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        -fx-min-width: 220;
+        -fx-pref-height: 180;
+        -fx-alignment: center;
+        -fx-background-radius: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Revenue" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="R 245,800" />
@@ -45,7 +53,15 @@
 
                 <!-- Occupancy Rate -->
                 <VBox alignment="CENTER" spacing="10">
-                    <VBox style="-fx-background-color: #66BA88; -fx-padding: 20; -fx-spacing: 10; -fx-min-width: 200; -fx-alignment: center; -fx-background-radius: 8;">
+                    <VBox style="
+        -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, rgba(255,255,255,0.8), rgba(102,186,136,0.9));
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        -fx-min-width: 220;
+        -fx-pref-height: 180;
+        -fx-alignment: center;
+        -fx-background-radius: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="📊" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Occupancy Rate" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="72%" />

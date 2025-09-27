@@ -47,7 +47,7 @@ public class ShiftViewController {
     //FK setter from employee
     public void setEmployee(Employee employee) {
         this.employee = employee;
-        System.out.println("FK received in FoodWorkerController: " + employee.getId());
+
     }
 
 
