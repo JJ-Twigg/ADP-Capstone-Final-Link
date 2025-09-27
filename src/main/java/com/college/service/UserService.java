@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -15,7 +16,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //autowire a bean, or method. it returns an object password encoder. This can encode passwords
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -29,76 +29,79 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // Read a user by email (primary key)
-    public User read(String email) {
-        return userRepository.findById(email).orElse(null);
+    // Read a user by ID
+    public User read(int userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 
     // Update an existing user
     public User update(User user) {
-        if (userRepository.existsById(user.getEmail())) {
+        if (userRepository.existsById(user.getUserId())) {
             return userRepository.save(user);
         }
         return null; // or throw an exception
     }
 
-    // Delete a user by email
-    public boolean delete(String email) {
-        if (userRepository.existsById(email)) {
-            userRepository.deleteById(email);
+    // Delete a user by ID
+    public boolean delete(int userId) {
+        if (userRepository.existsById(userId)) {
+            userRepository.deleteById(userId);
             return true;
         }
         return false;
     }
 
-    public User register(String email, String pass) {
+    public User register(String email, String pass, String name, String surname, Integer age, String gender, String role) {
 
-        //check if email is taken, this is a custom method in UserRepo, jpa doesnt have one
-        if(userRepository.existsByEmail(email)){
+        if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already taken");
         }
 
-        //use object-bcrypt returned from autowire to encode pass
         String hashedPassword = passwordEncoder.encode(pass);
 
-        //create User object with factory
-        User user = UserFactory.createAdmin(email, hashedPassword);
+        if(role.equals("ADMIN")){
+            //
+            User user = UserFactory.createAdmin(email, hashedPassword, name, surname, age, gender);
+            System.out.println("hashed password: " + hashedPassword);
+            System.out.println("saving admin register to db");
 
-        System.out.println("hashed password: " + hashedPassword);
+            return userRepository.save(user);
+        }else if(role.equals("MANAGER")){
+            User user = UserFactory.createManager(email, hashedPassword, name, surname, age, gender);
+            System.out.println("hashed password: " + hashedPassword);
+            System.out.println("saving manager register to db");
 
-        return userRepository.save(user);
+            return userRepository.save(user);
+        }else{
+            User user = UserFactory.createUser(email, hashedPassword, name, surname, age, gender,role);
+            System.out.println("hashed password: " + hashedPassword);
+            System.out.println("saving user register to db");
+
+            return userRepository.save(user);
+        }
 
     }
 
 
-
-
+    // Login by email + password
     public User login(String email, String pass) {
-
-        User user;
-
-
         try {
-            user = userRepository.findByEmail(email); // if returns null
-            if (user != null) {
-                // check password
+            Optional<User> optionalUser = userRepository.findByEmail(email);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
                 if (passwordEncoder.matches(pass, user.getPassword())) {
                     System.out.println("Login successful!");
                     return user;
                 } else {
                     System.out.println("Invalid password");
-                    return null;
                 }
             } else {
                 System.out.println("User not found");
-                return null;
             }
         } catch (Exception e) {
             System.out.println("Error during login: " + e.getMessage());
             e.printStackTrace();
-            return null;
         }
-
-
+        return null;
     }
 }

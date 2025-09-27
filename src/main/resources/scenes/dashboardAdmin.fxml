@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.college.controller.DashboardController" stylesheets="@/css/styles.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.college.controller.DashboardController">
 
     <left>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #FFFFFF; -fx-border-color: #FFFFFF;" styleClass="scroll-pane" vbarPolicy="AS_NEEDED">
@@ -15,7 +15,7 @@
                     <VBox alignment="CENTER" spacing="10">
                         <Label style="-fx-text-fill: white; -fx-font-size: 40px;" text="👤" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="John Doe" />
-                        <Label style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" text="Administrator" />
+                        <Label style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" text="SUPER ADMIN PAGE" />
                     </VBox>
 
                     <Separator />
@@ -24,14 +24,7 @@
                     <VBox spacing="5">
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
                         <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />
-
-
-                        <Button onAction="#showGuestSolo" styleClass="menu-button" text="Manage Guests" />
-                        <Button onAction="#showReservationSolo" styleClass="menu-button" text="Manage Reservation" />
-                        <Button onAction="#showEventsSolo" styleClass="menu-button" text="Manage Events" />
-                        <Button onAction="#showPaymentsSolo" styleClass="menu-button" text="Manage Payments" />
-
-
+<!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
                         <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
                         <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />

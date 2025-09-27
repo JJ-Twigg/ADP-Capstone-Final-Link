@@ -27,10 +27,10 @@ public class UserController {
         return userService.create(user);
     }
 
-    // Read a user by email
-    @GetMapping("/{email}")
-    public ResponseEntity<User> read(@PathVariable String email) {
-        User user = userService.read(email);
+    // Read a user by ID
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> read(@PathVariable int userId) {
+        User user = userService.read(userId);
         if (user != null) {
             return ResponseEntity.ok(user);
         }
@@ -38,17 +38,20 @@ public class UserController {
     }
 
     // Update a user
-    @PutMapping("/{email}")
-    public ResponseEntity<User> update(@PathVariable String email, @RequestBody User user) {
-        user.setEmail(email); // ensure the email matches the path
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> update(@PathVariable int userId, @RequestBody User user) {
+        user.setUserId(userId); // ensure the ID matches the path
         User updated = userService.update(user);
-        return ResponseEntity.ok(updated);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     // Delete a user
-    @DeleteMapping("/{email}")
-    public ResponseEntity<Void> delete(@PathVariable String email) {
-        boolean deleted = userService.delete(email);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> delete(@PathVariable int userId) {
+        boolean deleted = userService.delete(userId);
         if (deleted) {
             return ResponseEntity.ok().build();
         }

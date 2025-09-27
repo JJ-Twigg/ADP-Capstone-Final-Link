@@ -133,3 +133,6 @@ return new javafx.beans.property.SimpleIntegerProperty(
 });
 in employeecontrollerview, its probs important for future things
 
+
+- So basically, Spring Security is only being used 
+- as a backend authentication framework, not as a web filter chain.

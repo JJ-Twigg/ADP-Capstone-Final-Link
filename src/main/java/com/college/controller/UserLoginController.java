@@ -1,6 +1,7 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.config.DashboardAuthoriseHandler;
 import com.college.domain.User;
 import com.college.service.UserService;
 import javafx.event.ActionEvent;
@@ -16,6 +17,8 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -65,26 +68,50 @@ public class UserLoginController {
     }
 
 
-    //Auth Manager Method
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private DashboardAuthoriseHandler dashboardHandler;
+
     public void loginUser(String email, String password) {
+        UsernamePasswordAuthenticationToken authToken =
+                new UsernamePasswordAuthenticationToken(email, password);
 
-        //Make a token from login form. Then compare with token stored on db.
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
+        // Authenticate user
+        Authentication auth = authenticationManager.authenticate(authToken);
 
-        // THIS takes credentials from form, sends to securityConfig method Authmanager that uses this tokens email
-        // then compares the hash to the token passed here.
-        authenticationManager.authenticate(authToken);
-
-        // If no exception, login succeeded
-        System.out.println("User Authenticated Successfully with: " + email);
-        System.out.println("logging in");
-        changePage();
-
-
+        // Redirect to proper dashboard based on role
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        dashboardHandler.redirectToDashboard(stage, auth);
     }
+
+
+
+
+
+
+
+//    //Auth Manager Method
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
+//
+//    public void loginUser(String email, String password) {
+//
+//        //Make a token from login form. Then compare with token stored on db.
+//        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
+//
+//        // THIS takes credentials from form, sends to securityConfig method Authmanager that uses this tokens email
+//        // then compares the hash to the token passed here.
+//        Authentication auth = authenticationManager.authenticate(authToken);
+//
+//        // If no exception, login succeeded
+//        System.out.println("User Authenticated Successfully with: " + email);
+//        System.out.println("logging in");
+//        changePage(auth);
+//
+//
+//    }
 
 
 
@@ -95,12 +122,29 @@ public class UserLoginController {
     //just changes page
 
     @FXML
-    private void changePage() {
+    private void changePage(Authentication auth) {
         try {
 
-            System.out.println("Load dashboard page");
+            // Determine which FXML to load
+            String role = auth.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .findFirst()
+                    .orElse("");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/dashboard.fxml"));
+            String fxmlToLoad;
+            if (role.equals("ADMIN")) {
+                fxmlToLoad = "/scenes/dashboardAdmin.fxml";
+            } else if (role.equals("MANAGER")) {
+                fxmlToLoad = "/scenes/dashboard.fxml";
+            } else {
+                fxmlToLoad = "/scenes/dashboard.fxml"; // default
+            }
+
+            System.out.println("Loading FXML: " + fxmlToLoad);
+
+            System.out.println("Load dashboard page: " + fxmlToLoad);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlToLoad));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
             Parent dashboardRoot = loader.load();
 

@@ -1,6 +1,5 @@
 package com.college.controller;
 
-
 import com.college.MainFinal;
 import com.college.service.UserService;
 import javafx.event.ActionEvent;
@@ -9,18 +8,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.swing.*;
 import java.io.IOException;
 
 @Component
 public class UserRegisterController {
+
+
+    @FXML private TextField nameField;
+    @FXML private TextField surnameField;
+    @FXML private TextField ageField;
+    @FXML private TextField genderField;
+
+
 
     @FXML
     private TextField username;
@@ -31,61 +37,67 @@ public class UserRegisterController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @FXML
+    private ComboBox<String> roleComboBox;
 
-    // get username
-    public String getUsernameInput() {
-        return username.getText().trim();
-    }
 
-    // get password
-    public String getPasswordInput() {
-        return password.getText();
-    }
 
-    // signup button click
+
+
+
+
+
+    // Signup button click
     @FXML
     private void handleSignUp(ActionEvent event) {
-        String user = username.getText();
+        String email = username.getText().trim();
         String pass = password.getText();
 
-        if(user.isEmpty() || pass.isEmpty()){
-            System.out.println("Username and password are required!");
+        String name = nameField.getText().trim();
+        String surname = surnameField.getText().trim();
+        String ageText = ageField.getText().trim();
+        String gender = genderField.getText().trim();
+        String role = roleComboBox.getValue();
+
+        if (email.isEmpty() || pass.isEmpty() || name.isEmpty() || surname.isEmpty()
+                || ageText.isEmpty() || gender.isEmpty()) {
+            System.out.println("All fields are required!");
+            return;
+        }
+
+        Integer age;
+        try {
+            age = Integer.parseInt(ageText);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid age input!");
             return;
         }
 
         try {
-            userService.register(user, pass);
+            userService.register(email, pass, name, surname, age, gender,role);
             System.out.println("User registered successfully!");
-            changePage(event);
+            goToLoginPage(event);
 
-
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-
     @FXML
-    private void changePage(ActionEvent event) {
+    private void goToLoginPage(ActionEvent event) {
         try {
-            System.out.println("Load new page");
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-login.fxml"));
-
-            //get springboot context from MainFinal Now
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
+            Parent loginPage = loader.load();
+            Scene scene = ((Node) event.getSource()).getScene();
+            scene.setRoot(loginPage);
 
-            Parent newPage = loader.load();
-
-            Scene currentScene = ((Node) event.getSource()).getScene();
-            currentScene.setRoot(newPage);
+            // Optionally add CSS
+            String stylesheet = getClass().getResource("/css/buttonStyle.css").toExternalForm();
+            if (!scene.getStylesheets().contains(stylesheet)) {
+                scene.getStylesheets().add(stylesheet);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,23 +108,17 @@ public class UserRegisterController {
     private void goToLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-login.fxml"));
-            loader.setControllerFactory(MainFinal.getSpringContext()::getBean); // inject Spring beans
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+
             Parent loginPage = loader.load();
-
-            System.out.println("already has an account, transferring to login page");
-
             Stage stage = (Stage) username.getScene().getWindow();
-
-            Scene scene = stage.getScene();
-
             stage.getScene().setRoot(loginPage);
 
             String stylesheet = getClass().getResource("/css/buttonStyle.css").toExternalForm();
+            Scene scene = stage.getScene();
             if (!scene.getStylesheets().contains(stylesheet)) {
                 scene.getStylesheets().add(stylesheet);
             }
-
-            System.out.println("Switched to Login page");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -121,12 +127,7 @@ public class UserRegisterController {
 
     @FXML
     private void handleExit(ActionEvent event) {
-        // Get the current window and close
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-
-
-
-
 }
