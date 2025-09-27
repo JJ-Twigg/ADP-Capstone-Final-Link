@@ -106,6 +106,9 @@ public class GuestUIController {
         // Show dialog and handle the result
         dialog.showAndWait().ifPresent(guest -> {
             try {
+
+
+
                 // SAVE GUEST FIRST
                 Guest savedGuest = guestService.addGuest(guest);
 
@@ -132,6 +135,9 @@ public class GuestUIController {
             // Pass the guest object to Reservation controller
             ReservationUIController controller = loader.getController();
             controller.setGuest(guest);
+
+            //Make window non close-able through x button, to prevent isolated records prevents res x close
+//            stage.setOnCloseRequest(event -> event.consume());
 
             stage.show();
 

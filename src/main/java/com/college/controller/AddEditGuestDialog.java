@@ -4,6 +4,7 @@ import com.college.MainFinal;
 import com.college.domain.Guest;
 import com.college.repository.GuestRepository;
 import com.college.service.GuestUIServiceNaked;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -48,6 +49,8 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         this.guestService = new GuestUIServiceNaked(guestRepository);
 
         setTitle(guest == null ? "Add Guest" : "Edit Guest");
+
+
 
         // Header label
         Label headerLabel = new Label(guest == null ? "Add Guest" : "Edit Guest");

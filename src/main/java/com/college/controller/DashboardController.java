@@ -87,8 +87,8 @@ public class DashboardController {
 
 
     @FXML
-    public void showVenues() {
-        safeLoadViewOtherPages("/scenes/venue-view.fxml", "Venues");
+    public void showShifts() {
+        safeLoadViewOtherPages("/scenes/shiftFinal.fxml", "Shifts");
     }
 
 

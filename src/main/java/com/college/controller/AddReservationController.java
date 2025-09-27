@@ -134,6 +134,9 @@ public class AddReservationController {
         String startTime = startTimeField.getText();
         String endTime = endTimeField.getText();
 
+
+
+
         if (startTime.isEmpty() || endTime.isEmpty()) {
             System.out.println("Please fill in all fields.");
             return;
@@ -148,6 +151,9 @@ public class AddReservationController {
         }
 
         try {
+
+
+
             if ("Event".equals(bookingTypeSelected)) {
                 // 🔹 Event flow: skip room entirely
                 Reservation reservation = new Reservation(startTime, endTime);
@@ -155,8 +161,16 @@ public class AddReservationController {
                 savedReservation = reservationService.create(reservation);
 
                 System.out.println("Reservation ID (FK for Event): " + savedReservation.getReservationId());
+
+
+
+
                 openAddEventDialog(savedReservation);
+
                 stage.close();
+
+
+
 
             } else if ("Room".equals(bookingTypeSelected)) {
                 // 🔹 Room flow
@@ -183,6 +197,11 @@ public class AddReservationController {
                     openAddPaymentPage(this.guest);
 
                     stage.close();
+
+
+
+
+
                 } else {
                     alertRoomTaken();
                 }

@@ -140,6 +140,13 @@ public class ReservationUIController implements Initializable {
         loadReservationData();
     }
 
+
+
+
+
+
+
+
     @FXML
     private void add() {
         try {
@@ -154,6 +161,10 @@ public class ReservationUIController implements Initializable {
 
 
             Stage modalStage = new Stage();
+
+            //get owner for x close code im trying
+            modalStage.initOwner((Stage) reservationTable.getScene().getWindow());
+
             modalStage.initModality(Modality.APPLICATION_MODAL);
             modalStage.setTitle("Add New Reservation");
             modalStage.setScene(new Scene(root));
@@ -162,11 +173,22 @@ public class ReservationUIController implements Initializable {
             modalStage.showAndWait();
             loadReservationData();
 
+
+
         } catch (IOException e) {
             e.printStackTrace();
             labelFeedback.setText("Error opening Add Reservation form.");
         }
     }
+
+
+
+
+
+
+
+
+
 
     @FXML
     private void delete() {
