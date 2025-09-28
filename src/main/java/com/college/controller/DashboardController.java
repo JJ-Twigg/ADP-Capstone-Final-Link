@@ -82,7 +82,7 @@ public class DashboardController {
 
     @FXML
     public void showEmployees() {
-        safeLoadViewOtherPages("/scenes/employee-view.fxml", "Employees");
+        safeLoadViewOtherPages("/scenes/employeeFinal.fxml", "Employees");
     }
 
 
@@ -90,6 +90,14 @@ public class DashboardController {
     public void showShifts() {
         safeLoadViewOtherPages("/scenes/shiftFinal.fxml", "Shifts");
     }
+
+    @FXML
+    public void showEmployeeSalary() {
+        safeLoadViewOtherPages("/scenes/EmployeeSalary.fxml", "Employee Salaries");
+    }
+
+
+
 
 
 

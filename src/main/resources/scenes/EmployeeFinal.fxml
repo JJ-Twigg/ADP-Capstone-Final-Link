@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.EmployeeControllerView">
+
+    <!-- Table -->
+    <TableView fx:id="employeeTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0"
+               style="-fx-background-color: white; -fx-border-color: transparent;">
+        <columns>
+            <TableColumn fx:id="colEmployeeId" prefWidth="60" text="Employee ID"
+                         style="-fx-background-color: white;"/>
+            <TableColumn fx:id="colJobType" prefWidth="150" text="Job Type"
+                         style="-fx-background-color: white;"/>
+            <TableColumn fx:id="colStartDate" prefWidth="150" text="Start Date"
+                         style="-fx-background-color: white;"/>
+            <TableColumn fx:id="colUserId" prefWidth="150" text="User ID"
+                         style="-fx-background-color: white;"/>
+        </columns>
+    </TableView>
+
+    <!-- Side Pane -->
+    <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+        <children>
+
+            <!-- Buttons -->
+<!--            <Button layoutX="41.0" layoutY="193.0" prefHeight="40.0" prefWidth="150.0"-->
+<!--                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"-->
+<!--                    stylesheets="/css/buttonStyle.css" text="Add Employee"-->
+<!--                    textFill="WHITE" onAction="#addEmployee"/>-->
+
+            <Button layoutX="40.0" layoutY="275.0" prefHeight="40.0" prefWidth="150.0"
+                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                    stylesheets="/css/buttonStyle.css" text="Update Employee"
+                    textFill="WHITE" onAction="#updateEmployee"/>
+
+<!--            <Button layoutX="40.0" layoutY="350.0" prefHeight="40.0" prefWidth="150.0"-->
+<!--                    style="-fx-background-color: #E02850;-fx-background-radius: 15px;"-->
+<!--                    stylesheets="/css/buttonStyle.css" text="Delete Employee"-->
+<!--                    textFill="WHITE" onAction="#deleteEmployee"/>-->
+        </children>
+    </Pane>
+
+    <!-- Heading -->
+    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Employees" textAlignment="CENTER" wrappingWidth="188.35">
+        <font>
+            <Font size="32.0"/>
+        </font>
+    </Text>
+</AnchorPane>

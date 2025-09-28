@@ -37,6 +37,8 @@
                         <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
 
                         <Button onAction="#showShifts" styleClass="menu-button" text="Shifts" />
+
+                        <Button onAction="#showEmployeeSalary" styleClass="menu-button" text="Employee Salaries" />
                     </VBox>
 
                     <!-- Spacer to push Exit button down -->
