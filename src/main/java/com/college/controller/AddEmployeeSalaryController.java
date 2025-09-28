@@ -1,7 +1,10 @@
 package com.college.controller;
 
+import com.college.domain.Employee;
 import com.college.domain.EmployeeSalary;
 import com.college.service.EmployeeSalaryService;
+import com.college.service.EmployeeService;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -25,9 +28,43 @@ public class AddEmployeeSalaryController {
     private EmployeeSalaryService employeeSalaryService;
 
     @FXML
+    private ComboBox<Employee> employeeComboBox;
+
+    @Autowired
+    private EmployeeService empService;
+
+    @FXML
     public void initialize() {
         choiceMethod.getItems().addAll("Cash", "Card", "EFT");
         datePicker.setValue(LocalDate.now());
+
+        // Load employees into ComboBox
+        try {
+            var employees = empService.getAllEmployees();
+            employeeComboBox.setItems(FXCollections.observableArrayList(employees));
+
+            // Show full name in the list
+            employeeComboBox.setCellFactory(cb -> new ListCell<>() {
+                @Override
+                protected void updateItem(Employee emp, boolean empty) {
+                    super.updateItem(emp, empty);
+                    setText(empty || emp == null ? "" : emp.getUser().getName() + " " + emp.getUser().getSurname());
+                }
+            });
+
+            // Show selected employee in button
+            employeeComboBox.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(Employee emp, boolean empty) {
+                    super.updateItem(emp, empty);
+                    setText(empty || emp == null ? "" : emp.getUser().getName() + " " + emp.getUser().getSurname());
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error loading employees: " + e.getMessage());
+        }
     }
 
     public void setEmployeeSalary(EmployeeSalary employeeSalary) {
@@ -57,14 +94,34 @@ public class AddEmployeeSalaryController {
 
             double amount = Double.parseDouble(txtAmount.getText().trim());
 
+            //CHECK IF employee was selected
+            Employee selectedEmployee = employeeComboBox.getSelectionModel().getSelectedItem();
+            if (selectedEmployee == null) {
+                showAlert("Please select an employee");
+                return;
+            }
+
+            // Prevent adding duplicate salary by checking parents getSalary jpa
+            if (selectedEmployee.getSalary() != null) {
+                showAlert("This employee already has a salary assigned!");
+                return;
+            }
+
+
             if (employeeSalary == null) {
                 EmployeeSalary newSalary = new EmployeeSalary.Builder()
                         .setAmount(amount)
                         .setMethod(choiceMethod.getValue())
                         .setDate(datePicker.getValue())
                         .build();
+
+                    //add fk to object we just made
+                newSalary.setEmployee(selectedEmployee);
+
                 employeeSalaryService.create(newSalary);
+
                 showAlert(Alert.AlertType.INFORMATION, "Employee salary created successfully");
+
             } else {
                 employeeSalary.setAmount(amount);
                 employeeSalary.setMethod(choiceMethod.getValue());

@@ -42,6 +42,11 @@ public class ReservationService {
 
 
 
+    public int getCurrentReservationsCount() {
+        return repo.countAllReservations();
+    }
+
+
     @Transactional
     public boolean delete(int id){
         // 1️⃣ Fetch the managed reservation

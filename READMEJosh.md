@@ -159,13 +159,20 @@ cause they calling wrong service or something
 todo:
 ---
 add payment after event like for room
-insert register must be connected to employee insert there same time
-connect upper erd other stuff.
+
 make windows close when making res to stop desolate records
 cards get data from a table
 when login have image and get name from user table and display it
 reservation probably needs num of guests, so we not always booking single
 dialog box for tables could use some global css for all of them
-adding shift and salary, needs a new page where u select from db all emps. then select the one ur adding shift or salary for
 
-shift and salary, have to add way to select what emp to add shift or sal to
+
+
+another bug, mainteinceworker, probs spelt wrong in the if for bridge
+table specifciation if, fix that easy. foodwokrer is working so.
+
+
+also need to be able to delete employees, from a page. which would
+delete every other 4 tables or 6 tables whatever it is idk 
+
+superAdmin dash needs a table of managers. and ability to remove them

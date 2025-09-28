@@ -27,6 +27,17 @@ public class Employee {
     private Shift shift;
 
 
+    // FK Parent to EmployeeSalary
+    @OneToOne(mappedBy = "employee")
+    private EmployeeSalary salary;
+
+    public EmployeeSalary getSalary() {
+        return salary;
+    }
+
+    public void setSalary(EmployeeSalary salary) {
+        this.salary = salary;
+    }
 
 
 

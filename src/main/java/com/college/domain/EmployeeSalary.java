@@ -17,7 +17,24 @@ public class EmployeeSalary {
     private String method;
     private LocalDate date;
 
-    public EmployeeSalary() {}
+
+
+    //FK to employee
+    @OneToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId", unique = true)
+    private Employee employee;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public EmployeeSalary() {
+
+    }
 
     public EmployeeSalary(int salaryId, double amount, String method, LocalDate date) {
         this.salaryId = salaryId;

@@ -23,7 +23,7 @@
                     <!-- Menu Items -->
                     <VBox spacing="5">
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
-                        <Button onAction="#showShifts" styleClass="menu-button" text="Shifts" />
+                        <Button onAction="#showShiftsUser" styleClass="menu-button" text="Shifts" />
 <!--                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />-->
 <!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
 <!--                        <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />-->

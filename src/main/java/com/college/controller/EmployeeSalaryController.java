@@ -1,6 +1,7 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.domain.Employee;
 import com.college.domain.EmployeeSalary;
 import com.college.service.EmployeeSalaryService;
 import javafx.application.Platform;
@@ -28,6 +29,7 @@ public class EmployeeSalaryController {
     @FXML private TableColumn<EmployeeSalary, String> colMethod;
     @FXML private TableColumn<EmployeeSalary, LocalDate> colDate;
 
+
     private ObservableList<EmployeeSalary> employeeSalaries = FXCollections.observableArrayList();
 
     @Autowired
@@ -42,6 +44,8 @@ public class EmployeeSalaryController {
 
         employeeSalaryTable.setItems(employeeSalaries);
         loadEmployeeSalaries();
+
+
     }
 
     private void loadEmployeeSalaries() {

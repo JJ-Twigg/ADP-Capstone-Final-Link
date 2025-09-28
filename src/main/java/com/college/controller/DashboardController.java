@@ -92,6 +92,11 @@ public class DashboardController {
     }
 
     @FXML
+    public void showShiftsUser() {
+        safeLoadViewOtherPages("/scenes/shiftFinalUser.fxml", "Shifts");
+    }
+
+    @FXML
     public void showEmployeeSalary() {
         safeLoadViewOtherPages("/scenes/EmployeeSalary.fxml", "Employee Salaries");
     }
