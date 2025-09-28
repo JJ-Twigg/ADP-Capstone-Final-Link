@@ -1,5 +1,7 @@
 package com.college.controller;
 
+import com.college.service.EmployeeService;
+import com.college.service.ReservationService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -8,8 +10,12 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OverviewController {
 
     @FXML private PieChart occupancyPieChart;
@@ -19,6 +25,20 @@ public class OverviewController {
     @FXML private BarChart<String, Number> totalGuestsChart;
     @FXML private CategoryAxis totalGuestsChartXAxis;
     @FXML private NumberAxis totalGuestsChartYAxis;
+
+    @FXML
+    private Label currentGuestsLabel;
+
+    @FXML
+    private Label EmployeeLabel;
+
+    @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
+
 
     @FXML
     public void initialize() {
@@ -32,6 +52,22 @@ public class OverviewController {
             styleBarChartLegend(revenueBarChart, "#27ae60"); // dark green
             styleBarChartLegend(totalGuestsChart, "#2ecc71"); // light green
         });
+
+        //get live card data via db
+        updateCurrentGuestsLabel();
+        updateEmployeeCount();
+    }
+
+
+
+    private void updateCurrentGuestsLabel() {
+        int count = reservationService.getCurrentReservationsCount();
+        currentGuestsLabel.setText(String.format("%,d", count)); // formats 1247 -> 1,247
+    }
+
+    private void updateEmployeeCount() {
+        int totalEmployees = employeeService.getAllEmployees().size();
+        EmployeeLabel.setText(String.valueOf(totalEmployees));
     }
 
     private void setupOccupancyChart() {

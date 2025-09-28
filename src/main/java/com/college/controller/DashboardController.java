@@ -115,10 +115,14 @@ public class DashboardController {
             }
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            //added this new for card data
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+
             Parent view = loader.load();
             contentArea.getChildren().setAll(view);
         } catch (Exception e) {
             System.out.println("Error loading " + viewName + " view: " + e.getMessage());
+            e.printStackTrace();
 
             contentArea.getChildren().clear();
             Label messageLabel = new Label(viewName + " view is under construction");

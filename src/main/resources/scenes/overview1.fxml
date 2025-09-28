@@ -31,7 +31,7 @@
         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
 
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="👥" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Current Guests" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Current Reservations" />
                         <Label fx:id="currentGuestsLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="1,247" />
                         <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="12,000 total guests" />
                     </VBox>
@@ -75,8 +75,8 @@
         -fx-background-radius: 12;
         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="📊" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Occupancy Rate" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="72%" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Employees" />
+                        <Label fx:id="EmployeeLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="72%" />
                         <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="Avg. last 12 months" />
                     </VBox>
                 </VBox>

@@ -176,3 +176,7 @@ also need to be able to delete employees, from a page. which would
 delete every other 4 tables or 6 tables whatever it is idk 
 
 superAdmin dash needs a table of managers. and ability to remove them
+might still need connection room to employee. when room u select
+which single employee to work in that room, is that connected.
+also u can only select one? or 3 combo box isntead? then 3? 3 emps
+1 room?
