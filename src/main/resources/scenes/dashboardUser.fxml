@@ -15,7 +15,7 @@
                     <VBox alignment="CENTER" spacing="10">
                         <Label style="-fx-text-fill: white; -fx-font-size: 40px;" text="👤" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="John Doe" />
-                        <Label style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" text="SUPER ADMIN PAGE" />
+                        <Label style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" text="User Dashboard" />
                     </VBox>
 
                     <Separator />
@@ -23,11 +23,12 @@
                     <!-- Menu Items -->
                     <VBox spacing="5">
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
-                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />
+                        <Button onAction="#showShifts" styleClass="menu-button" text="Shifts" />
+<!--                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />-->
 <!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
-                        <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
-                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
-                        <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
+<!--                        <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />-->
+<!--                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />-->
+<!--                        <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />-->
 <!--                        <Button onAction="#showVenues" styleClass="menu-button" text="Venues" />-->
 <!--                        <Button onAction="#showVenues" styleClass="menu-button" text="Shifts" />-->
                     </VBox>

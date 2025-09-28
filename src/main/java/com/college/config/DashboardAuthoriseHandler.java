@@ -25,6 +25,9 @@ public class DashboardAuthoriseHandler {
             } else if (role.equals("ROLE_MANAGER")) {
                 fxmlToLoad = "/scenes/dashboard.fxml";
                 break;
+            }else if (role.equals("ROLE_USER")) {  // <-- add this
+                fxmlToLoad = "/scenes/dashboardUser.fxml";
+                break;
             }
         }
 

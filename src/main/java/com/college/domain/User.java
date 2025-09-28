@@ -2,6 +2,8 @@ package com.college.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users") // better to avoid reserved keyword "user"
@@ -21,7 +23,33 @@ public class User {
     private Integer age;
     private String gender;
 
-    // Private constructor for builder
+
+
+    //FK TO EMPLOYEE
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Employee employee;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+
+
+    //FK BRIDGE TABLE
+    // Bridge table: User to Role
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRole> userRoles = new ArrayList<>();
+
+
+
+
+
+
+    //  constructor for builder
     private User(UserBuilder builder) {
         this.userId = builder.userId;
         this.email = builder.email;

@@ -14,17 +14,61 @@ public class Employee {
     private String jobType;
     private LocalDate startDate;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user; // FK to User entity
 
-    public Employee() {}
 
+
+    //FK TO USERS TABLE
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "userId") // FK column
+    private User user;
+
+    //FK Parent to shift
+    @OneToOne(mappedBy = "employee")
+    private Shift shift;
+
+
+
+
+
+    public Shift getShift() {
+        return shift;
+    }
+
+    public void setShift(Shift shift) {
+        this.shift = shift;
+    }
+
+
+
+
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
+    public Employee() {
+
+    }
+
+
+
+    //HERE WE SET FK when we make an employee object using its constructor and not factory.
     public Employee(String jobType, LocalDate startDate, User user) {
         this.jobType = jobType;
         this.startDate = startDate;
-
+        this.user = user;
     }
+
+
+
+
 
     // Getters
     public int getEmployeeId() {

@@ -56,6 +56,26 @@
             </items>
         </ComboBox>
 
+
+        <ComboBox fx:id="otherRoleComboBox" prefWidth="250.0" prefHeight="40.0" visible="false">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="FoodWorker"/>
+                    <String fx:value="MaintenanceWorker"/>
+                    <String fx:value="Housekeeper"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+
+
+
+
+
+
+
+
+
         <Button text="Sign Up" onAction="#handleSignUp"
                 style="-fx-background-color: #66BA88; -fx-text-fill: white;"
                 prefWidth="250" prefHeight="40">

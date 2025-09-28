@@ -120,7 +120,7 @@ public class UserLoginController {
 
 
     //just changes page
-
+    //THIS IS NO LONGER USED OR CALLED
     @FXML
     private void changePage(Authentication auth) {
         try {
@@ -131,14 +131,22 @@ public class UserLoginController {
                     .findFirst()
                     .orElse("");
 
+            System.out.println("Role detected: '" + role + "'");
+
             String fxmlToLoad;
-            if (role.equals("ADMIN")) {
+
+            //THIS IS NO LONGER USED OR CALLED, this change page method is deprecated
+            if ("ADMIN".equals(role)) {
                 fxmlToLoad = "/scenes/dashboardAdmin.fxml";
-            } else if (role.equals("MANAGER")) {
+            } else if ("MANAGER".equals(role)) {
                 fxmlToLoad = "/scenes/dashboard.fxml";
+            } else if ("USER".equals(role)) {  //
+                fxmlToLoad = "/scenes/dashboardUser.fxml";
             } else {
-                fxmlToLoad = "/scenes/dashboard.fxml"; // default
+                fxmlToLoad = "/scenes/window-sign-upFinal.fxml"; // fallback
+                System.out.println(fxmlToLoad);
             }
+
 
             System.out.println("Loading FXML: " + fxmlToLoad);
 
@@ -174,7 +182,7 @@ public class UserLoginController {
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
         // Load the register window FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-sign-up.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-sign-upFinal.fxml"));
         loader.setControllerFactory(com.college.MainFinal.getSpringContext()::getBean); // spring context aware
         Parent registerRoot = loader.load();
 

@@ -164,3 +164,6 @@ connect upper erd other stuff.
 make windows close when making res to stop desolate records
 cards get data from a table
 when login have image and get name from user table and display it
+reservation probably needs num of guests, so we not always booking single
+dialog box for tables could use some global css for all of them
+adding shift and salary, needs a new page where u select from db all emps. then select the one ur adding shift or salary for

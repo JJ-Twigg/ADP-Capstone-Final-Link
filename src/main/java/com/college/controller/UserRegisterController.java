@@ -1,6 +1,13 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.domain.Employee;
+import com.college.domain.Role;
+import com.college.domain.User;
+import com.college.domain.UserRole;
+import com.college.service.EmployeeService;
+import com.college.service.RoleService;
+import com.college.service.UserRoleService;
 import com.college.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,36 +23,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @Component
 public class UserRegisterController {
-
 
     @FXML private TextField nameField;
     @FXML private TextField surnameField;
     @FXML private TextField ageField;
     @FXML private TextField genderField;
 
+    @FXML private TextField username;
+    @FXML private PasswordField password;
 
+    @Autowired private UserService userService;
 
-    @FXML
-    private TextField username;
-
-    @FXML
-    private PasswordField password;
+    @FXML private ComboBox<String> roleComboBox;
+    @FXML private ComboBox<String> otherRoleComboBox; // new secondary ComboBox
 
     @Autowired
-    private UserService userService;
+    EmployeeService employeeService;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     @FXML
-    private ComboBox<String> roleComboBox;
+    public void initialize() {
+        // Hide secondary combo initially
+        if (otherRoleComboBox != null) {
+            otherRoleComboBox.setVisible(false);
+        }
 
-
-
-
-
-
-
+        // Show/hide secondary combo based on selection
+        roleComboBox.setOnAction(event -> {
+            String selected = roleComboBox.getSelectionModel().getSelectedItem();
+            if ("USER".equals(selected)) {
+                otherRoleComboBox.setVisible(true);
+            } else {
+                otherRoleComboBox.setVisible(false);
+                otherRoleComboBox.getSelectionModel().clearSelection();
+            }
+        });
+    }
 
     // Signup button click
     @FXML
@@ -59,13 +81,22 @@ public class UserRegisterController {
         String gender = genderField.getText().trim();
         String role = roleComboBox.getValue();
 
+        //type of normal user, FW, Housekeeper etc.
+        String userType;
+
+        // if user selected, define type of user the person will be
+        if ("USER".equals(role) && otherRoleComboBox.getValue() != null) {
+            userType = otherRoleComboBox.getValue();
+        }
+
         if (email.isEmpty() || pass.isEmpty() || name.isEmpty() || surname.isEmpty()
-                || ageText.isEmpty() || gender.isEmpty()) {
+                || ageText.isEmpty() || gender.isEmpty() || role == null) {
             System.out.println("All fields are required!");
             return;
         }
 
         Integer age;
+
         try {
             age = Integer.parseInt(ageText);
         } catch (NumberFormatException e) {
@@ -74,8 +105,65 @@ public class UserRegisterController {
         }
 
         try {
-            userService.register(email, pass, name, surname, age, gender,role);
+            User user = userService.register(email, pass, name, surname, age, gender, role);
             System.out.println("User registered successfully!");
+
+            String jobType;
+            if ("USER".equals(role)) {
+                jobType = otherRoleComboBox.getValue(); // Housekeeper, Maintenance, FoodWorker
+                if (jobType == null) {
+                    System.out.println("Please select a user type!");
+                    return;
+                }
+            } else {
+                jobType = role; // ADMIN or MANAGER
+            }
+
+            //PASS FK AS USER OBJECT, JPA AUTO uses user object and gives fk from it to employee
+            Employee emp = new Employee(jobType, LocalDate.now(), user);
+
+            employeeService.createEmployee(emp);
+
+            //  Handle Role entity, user and role must be made first, bridge uses both their fk's
+                Role roleEntity = new Role.RoleBuilder().roleName(role).build();
+                roleService.create(roleEntity);
+
+            String specification;
+            switch (jobType) {
+                case "MANAGER":
+                    specification = "crudEmployees";
+                    break;
+                case "ADMIN":
+                    specification = "crudEmployeesAndManagers";
+                    break;
+                case "Housekeeper":
+                case "Maintenance":
+                case "FoodWorker":
+                    specification = "viewDetailsAndShift";
+                    break;
+                default:
+                    specification = "Null!"; // fallback
+                    break;
+            }
+
+
+            UserRole userRole = new UserRole();
+            userRole.setUser(user);
+            userRole.setRole(roleEntity);
+
+            userRole.setSpecification(specification);
+
+
+            userRoleService.create(userRole);
+
+
+
+
+            // 1. save Users credentials
+            // 2. immediately save employee with those credentials
+            // 3. only then call login page
+
+
             goToLoginPage(event);
 
         } catch (Exception e) {
