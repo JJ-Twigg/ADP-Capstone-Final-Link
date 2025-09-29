@@ -158,21 +158,20 @@ cause they calling wrong service or something
 ---
 todo:
 ---
-add payment after event like for room
+
 make windows close when making res to stop desolate records
 
 when login have image and get name from user table and display it
-reservation probably needs num of guests, so we not always booking single
-dialog box for tables could use some global css for all of them
 
+reservation probably needs num of guests, so we not always booking single
+
+dialog box for tables could use some global css for all of them
 
 tables on page, some pages tables dont have enough info. shift just start, end. no emp name nothing
 
 
-also need to be able to delete employees, from a page. which would
-delete every other 4 tables or 6 tables whatever it is idk 
 
-superAdmin dash needs a table of managers. and ability to remove them
+
 might still need connection room to employee. when room u select
 which single employee to work in that room, is that connected.
 also u can only select one? or 3 combo box isntead? then 3? 3 emps

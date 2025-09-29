@@ -10,4 +10,5 @@ public interface IShiftService {
     void delete(Integer id);
     Optional<Shift> findById(Integer id);
     List<Shift> getAll();
+    boolean existsById(Integer id);
 }

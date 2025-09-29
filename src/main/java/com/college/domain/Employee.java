@@ -23,12 +23,12 @@ public class Employee {
     private User user;
 
     //FK Parent to shift
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private Shift shift;
 
 
     // FK Parent to EmployeeSalary
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private EmployeeSalary salary;
 
     public EmployeeSalary getSalary() {

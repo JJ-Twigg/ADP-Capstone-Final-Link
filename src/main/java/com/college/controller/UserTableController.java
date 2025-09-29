@@ -101,6 +101,8 @@ public class UserTableController {
                 // Delete the user , cascade deletes UserRoles and Employee Auto
                 boolean deleted = userService.delete(selected.getUserId());
 
+                //cascade handles shift and employeeSalary
+
                 if (deleted) {
 
                     // Clean up orphaned roles ,roles with no UserRoles left

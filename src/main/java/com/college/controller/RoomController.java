@@ -5,6 +5,7 @@ import com.college.service.RoomService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -51,6 +52,7 @@ public class RoomController {
         String[] imageNames = {"a", "b", "c", "d", "e", "f"}; // fixed images
 
         HBox row = new HBox(20);
+        row.setAlignment(Pos.CENTER);
         int count = 0;
 
         for (int i = 0; i < rooms.size(); i++) {
@@ -63,6 +65,7 @@ public class RoomController {
             if (count % CARDS_PER_ROW == 0) {
                 roomContainer.getChildren().add(row);
                 row = new HBox(20);
+                row.setAlignment(Pos.CENTER);
             }
         }
 

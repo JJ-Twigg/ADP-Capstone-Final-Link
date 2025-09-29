@@ -15,4 +15,6 @@ public interface IEmployeeSalaryService {
     Optional<EmployeeSalary> findById(Integer id);
 
     List<EmployeeSalary> getAll();
+
+    boolean existsById(Integer id);
 }

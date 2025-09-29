@@ -1,5 +1,6 @@
 package com.college.service;
 
+import com.college.domain.Employee;
 import com.college.domain.EmployeeSalary;
 import com.college.repository.EmployeeSalaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class EmployeeSalaryService implements IEmployeeSalaryService {
     }
 
     @Override
+    public boolean existsById(Integer id) {
+        return employeeSalaryRepository.existsById(id);
+    }
+
+
+    @Override
     public List<EmployeeSalary> getAll() {
         return employeeSalaryRepository.findAll();
     }
@@ -42,4 +49,22 @@ public class EmployeeSalaryService implements IEmployeeSalaryService {
     public Optional<EmployeeSalary> findById(Integer id) {
         return employeeSalaryRepository.findById(id);
     }
+
+
+    public boolean existsByEmployeeId(int employeeId) {
+        return employeeSalaryRepository.existsByEmployee_EmployeeId(employeeId);
+    }
+
+    public void deleteByEmployee(Employee employee) {
+        if (employee == null) return;
+
+        EmployeeSalary salary = employeeSalaryRepository.findByEmployee(employee);
+        if (salary != null) {
+            employeeSalaryRepository.delete(salary);
+        }
+    }
+
+
+
+
 }

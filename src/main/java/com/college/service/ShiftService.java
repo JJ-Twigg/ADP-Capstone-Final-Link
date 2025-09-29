@@ -36,4 +36,13 @@ public class ShiftService implements IShiftService {
     public java.util.List<Shift> getAll() {
         return shiftRepository.findAll();
     }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return shiftRepository.existsById(id);
+    }
+
+    public boolean existsByEmployeeId(int employeeId) {
+        return shiftRepository.existsByEmployee_EmployeeId(employeeId);
+    }
 }
