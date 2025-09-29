@@ -1,8 +1,10 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
@@ -13,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
+
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -106,7 +110,11 @@ public class DashboardController {
         safeLoadViewOtherPages("/scenes/UsersFinal.fxml", "Users");
     }
 
-
+    @FXML
+    public void showSignIn(ActionEvent event) {
+        showSignInPage(event);
+//        safeLoadViewOtherPages("/scenes/window-login.fxml", "Login");
+    }
 
 
 
@@ -193,6 +201,30 @@ public class DashboardController {
         }
     }
 
+
+    @FXML
+    public void showSignInPage(ActionEvent event) {
+        try {
+            // Load login FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-login.fxml"));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+            Parent loginRoot = loader.load();
+
+            // Get the current stage from the event
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set new scene
+            Scene loginScene = new Scene(loginRoot);
+            loginScene.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
+
+            stage.setScene(loginScene);
+            stage.setTitle("Login");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
