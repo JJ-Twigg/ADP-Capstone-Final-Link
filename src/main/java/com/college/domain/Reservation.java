@@ -43,8 +43,13 @@ public class Reservation {
     @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
     private Event event;
 
+    public Event getEvent() {
+        return event;
+    }
 
-
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
     public int getReservationId() {
         return reservationId;

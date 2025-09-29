@@ -3,6 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.college.controller.DashboardController" stylesheets="@/css/styles.css">
 
     <left>
@@ -12,10 +15,24 @@
                 <VBox prefWidth="220" spacing="20" style="-fx-background-color: #66BA88; -fx-padding: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
                     <!-- User Profile -->
-                    <VBox alignment="CENTER" spacing="10">
-                        <Label style="-fx-text-fill: white; -fx-font-size: 40px;" text="👤" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="John Doe" />
-                        <Label style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" text="User Dashboard" />
+                    <VBox spacing="10" alignment="CENTER">
+                        <!-- Profile Image with Circle Clip -->
+                        <ImageView fx:id="profileImage" fitWidth="80" fitHeight="80">
+                            <image>
+                                <Image url="/images/characters/download4.jpg" />
+                            </image>
+                            <clip>
+                                <Circle centerX="40" centerY="40" radius="40"/>
+                            </clip>
+                        </ImageView>
+
+                        <!-- User Name -->
+                        <Label text="John Doe"
+                               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+
+                        <!-- Role -->
+                        <Label text="Administrator"
+                               style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" />
                     </VBox>
 
                     <Separator />

@@ -195,6 +195,8 @@ public class AddReservationController {
             paymentController.setGuest(guest);
 
             Stage modalStage = new Stage();
+            modalStage.setWidth(1000);
+            modalStage.setHeight(600);
             modalStage.initModality(Modality.APPLICATION_MODAL);
 
             modalStage.setScene(new Scene(root));

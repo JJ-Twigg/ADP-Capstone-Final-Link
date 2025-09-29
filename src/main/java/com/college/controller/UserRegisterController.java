@@ -137,7 +137,7 @@ public class UserRegisterController {
                     specification = "crudEmployeesAndManagers";
                     break;
                 case "Housekeeper":
-                case "Maintenance":
+                case "MaintenanceWorker":
                 case "FoodWorker":
                     specification = "viewDetailsAndShift";
                     break;
@@ -145,6 +145,8 @@ public class UserRegisterController {
                     specification = "Null!"; // fallback
                     break;
             }
+
+
 
 
             UserRole userRole = new UserRole();
@@ -161,7 +163,8 @@ public class UserRegisterController {
 
             // 1. save Users credentials
             // 2. immediately save employee with those credentials
-            // 3. only then call login page
+            // 3. insert into bridge and role table immediately also
+            // 4. only then call login page
 
 
             goToLoginPage(event);

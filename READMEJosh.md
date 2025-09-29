@@ -159,17 +159,14 @@ cause they calling wrong service or something
 todo:
 ---
 add payment after event like for room
-
 make windows close when making res to stop desolate records
-cards get data from a table
+
 when login have image and get name from user table and display it
 reservation probably needs num of guests, so we not always booking single
 dialog box for tables could use some global css for all of them
 
 
-
-another bug, mainteinceworker, probs spelt wrong in the if for bridge
-table specifciation if, fix that easy. foodwokrer is working so.
+tables on page, some pages tables dont have enough info. shift just start, end. no emp name nothing
 
 
 also need to be able to delete employees, from a page. which would
@@ -180,3 +177,12 @@ might still need connection room to employee. when room u select
 which single employee to work in that room, is that connected.
 also u can only select one? or 3 combo box isntead? then 3? 3 emps
 1 room?
+
+someone can add user details from users table name email username to user dashboard
+
+
+paymentpage for event needs fk from guest id to add payment
+and probs fk from reservaiton too before itll work
+
+rooms db i only show 6 rooms on ui currently 1 page,
+but db has 9 rooms.

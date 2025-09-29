@@ -3,7 +3,7 @@ package com.college.controller;
 import com.college.MainFinal;
 import com.college.domain.Guest;
 import com.college.domain.Reservation;
-import com.college.service.ReservationService;
+import com.college.service.*;
 import com.college.utilities.ApplicationContextProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +48,14 @@ public class ReservationUIController implements Initializable {
 
 
 
+    @Autowired
+    PaymentService paymentService;
 
+    @Autowired
+    GuestService guestService;
+
+    @Autowired
+    EventUIServiceNaked eventService;
 
 
     private final ReservationService reservationService;
@@ -207,9 +214,21 @@ public class ReservationUIController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
+                //get fk from parent and child methods
+                int guestId = selectedReservation.getGuest().getGuestID();
+
+                if (selectedReservation.getEvent() != null) {
+                    eventService.deleteByReservationId(selectedReservation.getReservationId());
+                }
+
                 boolean deleted = reservationService.delete(selectedReservation.getReservationId());
+                //delete from other tables at the same time too
+                paymentService.deleteByGuestId(guestId);
+
                 if (deleted) {
                     labelFeedback.setText("Reservation ID: " + selectedReservation.getReservationId() + " deleted successfully.");
+                    //delete from other tables at the same time too
+                    guestService.delete(guestId);
                     loadReservationData();
                 } else {
                     labelFeedback.setText("Failed to delete reservation ID: " + selectedReservation.getReservationId() + ".");
@@ -221,6 +240,10 @@ public class ReservationUIController implements Initializable {
         } else {
             labelFeedback.setText("Deletion cancelled.");
         }
+
+
+
+
     }
 
     @FXML

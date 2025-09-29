@@ -131,6 +131,8 @@ public class GuestUIController {
             Stage stage = new Stage();
             stage.setTitle("Reservation");
             stage.setScene(new Scene(loader.load()));
+            stage.setWidth(1000);
+            stage.setHeight(600);
 
             // Pass the guest object to Reservation controller
             ReservationUIController controller = loader.getController();

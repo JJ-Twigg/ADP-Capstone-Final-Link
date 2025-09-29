@@ -43,6 +43,12 @@ public class EventUIServiceNaked {
         return false;
     }
 
+
+    @Transactional
+    public void deleteByReservationId(int reservationId) {
+        eventRepository.deleteByReservationId(reservationId);
+    }
+
     // GET ALL
     public List<Event> getAllEvents() {
         return eventRepository.findAll();

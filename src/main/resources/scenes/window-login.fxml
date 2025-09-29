@@ -83,7 +83,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </PasswordField>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginAuth" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #66BA88;" text="Log in" textFill="WHITE">
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginAuth" prefHeight="40.0" prefWidth="227.0" style="-fx-background-color: #45b6fe;" text="Log in" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -118,7 +118,7 @@
                   <Font name="DejaVuMathTeXGyre-Regular" size="18.0" />
                </font>
             </Button>
-            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="284.0" style="-fx-background-color: #66BA88;">
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="284.0" style="-fx-background-color: #45b6fe;">
                <children>
                   <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
                      <image>

@@ -1,5 +1,6 @@
 package com.college.controller;
 
+import com.college.MainFinal;
 import com.college.domain.Event;
 import com.college.domain.Reservation;
 import com.college.service.EventUIService;
@@ -7,8 +8,14 @@ import com.college.service.EventUIServiceNaked;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class EventUIController {
@@ -83,6 +90,8 @@ public class EventUIController {
             loadEvents();
 
             addButton.setDisable(true);
+
+            openPaymentPage();
 
         } catch (Exception e) {
             showAlert("Error", "Failed to add event: " + e.getMessage());
@@ -162,6 +171,38 @@ public class EventUIController {
             showAlert("Error", "Failed to delete event: " + e.getMessage());
         }
     }
+
+
+
+    private void openPaymentPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/paymentFinal.fxml"));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+            Parent root = loader.load();
+
+            PaymentViewController paymentController = loader.getController();
+            if (reservation != null && reservation.getGuest() != null) {
+                paymentController.setGuest(reservation.getGuest());
+            } else {
+                showAlert("Error", "No guest FK found for this reservation!");
+                return;
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle("Payment");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to open Payment window: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
