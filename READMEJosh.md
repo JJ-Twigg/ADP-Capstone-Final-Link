@@ -180,9 +180,7 @@ also u can only select one? or 3 combo box isntead? then 3? 3 emps
 
 someone can add user details from users table name email username to user dashboard
 
-
-paymentpage for event needs fk from guest id to add payment
-and probs fk from reservaiton too before itll work
+shift and salary, only thing that doesnt delete with users, fix then done
 
 rooms db i only show 6 rooms on ui currently 1 page,
 but db has 9 rooms.

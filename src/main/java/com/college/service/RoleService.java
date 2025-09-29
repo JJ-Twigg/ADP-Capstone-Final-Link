@@ -33,6 +33,10 @@ public class RoleService implements IRoleService {
         return roleRepository.save(role);
     }
 
+    public boolean isRoleUsed(int roleId) {
+        return roleRepository.existsUserRoleByRoleId(roleId);
+    }
+
     @Override
     public boolean delete(Integer id) {
         if (roleRepository.existsById(id)) {

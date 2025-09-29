@@ -101,7 +101,10 @@ public class DashboardController {
         safeLoadViewOtherPages("/scenes/EmployeeSalary.fxml", "Employee Salaries");
     }
 
-
+    @FXML
+    public void showUsers() {
+        safeLoadViewOtherPages("/scenes/UsersFinal.fxml", "Users");
+    }
 
 
 
