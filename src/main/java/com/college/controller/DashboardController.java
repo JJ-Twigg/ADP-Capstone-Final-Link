@@ -14,6 +14,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -25,10 +28,33 @@ public class DashboardController {
     @FXML
     private StackPane contentArea;
 
+
+    @FXML
+    private Label emailLabel;
+
+    @FXML
+    private Label roleLabel;
+
+    String name;
+
+    public void setUserInfo(String email, String role) {
+        emailLabel.setText(email);
+        roleLabel.setText(role);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @FXML
     public void initialize() {
         // Just initialize, don't load any views automatically
         System.out.println("DashboardController initialized");
+
+
+
+
+
 
         // Show a simple welcome message
         contentArea.getChildren().clear();
@@ -44,6 +70,8 @@ public class DashboardController {
     public void showOverview() {
         safeLoadView("/scenes/overview1.fxml", "Overview");
     }
+
+
 
     @FXML
     public void showGuests() {
@@ -74,6 +102,54 @@ public class DashboardController {
     public void showRooms() {
         safeLoadViewOtherPages("/scenes/window-room-page1.fxml", "Rooms");
     }
+
+
+
+
+
+
+
+    @FXML
+    public void showOverviewUser() {
+        try {
+            String fxmlPath = "/scenes/overviewUser.fxml";
+            String viewName = "Overview";
+
+            if (getClass().getResource(fxmlPath) == null) {
+                throw new Exception("File not found: " + fxmlPath);
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+            Parent view = loader.load();
+
+            //  use the values already in DashboardController, email and role are given to dashboard when a user logs in
+            String email = emailLabel.getText();
+            String role = roleLabel.getText();
+
+            //give to overviewController
+            OverviewController controller = loader.getController();
+            controller.setUserEmail(email);
+            controller.setUserRole(role);
+            controller.setName(name);
+
+            contentArea.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            System.out.println("Error loading "  + " view: " + e.getMessage());
+            e.printStackTrace();
+
+            contentArea.getChildren().clear();
+            Label messageLabel = new Label( " view is under construction");
+            messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #2c3e50;");
+            contentArea.getChildren().add(messageLabel);
+        }
+    }
+
+
+
+
+
 
 
 

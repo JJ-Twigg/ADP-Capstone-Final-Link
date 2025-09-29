@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white; -fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.college.controller.OverviewController">
+
+    <AnchorPane style="-fx-padding: 20; -fx-background-color: white;">
+        <VBox alignment="CENTER" spacing="40" style="-fx-background-color: white;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+            <!-- Header -->
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #398F6C;" text="Dashboard Overview" />
+
+            <!-- Top Row: 3 Statistic Blocks -->
+            <HBox alignment="CENTER" spacing="30">
+                <!-- Total Guests -->
+                <VBox alignment="CENTER" spacing="10">
+                    <VBox style="
+    -fx-background-color: linear-gradient(
+    from 0% 0% to 100% 100%,
+    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
+    rgba(102, 186, 136, 0.9)   /* main green */
+);
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        -fx-min-width: 220;
+        -fx-pref-height: 180;
+        -fx-alignment: center;
+        -fx-background-radius: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
+
+                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="👥" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Email" />
+                        <Label fx:id="userEmailLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="johnDoe@gmail.com" />
+
+                    </VBox>
+                </VBox>
+
+                <!-- Total Revenue -->
+                <VBox alignment="CENTER" spacing="10">
+                    <VBox style="
+       -fx-background-color: linear-gradient(
+    from 0% 0% to 100% 100%,
+    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
+    rgba(102, 186, 136, 0.9)   /* main green */
+);
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        -fx-min-width: 220;
+        -fx-pref-height: 180;
+        -fx-alignment: center;
+        -fx-background-radius: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
+                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Name" />
+                        <Label fx:id="nameLabel"  style="-fx-text-fill: white;  -fx-font-size: 32px; -fx-font-weight: bold;" text="johnDoe" />
+                    </VBox>
+                </VBox>
+
+                <!-- Occupancy Rate -->
+                <VBox alignment="CENTER" spacing="10">
+                    <VBox style="
+        -fx-background-color: linear-gradient(
+    from 0% 0% to 100% 100%,
+    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
+    rgba(102, 186, 136, 0.9)   /* main green */
+);
+        -fx-padding: 20;
+        -fx-spacing: 10;
+        -fx-min-width: 220;
+        -fx-pref-height: 180;
+        -fx-alignment: center;
+        -fx-background-radius: 12;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
+                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="📊" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Role" />
+                        <Label fx:id="roleLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="role" />
+                    </VBox>
+                </VBox>
+            </HBox>
+
+            <!-- Bottom Row: 3 Charts -->
+            <HBox alignment="CENTER" spacing="30">
+                <!-- Total Guests Chart -->
+                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                    <BarChart fx:id="totalGuestsChart" prefHeight="250" prefWidth="300" title="Total Guests">
+                        <xAxis>
+                            <CategoryAxis label="Month" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Number of Guests" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- Revenue Chart -->
+                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                    <BarChart fx:id="revenueBarChart" prefHeight="250" prefWidth="300" title="Revenue">
+                        <xAxis>
+                            <CategoryAxis label="Month" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Revenue (R)" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- Occupancy Chart -->
+                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                    <PieChart fx:id="occupancyPieChart" prefHeight="250" prefWidth="300" title="Occupancy Breakdown" />
+                </VBox>
+            </HBox>
+
+
+        </VBox>
+    </AnchorPane>
+</ScrollPane>

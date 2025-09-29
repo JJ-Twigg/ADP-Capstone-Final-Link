@@ -27,11 +27,11 @@
                         </ImageView>
 
                         <!-- User Name -->
-                        <Label text="John Doe"
+                        <Label text="John Doe" fx:id="emailLabel"
                                style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
 
                         <!-- Role -->
-                        <Label text="Administrator"
+                        <Label text="Administrator" fx:id="roleLabel"
                                style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" />
                     </VBox>
 
@@ -46,6 +46,7 @@
 <!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
                         <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
+                        <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
 
 <!--                        <Button onAction="#showVenues" styleClass="menu-button" text="Venues" />-->
 <!--                        <Button onAction="#showVenues" styleClass="menu-button" text="Shifts" />-->

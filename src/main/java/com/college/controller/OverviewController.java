@@ -27,6 +27,12 @@ public class OverviewController {
     @FXML private NumberAxis totalGuestsChartYAxis;
 
     @FXML
+    private Label  userEmailLabel;
+
+    @FXML
+    private Label  roleLabel;
+
+    @FXML
     private Label currentGuestsLabel;
 
     @FXML
@@ -53,12 +59,28 @@ public class OverviewController {
             styleBarChartLegend(totalGuestsChart, "#2ecc71"); // light green
         });
 
-        //get live card data via db
-        updateCurrentGuestsLabel();
-        updateEmployeeCount();
+
     }
 
+    @FXML
+    private Label nameLabel; // link this to FXML
 
+    public void setName(String name) {
+        nameLabel.setText(name);
+    }
+
+    public void setUserEmail(String email) {
+        userEmailLabel.setText(email);
+    }
+
+    public void setUserRole(String role) {
+        roleLabel.setText(role);
+    }
+
+    private void updateCurrentUserEmail() {
+        int count = reservationService.getCurrentReservationsCount();
+        currentGuestsLabel.setText(String.format("%,d", count)); // formats 1247 -> 1,247
+    }
 
     private void updateCurrentGuestsLabel() {
         int count = reservationService.getCurrentReservationsCount();

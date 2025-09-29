@@ -27,11 +27,11 @@
                         </ImageView>
 
                         <!-- User Name -->
-                        <Label text="John Doe"
+                        <Label text="John Doe" fx:id="emailLabel"
                                style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
 
                         <!-- Role -->
-                        <Label text="Administrator"
+                        <Label text="Administrator" fx:id="roleLabel"
                                style="-fx-text-fill: #FFFFFF; -fx-font-size: 12px;" />
                     </VBox>
 
