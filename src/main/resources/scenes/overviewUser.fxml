@@ -54,7 +54,7 @@
         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Name" />
-                        <Label fx:id="nameLabel"  style="-fx-text-fill: white;  -fx-font-size: 32px; -fx-font-weight: bold;" text="johnDoe" />
+                        <Label fx:id="nameLabel"  style="-fx-text-fill: white;  -fx-font-size: 32px; -fx-font-weight: bold;"  text="johnDoe" />
                     </VBox>
                 </VBox>
 

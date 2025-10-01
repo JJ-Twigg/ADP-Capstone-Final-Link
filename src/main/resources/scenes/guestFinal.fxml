@@ -20,7 +20,7 @@
             <TableColumn fx:id="colPayment" prefWidth="200" style="-fx-background-color: white;"  text="Payment Details" />
         </columns>
     </TableView>
-        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #45b6fe;">
     <children>
 
 
@@ -36,7 +36,7 @@
             </image>
         </ImageView>
 <!--        <Button layoutX="40.0" layoutY="275.0"  onAction="#handleEditGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Update Guest" textFill="WHITE" />-->
-        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Guest" textFill="WHITE" />
+        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddGuest" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #2fa0e8;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Guest" textFill="WHITE" />
 
 
 

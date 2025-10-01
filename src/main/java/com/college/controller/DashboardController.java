@@ -288,6 +288,8 @@ public class DashboardController {
 
             // Get the current stage from the event
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setWidth(600);
+            stage.setHeight(430);
 
             // Set new scene
             Scene loginScene = new Scene(loginRoot);

@@ -59,7 +59,10 @@ public class OverviewController {
             styleBarChartLegend(totalGuestsChart, "#2ecc71"); // light green
         });
 
-
+        //get live card data via db
+        updateCurrentGuestsLabel();
+        updateEmployeeCount();
+        updateCurrentUserEmail();
     }
 
     @FXML
@@ -79,12 +82,12 @@ public class OverviewController {
 
     private void updateCurrentUserEmail() {
         int count = reservationService.getCurrentReservationsCount();
-        currentGuestsLabel.setText(String.format("%,d", count)); // formats 1247 -> 1,247
+        currentGuestsLabel.setText(String.format("%,d", count));
     }
 
     private void updateCurrentGuestsLabel() {
         int count = reservationService.getCurrentReservationsCount();
-        currentGuestsLabel.setText(String.format("%,d", count)); // formats 1247 -> 1,247
+        currentGuestsLabel.setText(String.format("%,d", count));
     }
 
     private void updateEmployeeCount() {

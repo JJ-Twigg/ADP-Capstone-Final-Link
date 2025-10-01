@@ -19,8 +19,9 @@
                     <VBox style="
     -fx-background-color: linear-gradient(
     from 0% 0% to 100% 100%,
-    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
-    rgba(102, 186, 136, 0.9)   /* main green */
+    rgba(69, 182, 254, 0.3),   /* lighter blue */
+    rgba(69, 182, 254, 0.9)    /* main blue */
+
 );
         -fx-padding: 20;
         -fx-spacing: 10;
