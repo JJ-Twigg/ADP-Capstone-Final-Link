@@ -2,6 +2,8 @@ package com.college.controller;
 
 import com.college.service.EmployeeService;
 import com.college.service.ReservationService;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,8 +14,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class OverviewController {
@@ -25,6 +31,10 @@ public class OverviewController {
     @FXML private BarChart<String, Number> totalGuestsChart;
     @FXML private CategoryAxis totalGuestsChartXAxis;
     @FXML private NumberAxis totalGuestsChartYAxis;
+
+    @FXML
+    private Label clockLabel;
+
 
     @FXML
     private Label  userEmailLabel;
@@ -66,6 +76,9 @@ public class OverviewController {
         
         updateEmployeeCount();
         updateCurrentUserEmail();
+
+        //call clock method
+        startClock();
     }
 
     @FXML
@@ -107,6 +120,22 @@ public class OverviewController {
         }
     }
 
+
+    private void startClock() {
+        // Define the format you want
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM dd yyyy  HH:mm:ss");
+
+        // Create a Timeline that updates every second
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalDateTime now = LocalDateTime.now();
+            clockLabel.setText(now.format(formatter));
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+
+        clock.setCycleCount(Timeline.INDEFINITE); // Repeat forever
+        clock.play();
+    }
 
 
     private void setupRevenueChart() {
