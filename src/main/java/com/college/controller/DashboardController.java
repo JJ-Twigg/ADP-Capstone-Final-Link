@@ -71,6 +71,11 @@ public class DashboardController {
         safeLoadView("/scenes/overview1.fxml", "Overview");
     }
 
+    @FXML
+    public void showOverviewManager() {
+        safeLoadView("/scenes/overviewManager.fxml", "Overview");
+    }
+
 
 
     @FXML

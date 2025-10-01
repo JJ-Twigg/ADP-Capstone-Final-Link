@@ -42,27 +42,27 @@
                 </VBox>
 
                 <!-- Total Revenue -->
-                <VBox alignment="CENTER" spacing="10">
-                    <VBox style="
-      -fx-background-color: linear-gradient(
-    from 0% 0% to 100% 100%,
-    rgba(69, 182, 254, 0.3),   /* lighter blue */
-    rgba(69, 182, 254, 0.9)    /* main blue */
+<!--                <VBox alignment="CENTER" spacing="10">-->
+<!--                    <VBox style="-->
+<!--      -fx-background-color: linear-gradient(-->
+<!--    from 0% 0% to 100% 100%,-->
+<!--    rgba(69, 182, 254, 0.3),   /* lighter blue */-->
+<!--    rgba(69, 182, 254, 0.9)    /* main blue */-->
 
-);
-        -fx-padding: 20;
-        -fx-spacing: 10;
-        -fx-min-width: 220;
-        -fx-pref-height: 180;
-        -fx-alignment: center;
-        -fx-background-radius: 12;
-        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
-                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Revenue" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="R 245,800" />
-                        <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="R 1,200,000 total revenue" />
-                    </VBox>
-                </VBox>
+<!--);-->
+<!--        -fx-padding: 20;-->
+<!--        -fx-spacing: 10;-->
+<!--        -fx-min-width: 220;-->
+<!--        -fx-pref-height: 180;-->
+<!--        -fx-alignment: center;-->
+<!--        -fx-background-radius: 12;-->
+<!--        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">-->
+<!--                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />-->
+<!--                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Revenue" />-->
+<!--                        <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="R 245,800" />-->
+<!--                        <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="R 1,200,000 total revenue" />-->
+<!--                    </VBox>-->
+<!--                </VBox>-->
 
                 <!-- Occupancy Rate -->
                 <VBox alignment="CENTER" spacing="10">
@@ -96,23 +96,31 @@
             <!-- Bottom Row: 2 Charts -->
             <!-- Employees Chart -->
             <HBox alignment="CENTER" spacing="30">
-                <!-- Employees Chart -->
 
-                <PieChart fx:id="totalEmployeesPieChart" title="Total Employees" prefHeight="300" prefWidth="450"/>
+                <!-- Employees Pie Chart -->
+                <VBox style="-fx-background-color: #ffffff;
+                 -fx-border-color: #27ae60;
+                 -fx-border-width: 2;
+                 -fx-border-radius: 15;
+                 -fx-background-radius: 15;
+                 -fx-padding: 10;"
+                      alignment="CENTER">
+                    <PieChart fx:id="totalEmployeesPieChart" title="Total Employees" prefHeight="300" prefWidth="350"/>
+                </VBox>
 
+                <!-- Reservations Pie Chart -->
+                <VBox style="-fx-background-color: #ffffff;
+                 -fx-border-color: #27ae60;
+                 -fx-border-width: 2;
+                 -fx-border-radius: 15;
+                 -fx-background-radius: 15;
+                 -fx-padding: 10;"
+                      alignment="CENTER">
+                    <PieChart fx:id="reservationsPieChart" title="Reservations" prefHeight="300" prefWidth="350"/>
+                </VBox>
 
-
-
-                <!-- Revenue Chart -->
-<!--                <BarChart fx:id="revenueBarChart" title="Total Revenue" prefHeight="300" prefWidth="450">-->
-<!--                    <xAxis>-->
-<!--                        <CategoryAxis label="Month" />-->
-<!--                    </xAxis>-->
-<!--                    <yAxis>-->
-<!--                        <NumberAxis label="Revenue (R)" />-->
-<!--                    </yAxis>-->
-<!--                </BarChart>-->
             </HBox>
+
 
 
             <!-- clock -->
@@ -128,7 +136,7 @@
 
             </HBox>
 
-            <PieChart visible="false" fx:id="reservationsPieChart" title="Reservations" prefHeight="300" prefWidth="350"/>
+
 
         </VBox>
     </AnchorPane>

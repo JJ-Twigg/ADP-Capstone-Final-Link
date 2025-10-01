@@ -25,16 +25,21 @@ import java.time.format.DateTimeFormatter;
 public class OverviewController {
 
 
-    @FXML private BarChart<String, Number> revenueBarChart;
+
     @FXML private CategoryAxis revenueXAxis;
     @FXML private NumberAxis revenueYAxis;
-    @FXML private BarChart<String, Number> totalGuestsChart;
+
+    @FXML
+    private PieChart reservationsPieChart;
+
     @FXML private CategoryAxis totalGuestsChartXAxis;
     @FXML private NumberAxis totalGuestsChartYAxis;
 
     @FXML
     private Label clockLabel;
 
+    @FXML
+    private PieChart totalEmployeesPieChart;
 
     @FXML
     private Label  userEmailLabel;
@@ -59,15 +64,11 @@ public class OverviewController {
     @FXML
     public void initialize() {
 //        setupOccupancyChart();
-        setupRevenueChart();
-        setupGuestsChart();
 
-        // Delay legend styling until after nodes are rendered
-        Platform.runLater(() -> {
+        setupEmployeePieChart();
+        setupReservationsPieChart();
 
-            styleBarChartLegend(revenueBarChart, "#27ae60"); // dark green
-            styleBarChartLegend(totalGuestsChart, "#2ecc71"); // light green
-        });
+
 
         //get live card data via db
         //this live updates when adding new res, therefore it breaks when u call user dash as user dash doesnt use it but ur calling the method
@@ -76,6 +77,8 @@ public class OverviewController {
         
         updateEmployeeCount();
         updateCurrentUserEmail();
+
+
 
         //call clock method
         startClock();
@@ -120,6 +123,45 @@ public class OverviewController {
         }
     }
 
+    private void setupEmployeePieChart() {
+        int totalEmployees = employeeService.getAllEmployees().size();
+        int maxCapacity = 50; // optional for visual context
+
+        PieChart.Data employeesSlice = new PieChart.Data("Employees", totalEmployees);
+        PieChart.Data remainingSlice = new PieChart.Data("Vacant Slots", maxCapacity - totalEmployees);
+
+        totalEmployeesPieChart.getData().clear();
+        totalEmployeesPieChart.getData().addAll(employeesSlice, remainingSlice);
+
+        // Optional: set colors
+        Platform.runLater(() -> {
+            employeesSlice.getNode().setStyle("-fx-pie-color: #27ae60;"); // green
+            remainingSlice.getNode().setStyle("-fx-pie-color: #bdc3c7;"); // gray
+        });
+    }
+
+
+
+    private void setupReservationsPieChart() {
+        // Get current reservations from your existing card or service
+        int currentReservations = reservationService.getCurrentReservationsCount(); // e.g., 40
+
+        // Fake last month reservations (just for display)
+        int lastMonthReservations = (int) (currentReservations * 0.75); // 75% of current, e.g., 30
+
+        PieChart.Data currentSlice = new PieChart.Data("This Month", currentReservations);
+        PieChart.Data lastSlice = new PieChart.Data("Last Month", lastMonthReservations);
+
+        reservationsPieChart.getData().clear();
+        reservationsPieChart.getData().addAll(currentSlice, lastSlice);
+
+        // Optional: set colors
+        Platform.runLater(() -> {
+            currentSlice.getNode().setStyle("-fx-pie-color: #27ae60;"); // green
+            lastSlice.getNode().setStyle("-fx-pie-color: #3498db;"); // blue
+        });
+    }
+
 
     private void startClock() {
         // Define the format you want
@@ -146,19 +188,23 @@ public class OverviewController {
         revenueSeries.getData().add(new XYChart.Data<>("Mar", 245800));
         revenueSeries.getData().add(new XYChart.Data<>("Apr", 210000));
         revenueSeries.getData().add(new XYChart.Data<>("May", 230000));
-        revenueBarChart.getData().add(revenueSeries);
+
     }
 
     private void setupGuestsChart() {
-        XYChart.Series<String, Number> guestsSeries = new XYChart.Series<>();
-        guestsSeries.setName("Guests");
-        guestsSeries.getData().add(new XYChart.Data<>("Jan", 120));
-        guestsSeries.getData().add(new XYChart.Data<>("Feb", 150));
-        guestsSeries.getData().add(new XYChart.Data<>("Mar", 100));
-        guestsSeries.getData().add(new XYChart.Data<>("Apr", 180));
-        guestsSeries.getData().add(new XYChart.Data<>("May", 200));
-        guestsSeries.getData().add(new XYChart.Data<>("Jun", 170));
-        totalGuestsChart.getData().add(guestsSeries);
+        int totalEmployees = employeeService.getAllEmployees().size();
+
+        // Set the label
+        if (EmployeeLabel != null) {
+            EmployeeLabel.setText(String.valueOf(totalEmployees));
+        }
+
+        // Optional: show a single bar in chart
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Employees");
+        series.getData().add(new XYChart.Data<>("Total", totalEmployees));
+
+
     }
 
 
