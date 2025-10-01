@@ -139,9 +139,16 @@ public class Payment {
     @JoinColumn(name = "guest_id", nullable = false) // FK column
     private Guest guest;
 
+
+    public Guest getGuest() {
+        return guest;
+    }
+
     public void setGuest(Guest guest) {
         this.guest = guest;
     }
+
+
 
     public Payment() {}
 

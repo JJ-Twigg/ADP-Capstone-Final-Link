@@ -17,7 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
@@ -146,8 +151,60 @@ public class PaymentViewController {
         }
     }
 
+
+
+    @FXML
+    private void handlePrintAllPayments() {
+        try {
+            // Fetch all payments from your service
+            List<Payment> payments = paymentService.getAll();
+
+            if (payments.isEmpty()) {
+                System.out.println("No payments found.");
+                return;
+            }
+
+            // Define folder and file
+            String folderPath = "W:/Work/IntelliJ IDEA Community Edition 2025.2.1/projects/ADP3_capstone_project/records";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+            String timestamp = LocalDateTime.now().format(formatter);
+            String fileName = "payments_" + timestamp + ".txt";
+
+            File folder = new File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs(); // create folder if it doesn't exist
+            }
+
+            File file = new File(folder, fileName);
+
+            try (FileWriter writer = new FileWriter(file)) {
+                for (Payment payment : payments) {
+                    writer.write(payment.toString() + System.lineSeparator());
+                }
+            }
+
+
+            System.out.println("Payments saved to: " + file.getAbsolutePath());
+
+            showSuccess("Payments Successfully saved to Records folder");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error fetching payments: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
     private void showAlert(String message) {
         showAlert(Alert.AlertType.WARNING, message);
+    }
+
+    private void showSuccess(String message) {
+        showAlert(Alert.AlertType.INFORMATION, message);
     }
 
     private void showAlert(Alert.AlertType type, String message) {
