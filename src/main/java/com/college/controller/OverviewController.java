@@ -2,6 +2,7 @@ package com.college.controller;
 
 import com.college.service.EmployeeService;
 import com.college.service.ReservationService;
+import com.college.service.ShiftService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -29,14 +30,24 @@ public class OverviewController {
     @FXML private CategoryAxis revenueXAxis;
     @FXML private NumberAxis revenueYAxis;
 
+
+    //shift chart live
+    @FXML
+    private BarChart<String, Number> shiftHoursChart;
+
+    //pie chart reservation live
     @FXML
     private PieChart reservationsPieChart;
+
+    //clock live
+    @FXML
+    private Label clockLabel;
+
 
     @FXML private CategoryAxis totalGuestsChartXAxis;
     @FXML private NumberAxis totalGuestsChartYAxis;
 
-    @FXML
-    private Label clockLabel;
+
 
     @FXML
     private PieChart totalEmployeesPieChart;
@@ -59,6 +70,9 @@ public class OverviewController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    ShiftService shiftService;
+
 
 
     @FXML
@@ -67,7 +81,7 @@ public class OverviewController {
 
         setupEmployeePieChart();
         setupReservationsPieChart();
-
+        setupShiftHoursChart();
 
 
         //get live card data via db
@@ -139,6 +153,32 @@ public class OverviewController {
             remainingSlice.getNode().setStyle("-fx-pie-color: #bdc3c7;"); // gray
         });
     }
+
+
+
+    private void setupShiftHoursChart() {
+        if (shiftHoursChart == null) return;
+
+        // Get total number of shifts from the database
+        int totalShifts = shiftService.getAll().size(); // replace with your ShiftService/Repository
+        int totalHours = totalShifts * 8; // each shift = 8 hours
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Total Hours Worked");
+
+        // Just one bar representing all shifts
+        series.getData().add(new XYChart.Data<>("All Shifts", totalHours));
+
+        shiftHoursChart.getData().clear();
+        shiftHoursChart.getData().add(series);
+
+        // Optional: style the bar
+        Platform.runLater(() -> {
+            series.getData().forEach(data -> data.getNode().setStyle("-fx-bar-fill: #e67e22;"));
+        });
+    }
+
+
 
 
 
