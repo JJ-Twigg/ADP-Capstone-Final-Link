@@ -42,7 +42,15 @@
                         <Button onAction="#showOverviewUser" styleClass="menu-button" text="Overview" />
                         <Button onAction="#showShiftsUser" styleClass="menu-button" text="Shifts" />
                         <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
-<!--                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />-->
+
+
+
+                        <!-- these are fake menu items, that are hidden. they fix the left sidebar length issue -->
+                        <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" visible="false"/>
+                        <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" visible="false"/>
+                        <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" visible="false"/>
+
+                        <!--                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />-->
 <!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
 <!--                        <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />-->
 <!--                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />-->

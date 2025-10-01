@@ -123,6 +123,18 @@ public class AddReservationController {
                     return;
                 }
 
+                //Get employee ID from combo, to book a room with this emp worker
+                Employee chosenEmployee = comboBoxEmployee.getValue();
+
+                if (chosenEmployee != null) {
+                    // Safe to use chosenEmployee
+                    System.out.println("Selected employee ID: " + chosenEmployee.getEmployeeId());
+                    System.out.println("Job type: " + chosenEmployee.getJobType());
+                } else {
+                    System.out.println("No employee selected!");
+                }
+
+                //get the room number they want to book
                 Room roomToUpdate = roomService.read(roomChosen);
 
                 if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
@@ -134,6 +146,8 @@ public class AddReservationController {
 
                     // Link reservation to room and save
                     roomToUpdate.setReservation(savedReservation);
+                    //save employee fk with room booking aswell
+                    roomToUpdate.setEmployee(chosenEmployee);
                     roomService.update(roomToUpdate);
 
                     alertReservationSuccess(roomChosen);

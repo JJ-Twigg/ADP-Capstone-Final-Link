@@ -159,8 +159,14 @@ cause they calling wrong service or something
 todo:
 ---
 
-fk between room and emp connected, but now need to insert
-employee when saving room., then dialog box tos
+
+
+now it inserts room with employee. but deleting doesnt remove emp from room
+but also the list of empoyees doesnt change, idk if we want that
+cause then u can move employees around. but the if room 51 has hk7
+
+if we move hk7 to room 52 that will break 1 to 1 rel
+
 
 think about adding code to insert 6 rooms when program runs?
 instead of manual insertion

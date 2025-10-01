@@ -112,6 +112,8 @@
                 </VBox>
             </HBox>
 
+            <!-- this is hidden and fixes guest label null when calling user, this relates to dashboard admin they both use overview controller-->
+            <Label fx:id="currentGuestsLabel" layoutX="100" layoutY="50" text="0" visible="false"/>
 
         </VBox>
     </AnchorPane>
