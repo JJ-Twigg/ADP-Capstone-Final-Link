@@ -60,7 +60,10 @@ public class OverviewController {
         });
 
         //get live card data via db
+        //this live updates when adding new res, therefore it breaks when u call user dash as user dash doesnt use it but ur calling the method
+
         updateCurrentGuestsLabel();
+        
         updateEmployeeCount();
         updateCurrentUserEmail();
     }
@@ -87,12 +90,21 @@ public class OverviewController {
 
     private void updateCurrentGuestsLabel() {
         int count = reservationService.getCurrentReservationsCount();
-        currentGuestsLabel.setText(String.format("%,d", count));
+        if (currentGuestsLabel != null) {
+            currentGuestsLabel.setText(String.format("%,d", count));
+        } else {
+            System.out.println("currentGuestsLabel is null cause you called user dashboard, skipping update");
+        }
+
     }
 
     private void updateEmployeeCount() {
         int totalEmployees = employeeService.getAllEmployees().size();
-        EmployeeLabel.setText(String.valueOf(totalEmployees));
+        if (EmployeeLabel != null) {
+            EmployeeLabel.setText(String.valueOf(totalEmployees));
+        } else {
+            System.out.println("EmployeeLabel is null, cause its for manager and admin dashboard, not user dash, (skipping update)");
+        }
     }
 
     private void setupOccupancyChart() {
