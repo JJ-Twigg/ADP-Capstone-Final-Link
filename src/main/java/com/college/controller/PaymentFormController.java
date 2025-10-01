@@ -38,10 +38,10 @@ public class PaymentFormController {
 
     @FXML
     public void initialize() {
-        choiceMethod.setValue("Select an option");
+        choiceMethod.setValue("Select Payment Method");
         choiceMethod.getItems().addAll("Cash", "Card", "EFT");
 
-        choiceStatus.setValue("Select an option");
+        choiceStatus.setValue("Select Payment Status");
         choiceStatus.getItems().addAll("Pending", "Completed", "Failed");
         datePicker.setValue(LocalDate.now());
 

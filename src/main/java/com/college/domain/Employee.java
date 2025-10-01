@@ -15,6 +15,22 @@ public class Employee {
     private LocalDate startDate;
 
 
+    //FK TO ROOM
+    @OneToOne(mappedBy = "employee")
+    private Room room;
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+
+
+
+
 
 
     //FK TO USERS TABLE

@@ -159,6 +159,12 @@ cause they calling wrong service or something
 todo:
 ---
 
+fk between room and emp connected, but now need to insert
+employee when saving room., then dialog box tos
+
+think about adding code to insert 6 rooms when program runs?
+instead of manual insertion
+
 make windows close when making res to stop desolate records
 
 when login have image and get name from user table and display it

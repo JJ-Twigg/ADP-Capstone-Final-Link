@@ -31,6 +31,27 @@ public class Room {
 
 
 
+
+    @OneToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId", nullable = true)
+    private Employee employee;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+
+
+
+
+
+
+
+
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
