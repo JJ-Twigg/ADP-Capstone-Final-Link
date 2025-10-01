@@ -12,7 +12,7 @@
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #FFFFFF; -fx-border-color: #FFFFFF;" styleClass="scroll-pane" vbarPolicy="AS_NEEDED">
 
             <AnchorPane>
-                <VBox prefWidth="220" spacing="20" style="-fx-background-color: #45b6fe; -fx-padding: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                <VBox prefWidth="220" spacing="20" style="-fx-background-color: #66BA88; -fx-padding: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
                     <!-- User Profile #66BA88-->
                     <VBox spacing="10" alignment="CENTER">
@@ -40,7 +40,7 @@
                     <!-- Menu Items -->
                     <VBox spacing="5">
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
-                        <Button onAction="#showGuests" styleClass="menu-button" text=" Add Guest Reservation" />
+                        <Button onAction="#showGuestsGreen" styleClass="menu-button" text=" Add Guest Reservation" />
 
 
                         <Button onAction="#showGuestSolo" styleClass="menu-button" text="Manage Guests" />
@@ -50,8 +50,8 @@
 
 
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
-                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
-                        <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
+<!--                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />-->
+                        <Button onAction="#showEmployeesGreen" styleClass="menu-button" text="Employees" />
 
                         <Button onAction="#showShifts" styleClass="menu-button" text="Shifts" />
 

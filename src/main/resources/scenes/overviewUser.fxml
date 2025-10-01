@@ -4,7 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white; -fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.college.controller.OverviewController">
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;
+ -fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12"
+            fx:controller="com.college.controller.OverviewController">
 
     <AnchorPane style="-fx-padding: 20; -fx-background-color: white;">
         <VBox alignment="CENTER" spacing="40" style="-fx-background-color: white;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
@@ -17,11 +19,11 @@
                 <!-- Total Guests -->
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
-    -fx-background-color: linear-gradient(
-    from 0% 0% to 100% 100%,
-    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
-    rgba(102, 186, 136, 0.9)   /* main green */
-);
+   -fx-background-color: linear-gradient(
+        from 0% 0% to 100% 100%,
+        rgba(255, 200, 150, 0.3),   /* lighter orange */
+        rgba(230, 126, 34, 0.9)     /* main orange */
+    );
         -fx-padding: 20;
         -fx-spacing: 10;
         -fx-min-width: 220;
@@ -40,11 +42,11 @@
                 <!-- Total Revenue -->
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
-       -fx-background-color: linear-gradient(
-    from 0% 0% to 100% 100%,
-    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
-    rgba(102, 186, 136, 0.9)   /* main green */
-);
+    -fx-background-color: linear-gradient(
+        from 0% 0% to 100% 100%,
+        rgba(255, 200, 150, 0.3),   /* lighter orange */
+        rgba(230, 126, 34, 0.9)     /* main orange */
+    );
         -fx-padding: 20;
         -fx-spacing: 10;
         -fx-min-width: 220;
@@ -61,11 +63,11 @@
                 <!-- Occupancy Rate -->
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
-        -fx-background-color: linear-gradient(
-    from 0% 0% to 100% 100%,
-    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
-    rgba(102, 186, 136, 0.9)   /* main green */
-);
+   -fx-background-color: linear-gradient(
+        from 0% 0% to 100% 100%,
+        rgba(255, 200, 150, 0.3),   /* lighter orange */
+        rgba(230, 126, 34, 0.9)     /* main orange */
+    );
         -fx-padding: 20;
         -fx-spacing: 10;
         -fx-min-width: 220;
@@ -80,10 +82,35 @@
                 </VBox>
             </HBox>
 
-            <!-- Bottom Row: 3 Charts -->
+            <!-- Bottom Row: Shift Hours Chart -->
+            <HBox alignment="CENTER" spacing="30">
+                <VBox style="-fx-background-color: #ffffff;
+                 -fx-border-color: #e67e22;
+                 -fx-border-width: 2;
+                 -fx-border-radius: 15;
+                 -fx-background-radius: 15;
+                 -fx-padding: 10;">
+                    <BarChart fx:id="shiftHoursChart" prefHeight="250" prefWidth="400" title="Shift Hours">
+                        <xAxis>
+                            <CategoryAxis label="Employee" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Hours Worked" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+            </HBox>
+
+
+
+
+
+
+
+            <!-- Bottom Row: 3 Charts HIDDEN! deleting causes errors in overview controller, DO NOT DELETE THESE 3 they are hidden! -->
             <HBox alignment="CENTER" spacing="30">
                 <!-- Total Guests Chart -->
-                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                <VBox visible="false" style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
                     <BarChart fx:id="totalGuestsChart" prefHeight="250" prefWidth="300" title="Total Guests">
                         <xAxis>
                             <CategoryAxis label="Month" />
@@ -95,7 +122,7 @@
                 </VBox>
 
                 <!-- Revenue Chart -->
-                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                <VBox visible="false" style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
                     <BarChart fx:id="revenueBarChart" prefHeight="250" prefWidth="300" title="Revenue">
                         <xAxis>
                             <CategoryAxis label="Month" />
@@ -107,10 +134,12 @@
                 </VBox>
 
                 <!-- Occupancy Chart -->
-                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                <VBox visible="false" style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
                     <PieChart fx:id="occupancyPieChart" prefHeight="250" prefWidth="300" title="Occupancy Breakdown" />
                 </VBox>
             </HBox>
+
+
 
             <!-- this is hidden and fixes guest label null when calling user, this relates to dashboard admin they both use overview controller-->
             <Label fx:id="currentGuestsLabel" layoutX="100" layoutY="50" text="0" visible="false"/>

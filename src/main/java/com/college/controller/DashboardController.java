@@ -79,6 +79,11 @@ public class DashboardController {
     }
 
     @FXML
+    public void showGuestsGreen() {
+        safeLoadViewOtherPages("/scenes/guestFinalGreen.fxml", "Guests");
+    }
+
+    @FXML
     public void showGuestSolo() {
         safeLoadViewOtherPages("/scenes/guestFinalAll.fxml", "Reservation");
     }
@@ -171,6 +176,10 @@ public class DashboardController {
         safeLoadViewOtherPages("/scenes/employeeFinal.fxml", "Employees");
     }
 
+    @FXML
+    public void showEmployeesGreen() {
+        safeLoadViewOtherPages("/scenes/employeeFinalGreen.fxml", "Employees");
+    }
 
     @FXML
     public void showShifts() {
