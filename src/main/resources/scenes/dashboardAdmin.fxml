@@ -45,8 +45,8 @@
                         <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
 <!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
-                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />
-                        <Button onAction="#showPrint" styleClass="menu-button" text="Print" />
+<!--                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />-->
+                        <Button onAction="#showPrint" styleClass="menu-button" text="Print Payments" />
                         <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
 
 <!--                        <Button onAction="#showVenues" styleClass="menu-button" text="Venues" />-->

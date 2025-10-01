@@ -40,7 +40,7 @@
                     <!-- Menu Items -->
                     <VBox spacing="5">
                         <Button onAction="#showOverviewManager" styleClass="menu-button" text="Overview" />
-                        <Button onAction="#showGuestsGreen" styleClass="menu-button" text=" Add Guest Reservation" />
+                        <Button onAction="#showGuestsGreen" styleClass="menu-button" text="Add Reservations" />
 
 
                         <Button onAction="#showGuestSolo" styleClass="menu-button" text="Manage Guests" />
