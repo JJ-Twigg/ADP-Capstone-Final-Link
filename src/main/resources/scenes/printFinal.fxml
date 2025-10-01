@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
+<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
 
 
     <!-- Table -->
@@ -19,7 +18,7 @@
             <TableColumn fx:id="colDate" prefWidth="200" style="-fx-background-color: white;" text="Date" />
         </columns>
     </TableView>
-        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #45b6fe;">
+        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
     <children>
 
 
@@ -29,15 +28,13 @@
 
     <!-- Buttons -->
 <!--    <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeletePayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #E02850; -fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Delete Payment" textFill="WHITE" />-->
-
         <ImageView layoutX="63.0" layoutY="26.0">
             <image>
                 <Image url="/images/c.png" />
             </image>
         </ImageView>
 <!--        <Button layoutX="40.0" layoutY="275.0" onAction="#handleUpdatePayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Update Payment" textFill="WHITE" />-->
-
-        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddPayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #2fa0e8;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Payment" textFill="WHITE" />
+        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddPayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Payment" textFill="WHITE" />
 
 
 

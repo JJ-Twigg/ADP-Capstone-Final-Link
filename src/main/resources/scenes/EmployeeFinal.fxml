@@ -25,7 +25,7 @@
     </TableView>
 
     <!-- Side Pane -->
-    <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+    <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #45b6fe;">
         <children>
 
             <!-- Buttons -->
@@ -35,7 +35,7 @@
 <!--                    textFill="WHITE" onAction="#addEmployee"/>-->
 
             <Button layoutX="40.0" layoutY="275.0" prefHeight="40.0" prefWidth="150.0"
-                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                    style="-fx-background-color: #2fa0e8;-fx-background-radius: 15px;"
                     stylesheets="/css/buttonStyle.css" text="Update Employee"
                     textFill="WHITE" onAction="#updateEmployee"/>
 

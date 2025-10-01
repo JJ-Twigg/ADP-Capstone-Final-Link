@@ -104,6 +104,12 @@ public class DashboardController {
     }
 
 
+    @FXML
+    public void showPrint() {
+        safeLoadViewOtherPages("/scenes/printFinal.fxml", "Print");
+    }
+
+
 
 
 

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OverviewController {
 
-    @FXML private PieChart occupancyPieChart;
+
     @FXML private BarChart<String, Number> revenueBarChart;
     @FXML private CategoryAxis revenueXAxis;
     @FXML private NumberAxis revenueYAxis;
@@ -48,13 +48,13 @@ public class OverviewController {
 
     @FXML
     public void initialize() {
-        setupOccupancyChart();
+//        setupOccupancyChart();
         setupRevenueChart();
         setupGuestsChart();
 
         // Delay legend styling until after nodes are rendered
         Platform.runLater(() -> {
-            stylePieChartLegend();
+
             styleBarChartLegend(revenueBarChart, "#27ae60"); // dark green
             styleBarChartLegend(totalGuestsChart, "#2ecc71"); // light green
         });
@@ -107,12 +107,7 @@ public class OverviewController {
         }
     }
 
-    private void setupOccupancyChart() {
-        occupancyPieChart.getData().addAll(
-                new PieChart.Data("Occupied", 72),
-                new PieChart.Data("Available", 28)
-        );
-    }
+
 
     private void setupRevenueChart() {
         XYChart.Series<String, Number> revenueSeries = new XYChart.Series<>();
@@ -137,17 +132,7 @@ public class OverviewController {
         totalGuestsChart.getData().add(guestsSeries);
     }
 
-    private void stylePieChartLegend() {
-        occupancyPieChart.getData().forEach(data -> {
-            data.getNode().setStyle(
-                    data.getName().equals("Occupied") ? "-fx-pie-color: #27ae60;" : "-fx-pie-color: #2ecc71;"
-            );
-        });
 
-        occupancyPieChart.lookupAll(".chart-legend-item-symbol").forEach(node -> {
-            node.setStyle(node.toString().contains("Occupied") ? "-fx-background-color: #27ae60;" : "-fx-background-color: #2ecc71;");
-        });
-    }
 
     private void styleBarChartLegend(BarChart<String, Number> chart, String color) {
         chart.getData().forEach(series -> series.getData().forEach(data -> {

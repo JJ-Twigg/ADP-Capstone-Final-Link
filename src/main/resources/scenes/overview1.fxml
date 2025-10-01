@@ -41,10 +41,11 @@
                 <!-- Total Revenue -->
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
-       -fx-background-color: linear-gradient(
+      -fx-background-color: linear-gradient(
     from 0% 0% to 100% 100%,
-    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
-    rgba(102, 186, 136, 0.9)   /* main green */
+    rgba(69, 182, 254, 0.3),   /* lighter blue */
+    rgba(69, 182, 254, 0.9)    /* main blue */
+
 );
         -fx-padding: 20;
         -fx-spacing: 10;
@@ -63,10 +64,11 @@
                 <!-- Occupancy Rate -->
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
-        -fx-background-color: linear-gradient(
+       -fx-background-color: linear-gradient(
     from 0% 0% to 100% 100%,
-    rgba(150, 220, 180, 0.3),  /* lighter green instead of white */
-    rgba(102, 186, 136, 0.9)   /* main green */
+    rgba(69, 182, 254, 0.3),   /* lighter blue */
+    rgba(69, 182, 254, 0.9)    /* main blue */
+
 );
         -fx-padding: 20;
         -fx-spacing: 10;
@@ -83,37 +85,30 @@
                 </VBox>
             </HBox>
 
-            <!-- Bottom Row: 3 Charts -->
+            <!-- Bottom Row: 2 Charts -->
+            <!-- Employees Chart -->
             <HBox alignment="CENTER" spacing="30">
-                <!-- Total Guests Chart -->
-                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
-                    <BarChart fx:id="totalGuestsChart" prefHeight="250" prefWidth="300" title="Total Guests">
-                        <xAxis>
-                            <CategoryAxis label="Month" />
-                        </xAxis>
-                        <yAxis>
-                            <NumberAxis label="Number of Guests" />
-                        </yAxis>
-                    </BarChart>
-                </VBox>
+                <!-- Employees Chart -->
+                <BarChart fx:id="totalGuestsChart" title="Total Employees" prefHeight="300" prefWidth="450">
+                    <xAxis>
+                        <CategoryAxis label="Month" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Number of Employees" />
+                    </yAxis>
+                </BarChart>
 
                 <!-- Revenue Chart -->
-                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
-                    <BarChart fx:id="revenueBarChart" prefHeight="250" prefWidth="300" title="Revenue">
-                        <xAxis>
-                            <CategoryAxis label="Month" />
-                        </xAxis>
-                        <yAxis>
-                            <NumberAxis label="Revenue (R)" />
-                        </yAxis>
-                    </BarChart>
-                </VBox>
-
-                <!-- Occupancy Chart -->
-                <VBox style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
-                    <PieChart fx:id="occupancyPieChart" prefHeight="250" prefWidth="300" title="Occupancy Breakdown" />
-                </VBox>
+                <BarChart fx:id="revenueBarChart" title="Total Revenue" prefHeight="300" prefWidth="450">
+                    <xAxis>
+                        <CategoryAxis label="Month" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Revenue (R)" />
+                    </yAxis>
+                </BarChart>
             </HBox>
+
 
 
         </VBox>
