@@ -48,16 +48,17 @@ public class GuestUIController {
 
     @FXML
     public void initialize() {
+
         colGuestID.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleIntegerProperty(data.getValue().getGuestID()).asObject());
         colName.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));   // Amount → Name
         colSurname.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(data.getValue().getSurname()));
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getSurname())); // Method → Surname
         colEmail.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(data.getValue().getEmail()));
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getEmail()));   // Status → Email
         colContact.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(data.getValue().getContactNumber()));
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getContactNumber())); // Date → Contact
         colPayment.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleStringProperty(data.getValue().getPaymentDetails()));
 

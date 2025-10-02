@@ -40,10 +40,11 @@ public class EmployeeControllerView {
         colEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         colJobType.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+
         colUserId.setCellValueFactory(cellData -> {
             Employee emp = cellData.getValue();
             return new javafx.beans.property.SimpleIntegerProperty(
-//                emp.getUser() != null ? emp.getUser().getId() : 0
+                    emp.getUser() != null ? emp.getUser().getUserId() : 0
             ).asObject();
         });
 

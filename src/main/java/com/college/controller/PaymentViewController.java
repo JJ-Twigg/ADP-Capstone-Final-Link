@@ -30,6 +30,8 @@ public class PaymentViewController {
 
     @FXML private TableView<Payment> paymentTable;
     @FXML private TableColumn<Payment, Integer> colId;
+    @FXML private TableColumn<Payment, Integer> colGuestId;
+
     @FXML private TableColumn<Payment, Double> colAmount;
     @FXML private TableColumn<Payment, String> colMethod;
     @FXML private TableColumn<Payment, String> colStatus;
@@ -65,6 +67,15 @@ public class PaymentViewController {
         colMethod.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
+
+        colGuestId.setCellValueFactory(cellData -> {
+            Payment payment = cellData.getValue();
+            return new javafx.beans.property.SimpleIntegerProperty(
+                    payment.getGuest() != null ? payment.getGuest().getGuestId() : 0
+            ).asObject();
+        });
+
+
         paymentTable.setItems(payments);
 
         // Debug: Check if Spring injection worked

@@ -56,10 +56,11 @@
     </Pane>
 
     <!-- TableView -->
-    <TableView fx:id="eventTable" layoutX="250.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0"
+    <TableView fx:id="eventTable" layoutX="250.0" layoutY="50.0" prefHeight="400.0" prefWidth="500.0"
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
             <TableColumn fx:id="colId"  style="-fx-background-color: white;" prefWidth="60" text="ID" />
+            <TableColumn fx:id="colReservationId" style="-fx-background-color: white;" prefWidth="100" text="Reservation ID" />
             <TableColumn fx:id="colReason"  style="-fx-background-color: white;" prefWidth="150" text="Reason" />
             <TableColumn fx:id="colDescription"  style="-fx-background-color: white;" prefWidth="200" text="Description" />
         </columns>

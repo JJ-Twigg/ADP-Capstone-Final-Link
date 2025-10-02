@@ -57,6 +57,10 @@ public class Guest {
         this.guestID = builder.guestID;
     }
 
+    public void setGuestID(int guestID) {
+        this.guestID = guestID;
+    }
+
     public String getPaymentDetails() {
         return paymentDetails;
     }
@@ -91,6 +95,10 @@ public class Guest {
                 ", email='" + email + '\'' +
                 ", paymentDetails='" + paymentDetails + '\'' +
                 '}';
+    }
+
+    public int getGuestId() {
+        return this.guestID;
     }
 
     public static class GuestBuilder {

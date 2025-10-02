@@ -5,6 +5,7 @@ import com.college.domain.Guest;
 import com.college.domain.Reservation;
 import com.college.service.*;
 import com.college.utilities.ApplicationContextProvider;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,6 +32,8 @@ public class ReservationUIController implements Initializable {
 
     @FXML private TableView<Reservation> reservationTable;
     @FXML private TableColumn<Reservation, Integer> reservationIdColumn;
+    @FXML private TableColumn<Reservation, Integer> guestIdColumn;
+
     @FXML private TableColumn<Reservation, String> startTimeColumn;
     @FXML private TableColumn<Reservation, String> endTimeColumn;
 
@@ -96,6 +99,12 @@ public class ReservationUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         reservationIdColumn.setCellValueFactory(new PropertyValueFactory<>("reservationId"));
+
+        reservationIdColumn.setCellValueFactory(new PropertyValueFactory<>("reservationId"));
+        guestIdColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getGuest().getGuestId()).asObject()
+        );
+
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("reservationDateTimeStart"));
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("reservationDateTimeEnd"));
 

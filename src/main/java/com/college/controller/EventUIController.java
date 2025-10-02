@@ -5,6 +5,7 @@ import com.college.domain.Event;
 import com.college.domain.Reservation;
 import com.college.service.EventUIService;
 import com.college.service.EventUIServiceNaked;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,9 @@ public class EventUIController {
     @FXML private TextField descriptionField;
     @FXML private TableView<Event> eventTable;
     @FXML private TableColumn<Event, Integer> colId;
+    @FXML
+    private TableColumn<Event, Integer> colReservationId;
+
     @FXML private TableColumn<Event, String> colReason;
     @FXML private TableColumn<Event, String> colDescription;
 
@@ -58,6 +63,12 @@ public class EventUIController {
     @FXML
     public void initialize() {
         colId.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getEventId()).asObject());
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("eventId"));
+        colReservationId.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getReservation().getReservationId()).asObject()
+        );
+
         colReason.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getReason()));
         colDescription.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDescription()));
 

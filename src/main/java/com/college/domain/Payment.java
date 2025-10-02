@@ -135,7 +135,7 @@ public class Payment {
 
 
     //FK To Guest
-    @ManyToOne(fetch = FetchType.LAZY)  // Many payments can belong to one guest
+    @ManyToOne(fetch = FetchType.EAGER)  // Many payments can belong to one guest
     @JoinColumn(name = "guest_id", nullable = false) // FK column
     private Guest guest;
 

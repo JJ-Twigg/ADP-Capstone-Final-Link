@@ -12,12 +12,12 @@
     <!-- Table -->
     <TableView fx:id="guestTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
-            <TableColumn fx:id="colGuestID" prefWidth="60" style="-fx-background-color: white;" text="ID" />
-            <TableColumn fx:id="colName" prefWidth="150" style="-fx-background-color: white;" text="Amount" />
-            <TableColumn fx:id="colSurname" prefWidth="150" style="-fx-background-color: white;" text="Method" />
-            <TableColumn fx:id="colEmail" prefWidth="150" style="-fx-background-color: white;" text="Status" />
-            <TableColumn fx:id="colContact" prefWidth="200" style="-fx-background-color: white;" text="Date" />
-            <TableColumn fx:id="colPayment" prefWidth="200" style="-fx-background-color: white;"  text="Payment Details" />
+            <TableColumn fx:id="colGuestID" prefWidth="60" style="-fx-background-color: white;" text="GuestID" />
+            <TableColumn fx:id="colName" prefWidth="150" style="-fx-background-color: white;" text="Name" />
+            <TableColumn fx:id="colSurname" prefWidth="150" style="-fx-background-color: white;" text="Surname" />
+            <TableColumn fx:id="colEmail" prefWidth="150" style="-fx-background-color: white;" text="Email" />
+            <TableColumn fx:id="colContact" prefWidth="200" style="-fx-background-color: white;" text="Contact" />
+            <TableColumn fx:id="colPayment" prefWidth="200" style="-fx-background-color: white;" text="Payment Method" />
         </columns>
     </TableView>
         <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #45b6fe;">
