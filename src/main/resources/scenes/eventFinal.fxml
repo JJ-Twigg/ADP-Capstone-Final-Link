@@ -6,51 +6,51 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.EventUIController">
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.EventUIController">
 
-    <!-- Left side Pane for inputs and buttons -->
+    <!-- Left side Pane,inputs and buttons -->
     <Pane layoutX="0.0" layoutY="0.0" prefHeight="605.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
         <children>
-            <!-- Image at top -->
-            <ImageView layoutX="63.0" layoutY="26.0">
-                <image>
-                    <Image url="/images/c.png" />
-                </image>
-            </ImageView>
+            <!-- inputs,buttons -->
+            <VBox layoutX="15.0" layoutY="30.0" spacing="15.0" alignment="TOP_CENTER">
 
-            <!-- Reason input -->
-            <HBox layoutX="10.0" layoutY="100.0" spacing="10.0">
-                <Label text="Reason:" />
-                <TextField fx:id="reasonField" promptText="Holiday, Work, etc." />
-            </HBox>
+                <!-- Logo at top -->
+                <ImageView>
+                    <image>
+                        <Image url="/images/c.png"/>
+                    </image>
+                </ImageView>
 
-            <!-- Description input -->
-            <HBox layoutX="10.0" layoutY="150.0" spacing="10.0">
-                <Label text="Description:" />
-                <TextField fx:id="descriptionField" promptText="Optional details" />
-            </HBox>
+                <!-- Reason input, false visible at first-->
+                <HBox fx:id="reasonBox" spacing="10.0" visible="false">
+                    <TextField fx:id="reasonField" promptText="Reason: Holiday, Work, etc." prefWidth="200.0"/>
+                </HBox>
 
-            <!-- Add Event button -->
-            <Button fx:id="addButton" layoutX="40.0" layoutY="200.0" onAction="#handleAddEvent"
-                    prefHeight="40.0" prefWidth="150.0"
-                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
-                    stylesheets="/css/buttonStyle.css"
-                    text="Add Event" textFill="WHITE" />
+                <!-- Description input, false visible at first  -->
+                <HBox fx:id="descriptionBox" spacing="10.0" visible="false">
+                    <TextField fx:id="descriptionField" promptText="Description: Optional details" prefWidth="200.0"/>
+                </HBox>
 
-            <!-- Update Event button -->
-<!--            <Button layoutX="40.0" layoutY="275.0" onAction="#handleEditEvent"-->
-<!--                    prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css"-->
-<!--                    text="Update Event" textFill="WHITE" />-->
+                <!-- Buttons -->
+                <VBox spacing="10.0" alignment="TOP_CENTER">
 
-            <!-- Delete Event button -->
-<!--            <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeleteEvent"-->
-<!--                    prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #E02850; -fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css"-->
-<!--                    text="Delete Event" textFill="WHITE" />-->
+                    <Button fx:id="newButton"
+                            prefHeight="40.0" prefWidth="150.0"
+                            style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                            stylesheets="/css/buttonStyle.css"
+                            text="Enter Event Details" textFill="WHITE"
+                            onAction="#showAddEventInputs"/>
+                    <!-- Existing Add Event button -->
+                    <Button fx:id="addButton"
+                            prefHeight="40.0" prefWidth="150.0"
+                            style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                            stylesheets="/css/buttonStyle.css"
+                            text="Add Event" textFill="WHITE"
+                            onAction="#handleAddEvent"/>
+                </VBox>
 
+            </VBox>
         </children>
     </Pane>
 
@@ -58,9 +58,9 @@
     <TableView fx:id="eventTable" layoutX="250.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0"
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
-            <TableColumn fx:id="colId"  style="-fx-background-color: white;" prefWidth="60" text="ID" />
-            <TableColumn fx:id="colReason"  style="-fx-background-color: white;" prefWidth="150" text="Reason" />
-            <TableColumn fx:id="colDescription"  style="-fx-background-color: white;" prefWidth="200" text="Description" />
+            <TableColumn fx:id="colId" style="-fx-background-color: white;" prefWidth="60" text="ID"/>
+            <TableColumn fx:id="colReason" style="-fx-background-color: white;" prefWidth="150" text="Reason"/>
+            <TableColumn fx:id="colDescription" style="-fx-background-color: white;" prefWidth="200" text="Description"/>
         </columns>
     </TableView>
 

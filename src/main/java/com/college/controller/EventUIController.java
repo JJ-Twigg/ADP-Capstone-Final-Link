@@ -7,11 +7,13 @@ import com.college.service.EventUIService;
 import com.college.service.EventUIServiceNaked;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,11 @@ public class EventUIController {
     @FXML private TableColumn<Event, Integer> colId;
     @FXML private TableColumn<Event, String> colReason;
     @FXML private TableColumn<Event, String> colDescription;
+
+    @FXML
+    private HBox reasonBox;       // wrap reasonField in HBox in FXML and fx:id="reasonBox"
+    @FXML
+    private HBox descriptionBox;
 
     @FXML
     private Button addButton;
@@ -90,6 +97,10 @@ public class EventUIController {
             loadEvents();
 
             addButton.setDisable(true);
+
+            Stage currentStage = (Stage) addButton.getScene().getWindow();
+
+            currentStage.close();
 
             openPaymentPage();
 
@@ -210,5 +221,14 @@ public class EventUIController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void showAddEventInputs(ActionEvent actionEvent) {
+        // Make the input fields visible
+        reasonBox.setVisible(true);
+        descriptionBox.setVisible(true);
+
+        // Optional: move focus to the first field
+        reasonField.requestFocus();
     }
 }

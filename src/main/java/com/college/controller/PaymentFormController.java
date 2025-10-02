@@ -129,7 +129,13 @@ public class PaymentFormController {
     }
 
     private void closeWindow() {
-        ((Stage) txtAmount.getScene().getWindow()).close();
+        Stage modalStage = (Stage) txtAmount.getScene().getWindow();  // the modal
+        Stage parentStage = (Stage) modalStage.getOwner();            // PaymentView window
+
+        modalStage.close();  // close the modal
+        if (parentStage != null) {
+            parentStage.close();  // close PaymentView
+        }
     }
 
     private void showAlert(String message) {

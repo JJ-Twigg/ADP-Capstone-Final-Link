@@ -134,7 +134,10 @@ public class PaymentViewController {
             loader.setControllerFactory(applicationContext::getBean);
 
             Stage stage = new Stage();
+            stage.initOwner((Stage) paymentTable.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
+
+
             stage.setTitle(payment == null ? "Add Payment" : "Update Payment");
             stage.setScene(new Scene(loader.load()));
 

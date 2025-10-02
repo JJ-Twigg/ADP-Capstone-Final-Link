@@ -1,19 +1,15 @@
 package com.college.controller;
 
-import com.college.MainFinal;
 import com.college.domain.Guest;
 import com.college.repository.GuestRepository;
 import com.college.service.GuestUIServiceNaked;
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -28,77 +24,56 @@ public class AddEditGuestDialog extends Dialog<Guest> {
     private final TextField txtContact = new TextField();
     private final ComboBox<String> cbPayment = new ComboBox<>();
 
+    private Guest savedGuest;
 
-    private Guest savedGuest; // add this field
-
-    public Guest getSavedGuest() {
-        return savedGuest;
-    }
-
+    public Guest getSavedGuest() { return savedGuest; }
 
     private Runnable onSaveCallback;
-
-    public void setOnSaveCallback(Runnable callback) {
-        this.onSaveCallback = callback;
-    }
-
-
-
+    public void setOnSaveCallback(Runnable callback) { this.onSaveCallback = callback; }
 
     public AddEditGuestDialog(GuestRepository guestRepository, Guest guest) {
         this.guestService = new GuestUIServiceNaked(guestRepository);
-
         setTitle(guest == null ? "Add Guest" : "Edit Guest");
 
-
-
-        // Header label
+        // Header
         Label headerLabel = new Label(guest == null ? "Add Guest" : "Edit Guest");
         headerLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         HBox headerBox = new HBox(headerLabel);
         headerBox.setAlignment(Pos.CENTER);
         headerBox.setPadding(new Insets(0, 0, 10, 0));
-        getDialogPane().setHeader(headerBox);
 
-        // Buttons
-        ButtonType submitButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        getDialogPane().getButtonTypes().addAll(submitButtonType, cancelButtonType);
-
-        // Layout
+        // Grid for input fields (no labels, using promptText)
         GridPane grid = new GridPane();
         grid.setHgap(15);
         grid.setVgap(15);
         grid.setPadding(new Insets(20));
+        grid.add(txtID, 0, 0);
+        grid.add(txtName, 0, 1);
+        grid.add(txtSurname, 0, 2);
+        grid.add(txtEmail, 0, 3);
+        grid.add(txtContact, 0, 4);
+        grid.add(cbPayment, 0, 5);
 
-        // Fields
-        grid.add(new Label("Guest ID:"), 0, 0);
-        grid.add(txtID, 1, 0);
-        grid.add(new Label("Name:"), 0, 1);
-        grid.add(txtName, 1, 1);
-        grid.add(new Label("Surname:"), 0, 2);
-        grid.add(txtSurname, 1, 2);
-        grid.add(new Label("Email:"), 0, 3);
-        grid.add(txtEmail, 1, 3);
-        grid.add(new Label("Contact Number:"), 0, 4);
-        grid.add(txtContact, 1, 4);
-        grid.add(new Label("Payment Method:"), 0, 5);
-        grid.add(cbPayment, 1, 5);
+        // Input field styles and prompt text
+        String inputStyle = "-fx-pref-width: 260px; -fx-padding: 6px; -fx-background-radius: 0; -fx-border-radius: 0;";
+        txtID.setStyle(inputStyle);
+        txtName.setStyle(inputStyle);
+        txtSurname.setStyle(inputStyle);
+        txtEmail.setStyle(inputStyle);
+        txtContact.setStyle(inputStyle);
+        cbPayment.setStyle(inputStyle);
 
-        // Styles
-        String textFieldStyle = "-fx-pref-width: 250px; -fx-padding: 6px;";
-        txtID.setStyle(textFieldStyle);
-        txtName.setStyle(textFieldStyle);
-        txtSurname.setStyle(textFieldStyle);
-        txtEmail.setStyle(textFieldStyle);
-        txtContact.setStyle(textFieldStyle);
-        cbPayment.setStyle(textFieldStyle);
+        txtID.setPromptText("Guest ID");
+        txtName.setPromptText("Name");
+        txtSurname.setPromptText("Surname");
+        txtEmail.setPromptText("Email");
+        txtContact.setPromptText("Contact Number");
+        cbPayment.setPromptText("Select Payment Method");
 
-        // Payment methods
         cbPayment.getItems().addAll("Cash", "Credit Card", "Debit Card", "EFT", "PayPal");
         cbPayment.setEditable(false);
 
-        // Pre-fill or generate default values
+        // Prefill values
         if (guest != null) {
             txtID.setText(String.valueOf(guest.getGuestID()));
             txtID.setDisable(true);
@@ -108,13 +83,13 @@ public class AddEditGuestDialog extends Dialog<Guest> {
             txtContact.setText(formatPhone(guest.getContactNumber()));
             cbPayment.setValue(guest.getPaymentDetails());
         } else {
-            txtID.setText("Auto"); // Hibernate generates ID
+            txtID.setText("Auto");
             txtID.setDisable(true);
             txtEmail.setText("guest@example.com");
             txtContact.setText("000 000 0000");
         }
 
-        // Auto-format phone number
+        // Format phone input
         txtContact.textProperty().addListener((obs, oldVal, newVal) -> {
             String digits = newVal.replaceAll("\\D", "");
             if (digits.length() > 10) digits = digits.substring(0, 10);
@@ -126,124 +101,72 @@ public class AddEditGuestDialog extends Dialog<Guest> {
             if (!formatted.toString().equals(newVal)) txtContact.setText(formatted.toString());
         });
 
-        // Auto-capitalize Name & Surname
+        // Auto-capitalize names
         txtName.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal && !txtName.getText().isEmpty()) txtName.setText(capitalizeFirst(txtName.getText()));
+            if (!newVal && !txtName.getText().isEmpty())
+                txtName.setText(capitalizeFirst(txtName.getText()));
         });
         txtSurname.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal && !txtSurname.getText().isEmpty()) txtSurname.setText(capitalizeFirst(txtSurname.getText()));
+            if (!newVal && !txtSurname.getText().isEmpty())
+                txtSurname.setText(capitalizeFirst(txtSurname.getText()));
         });
 
-        // Content
-        getDialogPane().setContent(grid);
+        // Centered buttons with FXML style
+        Button saveButton = new Button("Save");
+        saveButton.setPrefSize(120, 40);
+        saveButton.setStyle("-fx-background-color: #45b6fe; -fx-text-fill: white; -fx-background-radius: 0;");
+        saveButton.setCursor(Cursor.HAND);
 
-        // Dialog button styles
-        getDialogPane().lookupButton(submitButtonType).setStyle("-fx-background-color: #26AD00; -fx-text-fill: white;");
-        getDialogPane().lookupButton(cancelButtonType).setStyle("-fx-background-color: #C20010; -fx-text-fill: white;");
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setPrefSize(120, 40);
+        cancelButton.setStyle("-fx-background-color: #cc000a; -fx-text-fill: white; -fx-background-radius: 0;");
+        cancelButton.setCursor(Cursor.HAND);
 
-        // Validation
-        Button saveButton = (Button) getDialogPane().lookupButton(submitButtonType);
-        saveButton.addEventFilter(javafx.event.ActionEvent.ACTION, event -> {
+        HBox buttonBox = new HBox(20, saveButton, cancelButton);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        VBox root = new VBox(20, headerBox, grid, buttonBox);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(20));
+        getDialogPane().setContent(root);
+
+        // Cancel closes dialog
+        cancelButton.setOnAction(e -> setResult(null));
+
+        // Save button validation & result
+        saveButton.setOnAction(e -> {
             String name = capitalizeFirst(txtName.getText().trim());
             String surname = capitalizeFirst(txtSurname.getText().trim());
-            if (name.isEmpty() || surname.isEmpty()) {
-                showAlert("Validation Error", "Name and Surname cannot be empty.");
-                event.consume();
-                return;
-            }
             String email = txtEmail.getText().trim();
-            if (!email.contains("@") || email.length() < 5) {
-                showAlert("Validation Error", "Email must be valid and contain '@'.");
-                event.consume();
-                return;
-            }
-            String rawContact = txtContact.getText().replaceAll("\\s", "");
-            if (!rawContact.matches("\\d{10}")) {
-                showAlert("Validation Error", "Contact number must be exactly 10 digits.");
-                event.consume();
-                return;
-            }
+            String contact = txtContact.getText().replaceAll("\\s", "");
             String payment = cbPayment.getValue();
-            if (payment == null || payment.isEmpty()) {
-                showAlert("Validation Error", "Please select a payment method.");
-                event.consume();
-            }
 
-            // Email uniqueness
+            if (name.isEmpty() || surname.isEmpty()) { showAlert("Validation Error", "Name and Surname cannot be empty."); return; }
+            if (!email.contains("@") || email.length() < 5) { showAlert("Validation Error", "Email must be valid."); return; }
+            if (!contact.matches("\\d{10}")) { showAlert("Validation Error", "Contact must be exactly 10 digits."); return; }
+            if (payment == null || payment.isEmpty()) { showAlert("Validation Error", "Please select a payment method."); return; }
+
             try {
                 List<Guest> allGuests = guestService.getAllGuests();
                 boolean exists = allGuests.stream()
                         .anyMatch(g -> g.getEmail().equalsIgnoreCase(email)
                                 && (guest == null || g.getGuestID() != guest.getGuestID()));
-                if (exists) {
-                    showAlert("Validation Error", "A guest with this Email already exists.");
-                    event.consume();
-                }
+                if (exists) { showAlert("Validation Error", "A guest with this email already exists."); return; }
             } catch (Exception ignored) {}
-        });
 
-        setResultConverter(dialogButton -> {
-            if (dialogButton == submitButtonType) {
-                String name = capitalizeFirst(txtName.getText().trim());
-                String surname = capitalizeFirst(txtSurname.getText().trim());
-                String email = txtEmail.getText().trim();
-                String formattedContact = txtContact.getText().replaceAll("\\s", "")
-                        .replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3");
-                String payment = cbPayment.getValue();
+            Guest.GuestBuilder builder = new Guest.GuestBuilder()
+                    .setName(name)
+                    .setSurname(surname)
+                    .setEmail(email)
+                    .setContactNumber(txtContact.getText())
+                    .setPaymentDetails(payment);
 
-                Guest.GuestBuilder builder = new Guest.GuestBuilder()
-                        .setName(name)
-                        .setSurname(surname)
-                        .setEmail(email)
-                        .setContactNumber(formattedContact)
-                        .setPaymentDetails(payment);
-
-                if (guest != null) {
-                    builder.setGuestID(guest.getGuestID());
-                }
-
-                savedGuest = builder.build(); // store built Guest
-                return savedGuest;
-            }
-            return null;
+            if (guest != null) builder.setGuestID(guest.getGuestID());
+            savedGuest = builder.build();
+            if (onSaveCallback != null) onSaveCallback.run();
+            setResult(savedGuest);
         });
     }
-
-
-
-
-
-
-    public void openReservationPage(Guest guest) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/reservationFinal.fxml"));
-            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
-            Scene scene = new Scene(loader.load());
-            Stage stage = new Stage();
-            stage.setTitle("Reservation");
-
-            // Pass the Guest object to ReservationUIController
-            ReservationUIController controller = loader.getController();
-            controller.setGuest(guest); // now passing full Guest object
-
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not open Reservation page: " + e.getMessage());
-            alert.showAndWait();
-        }
-    }
-
-
-
-
-
-
-
-
-
-
 
     private String capitalizeFirst(String text) {
         text = text.trim();

@@ -38,9 +38,17 @@ public class MainFinal extends Application {
 
         scene.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
 
+    // remove this and it will deafult back to default
+        stage.setWidth(616);    // your desired width
+        stage.setHeight(480);
+
+
         stage.setScene(scene);
         stage.setTitle("HMS - Room Management");
         stage.show();
+
+        System.out.println("Stage width: " + stage.getWidth());
+        System.out.println("Stage height: " + stage.getHeight());
     }
 
     @Override

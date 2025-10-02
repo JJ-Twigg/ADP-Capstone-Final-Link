@@ -18,32 +18,33 @@
                 </image>
             </ImageView>
 
-            <!-- Reason input -->
-            <HBox layoutX="10.0" layoutY="100.0" spacing="10.0">
-                <Label text="Reason:" />
-                <TextField fx:id="reasonField" promptText="Holiday, Work, etc." />
-            </HBox>
+            <!-- VBox for inputs + buttons -->
+            <VBox layoutX="15.0" layoutY="120.0" spacing="10.0" alignment="TOP_CENTER">
+                <!-- Reason input, initially hidden -->
+                <HBox fx:id="reasonBox" spacing="10.0" visible="false">
+                    <TextField fx:id="reasonField" promptText="Reason: Holiday, Work, etc." prefWidth="200.0"/>
+                </HBox>
 
-            <!-- Description input -->
-            <HBox layoutX="10.0" layoutY="150.0" spacing="10.0">
-                <Label text="Description:" />
-                <TextField fx:id="descriptionField" promptText="Optional details" />
-            </HBox>
+                <!-- Description input, initially hidden -->
+                <HBox fx:id="descriptionBox" spacing="10.0" visible="false">
+                    <TextField fx:id="descriptionField" promptText="Description: Optional details" prefWidth="200.0"/>
+                </HBox>
 
-            <!-- Add Event button -->
-<!--            <Button fx:id="addButton" layoutX="40.0" layoutY="200.0" onAction="#handleAddEvent"-->
-<!--                    prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css"-->
-<!--                    text="Add Event" textFill="WHITE" />-->
+                <!-- Enter Event Details button -->
+                <Button fx:id="newButton"
+                        prefHeight="40.0" prefWidth="150.0"
+                        style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                        stylesheets="/css/buttonStyle.css"
+                        text="Enter Event Details" textFill="WHITE"
+                        onAction="#showAddEventInputs"/>
 
-            <!-- Update Event button -->
-            <Button layoutX="40.0" layoutY="275.0" onAction="#handleEditEvent"
-                    prefHeight="40.0" prefWidth="150.0"
-                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
-                    stylesheets="/css/buttonStyle.css"
-                    text="Update Event" textFill="WHITE" />
-
+                <!-- Update Event button -->
+                <Button layoutX="40.0" layoutY="275.0" onAction="#handleEditEvent"
+                        prefHeight="40.0" prefWidth="150.0"
+                        style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                        stylesheets="/css/buttonStyle.css"
+                        text="Update Event" textFill="WHITE"/>
+            </VBox>
             <!-- Delete Event button -->
 <!--            <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeleteEvent"-->
 <!--                    prefHeight="40.0" prefWidth="150.0"-->

@@ -121,62 +121,66 @@ public class UserLoginController {
 
     //just changes page
     //THIS IS NO LONGER USED OR CALLED
-    @FXML
-    private void changePage(Authentication auth) {
-        try {
-
-            // Determine which FXML to load
-            String role = auth.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .findFirst()
-                    .orElse("");
-
-            System.out.println("Role detected: '" + role + "'");
-
-            String fxmlToLoad;
-
-            //THIS IS NO LONGER USED OR CALLED, this change page method is deprecated
-            if ("ADMIN".equals(role)) {
-                fxmlToLoad = "/scenes/dashboardAdmin.fxml";
-            } else if ("MANAGER".equals(role)) {
-                fxmlToLoad = "/scenes/dashboard.fxml";
-            } else if ("USER".equals(role)) {  //
-                fxmlToLoad = "/scenes/dashboardUser.fxml";
-            } else {
-                fxmlToLoad = "/scenes/window-sign-upFinal.fxml"; // fallback
-                System.out.println(fxmlToLoad);
-            }
 
 
-            System.out.println("Loading FXML: " + fxmlToLoad);
 
-            System.out.println("Load dashboard page: " + fxmlToLoad);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlToLoad));
-            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
-            Parent dashboardRoot = loader.load();
-
-            DashboardController controller = loader.getController();
-
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-
-            // Create a new Scene or reuse current scene
-            Scene currentScene = loginButton.getScene();
-
-            // Apply CSS only to dashboard
-            currentScene.getStylesheets().clear(); // optional: remove any old styles
-            currentScene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-
-            // Swap root to dashboard
-            currentScene.setRoot(dashboardRoot);
-
-            stage.setWidth(1100);
-            stage.setHeight(600);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    private void changePage(Authentication auth) {
+//        try {
+//
+//            // Determine which FXML to load
+//            String role = auth.getAuthorities().stream()
+//                    .map(GrantedAuthority::getAuthority)
+//                    .findFirst()
+//                    .orElse("");
+//
+//            System.out.println("Role detected: '" + role + "'");
+//
+//            String fxmlToLoad;
+//
+//            //THIS IS NO LONGER USED OR CALLED, this change page method is deprecated
+//            if ("ADMIN".equals(role)) {
+//                fxmlToLoad = "/scenes/dashboardAdmin.fxml";
+//            } else if ("MANAGER".equals(role)) {
+//                fxmlToLoad = "/scenes/dashboard.fxml";
+//            } else if ("USER".equals(role)) {  //
+//                fxmlToLoad = "/scenes/dashboardUser.fxml";
+//            } else {
+//                fxmlToLoad = "/scenes/window-sign-upFinal.fxml"; // fallback
+//                System.out.println(fxmlToLoad);
+//            }
+//
+//
+//            System.out.println("Loading FXML: " + fxmlToLoad);
+//
+//            System.out.println("Load dashboard page: " + fxmlToLoad);
+//
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlToLoad));
+//            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+//            Parent dashboardRoot = loader.load();
+//
+//            DashboardController controller = loader.getController();
+//
+//            Stage stage = (Stage) loginButton.getScene().getWindow();
+//
+//            // Create a new Scene or reuse current scene
+//            Scene currentScene = loginButton.getScene();
+//
+//            // Apply CSS only to dashboard
+//            currentScene.getStylesheets().clear(); // optional: remove any old styles
+//            currentScene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+//
+//            // Swap root to dashboard
+//            currentScene.setRoot(dashboardRoot);
+//
+//            stage.setWidth(1100);
+//            stage.setHeight(600);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     @FXML

@@ -310,6 +310,8 @@ public class DashboardController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setWidth(600);
             stage.setHeight(430);
+            stage.centerOnScreen();
+            stage.setResizable(false);
 
             // Set new scene
             Scene loginScene = new Scene(loginRoot);
