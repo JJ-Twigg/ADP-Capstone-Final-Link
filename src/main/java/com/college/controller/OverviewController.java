@@ -151,6 +151,16 @@ public class OverviewController {
         Platform.runLater(() -> {
             employeesSlice.getNode().setStyle("-fx-pie-color: #27ae60;"); // green
             remainingSlice.getNode().setStyle("-fx-pie-color: #bdc3c7;"); // gray
+
+            // Fix legend key colors
+            Node[] legendSymbols = totalEmployeesPieChart.lookupAll(".chart-legend-item-symbol").toArray(new Node[0]);
+            if (legendSymbols.length >= 2) {
+                legendSymbols[0].setStyle("-fx-background-color: #27ae60;"); // "Employees"
+                legendSymbols[1].setStyle("-fx-background-color: #bdc3c7;"); // "Vacant Slots"
+            }
+
+
+
         });
     }
 
@@ -199,6 +209,14 @@ public class OverviewController {
         Platform.runLater(() -> {
             currentSlice.getNode().setStyle("-fx-pie-color: #27ae60;"); // green
             lastSlice.getNode().setStyle("-fx-pie-color: #3498db;"); // blue
+
+            // Fix legend key colors
+            Node[] legendSymbols = reservationsPieChart.lookupAll(".chart-legend-item-symbol").toArray(new Node[0]);
+            if (legendSymbols.length >= 2) {
+                legendSymbols[0].setStyle("-fx-background-color: #27ae60;"); // "This Month"
+                legendSymbols[1].setStyle("-fx-background-color: #3498db;"); // "Last Month"
+            }
+
         });
     }
 
