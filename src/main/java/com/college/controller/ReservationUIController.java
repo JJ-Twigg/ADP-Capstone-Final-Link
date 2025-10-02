@@ -46,6 +46,10 @@ public class ReservationUIController implements Initializable {
 
 
 
+    private Stage stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
 
     @Autowired
@@ -163,32 +167,26 @@ public class ReservationUIController implements Initializable {
             Parent root = loader.load();
             AddReservationController addController = loader.getController();
 
-            addController.setGuest(this.guest);
-
-
+            addController.setGuest(this.guest); // pass guest to modal
 
             Stage modalStage = new Stage();
-
-            //get owner for x close code im trying
-            modalStage.initOwner((Stage) reservationTable.getScene().getWindow());
-
             modalStage.initModality(Modality.APPLICATION_MODAL);
             modalStage.setTitle("Add New Reservation");
             modalStage.setScene(new Scene(root));
-            addController.setStage(modalStage);
+            addController.setStage(modalStage); // set modal stage
+
+            // ✅ CLOSE Reservation page when opening modal
+            if (stage != null) {
+                stage.close();
+            }
 
             modalStage.showAndWait();
-            loadReservationData();
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
             labelFeedback.setText("Error opening Add Reservation form.");
         }
     }
-
-
 
 
 

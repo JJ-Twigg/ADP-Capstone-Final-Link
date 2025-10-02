@@ -7,6 +7,7 @@ import com.college.service.GuestUIServiceNaked;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -128,20 +129,23 @@ public class GuestUIController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/reservationFinal.fxml"));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
-            Stage stage = new Stage();
-            stage.setTitle("Reservation");
-            stage.setScene(new Scene(loader.load()));
-            stage.setWidth(1000);
-            stage.setHeight(600);
 
-            // Pass the guest object to Reservation controller
+            Parent root = loader.load();
+
+            // Create a new stage for the Reservation page
+            Stage reservationStage = new Stage();
+            reservationStage.setTitle("Reservation");
+            reservationStage.setScene(new Scene(root));
+            reservationStage.setWidth(1000);
+            reservationStage.setHeight(600);
+
+            // Pass guest AND stage to the controller
             ReservationUIController controller = loader.getController();
             controller.setGuest(guest);
+            controller.setStage(reservationStage);  // <- important!
 
-            //Make window non close-able through x button, to prevent isolated records prevents res x close
-//            stage.setOnCloseRequest(event -> event.consume());
-
-            stage.show();
+            // Show reservation page as non-blocking window
+            reservationStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();

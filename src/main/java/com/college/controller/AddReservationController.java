@@ -26,9 +26,21 @@ import java.io.IOException;
 @Component
 public class AddReservationController {
 
+    private Stage parentStage;
+
+    public void setParentStage(Stage parentStage) {
+        this.parentStage = parentStage;
+    }
+
+
     private Reservation savedReservation;
     private Guest guest;
     private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 
     @Autowired
     private RoomService roomService;
@@ -53,9 +65,11 @@ public class AddReservationController {
         this.guest = guest;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+
+
+
+
+
 
     @FXML
     public void initialize() {
@@ -87,6 +101,7 @@ public class AddReservationController {
 
     @FXML
     private void saveReservation() {
+
         String startTime = startTimeField.getText();
         String endTime = endTimeField.getText();
 
@@ -111,32 +126,20 @@ public class AddReservationController {
 
                 System.out.println("Reservation ID (Event): " + savedReservation.getReservationId());
 
-
-
+                // Open Event modal WITHOUT closing parent
                 openAddEventDialog(savedReservation);
 
+                // Only close AddReservation modal
+                if (stage != null) stage.close();
 
-
-                stage.close();
-
+                // Parent Reservation page remains open
             } else if ("Room".equals(bookingTypeSelected)) {
                 if (roomChosen == null) {
                     System.out.println("Please select a room.");
                     return;
                 }
 
-                //Get employee ID from combo, to book a room with this emp worker
                 Employee chosenEmployee = comboBoxEmployee.getValue();
-
-                if (chosenEmployee != null) {
-                    // Safe to use chosenEmployee
-                    System.out.println("Selected employee ID: " + chosenEmployee.getEmployeeId());
-                    System.out.println("Job type: " + chosenEmployee.getJobType());
-                } else {
-                    System.out.println("No employee selected!");
-                }
-
-                //get the room number they want to book
                 Room roomToUpdate = roomService.read(roomChosen);
 
                 if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
@@ -146,16 +149,19 @@ public class AddReservationController {
                     reservation.setGuest(this.guest);
                     savedReservation = reservationService.create(reservation);
 
-                    // Link reservation to room and save
                     roomToUpdate.setReservation(savedReservation);
-                    //save employee fk with room booking aswell
                     roomToUpdate.setEmployee(chosenEmployee);
                     roomService.update(roomToUpdate);
 
                     alertReservationSuccess(roomChosen);
+
+                    // Open Payment modal
                     openAddPaymentPage(this.guest);
 
-                    stage.close();
+                    // Close AddReservation modal and parent Reservation page
+                    if (stage != null) stage.close();
+                    if (parentStage != null) parentStage.close();
+
                 } else {
                     alertRoomTaken();
                 }
@@ -165,6 +171,7 @@ public class AddReservationController {
             System.out.println("Error saving reservation: " + e.getMessage());
         }
     }
+
 
     private void alertRoomTaken() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
