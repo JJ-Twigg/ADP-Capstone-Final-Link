@@ -5,6 +5,7 @@ import com.college.domain.Employee;
 import com.college.domain.EmployeeSalary;
 import com.college.service.EmployeeSalaryService;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class EmployeeSalaryController {
 
     @FXML private TableView<EmployeeSalary> employeeSalaryTable;
     @FXML private TableColumn<EmployeeSalary, Integer> colId;
+    @FXML private TableColumn<EmployeeSalary, String> colEmployee;
     @FXML private TableColumn<EmployeeSalary, Double> colAmount;
     @FXML private TableColumn<EmployeeSalary, String> colMethod;
     @FXML private TableColumn<EmployeeSalary, LocalDate> colDate;
@@ -41,6 +43,17 @@ public class EmployeeSalaryController {
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         colMethod.setCellValueFactory(new PropertyValueFactory<>("method"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        colEmployee.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getEmployee() != null) {
+                return new SimpleStringProperty(
+                        String.valueOf(cellData.getValue().getEmployee().getEmployeeId())
+                );
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
+
 
         employeeSalaryTable.setItems(employeeSalaries);
         loadEmployeeSalaries();

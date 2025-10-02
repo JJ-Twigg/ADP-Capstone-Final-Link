@@ -4,6 +4,7 @@ import com.college.domain.Employee;
 import com.college.domain.Shift;
 import com.college.service.ShiftService;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +27,8 @@ public class ShiftViewController {
 
     @FXML private TableView<Shift> shiftTable;
     @FXML private TableColumn<Shift, Integer> colId;
+    @FXML private TableColumn<Shift, String> colEmployee;
+
     @FXML private TableColumn<Shift, LocalDate> colDate;
     @FXML private TableColumn<Shift, LocalTime> colStartTime;
     @FXML private TableColumn<Shift, LocalTime> colEndTime;
@@ -58,6 +61,20 @@ public class ShiftViewController {
         colStartTime.setCellValueFactory(new PropertyValueFactory<>("shiftStartTime"));
         colEndTime.setCellValueFactory(new PropertyValueFactory<>("shiftEndTime"));
         colOvertime.setCellValueFactory(new PropertyValueFactory<>("shiftOvertime"));
+
+        colEmployee.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getEmployee() != null) {
+                return new SimpleStringProperty(
+                        String.valueOf(cellData.getValue().getEmployee().getEmployeeId())
+                );
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
+
+
+
+
         shiftTable.setItems(shifts);
 
         // Debug: Check if Spring injection worked

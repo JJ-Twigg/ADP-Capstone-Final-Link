@@ -40,7 +40,7 @@ public class MainFinal extends Application {
 
     // remove this and it will deafult back to default
         stage.setWidth(616);
-        stage.setHeight(440);
+        stage.setHeight(442);
 
 
         stage.setScene(scene);

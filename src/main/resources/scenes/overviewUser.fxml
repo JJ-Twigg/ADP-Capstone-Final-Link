@@ -158,6 +158,8 @@
             <!-- they all use same controller, so must have same fxids otherwise u get null errors-->
             <PieChart visible="false" fx:id="totalEmployeesPieChart" title="Total Employees" prefHeight="300" prefWidth="450"/>
 
+            <PieChart visible="false" fx:id="reservationsPieChart" title="Reservations" prefHeight="300" prefWidth="350"/>
+
             <!-- this is hidden and fixes guest label null when calling user, this relates to dashboard admin they both use overview controller-->
             <Label fx:id="currentGuestsLabel" layoutX="100" layoutY="50" text="0" visible="false"/>
 
