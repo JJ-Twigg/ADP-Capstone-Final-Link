@@ -41,17 +41,17 @@
         <!-- Input fields -->
         <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0">
             <TextField fx:id="username" promptText="Email" prefWidth="220" maxWidth="220" prefHeight="30"
-                       style="-fx-background-radius: 0; -fx-border-radius: 0;"/>
+                       style="-fx-background-radius: 3;  -fx-border-radius: 3"/>
             <PasswordField fx:id="password" promptText="Password" prefWidth="220" maxWidth="220" prefHeight="30"
-                           style="-fx-background-radius: 0; -fx-border-radius: 0;"/>
+                           style="-fx-background-radius: 3;  -fx-border-radius: 3"/>
             <TextField fx:id="nameField" promptText="First Name" prefWidth="220" maxWidth="220" prefHeight="30"
-                       style="-fx-background-radius: 0; -fx-border-radius: 0;"/>
+                       style="-fx-background-radius: 3;  -fx-border-radius: 3"/>
             <TextField fx:id="surnameField" promptText="Surname" prefWidth="220" maxWidth="220" prefHeight="30"
-                       style="-fx-background-radius: 0; -fx-border-radius: 0;"/>
+                       style="-fx-background-radius: 3;  -fx-border-radius: 3"/>
             <TextField fx:id="ageField" promptText="Age" prefWidth="220" maxWidth="220" prefHeight="30"
-                       style="-fx-background-radius: 0; -fx-border-radius: 0;"/>
+                       style="-fx-background-radius: 3;  -fx-border-radius: 3"/>
             <TextField fx:id="genderField" promptText="Gender" prefWidth="220" maxWidth="220" prefHeight="30"
-                       style="-fx-background-radius: 0; -fx-border-radius: 0;"/>
+                       style="-fx-background-radius: 3;  -fx-border-radius: 3"/>
         </VBox>
 
         <!-- ComboBox -->
