@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.GuestUIController">
+
+    <!-- Sidebar -->
+    <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+        <children>
+            <VBox layoutX="15.0" layoutY="50.0" spacing="15.0" alignment="TOP_CENTER">
+
+                <!-- Logo -->
+                <ImageView>
+                    <image>
+                        <Image url="/images/c.png" />
+                    </image>
+                </ImageView>
+
+                <!-- Search Fields -->
+                <TextField fx:id="searchNameField" promptText="Enter Name" prefWidth="200"/>
+                <TextField fx:id="searchSurnameField" promptText="Enter Surname" prefWidth="200"/>
+
+                <!-- Buttons -->
+                <Button onAction="#handleSearchGuest" prefHeight="40.0" prefWidth="200.0"
+                        style="-fx-background-color: #398F6C; -fx-background-radius: 10px;"
+                        stylesheets="/css/buttonStyle.css" text="Search For A Guest" textFill="WHITE"/>
+
+            </VBox>
+        </children>
+    </Pane>
+
+    <!-- Header -->
+    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Guests" textAlignment="CENTER" wrappingWidth="188.0">
+        <font>
+            <Font size="32.0" />
+        </font>
+    </Text>
+
+    <!-- Guest Table -->
+    <TableView fx:id="guestTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0"
+               style="-fx-background-color: white; -fx-border-color: transparent;">
+        <columns>
+            <TableColumn fx:id="colGuestID" prefWidth="60" text="GuestID" />
+            <TableColumn fx:id="colName" prefWidth="150" text="Name" />
+            <TableColumn fx:id="colSurname" prefWidth="150" text="Surname" />
+            <TableColumn fx:id="colEmail" prefWidth="150" text="Email" />
+            <TableColumn fx:id="colContact" prefWidth="200" text="Contact" />
+            <TableColumn fx:id="colPayment" prefWidth="200" text="Payment Method" />
+        </columns>
+    </TableView>
+
+</AnchorPane>

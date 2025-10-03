@@ -42,6 +42,11 @@ public class GuestUIServiceNaked {
         return false;
     }
 
+
+    public List<Guest> searchGuestByNameAndSurname(String name, String surname) {
+        return guestRepository.findByNameAndSurname(name, surname);
+    }
+
     // ----------------- GET ALL -----------------
     public List<Guest> getAllGuests() {
         return guestRepository.findAll();

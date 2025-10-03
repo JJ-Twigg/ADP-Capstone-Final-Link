@@ -35,6 +35,12 @@ public class GuestUIController {
     @FXML
     private TableColumn<Guest, String> colPayment;
 
+    @FXML
+    private TextField searchNameField;
+
+    @FXML
+    private TextField searchSurnameField;
+
     private final GuestUIServiceNaked guestService;
     private final GuestRepository guestRepository;
 
@@ -62,7 +68,7 @@ public class GuestUIController {
         colPayment.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleStringProperty(data.getValue().getPaymentDetails()));
 
-        loadGuests();
+//        loadGuests(); // not loading table with data for search, keep empty
     }
 
 
@@ -237,6 +243,34 @@ public class GuestUIController {
         }
     }
 
+
+    @FXML
+    public void handleSearchGuest() {
+        String name = searchNameField.getText().trim();
+        String surname = searchSurnameField.getText().trim();
+
+        if (name.isEmpty() || surname.isEmpty()) {
+            showAlert("Error", "Please enter both name and surname.");
+            return;
+        }
+
+        System.out.println("Searching for guest: " + name + " " + surname);
+
+        // Get all guests matching the name and surname
+        List<Guest> guests = guestRepository.findByNameAndSurname(name, surname);
+
+        if (guests.isEmpty()) {
+            guestTable.getItems().clear(); // clear table if not found
+            showAlert("Not Found", "No guest found with that name and surname.");
+        } else {
+            guestTable.setItems(FXCollections.observableArrayList(guests));
+            if (guests.size() == 1) {
+                showAlert("Guest Found", "Guest discovered successfully.");
+            } else {
+                showAlert("Multiple Guests Found", guests.size() + " guests found with that name and surname.");
+            }
+        }
+    }
 
 
 

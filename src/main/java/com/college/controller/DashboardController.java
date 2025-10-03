@@ -119,7 +119,14 @@ public class DashboardController {
         safeLoadViewOtherPages("/scenes/printFinal.fxml", "Print");
     }
 
+    @FXML
+    public void showSearchGuest() {
+        safeLoadViewOtherPages("/scenes/guestSearchFinal.fxml", "Search For A Guest");
+    }
 
+    @FXML
+    public void showSearchTopPayment() {safeLoadViewOtherPages("/scenes/paymentSearchFinal.fxml", "Search Top Payments");
+    }
 
 
 

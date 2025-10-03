@@ -2,6 +2,7 @@ package com.college.controller;
 
 import com.college.domain.Guest;
 import com.college.domain.Payment;
+import com.college.repository.PaymentRepository;
 import com.college.service.PaymentService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,7 +16,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,6 +28,7 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -42,6 +48,9 @@ public class PaymentViewController {
 
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    PaymentRepository paymentRepository;
 
     private ObservableList<Payment> payments = FXCollections.observableArrayList();
 
@@ -208,7 +217,40 @@ public class PaymentViewController {
         }
     }
 
+    @FXML
+    private void searchTopPayments() {
+        try {
 
+            Pageable top3 = PageRequest.of(0, 3);
+            List<Guest> topGuests = paymentRepository.findTopRevenueGeneratingGuests(top3);
+
+            if (topGuests.isEmpty()) {
+                showAlert("No payments found.");
+                paymentTable.getItems().clear();
+                return;
+            }
+
+            // Option 1: Show payments for these guests
+            List<Payment> topPayments = new ArrayList<>();
+            for (Guest guest : topGuests) {
+                topPayments.addAll(paymentService.getPaymentsByGuest(guest));
+            }
+
+            // Sort by payment amount descending
+            topPayments.sort((p1, p2) -> Double.compare(p2.getPaymentAmount(), p1.getPaymentAmount()));
+
+            // Update table
+            payments.clear();
+            payments.addAll(topPayments);
+            paymentTable.setItems(payments);
+
+            showSuccess("Top 3 revenue-generating guests displayed.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error fetching top payments: " + e.getMessage());
+        }
+    }
 
 
 

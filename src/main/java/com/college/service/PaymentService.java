@@ -1,5 +1,6 @@
 package com.college.service;
 
+import com.college.domain.Guest;
 import com.college.domain.Payment;
 import com.college.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class PaymentService implements IPaymentService {
 
 
 
+    public List<Payment> getPaymentsByGuest(Guest guest) {
+        return paymentRepository.findByGuest(guest);
+    }
 
 
     @Transactional

@@ -57,6 +57,10 @@
 
                         <Button onAction="#showEmployeeSalary" styleClass="menu-button" text="Employee Salaries" />
 
+                        <Button onAction="#showSearchGuest" styleClass="menu-button" text="Search Guest" />
+
+                        <Button onAction="#showSearchTopPayment" styleClass="menu-button" text="Search Guest" />
+
                         <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
 
                     </VBox>
