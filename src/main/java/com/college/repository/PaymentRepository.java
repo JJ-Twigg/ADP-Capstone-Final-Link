@@ -28,5 +28,8 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
     List<Payment> findByGuest(Guest guest);
 
+    @Query("SELECT SUM(p.paymentAmount) FROM Payment p")
+    Double getTotalAmount();
+
 
 }

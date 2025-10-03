@@ -78,7 +78,7 @@
         </ComboBox>
 
         <Button text="Sign Up" onAction="#handleSignUp"
-                style="-fx-background-color: #6ac5fe; -fx-text-fill: white;-fx-background-radius: 10;"
+                style="-fx-background-color:  #45b6fe; -fx-text-fill: white;-fx-background-radius: 10;"
                 prefWidth="220" prefHeight="35">
             <cursor>
                 <Cursor fx:constant="HAND"/>

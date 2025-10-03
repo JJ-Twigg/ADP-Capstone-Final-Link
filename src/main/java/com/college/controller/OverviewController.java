@@ -1,6 +1,7 @@
 package com.college.controller;
 
 import com.college.service.EmployeeService;
+import com.college.service.PaymentService;
 import com.college.service.ReservationService;
 import com.college.service.ShiftService;
 import javafx.animation.KeyFrame;
@@ -19,8 +20,10 @@ import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Component
 public class OverviewController {
@@ -47,7 +50,8 @@ public class OverviewController {
     @FXML private CategoryAxis totalGuestsChartXAxis;
     @FXML private NumberAxis totalGuestsChartYAxis;
 
-
+    @FXML
+    private Label revenueLabel;
 
     @FXML
     private PieChart totalEmployeesPieChart;
@@ -73,6 +77,18 @@ public class OverviewController {
     @Autowired
     ShiftService shiftService;
 
+    @Autowired
+    PaymentService paymentService;
+
+
+    @FXML
+    private BarChart<String, Number> monthlyEarningsBarChart;
+
+    @FXML
+    private CategoryAxis monthsAxis;
+
+    @FXML
+    private NumberAxis earningsAxis;
 
 
     @FXML
@@ -91,6 +107,9 @@ public class OverviewController {
         
         updateEmployeeCount();
         updateCurrentUserEmail();
+        updateRevenue();
+
+        setupRevenueChart();
 
 
 
@@ -136,6 +155,23 @@ public class OverviewController {
             System.out.println("EmployeeLabel is null, cause its for manager and admin dashboard, not user dash, (skipping update)");
         }
     }
+
+
+    //also a custom method
+    private void updateRevenue() {
+        Double total = paymentService.getTotalAmount(); // use wrapper Double, since service may return null
+
+        if (revenueLabel!= null) { // <-- this refers to your Label field
+            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "ZA")); // South Africa Rand
+            revenueLabel.setText(currencyFormatter.format(total != null ? total : 0.0));
+        } else {
+            System.out.println("totalRevenue label is null (not available in this dashboard)");
+        }
+    }
+
+
+
+
 
     private void setupEmployeePieChart() {
         int totalEmployees = employeeService.getAllEmployees().size();
@@ -238,15 +274,36 @@ public class OverviewController {
     }
 
 
-    private void setupRevenueChart() {
-        XYChart.Series<String, Number> revenueSeries = new XYChart.Series<>();
-        revenueSeries.setName("Revenue");
-        revenueSeries.getData().add(new XYChart.Data<>("Jan", 180000));
-        revenueSeries.getData().add(new XYChart.Data<>("Feb", 200000));
-        revenueSeries.getData().add(new XYChart.Data<>("Mar", 245800));
-        revenueSeries.getData().add(new XYChart.Data<>("Apr", 210000));
-        revenueSeries.getData().add(new XYChart.Data<>("May", 230000));
 
+    private void setupRevenueChart() {
+        Double totalRevenue = paymentService.getTotalAmount();
+        if (totalRevenue == null) totalRevenue = 0.0;
+
+        XYChart.Series<String, Number> revenueSeries = new XYChart.Series<>();
+        revenueSeries.setName("Total Revenue");
+
+        // Add a single bar representing total revenue
+        revenueSeries.getData().add(new XYChart.Data<>("Total", totalRevenue));
+
+        // Use the correct axes from FXML
+        monthsAxis.setLabel("Revenue");
+        earningsAxis.setLabel("Amount (R)");
+
+        earningsAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(earningsAxis, "R ", null));
+
+        monthlyEarningsBarChart.getData().clear();
+        monthlyEarningsBarChart.getData().add(revenueSeries);
+
+        monthlyEarningsBarChart.setLegendVisible(false);
+
+
+        Platform.runLater(() -> {
+            for (XYChart.Data<String, Number> data : revenueSeries.getData()) {
+                if (data.getNode() != null) {
+                    data.getNode().setStyle("-fx-bar-fill: #27ae60;"); // green
+                }
+            }
+        });
     }
 
     private void setupGuestsChart() {

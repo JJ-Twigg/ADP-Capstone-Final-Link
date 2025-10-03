@@ -60,8 +60,8 @@
         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Revenue" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="R 245,800" />
-                        <Label style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="R 1,200,000 total revenue" />
+                        <Label fx:id="revenueLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="R 245,800" />
+
                     </VBox>
                 </VBox>
 
@@ -123,7 +123,7 @@
             </HBox>
 
             <VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
-                <BarChart fx:id="monthlyEarningsBarChart" title="Monthly Earnings" prefHeight="400" prefWidth="750">
+                <BarChart fx:id="monthlyEarningsBarChart" title="Total Revenue" prefHeight="400" prefWidth="750">
                     <xAxis>
                         <CategoryAxis fx:id="monthsAxis" label="Month"/>
                     </xAxis>

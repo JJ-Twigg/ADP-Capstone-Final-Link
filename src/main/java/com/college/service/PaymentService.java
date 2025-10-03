@@ -52,7 +52,9 @@ public class PaymentService implements IPaymentService {
         paymentRepository.deleteByGuestId(guestId);
     }
 
-
+    public Double getTotalAmount() {
+        return paymentRepository.getTotalAmount();
+    }
 
     @Override
     public List<Payment> getAll() {
