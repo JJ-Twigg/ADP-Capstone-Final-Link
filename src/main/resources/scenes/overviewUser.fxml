@@ -163,6 +163,15 @@
             <!-- this is hidden and fixes guest label null when calling user, this relates to dashboard admin they both use overview controller-->
             <Label fx:id="currentGuestsLabel" layoutX="100" layoutY="50" text="0" visible="false"/>
 
+            <BarChart fx:id="monthlyEarningsBarChart" title="Total Revenue" prefHeight="400" prefWidth="750" visible="false">
+                <xAxis>
+                    <CategoryAxis fx:id="monthsAxis" label="Month"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="earningsAxis" label="Earnings (k)"/>
+                </yAxis>
+            </BarChart>
+
         </VBox>
     </AnchorPane>
 </ScrollPane>
