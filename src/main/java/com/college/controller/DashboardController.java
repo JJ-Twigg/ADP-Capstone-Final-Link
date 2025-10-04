@@ -128,7 +128,10 @@ public class DashboardController {
     public void showSearchTopPayment() {safeLoadViewOtherPages("/scenes/paymentSearchFinal.fxml", "Search Top Payments");
     }
 
-
+    @FXML
+    public void showRestful() {
+        safeLoadView("/scenes/restFinal.fxml", "Restful Web Service");
+    }
 
 
 
