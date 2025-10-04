@@ -10,7 +10,7 @@
             fx:controller="com.college.controller.EmployeeControllerView">
 
     <!-- Table -->
-    <TableView fx:id="employeeTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="500.0"
+    <TableView fx:id="employeeTable" layoutX="360" layoutY="114.0" prefHeight="332.0" prefWidth="500.0"
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
             <TableColumn fx:id="colEmployeeId" prefWidth="60" text="Employee ID"

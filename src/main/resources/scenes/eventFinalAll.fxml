@@ -56,7 +56,7 @@
     </Pane>
 
     <!-- TableView -->
-    <TableView fx:id="eventTable" layoutX="250.0" layoutY="50.0" prefHeight="400.0" prefWidth="500.0"
+    <TableView fx:id="eventTable" layoutX="350.0" layoutY="50.0" prefHeight="400.0" prefWidth="500.0"
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
             <TableColumn fx:id="colId"  style="-fx-background-color: white;" prefWidth="60" text="ID" />
@@ -67,7 +67,7 @@
     </TableView>
 
     <!-- Title -->
-    <Text fill="#383838" layoutX="529.0" layoutY="15.0" text="Events">
+    <Text fill="#383838" layoutX="549.0" layoutY="35.0" text="Events">
         <font>
             <Font size="32.0"/>
         </font>

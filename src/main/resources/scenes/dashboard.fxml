@@ -59,7 +59,7 @@
 
                         <Button onAction="#showSearchGuest" styleClass="menu-button" text="Search Guest" />
 
-                        <Button onAction="#showSearchTopPayment" styleClass="menu-button" text="Search Guest" />
+                        <Button onAction="#showSearchTopPayment" styleClass="menu-button" text="Top Guest Payments" />
 
                         <Button onAction="#showRestful" styleClass="menu-button" text="RestfulWeb" />
 

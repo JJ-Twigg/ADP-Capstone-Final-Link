@@ -11,12 +11,13 @@
 
 <!--    style="-fx-background-color: white;" makes it look nice but causes right ugly ui glitch on right of table?-->
     <!-- Table -->
-    <TableView fx:id="reservationTable"  layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="240.0" style="-fx-background-color: white; -fx-border-color: transparent;">
+    <TableView fx:id="reservationTable"   layoutX="415.0" layoutY="136.5" prefHeight="332.0" prefWidth="390" style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
-            <TableColumn fx:id="reservationIdColumn" style="-fx-background-color: white;" text="ID" />
-            <TableColumn fx:id="guestIdColumn" style="-fx-background-color: white;" text="Guest ID" />
-            <TableColumn fx:id="startTimeColumn" style="-fx-background-color: white;" text="Start Time" />
-            <TableColumn fx:id="endTimeColumn" style="-fx-background-color: white;" text="End Time" />
+            <TableColumn fx:id="reservationIdColumn" text="ID" prefWidth="80" style="-fx-background-color: white;" />
+            <TableColumn fx:id="guestIdColumn" text="Guest ID" prefWidth="120" style="-fx-background-color: white;" />
+            <TableColumn fx:id="startTimeColumn" text="Start Time" prefWidth="140" style="-fx-background-color: white;" />
+            <TableColumn fx:id="endTimeColumn" text="End Time" prefWidth="140" style="-fx-background-color: white;" />
+
         </columns>
     </TableView>
         <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
