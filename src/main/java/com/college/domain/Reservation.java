@@ -60,8 +60,9 @@ public class Reservation {
     }
 
 
-
-
+    public Room getRoom() {
+        return room;
+    }
 
     public Reservation(){}
     public Reservation(String reservationDateTimeStart, String reservationDateTimeEnd) {

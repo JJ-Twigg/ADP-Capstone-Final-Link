@@ -74,7 +74,7 @@ public class AddReservationController {
     @FXML
     public void initialize() {
         // Populate room numbers (51-59)
-        for (int i = 52; i <= 59; i++) {
+        for (int i = 51; i <= 56; i++) {
             comboBoxNumbers.getItems().add(i);
         }
         comboBoxNumbers.setValue(52);
@@ -87,8 +87,20 @@ public class AddReservationController {
             comboBoxEmployee.setVisible(!"Event".equals(type));
         });
 
-        // Employee ComboBox
-        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees());
+        // Employee ComboBox, this just gets all employees and works well.
+//        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees());
+
+        //employee Combo box, get all employees, who are housekeepers
+        comboBoxEmployee.getItems().addAll(
+                employeeService.getAllEmployees().stream()
+                        .filter(emp -> "housekeeper".equalsIgnoreCase(emp.getJobType()))
+                        .filter(emp -> roomService.getAll().stream()
+                                .noneMatch(room -> room.getEmployee() != null &&
+                                        room.getEmployee().getEmployeeId() == emp.getEmployeeId()))
+                        .toList()
+        );
+
+
         comboBoxEmployee.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Employee emp, boolean empty) {
@@ -111,6 +123,10 @@ public class AddReservationController {
         }
 
         Integer roomChosen = comboBoxNumbers.getValue();
+
+        double price = getRoomPrice(roomChosen);
+        System.out.println("price of that room id is: " + price);
+
         String bookingTypeSelected = comboBoxBookingType.getValue();
 
         if (bookingTypeSelected == null) {
@@ -155,8 +171,10 @@ public class AddReservationController {
 
                     alertReservationSuccess(roomChosen);
 
+
+
                     // Open Payment modal
-                    openAddPaymentPage(this.guest);
+                    openAddPaymentPage(this.guest, price);
 
                     // Close AddReservation modal and parent Reservation page
                     if (stage != null) stage.close();
@@ -208,7 +226,7 @@ public class AddReservationController {
         }
     }
 
-    private void openAddPaymentPage(Guest guest) {
+    private void openAddPaymentPage(Guest guest, double price) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/paymentFinal.fxml"));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
@@ -216,6 +234,8 @@ public class AddReservationController {
             Parent root = loader.load();
             PaymentViewController paymentController = loader.getController();
             paymentController.setGuest(guest);
+            //pass price to setter
+            paymentController.setPrice(price);
 
             Stage modalStage = new Stage();
             modalStage.setWidth(1000);
@@ -228,6 +248,37 @@ public class AddReservationController {
             e.printStackTrace();
         }
     }
+
+
+    public double getRoomPrice(int roomID) {
+        double price;
+        switch (roomID) {
+            case 51:
+                price = 500.00;
+                break;
+            case 52:
+                price = 500.00;
+                break;
+            case 53:
+                price = 800.00;
+                break;
+            case 54:
+                price = 800.00;
+                break;
+            case 55:
+                price = 1200.00;
+                break;
+            case 56:
+                price = 1200.00;
+                break;
+            default:
+                price = 0.0; // or throw an exception if invalid roomID
+                break;
+        }
+        return price;
+    }
+
+
 
     @FXML
     private void cancel() {

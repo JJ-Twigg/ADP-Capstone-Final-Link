@@ -158,8 +158,12 @@ cause they calling wrong service or something
 ---
 todo:
 ---
-Room issues, housekeepr should idsapper afte assinged? then how to reasihg?
-also payment, if room costs certain amount that sohul dbe the amount
+fixed now. when u delete a reservation emp fk becomes null.
+thats done. then they re appear in combobox. so this is fixed.
+
+think maybe adding system price for payment of rooms using setters
+eg 51 = 2000 switch then pass to form. idk if its worth it for such 
+a small thing
 
 
 now it inserts room with employee. but deleting doesnt remove emp from room
@@ -196,3 +200,13 @@ shift and salary, only thing that doesnt delete with users, fix then done
 
 rooms db i only show 6 rooms on ui currently 1 page,
 but db has 9 rooms.
+
+
+INSERT INTO Room (roomID, room_type, price_Per_Night, availability, features, reservation_id)
+VALUES
+(51, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Desk Lamp', NULL),
+(52, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Mini Fridge', NULL),
+(53, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Sofa', NULL),
+(54, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Balcony', NULL),
+(55, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Coffee Maker', NULL),
+(56, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Bathtub', NULL)

@@ -35,6 +35,13 @@ public class PaymentFormController {
 
 
 
+    private double price;
+
+    public void setPrice(double price) {
+        this.price = price;
+        System.out.println("Payment Controller price: " + price);
+    }
+
 
     @FXML
     public void initialize() {

@@ -64,6 +64,9 @@ public class ReservationUIController implements Initializable {
     @Autowired
     EventUIServiceNaked eventService;
 
+    @Autowired
+    RoomService roomService;
+
 
     private final ReservationService reservationService;
     private ObservableList<Reservation> reservationList;
@@ -184,7 +187,7 @@ public class ReservationUIController implements Initializable {
             modalStage.setScene(new Scene(root));
             addController.setStage(modalStage); // set modal stage
 
-            // ✅ CLOSE Reservation page when opening modal
+
             if (stage != null) {
                 stage.close();
             }
@@ -228,9 +231,17 @@ public class ReservationUIController implements Initializable {
                     eventService.deleteByReservationId(selectedReservation.getReservationId());
                 }
 
+                // Nullify employee FK in the room linked to this reservation
+                if (selectedReservation.getRoom() != null) {
+                    selectedReservation.getRoom().setEmployee(null);
+                    roomService.update(selectedReservation.getRoom()); // persist change
+                }
+
                 boolean deleted = reservationService.delete(selectedReservation.getReservationId());
                 //delete from other tables at the same time too
                 paymentService.deleteByGuestId(guestId);
+
+
 
                 if (deleted) {
                     labelFeedback.setText("Reservation ID: " + selectedReservation.getReservationId() + " deleted successfully.");

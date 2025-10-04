@@ -32,6 +32,7 @@ public class Room {
 
 
 
+    // FK to Employee, one to one means only one housekeeper per 1 room
     @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employeeId", nullable = true)
     private Employee employee;
