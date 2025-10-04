@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class GuestUIController {
+public class GuestUIControllerSearch {
 
     @FXML
     private TableView<Guest> guestTable;
@@ -47,7 +47,7 @@ public class GuestUIController {
 
 
     @Autowired
-    public GuestUIController(GuestRepository guestRepository) {
+    public GuestUIControllerSearch(GuestRepository guestRepository) {
         this.guestRepository = guestRepository;
         this.guestService = new GuestUIServiceNaked(guestRepository);
     }
@@ -68,7 +68,7 @@ public class GuestUIController {
         colPayment.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleStringProperty(data.getValue().getPaymentDetails()));
 
-        loadGuests();
+//        loadGuests(); // not loading table with data for search, keep empty
     }
 
 

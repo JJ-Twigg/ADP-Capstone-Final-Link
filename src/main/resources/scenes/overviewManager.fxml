@@ -134,9 +134,17 @@
                 <!-- Time & Date -->
                 <Label fx:id="clockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
 
+
             </HBox>
 
-
+            <BarChart fx:id="monthlyEarningsBarChart" title="Total Revenue" prefHeight="400" prefWidth="750" visible="false">
+                <xAxis>
+                    <CategoryAxis fx:id="monthsAxis" label="Month"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="earningsAxis" label="Earnings (k)"/>
+                </yAxis>
+            </BarChart>
 
         </VBox>
     </AnchorPane>

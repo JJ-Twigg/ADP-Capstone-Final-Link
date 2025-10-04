@@ -158,7 +158,8 @@ cause they calling wrong service or something
 ---
 todo:
 ---
-
+Room issues, housekeepr should idsapper afte assinged? then how to reasihg?
+also payment, if room costs certain amount that sohul dbe the amount
 
 
 now it inserts room with employee. but deleting doesnt remove emp from room

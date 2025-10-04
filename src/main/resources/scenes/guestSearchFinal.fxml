@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
             xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.college.controller.GuestUIController">
+            fx:controller="com.college.controller.GuestUIControllerSearch">
 
     <!-- Sidebar -->
     <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
