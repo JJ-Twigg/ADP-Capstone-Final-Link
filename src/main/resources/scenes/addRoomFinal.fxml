@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<HBox fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0"
+      minHeight="550.0" minWidth="600.0"
+      prefHeight="550.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.college.controller.AdminAddRoomController">
+
+    <!-- Left blue panel with logo -->
+    <VBox alignment="CENTER" prefWidth="220.0" style="-fx-background-color: #45b6fe;" spacing="20.0">
+        <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true">
+            <image>
+                <Image url="/images/c.png"/>
+            </image>
+        </ImageView>
+        <Label text="Hotel Management System" textFill="WHITE" alignment="CENTER">
+            <font>
+                <Font size="15"/>
+            </font>
+        </Label>
+        <Label text="HMS" textFill="WHITE" alignment="CENTER"/>
+    </VBox>
+
+    <!-- Right white panel with input fields -->
+    <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0" style="-fx-background-color: WHITE;">
+        <Label text="Add New Room" textFill="BLACK" alignment="CENTER">
+            <font>
+                <Font size="30"/>
+            </font>
+        </Label>
+
+        <!-- Input fields -->
+        <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0">
+
+            <!-- Room ID ComboBox (60–70) -->
+            <ComboBox fx:id="roomIdComboBox" promptText="Select Room ID" prefWidth="220" maxWidth="220" prefHeight="30"
+                      style="-fx-background-radius: 3; -fx-border-radius: 3;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="60"/>
+                        <String fx:value="61"/>
+                        <String fx:value="62"/>
+                        <String fx:value="63"/>
+                        <String fx:value="64"/>
+                        <String fx:value="65"/>
+                        <String fx:value="66"/>
+                        <String fx:value="67"/>
+                        <String fx:value="68"/>
+                        <String fx:value="69"/>
+                        <String fx:value="70"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+
+
+
+            <TextField fx:id="roomTypeField" promptText="Room Type" prefWidth="220" maxWidth="220" prefHeight="30"
+                       style="-fx-background-radius: 3; -fx-border-radius: 3"/>
+
+            <TextField fx:id="pricePerNightField" promptText="Price per Night" prefWidth="220" maxWidth="220" prefHeight="30"
+                       style="-fx-background-radius: 3; -fx-border-radius: 3"/>
+
+            <ComboBox fx:id="availabilityComboBox" prefWidth="220" prefHeight="30"
+                      style="-fx-background-radius: 0; -fx-border-radius: 0;" value="Select Availability">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Available"/>
+                        <String fx:value="Unavailable"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <TextField fx:id="featuresField" promptText="Features (e.g., WiFi, AC, Balcony)" prefWidth="220" maxWidth="220" prefHeight="30"
+                       style="-fx-background-radius: 3; -fx-border-radius: 3"/>
+        </VBox>
+
+        <!-- Image upload section -->
+        <VBox alignment="CENTER" spacing="10.0">
+            <ImageView fx:id="roomImageView" fitHeight="120" fitWidth="150" preserveRatio="true" style="-fx-border-color: #ccc;"/>
+            <Button text="Upload Room Image" onAction="#handleUploadImage"
+                    style="-fx-background-color: #45b6fe; -fx-text-fill: white; -fx-background-radius: 10;"
+                    prefWidth="220" prefHeight="35">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Button>
+        </VBox>
+
+        <!-- Buttons -->
+        <Button text="Add Room" onAction="#addRoomToDatabase"
+                style="-fx-background-color: #45b6fe; -fx-text-fill: white; -fx-background-radius: 10;"
+                prefWidth="220" prefHeight="35">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+
+
+    </VBox>
+</HBox>

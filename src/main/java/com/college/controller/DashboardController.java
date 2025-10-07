@@ -133,6 +133,9 @@ public class DashboardController {
         safeLoadView("/scenes/restFinal.fxml", "Restful Web Service");
     }
 
+    @FXML
+    public void showAdminAddRoom() {safeLoadView("/scenes/addRoomFinal.fxml", "Add Rooms");}
+
 
 
     @FXML

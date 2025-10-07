@@ -163,23 +163,14 @@ but if there are no housekeeprs ur stuck in that
 window and then it allows u to have no housekeeper. which cant
 be assigned later.
 
-also in houskeeper emplyoees tab whatefver
-u cant tell whichhousekeper is taken i dont think?
-
 also start time end time need to be actual times 
 u should not be able to write what u want
 
-reservation page needs roomid connected to that res
-and must do getEmployee() to get what housekeepr is working there
-
-center total revenue in admin dash, 
 
 check all update and delete functionality on table pages.
 
 make windows close when making res to stop desolate records
 
-think maybe adding system price for payment of rooms using setters
- idk if its worth it for such a small thing. but have to get from db as admin can update price at anytime
 
 think about adding code to insert 6 rooms when program runs?
 instead of manual insertion
@@ -187,6 +178,14 @@ instead of manual insertion
 reservation probably needs num of guests, so we not always booking single
 
 admin add new rooms? uplaod image?
+this is a decision, i can do easy add custom 
+rooms but u cant select the image with the existing code ez.
+maybe there'd be a way to have loop generate upload image
+that coudl replace the default image i set in the array.
+
+option 2 make a new room table custom called custom rooms
+connect fk. then can just upload image to db as a col
+
 
 
 

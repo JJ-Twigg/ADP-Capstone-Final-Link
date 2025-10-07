@@ -48,6 +48,8 @@
 <!--                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />-->
                         <Button onAction="#showPrint" styleClass="menu-button" text="Print Payments" />
 
+                        <Button onAction="#showAdminAddRoom" styleClass="menu-button" text="Add Rooms" />
+
 <!--                        <Button onAction="#showRestful" styleClass="menu-button" text="RestfulWeb" />-->
 
                         <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
