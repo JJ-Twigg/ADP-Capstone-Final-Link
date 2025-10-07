@@ -37,6 +37,9 @@ public class ReservationUIController implements Initializable {
     @FXML private TableColumn<Reservation, String> startTimeColumn;
     @FXML private TableColumn<Reservation, String> endTimeColumn;
 
+    @FXML private TableColumn<Reservation, Integer> roomIdColumn;
+    @FXML private TableColumn<Reservation, Integer> employeeIdColumn;
+
     @FXML private Button btnAdd;
     @FXML private Button btnEdit;
     @FXML private Button btnDelete;
@@ -110,6 +113,11 @@ public class ReservationUIController implements Initializable {
 
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("reservationDateTimeStart"));
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("reservationDateTimeEnd"));
+
+
+
+
+
 
         reservationList = FXCollections.observableArrayList();
         reservationTable.setItems(reservationList);

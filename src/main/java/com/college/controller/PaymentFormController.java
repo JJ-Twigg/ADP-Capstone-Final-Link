@@ -3,6 +3,7 @@ package com.college.controller;
 import com.college.domain.Guest;
 import com.college.domain.Payment;
 import com.college.service.PaymentService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -37,11 +38,18 @@ public class PaymentFormController {
 
     private double price;
 
+    @FXML
+    private Label lblPrice; // bind to FXML label
+
     public void setPrice(double price) {
         this.price = price;
-        System.out.println("Payment Controller price: " + price);
+        System.out.println("paymentFormController price: " + price);
+        // Update label and text field
+        Platform.runLater(() -> {
+            lblPrice.setText("Price from database: " + price);
+            txtAmount.setText(String.valueOf(price));
+        });
     }
-
 
     @FXML
     public void initialize() {

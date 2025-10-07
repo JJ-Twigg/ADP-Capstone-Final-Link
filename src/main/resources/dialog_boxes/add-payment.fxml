@@ -29,6 +29,14 @@
                text="Add A Payment"
                maxWidth="Infinity" />
 
+        <!-- Label to show price from database -->
+        <Label fx:id="lblPrice"
+               text="Price from database: 0.0"
+               style="-fx-font-size: 14px; -fx-text-fill: #333;"
+               maxWidth="260.0"
+               prefWidth="260.0"
+               alignment="CENTER_LEFT"/>
+
         <!-- Input Fields -->
         <VBox alignment="CENTER" spacing="15">
             <!-- Amount field -->

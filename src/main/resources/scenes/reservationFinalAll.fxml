@@ -18,6 +18,8 @@
             <TableColumn fx:id="startTimeColumn" text="Start Time" prefWidth="140" style="-fx-background-color: white;" />
             <TableColumn fx:id="endTimeColumn" text="End Time" prefWidth="140" style="-fx-background-color: white;" />
 
+            <TableColumn fx:id="roomIdColumn" text="Room ID" prefWidth="100" style="-fx-background-color: white;" />
+            <TableColumn fx:id="employeeIdColumn" text="Employee ID" prefWidth="120" style="-fx-background-color: white;" />
         </columns>
     </TableView>
         <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">

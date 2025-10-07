@@ -68,7 +68,7 @@ public class PaymentViewController {
 
     public void setPrice(double price) {
         this.price = price;
-        System.out.println("Payment Controller price: " + price);
+        System.out.println("Paymentview Controller price: " + price);
     }
 
 
@@ -168,9 +168,13 @@ public class PaymentViewController {
             stage.setScene(new Scene(loader.load()));
 
             PaymentFormController controller = loader.getController();
-            controller.setPayment(payment);
+
 
             controller.setGuest(this.guest);
+
+            if (payment == null) {
+                controller.setPrice(this.price);
+            }
 
             stage.showAndWait();
             loadPayments(); // Refresh the table

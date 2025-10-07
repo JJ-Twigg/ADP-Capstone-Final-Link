@@ -39,6 +39,15 @@ public class AddReservationController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+
+        this.stage.setOnCloseRequest(event -> {
+            event.consume(); // stop the window from closing
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Action Blocked");
+            alert.setHeaderText(null);
+            alert.setContentText("You cannot close this window until a reservation is made.");
+            alert.showAndWait();
+        });
     }
 
 
@@ -124,7 +133,7 @@ public class AddReservationController {
 
         Integer roomChosen = comboBoxNumbers.getValue();
 
-        double price = getRoomPrice(roomChosen);
+        float price = (float) getRoomPrice(roomChosen);
         System.out.println("price of that room id is: " + price);
 
         String bookingTypeSelected = comboBoxBookingType.getValue();
@@ -251,31 +260,19 @@ public class AddReservationController {
 
 
     public double getRoomPrice(int roomID) {
-        double price;
-        switch (roomID) {
-            case 51:
-                price = 500.00;
-                break;
-            case 52:
-                price = 500.00;
-                break;
-            case 53:
-                price = 800.00;
-                break;
-            case 54:
-                price = 800.00;
-                break;
-            case 55:
-                price = 1200.00;
-                break;
-            case 56:
-                price = 1200.00;
-                break;
-            default:
-                price = 0.0; // or throw an exception if invalid roomID
-                break;
+        try {
+            Room room = roomService.read(roomID); // Fetch room by ID
+            float price = room.getPricePerNight();
+            System.out.println("recieved price from database for that id: " + price);
+                return price;
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0;
         }
-        return price;
     }
 
 

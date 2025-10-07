@@ -78,6 +78,11 @@ public class RoomController {
         VBox card = new VBox(10);
         card.getStyleClass().add("room-card");
 
+        card.setAlignment(Pos.CENTER);
+        card.setPrefWidth(220);
+        card.setMaxWidth(220);
+        card.setMinWidth(220);
+
         ImageView roomImage = new ImageView();
         roomImage.setFitWidth(200);
         roomImage.setFitHeight(150);

@@ -158,36 +158,54 @@ cause they calling wrong service or something
 ---
 todo:
 ---
-fixed now. when u delete a reservation emp fk becomes null.
-thats done. then they re appear in combobox. so this is fixed.
+now u cant close res,
+but if there are no housekeeprs ur stuck in that
+window and then it allows u to have no housekeeper. which cant
+be assigned later.
+
+also in houskeeper emplyoees tab whatefver
+u cant tell whichhousekeper is taken i dont think?
+
+also start time end time need to be actual times 
+u should not be able to write what u want
+
+reservation page needs roomid connected to that res
+and must do getEmployee() to get what housekeepr is working there
+
+center total revenue in admin dash, 
+
+check all update and delete functionality on table pages.
+
+make windows close when making res to stop desolate records
 
 think maybe adding system price for payment of rooms using setters
-eg 51 = 2000 switch then pass to form. idk if its worth it for such 
-a small thing
+ idk if its worth it for such a small thing. but have to get from db as admin can update price at anytime
+
+think about adding code to insert 6 rooms when program runs?
+instead of manual insertion
+
+reservation probably needs num of guests, so we not always booking single
+
+admin add new rooms? uplaod image?
+
+
+
 
 
 now it inserts room with employee. but deleting doesnt remove emp from room
 but also the list of empoyees doesnt change, idk if we want that
 cause then u can move employees around. but the if room 51 has hk7
 
-if we move hk7 to room 52 that will break 1 to 1 rel
-
-
-think about adding code to insert 6 rooms when program runs?
-instead of manual insertion
-
-make windows close when making res to stop desolate records
-
-when login have image and get name from user table and display it
-
-reservation probably needs num of guests, so we not always booking single
-
-dialog box for tables could use some global css for all of them
-
-tables on page, some pages tables dont have enough info. shift just start, end. no emp name nothing
 
 
 
+
+
+
+
+
+fixed now. when u delete a reservation emp fk becomes null.
+thats done. then they re appear in combobox. so this is fixed.
 
 might still need connection room to employee. when room u select
 which single employee to work in that room, is that connected.

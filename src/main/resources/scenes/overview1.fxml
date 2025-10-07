@@ -59,9 +59,9 @@
         -fx-background-radius: 12;
         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Total Revenue" />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;  -fx-alignment: center" alignment="CENTER" text="Total Revenue" />
                         <Label fx:id="revenueLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="R 245,800" />
-
+                        <Label visible="false" style="-fx-text-fill: #ecf0f1; -fx-font-size: 11px;" text="Avg. last 12 months" />
                     </VBox>
                 </VBox>
 

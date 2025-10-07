@@ -8,7 +8,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,9 +31,6 @@ public class UserTableController {
     @FXML private TableColumn<User, Integer> ageColumn;
     @FXML private TableColumn<User, String> genderColumn;
 
-    @FXML
-    private Label labelFeedback;
-
     @Autowired
     private UserService userService;
 
@@ -43,7 +39,7 @@ public class UserTableController {
 
     private final ObservableList<User> userList = FXCollections.observableArrayList();
 
-    // ✅ This method is automatically called by JavaFX when FXML is loaded
+
     @FXML
     public void initialize() {
         // Bind table columns
@@ -71,25 +67,25 @@ public class UserTableController {
             List<User> users = userService.getAll();
             userList.setAll(users);
             userTable.setItems(userList);
-            labelFeedback.setText("Loaded " + users.size() + " users.");
+            System.out.println("Loaded " + users.size() + " users.");
         } catch (Exception e) {
-            labelFeedback.setText("Failed to load users: " + e.getMessage());
+            System.out.println("Failed to load users: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @FXML
     public void addUser() {
-        labelFeedback.setText("Add User clicked - implement form here");
+        System.out.println("Add User clicked - implement form here");
     }
 
     @FXML
     public void updateUser() {
         User selected = userTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            labelFeedback.setText("Update User: " + selected.getName());
+            System.out.println("Update User: " + selected.getName());
         } else {
-            labelFeedback.setText("Select a user to update.");
+            System.out.println("Select a user to update.");
         }
     }
 
@@ -98,37 +94,31 @@ public class UserTableController {
         User selected = userTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
             try {
-                // Delete the user , cascade deletes UserRoles and Employee Auto
                 boolean deleted = userService.delete(selected.getUserId());
 
-                //cascade handles shift and employeeSalary
-
                 if (deleted) {
-
-                    // Clean up orphaned roles ,roles with no UserRoles left
-                    List<Role> allRoles = roleService.getAll(); // fetch all roles
+                    // Clean up orphaned roles
+                    List<Role> allRoles = roleService.getAll();
                     for (Role role : allRoles) {
-                        boolean used = roleService.isRoleUsed(role.getId()); // check if any UserRole still references it
+                        boolean used = roleService.isRoleUsed(role.getId());
                         if (!used) {
                             roleService.delete(role.getId());
                         }
                     }
 
-                    // Update table and feedback
                     userList.remove(selected);
-                    labelFeedback.setText("Deleted user: " + selected.getName() + " and cleaned up unused roles.");
-
+                    System.out.println("Deleted user: " + selected.getName() + " and cleaned up unused roles.");
                 } else {
-                    labelFeedback.setText("Failed to delete user.");
+                    System.out.println("Failed to delete user.");
                 }
 
             } catch (Exception e) {
-                labelFeedback.setText("Error deleting user: " + e.getMessage());
+                System.out.println("Error deleting user: " + e.getMessage());
                 e.printStackTrace();
             }
 
         } else {
-            labelFeedback.setText("Select a user to delete.");
+            System.out.println("Select a user to delete.");
         }
     }
 
