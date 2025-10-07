@@ -67,7 +67,10 @@ public class ReservationService {
     }
 
 
-
+    @Transactional(readOnly = true)
+    public List<Reservation> getAllWithRoomAndEmployee() {
+        return repo.findAllWithRoomAndEmployee();
+    }
 
 
 

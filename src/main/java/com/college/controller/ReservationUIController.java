@@ -3,6 +3,7 @@ package com.college.controller;
 import com.college.MainFinal;
 import com.college.domain.Guest;
 import com.college.domain.Reservation;
+import com.college.domain.Room;
 import com.college.service.*;
 import com.college.utilities.ApplicationContextProvider;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -115,7 +116,22 @@ public class ReservationUIController implements Initializable {
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("reservationDateTimeEnd"));
 
 
+// Room ID column
+        roomIdColumn.setCellValueFactory(cellData -> {
+            Reservation r = cellData.getValue();
+            Room room = r.getRoom();
+            return new SimpleIntegerProperty(
+                    room != null ? room.getRoomID() : 0
+            ).asObject();
+        });
 
+// Employee ID column
+        employeeIdColumn.setCellValueFactory(cellData -> {
+            Reservation r = cellData.getValue();
+            Room room = r.getRoom();
+            int empId = (room != null && room.getEmployee() != null) ? room.getEmployee().getEmployeeId() : 0;
+            return new SimpleIntegerProperty(empId).asObject();
+        });
 
 
 
@@ -128,7 +144,7 @@ public class ReservationUIController implements Initializable {
     @FXML
     private void loadReservationData() {
         labelFeedback.setText("");
-        List<Reservation> reservations = reservationService.getAll();
+        List<Reservation> reservations = reservationService.getAllWithRoomAndEmployee();
         reservationList.clear();
         reservationList.addAll(reservations);
         System.out.println("Data loaded into TableView. Total items: " + reservationList.size());
