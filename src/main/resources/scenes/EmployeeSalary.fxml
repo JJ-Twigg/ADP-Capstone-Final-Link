@@ -19,11 +19,11 @@
                style="-fx-background-color: white; -fx-border-color: transparent; -fx-selection-bar: lightblue;
                   -fx-selection-bar-text-fill: black;">
         <columns>
-            <TableColumn fx:id="colId" prefWidth="60" style="-fx-background-color: white;" text="ID" />
-            <TableColumn fx:id="colEmployee" prefWidth="150" text="Employee Id" style="-fx-background-color: white;"  />
-            <TableColumn fx:id="colAmount" prefWidth="150" style="-fx-background-color: white;" text="Amount" />
-            <TableColumn fx:id="colMethod" prefWidth="150" style="-fx-background-color: white;" text="Method" />
-            <TableColumn fx:id="colDate" prefWidth="200" style="-fx-background-color: white;" text="Date" />
+            <TableColumn fx:id="colId" prefWidth="60"  text="ID" />
+            <TableColumn fx:id="colEmployee" prefWidth="150" text="Employee Id"   />
+            <TableColumn fx:id="colAmount" prefWidth="150"  text="Amount" />
+            <TableColumn fx:id="colMethod" prefWidth="150" text="Method" />
+            <TableColumn fx:id="colDate" prefWidth="200"  text="Date" />
         </columns>
     </TableView>
     <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">

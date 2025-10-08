@@ -122,6 +122,13 @@
             </HBox>
 
 
+            <HBox alignment="CENTER" spacing="10">
+                <Button text="Upload Image" fx:id="uploadImageButton"
+                        onAction="#handleUploadImage"
+                        style="-fx-background-color: #45b6fe; -fx-text-fill: white; -fx-background-radius: 10;"
+                        prefWidth="220" prefHeight="35"/>
+            </HBox>
+
 
             <!-- clock -->
             <HBox fx:id="clockBox" alignment="CENTER" spacing="10" maxWidth="400"
@@ -146,6 +153,9 @@
                 </yAxis>
             </BarChart>
 
+            <Label visible="false" fx:id="userEmailLabel" />
+            <Label visible="false" fx:id="roleLabel" text="..." />
+            <Label visible="false" fx:id="nameLabel" text="..." />
         </VBox>
     </AnchorPane>
 </ScrollPane>

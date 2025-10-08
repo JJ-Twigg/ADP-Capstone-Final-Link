@@ -82,6 +82,25 @@ public class UserService {
 
     }
 
+    public byte[] getUserPhoto(String email) {
+        return userRepository.findByEmail(email)
+                .map(User::getImage) // or getPhoto()
+                .orElse(null);       // return null if not set
+    }
+
+
+    public void updateUserPhoto(String email, byte[] imageBytes) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if(optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setImage(imageBytes); // assuming your entity has "private byte[] image"
+            userRepository.save(user);
+            System.out.println("Photo updated successfully for user: " + email);
+        } else {
+            throw new RuntimeException("User not found with email: " + email);
+        }
+    }
+
 
     // Login by email + password
     public User login(String email, String pass) {

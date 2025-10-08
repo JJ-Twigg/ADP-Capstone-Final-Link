@@ -1,12 +1,10 @@
 package com.college.controller;
 
-import com.college.service.EmployeeService;
-import com.college.service.PaymentService;
-import com.college.service.ReservationService;
-import com.college.service.ShiftService;
+import com.college.service.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
@@ -14,12 +12,17 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -80,6 +83,15 @@ public class OverviewController {
     @Autowired
     PaymentService paymentService;
 
+    @Autowired
+    UserService userService;
+
+    private DashboardController dashboardController;
+
+    public void setDashboardController(DashboardController dashboardController) {
+        this.dashboardController = dashboardController;
+    }
+
 
     @FXML
     private BarChart<String, Number> monthlyEarningsBarChart;
@@ -120,12 +132,17 @@ public class OverviewController {
     @FXML
     private Label nameLabel; // link this to FXML
 
+    String userEmail;
+
     public void setName(String name) {
         nameLabel.setText(name);
     }
 
     public void setUserEmail(String email) {
+        //receives email from dashboard
         userEmailLabel.setText(email);
+        this.userEmail = email;
+
     }
 
     public void setUserRole(String role) {
@@ -320,6 +337,41 @@ public class OverviewController {
         series.getData().add(new XYChart.Data<>("Total", totalEmployees));
 
 
+    }
+
+
+
+    @FXML
+    private void handleUploadImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Image");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
+                // Save to DB
+                userService.updateUserPhoto(userEmail, imageBytes);
+
+                // Update ImageView in OverviewController (optional, if you have one)
+                // profileImageView.setImage(new Image(new ByteArrayInputStream(imageBytes)));
+
+                // **Update Dashboard ImageView**
+                if(dashboardController != null) {
+                    dashboardController.setProfileImage(imageBytes);
+                }
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Image uploaded successfully!");
+                alert.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

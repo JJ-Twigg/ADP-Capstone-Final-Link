@@ -24,6 +24,11 @@ public class User {
     private String gender;
 
 
+    @Lob
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    private byte[] image;
+
+
 
     //FK TO EMPLOYEE
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -135,6 +140,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

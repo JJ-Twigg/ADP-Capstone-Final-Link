@@ -12,12 +12,12 @@
     <!-- Table -->
     <TableView fx:id="shiftTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
-            <TableColumn fx:id="colId" prefWidth="60" style="-fx-background-color: white;" text="ID" />
-            <TableColumn fx:id="colEmployee" prefWidth="150" text="Employee Id" style="-fx-background-color: white;"/>
-            <TableColumn fx:id="colDate" prefWidth="200" style="-fx-background-color: white;" text="Date" />
-            <TableColumn fx:id="colStartTime" prefWidth="150" style="-fx-background-color: white;" text="Start Time" />
-            <TableColumn fx:id="colEndTime" prefWidth="150" style="-fx-background-color: white;" text="End Time" />
-            <TableColumn fx:id="colOvertime" prefWidth="150" style="-fx-background-color: white;" text="Overtime" />
+            <TableColumn fx:id="colId" prefWidth="60"  text="ID" />
+            <TableColumn fx:id="colEmployee" prefWidth="150" text="Employee Id" />
+            <TableColumn fx:id="colDate" prefWidth="200"  text="Date" />
+            <TableColumn fx:id="colStartTime" prefWidth="150"  text="Start Time" />
+            <TableColumn fx:id="colEndTime" prefWidth="150"  text="End Time" />
+            <TableColumn fx:id="colOvertime" prefWidth="150"  text="Overtime" />
 
         </columns>
     </TableView>

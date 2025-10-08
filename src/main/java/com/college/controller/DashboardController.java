@@ -1,11 +1,14 @@
 package com.college.controller;
 
 import com.college.MainFinal;
+import com.college.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -14,11 +17,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -37,9 +42,27 @@ public class DashboardController {
 
     String name;
 
+    @FXML
+    private ImageView profileImage;
+
+    @Autowired
+    private UserService userService;
+
+    public void setProfileImage(byte[] imageBytes) {
+        if (imageBytes != null && imageBytes.length > 0) {
+            Image img = new Image(new ByteArrayInputStream(imageBytes));
+            profileImage.setImage(img);
+        } else {
+            // fallback to default image
+            profileImage.setImage(new Image(getClass().getResource("/images/characters/download4.jpg").toExternalForm()));
+        }
+    }
+
     public void setUserInfo(String email, String role) {
         emailLabel.setText(email);
         roleLabel.setText(role);
+        byte[] userImage = userService.getUserPhoto(emailLabel.getText());
+        setProfileImage(userImage);
     }
 
     public void setName(String name) {
@@ -66,15 +89,13 @@ public class DashboardController {
 
 
 
+
     @FXML
     public void showOverview() {
         safeLoadView("/scenes/overview1.fxml", "Overview");
     }
 
-    @FXML
-    public void showOverviewManager() {
-        safeLoadView("/scenes/overviewManager.fxml", "Overview");
-    }
+
 
 
 
@@ -141,6 +162,14 @@ public class DashboardController {
     @FXML
     public void showAdminAddRoom() {safeLoadView("/scenes/addRoomFinal.fxml", "Add Rooms");}
 
+//this is the old show-overview-manager before adding profile image persistence, just go back to this if the new method show overview manager
+// if it breaks spring context or something for manager dash after doing this
+//    @FXML
+//    public void showOverviewManager() {
+//        safeLoadView("/scenes/overviewManager.fxml", "Overview");
+//    }
+
+
 
 
     @FXML
@@ -167,6 +196,8 @@ public class DashboardController {
             controller.setUserRole(role);
             controller.setName(name);
 
+            controller.setDashboardController(this);
+
             contentArea.getChildren().setAll(view);
 
         } catch (Exception e) {
@@ -177,6 +208,38 @@ public class DashboardController {
             Label messageLabel = new Label( " view is under construction");
             messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #2c3e50;");
             contentArea.getChildren().add(messageLabel);
+        }
+    }
+
+    @FXML
+    public void showOverviewManager() {
+        try {
+            String fxmlPath = "/scenes/overviewManager.fxml";
+            String viewName = "Overview";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
+            Parent view = loader.load();
+
+            // Pass the current logged-in user's email and role to the OverviewController
+            String email = emailLabel.getText();
+            String role = roleLabel.getText();
+
+            OverviewController controller = loader.getController();
+            controller.setUserEmail(email);
+            controller.setUserRole(role);
+            controller.setDashboardController(this); // for callbacks
+            controller.setName(name);
+
+            // **Update the dashboard image here, not in OverviewController**
+            byte[] userImage = userService.getUserPhoto(email);
+            setProfileImage(userImage); // DashboardController method
+
+            contentArea.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            System.out.println("Error loading " + " view: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
