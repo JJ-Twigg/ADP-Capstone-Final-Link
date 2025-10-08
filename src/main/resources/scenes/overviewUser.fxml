@@ -20,10 +20,10 @@
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
    -fx-background-color: linear-gradient(
-        from 0% 0% to 100% 100%,
-        rgba(255, 200, 150, 0.3),   /* lighter orange */
-        rgba(230, 126, 34, 0.9)     /* main orange */
-    );
+    from 0% 0% to 100% 100%,
+    rgba(220, 220, 220, 0.3),   /* lighter grey */
+    rgba(128, 128, 128, 0.9)    /* main grey */
+);
         -fx-padding: 20;
         -fx-spacing: 10;
         -fx-min-width: 220;
@@ -43,10 +43,10 @@
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
     -fx-background-color: linear-gradient(
-        from 0% 0% to 100% 100%,
-        rgba(255, 200, 150, 0.3),   /* lighter orange */
-        rgba(230, 126, 34, 0.9)     /* main orange */
-    );
+    from 0% 0% to 100% 100%,
+    rgba(220, 220, 220, 0.3),   /* lighter grey */
+    rgba(128, 128, 128, 0.9)    /* main grey */
+);
         -fx-padding: 20;
         -fx-spacing: 10;
         -fx-min-width: 220;
@@ -64,10 +64,10 @@
                 <VBox alignment="CENTER" spacing="10">
                     <VBox style="
    -fx-background-color: linear-gradient(
-        from 0% 0% to 100% 100%,
-        rgba(255, 200, 150, 0.3),   /* lighter orange */
-        rgba(230, 126, 34, 0.9)     /* main orange */
-    );
+    from 0% 0% to 100% 100%,
+    rgba(220, 220, 220, 0.3),   /* lighter grey */
+    rgba(128, 128, 128, 0.9)    /* main grey */
+);
         -fx-padding: 20;
         -fx-spacing: 10;
         -fx-min-width: 220;

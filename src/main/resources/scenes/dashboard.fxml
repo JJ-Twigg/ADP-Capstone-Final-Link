@@ -63,6 +63,8 @@
 
                         <Button onAction="#showRestful" styleClass="menu-button" text="RestfulWeb" />
 
+                        <Button onAction="#showFAQ" styleClass="menu-button" text="FAQ" />
+
                         <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
 
                     </VBox>

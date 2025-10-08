@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fx:id="faqScrollPane" xmlns:fx="http://javafx.com/fxml" fitToWidth="true">
+    <content>
+        <VBox spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Title -->
+            <Label text="Hotel Management System - FAQ" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <!-- Login Info -->
+            <TitledPane text="Login Information" expanded="false">
+                <content>
+                    <Label wrapText="true" text="The system allows login for three main users: Admin, Manager, and User.
+Users include subsets such as Housekeeper, Maintenance Worker, and Food Worker."/>
+                </content>
+            </TitledPane>
+
+            <!-- Admin Info -->
+            <TitledPane text="Admin Privileges" expanded="false">
+                <content>
+                    <Label wrapText="true" text="Admins can edit user details, manage all system accounts,
+and print payment summaries or payroll reports for all users. They have full control of the system."/>
+                </content>
+            </TitledPane>
+
+            <!-- Manager Info -->
+            <TitledPane text="Manager Privileges" expanded="false">
+                <content>
+                    <Label wrapText="true" text="Managers can add guests and reservations to the system for rooms or events.
+They can also view payment histories and confirm how guests paid."/>
+                </content>
+            </TitledPane>
+
+            <!-- User Info -->
+            <TitledPane text="User Privileges" expanded="false">
+                <content>
+                    <Label wrapText="true" text="Users (Housekeeper, Maintenance Worker, Food Worker) can view their shifts,
+track total hours worked, and check schedules. They have read-only access to the system for their tasks."/>
+                </content>
+            </TitledPane>
+
+            <!-- Booking and Payment Info -->
+            <TitledPane text="Booking And Payments" expanded="false">
+                <content>
+                    <Label wrapText="true" text="Guests can be booked for rooms or events by managers. All payment details
+and histories are tracked and can be printed by admins. This helps maintain accurate accounting records."/>
+                </content>
+            </TitledPane>
+
+            <!-- General Usage -->
+            <TitledPane text="How to Use the Program" expanded="false">
+                <content>
+                    <Label wrapText="true" text="1. Login with your assigned credentials.
+2. Admins manage users and payments.
+3. Managers add guests, reservations, and check payments.
+4. Users view their shifts and hours worked.
+5. Navigate the menu to access specific modules like Rooms, Guests, or Payments."/>
+                </content>
+            </TitledPane>
+
+            <!-- Additional Notes -->
+            <TitledPane text="Additional Notes" expanded="false">
+                <content>
+                    <Label wrapText="true" text="Always logout when finished. System automatically updates room availability,
+shift schedules, and payment records."/>
+                </content>
+            </TitledPane>
+
+        </VBox>
+    </content>
+</ScrollPane>

@@ -134,6 +134,11 @@ public class DashboardController {
     }
 
     @FXML
+    public void showFAQ() {
+        safeLoadView("/scenes/FAQ.fxml", "FAQ");
+    }
+
+    @FXML
     public void showAdminAddRoom() {safeLoadView("/scenes/addRoomFinal.fxml", "Add Rooms");}
 
 

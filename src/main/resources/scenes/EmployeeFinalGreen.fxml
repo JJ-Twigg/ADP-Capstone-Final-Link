@@ -14,13 +14,13 @@
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
             <TableColumn fx:id="colEmployeeId" prefWidth="60" text="Employee ID"
-                         style="-fx-background-color: white;"/>
+                         />
             <TableColumn fx:id="colJobType" prefWidth="150" text="Job Type"
-                         style="-fx-background-color: white;"/>
+                         />
             <TableColumn fx:id="colStartDate" prefWidth="150" text="Start Date"
-                         style="-fx-background-color: white;"/>
+                         />
             <TableColumn fx:id="colUserId" prefWidth="150" text="User ID"
-                         style="-fx-background-color: white;"/>
+                         />
         </columns>
     </TableView>
 
