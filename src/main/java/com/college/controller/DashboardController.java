@@ -155,6 +155,9 @@ public class DashboardController {
     }
 
     @FXML
+    public void showProfileManager() {safeLoadView("/scenes/profileManagerFinal.fxml", "My Profile");}
+
+    @FXML
     public void showFAQ() {
         safeLoadView("/scenes/FAQ.fxml", "FAQ");
     }

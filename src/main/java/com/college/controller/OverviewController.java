@@ -1,5 +1,7 @@
 package com.college.controller;
 
+import com.college.domain.User;
+import com.college.repository.UserRepository;
 import com.college.service.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,6 +17,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
@@ -30,6 +33,7 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Optional;
 
 @Component
 public class OverviewController {
@@ -88,6 +92,9 @@ public class OverviewController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
 
     private DashboardController dashboardController;
 
@@ -190,6 +197,54 @@ public class OverviewController {
     }
 
 
+    // --------------------------------------
+
+    @FXML
+    private void updateEmail() {
+        System.out.println("\nonMouseClicked");
+
+        Optional<User> userObj = userRepository.findByEmail(userEmailLabel.getText());
+        System.out.println("User: " + userObj);
+
+        TextInputDialog dialog = new TextInputDialog(userEmailLabel.getText());
+        dialog.setTitle("Update Email");
+        dialog.setHeaderText("Update Email");
+
+        Optional<String> email = dialog.showAndWait();
+        if (email.isEmpty()) return;
+
+        userObj.get().setEmail(email.get());
+        setUserEmail(email.get());
+
+        userRepository.save(userObj.get());
+        System.out.println("User updated");
+        System.out.println(userObj.get());
+    }
+
+    @FXML
+    private void updateName() {
+        System.out.println("\nonMouseClicked");
+        String nameString = nameLabel.getText();
+
+        Optional<User> userObj = userRepository.findByEmail(userEmailLabel.getText());
+        System.out.println("User: " + userObj);
+
+//        TextInputDialog dialog = new TextInputDialog();
+        TextInputDialog dialog = new TextInputDialog(nameString);
+        dialog.setTitle("Update Name");
+        dialog.setHeaderText("Update Name");
+
+        Optional<String> name = dialog.showAndWait();
+        if (name.isEmpty()) return;
+
+        userObj.get().setName(name.get());
+        setName(name.get());
+
+        userRepository.save(userObj.get());
+        System.out.println("User updated");
+        System.out.println(userObj.get());
+    }
+    // --------------------------------------
 
 
 
