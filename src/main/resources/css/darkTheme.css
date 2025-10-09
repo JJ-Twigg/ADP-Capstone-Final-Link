@@ -1,0 +1,19 @@
+.card-box {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #333333, #111111) !important;
+    -fx-background-radius: 12 !important;
+    -fx-padding: 20 !important;
+}
+
+.card-value, .card-title, .card-icon {
+    -fx-text-fill: white !important;
+}
+
+.clock-box {
+    -fx-background-color: #222222 !important;
+    -fx-background-radius: 12 !important;
+    -fx-padding: 10 !important;
+}
+
+.clock-label, .clock-icon {
+    -fx-text-fill: #f1f1f1 !important;
+}

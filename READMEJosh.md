@@ -227,3 +227,11 @@ VALUES
 (54, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Balcony', NULL),
 (55, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Coffee Maker', NULL),
 (56, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Bathtub', NULL)
+
+
+
+INSERT INTO Room (roomID, room_type, price_Per_Night, availability, features, reservation_id)
+VALUES
+(57, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Desk Lamp', NULL),
+(58, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Balcony', NULL),
+(59, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Bathtub', NULL);

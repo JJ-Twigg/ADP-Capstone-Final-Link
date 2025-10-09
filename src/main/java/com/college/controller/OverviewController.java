@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -14,6 +15,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -237,7 +240,7 @@ public class OverviewController {
 
         // Optional: style the bar
         Platform.runLater(() -> {
-            series.getData().forEach(data -> data.getNode().setStyle("-fx-bar-fill: #e67e22;"));
+            series.getData().forEach(data -> data.getNode().setStyle("-fx-bar-fill: #808080;"));
         });
     }
 
@@ -370,6 +373,38 @@ public class OverviewController {
                 alert.showAndWait();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+
+    @FXML
+    private ToggleButton themeToggleButton;
+
+    @FXML
+    private void toggleTheme(ActionEvent event) {
+        Scene scene = themeToggleButton.getScene();
+        scene.getStylesheets().clear();
+
+        if (themeToggleButton.isSelected()) {
+            // Dark theme
+            URL darkTheme = getClass().getResource("/css/darkTheme.css");
+            if (darkTheme != null) {
+                scene.getStylesheets().clear(); // remove previous theme
+                scene.getStylesheets().add(darkTheme.toExternalForm());
+                themeToggleButton.setText("Light Mode");
+            } else {
+                System.out.println("Dark theme CSS not found!");
+            }
+        } else {
+            // Light theme
+            URL lightTheme = getClass().getResource("/css/lightTheme.css");
+            if (lightTheme != null) {
+                scene.getStylesheets().clear(); // remove previous theme
+                scene.getStylesheets().add(lightTheme.toExternalForm());
+                themeToggleButton.setText("Dark Mode");
+            } else {
+                System.out.println("Light theme CSS not found!");
             }
         }
     }

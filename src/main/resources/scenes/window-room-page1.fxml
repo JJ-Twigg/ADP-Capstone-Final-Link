@@ -24,7 +24,7 @@
 
     <!-- Bottom navigation buttons -->
     <HBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="30" alignment="CENTER_RIGHT">
-<!--        <Button text="Go Back" onAction="#goBack" styleClass="navigation-button"/>-->
-<!--        <Button fx:id="nextPageButton" text="Next Page" onAction="#nextPage" styleClass="navigation-button"/>-->
+        <Button text="Go Back" onAction="#goBack" styleClass="navigation-button"/>
+        <Button fx:id="nextPageButton" text="Next Page" onAction="#nextPage" styleClass="navigation-button"/>
     </HBox>
 </AnchorPane>

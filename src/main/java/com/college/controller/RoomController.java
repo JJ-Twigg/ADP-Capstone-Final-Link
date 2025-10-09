@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,25 +40,47 @@ public class RoomController {
 
     @FXML
     private void initialize() {
-        loadRoomsFromDB();
+        loadRoomsFromDB(0);
     }
 
-    private void loadRoomsFromDB() {
-        // Only load rooms with IDs 51–56
-        List<Room> rooms = roomService.getAll()
+
+    private int currentPage = 0;
+
+    private static final int ROWS_PER_PAGE = 1;   // rows per page
+    private static final int ROOMS_PER_PAGE = CARDS_PER_ROW * ROWS_PER_PAGE;
+
+    private void loadRoomsFromDB(int page) {
+        List<Room> allRooms = roomService.getAll()
                 .stream()
-                .filter(r -> r.getRoomID() >= 51 && r.getRoomID() <= 56)
+                .sorted(Comparator.comparingInt(Room::getRoomID))
                 .collect(Collectors.toList());
 
-        String[] imageNames = {"a", "b", "c", "d", "e", "f"}; // fixed images
+        roomContainer.getChildren().clear(); // clear previous cards
+        String[] imageNames = {"a", "b", "c", "d", "e", "f"};
+
+        List<Room> roomsOnPage;
+
+        if (page == 0) {
+            // Page 1: fixed IDs 51–56
+            roomsOnPage = allRooms.stream()
+                    .filter(r -> r.getRoomID() >= 51 && r.getRoomID() <= 56)
+                    .collect(Collectors.toList());
+        } else if (page == 1) {
+            // Page 2: all rooms with ID > 56
+            roomsOnPage = allRooms.stream()
+                    .filter(r -> r.getRoomID() > 56)
+                    .collect(Collectors.toList());
+            if (roomsOnPage.isEmpty()) return; // no more rooms
+        } else {
+            return; // no further pages
+        }
 
         HBox row = new HBox(20);
         row.setAlignment(Pos.CENTER);
         int count = 0;
 
-        for (int i = 0; i < rooms.size(); i++) {
-            Room room = rooms.get(i);
-            String imageName = imageNames[i % imageNames.length];
+        for (Room room : roomsOnPage) {
+            String imageName = imageNames[room.getRoomID() % imageNames.length];
             VBox card = createRoomCard(room, imageName);
             row.getChildren().add(card);
             count++;
@@ -72,7 +95,12 @@ public class RoomController {
         if (!row.getChildren().isEmpty()) {
             roomContainer.getChildren().add(row);
         }
+
+        currentPage = page;
     }
+
+
+
 
     private VBox createRoomCard(Room room, String imageName) {
         VBox card = new VBox(10);
@@ -161,29 +189,17 @@ public class RoomController {
 
     @FXML
     private void nextPage(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-room-page2.fxml"));
-            Parent page2 = loader.load();
-            RoomController controller = loader.getController();
-            controller.setRoomService(this.roomService);
-            Scene scene = ((Node) event.getSource()).getScene();
-            scene.setRoot(page2);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (currentPage < 1) { // only 2 pages: 0 and 1
+            currentPage++;
+            loadRoomsFromDB(currentPage);
         }
     }
 
     @FXML
     private void goBack(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-room-page1.fxml"));
-            Parent page1 = loader.load();
-            RoomController controller = loader.getController();
-            controller.setRoomService(this.roomService);
-            Scene scene = ((Node) event.getSource()).getScene();
-            scene.setRoot(page1);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (currentPage > 0) {
+            currentPage--;
+            loadRoomsFromDB(currentPage);
         }
     }
 

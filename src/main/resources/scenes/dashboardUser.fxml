@@ -42,6 +42,7 @@
                     <VBox spacing="5">
                         <Button onAction="#showOverviewUser" styleClass="menu-button" text="Overview" />
                         <Button onAction="#showShiftsUser" styleClass="menu-button" text="Shifts" />
+                        <Button onAction="#showFAQ" styleClass="menu-button" text="FAQ" />
                         <Button onAction="#showSignIn" styleClass="menu-button" text="Return To SignIn" />
 
 
