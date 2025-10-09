@@ -1,7 +1,10 @@
 package com.college.controller;
 
+import com.college.domain.CustomRoom;
 import com.college.domain.Room;
+import com.college.factory.CustomRoomFactory;
 import com.college.factory.RoomFactory;
+import com.college.service.CustomRoomService;
 import com.college.service.RoomService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.nio.file.Files;
 
 @Component
 public class AdminAddRoomController {
@@ -28,8 +32,11 @@ public class AdminAddRoomController {
     @FXML
     private ImageView roomImageView;
 
+//    @Autowired
+//    RoomService roomService;
+
     @Autowired
-    RoomService roomService;
+    CustomRoomService customRoomService;
 
     private File selectedImageFile;
 
@@ -59,28 +66,35 @@ public class AdminAddRoomController {
     }
 
 
-    public void addRoomToDatabase(){
+    public void addRoomToDatabase() {
         try {
-            // Retrieve values from fields
             int roomID = Integer.parseInt(roomIdComboBox.getValue());
             String roomType = roomTypeField.getText();
             float pricePerNight = Float.parseFloat(pricePerNightField.getText());
             boolean availability = "Available".equalsIgnoreCase(availabilityComboBox.getValue());
             String features = featuresField.getText();
 
-            Room customRoom = RoomFactory.createRoom(roomID,roomType,pricePerNight,availability,features);
+            byte[] imageBytes = null;
+            if (selectedImageFile != null) {
+                imageBytes = Files.readAllBytes(selectedImageFile.toPath());
+            }
 
-            roomService.create(customRoom);
+            CustomRoom customRoom = CustomRoomFactory.createCustomRoom(
+                    roomID, roomType, pricePerNight, availability, features, imageBytes
+            );
 
+            customRoomService.create(customRoom);
 
-
-
-
+            showAlert("Success", "Room added successfully!");
 
         } catch (NumberFormatException e) {
-
+            showAlert("Error", "Please enter valid numeric values for Room ID and Price.");
+        } catch (Exception e) {
+            showAlert("Error", "Failed to add room: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

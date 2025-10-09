@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -75,6 +76,16 @@ public class UserRegisterController {
         String email = username.getText().trim();
         String pass = password.getText();
 
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        if (!email.matches(emailRegex)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Email");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid email address!");
+            alert.showAndWait();
+            return; // stop signup
+        }
+
         String name = nameField.getText().trim();
         String surname = surnameField.getText().trim();
         String ageText = ageField.getText().trim();
@@ -100,7 +111,11 @@ public class UserRegisterController {
         try {
             age = Integer.parseInt(ageText);
         } catch (NumberFormatException e) {
-            System.out.println("Invalid age input!");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Age");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid numeric age!");
+            alert.showAndWait();
             return;
         }
 
