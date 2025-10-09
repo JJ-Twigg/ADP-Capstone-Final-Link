@@ -53,6 +53,8 @@
 
 
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
+
+                        <Button onAction="#showCustomRooms" styleClass="menu-button" text="Custom Rooms" />
 <!--                        <Button onAction="#showPayments" styleClass="menu-button" text="Payments" />-->
                         <Button onAction="#showEmployeesGreen" styleClass="menu-button" text="Employees" />
 

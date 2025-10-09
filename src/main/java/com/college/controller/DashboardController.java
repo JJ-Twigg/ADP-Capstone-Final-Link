@@ -165,6 +165,9 @@ public class DashboardController {
     @FXML
     public void showAdminAddRoom() {safeLoadView("/scenes/addRoomFinal.fxml", "Add Rooms");}
 
+    @FXML
+    public void showCustomRooms() {safeLoadView("/scenes/customRoomFinal.fxml", "Custom Rooms");}
+
 //this is the old show-overview-manager before adding profile image persistence, just go back to this if the new method show overview manager
 // if it breaks spring context or something for manager dash after doing this
 //    @FXML
