@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
@@ -55,13 +56,21 @@ public class RoomControllerCustom {
 
         String[] imageNames = {"a", "b", "c", "d", "e", "f"};
 
-        HBox row = new HBox(20);
-        row.setAlignment(Pos.CENTER);
+        HBox row = new HBox(20);       // spacing between cards
+        row.setAlignment(Pos.CENTER);   // center cards in row
         int count = 0;
 
         for (CustomRoom room : allRooms) {
             String imageName = imageNames[room.getRoomID() % imageNames.length];
-            VBox card = createRoomCard(room, imageName);
+            VBox card = createRoomCard(room);
+
+            // --- CARD FIXES FOR GRID-LIKE LAYOUT ---
+            card.setPrefWidth(220);
+            card.setMaxWidth(220);
+            card.setMinWidth(220);
+            card.setStyle("-fx-background-color: white; -fx-padding: 15; -fx-spacing: 10; -fx-alignment: top_center; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 2, 2);");
+            // ------------------------------
+
             row.getChildren().add(card);
             count++;
 
@@ -77,7 +86,8 @@ public class RoomControllerCustom {
         }
     }
 
-    private VBox createRoomCard(CustomRoom room, String imageName) {
+
+    private VBox createRoomCard(CustomRoom room) {
         VBox card = new VBox(10);
         card.getStyleClass().add("room-card");
         card.setAlignment(Pos.CENTER);
@@ -90,10 +100,11 @@ public class RoomControllerCustom {
         roomImage.setFitHeight(150);
         roomImage.setPreserveRatio(false);
 
-        URL roomUrl = getClass().getClassLoader().getResource("images/rooms/" + imageName + ".jpg");
-        if (roomUrl != null) {
-            roomImage.setImage(new Image(roomUrl.toExternalForm()));
+        // --- Load image from CustomRoom's Blob ---
+        if (room.getImage() != null && room.getImage().length > 0) {
+            roomImage.setImage(new Image(new ByteArrayInputStream(room.getImage())));
         } else {
+            // fallback placeholder
             URL placeholderUrl = getClass().getClassLoader().getResource("images/placeholder.jpg");
             if (placeholderUrl != null) {
                 roomImage.setImage(new Image(placeholderUrl.toExternalForm()));
@@ -115,12 +126,51 @@ public class RoomControllerCustom {
 
         Button updateBtn = new Button("Update Room");
         updateBtn.setMaxWidth(Double.MAX_VALUE);
-        updateBtn.setOnAction(event -> customRoomService.update(room));
-        updateBtn.getStyleClass().add("room-button");
+
+        updateBtn.setStyle(
+                "-fx-background-color: #398F6C;" +      // red background
+                        "-fx-text-fill: white;" +               // white text
+                        "-fx-font-size: 12px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 8 16;" +
+                        "-fx-background-radius: 3;" +
+                        "-fx-cursor: hand;"
+        );
+
+// Optional: hover effect inline
+        updateBtn.setOnMouseEntered(e -> updateBtn.setStyle(
+                "-fx-background-color: #ADD8E6;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 8 16;" +
+                        "-fx-background-radius: 3;" +
+                        "-fx-cursor: hand;"
+        ));
+        updateBtn.setOnMouseExited(e -> updateBtn.setStyle(
+                "-fx-background-color: #398F6C;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 8 16;" +
+                        "-fx-background-radius: 3;" +
+                        "-fx-cursor: hand;"
+        ));
+
+        updateBtn.setOnAction(event -> {
+            try {
+                // Call service to update the room in DB
+                customRoomService.update(room);
+                System.out.println("Room " + room.getRoomID() + " updated successfully.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         card.getChildren().add(updateBtn);
 
         return card;
     }
+
 
     private HBox createEditableField(String labelPrefix, String value, java.util.function.Consumer<String> setter) {
         HBox hbox = new HBox(5);

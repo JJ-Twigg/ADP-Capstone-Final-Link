@@ -340,7 +340,11 @@ public class DashboardController {
                 view.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
             }else if("/scenes/window-room-page2.fxml".equals(fxmlPath)){
                 view.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
+            }else if ("/scenes/customRoomFinal.fxml".equals(fxmlPath)) {
+                view.getStylesheets().add(getClass().getResource("/css/buttonStyle.css").toExternalForm());
             }
+
+
 
 
             contentArea.getChildren().setAll(view);
