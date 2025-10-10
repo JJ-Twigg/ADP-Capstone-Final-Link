@@ -18,9 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.io.ByteArrayInputStream;
@@ -101,7 +98,7 @@ public class DashboardController {
 
     @FXML
     public void showGuests() {
-        safeLoadViewOtherPages("/scenes/guestFinal.fxml", "Guests");
+        safeLoadViewOtherPages("/scenes/guestFinalViewOnly.fxml", "Guests");
     }
 
     @FXML
@@ -117,6 +114,11 @@ public class DashboardController {
     @FXML
     public void showReservationSolo() {
         safeLoadViewOtherPages("/scenes/reservationFinalAll.fxml", "Reservation");
+    }
+
+    @FXML
+    public void showReservationViewOnly() {
+        safeLoadViewOtherPages("/scenes/reservationFinalAllViewOnly.fxml", "Reservation");
     }
 
     @FXML

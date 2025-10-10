@@ -154,33 +154,45 @@ public class UserTableController {
     public void deleteUser() {
         User selected = userTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            try {
-                boolean deleted = userService.delete(selected.getUserId());
+            // Show confirmation dialog
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Delete Confirmation");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.setContentText("Are you sure you want to delete user: " + selected.getName() + "?");
 
-                if (deleted) {
-                    // Clean up orphaned roles
-                    List<Role> allRoles = roleService.getAll();
-                    for (Role role : allRoles) {
-                        boolean used = roleService.isRoleUsed(role.getId());
-                        if (!used) {
-                            roleService.delete(role.getId());
+            Optional<javafx.scene.control.ButtonType> result = confirmAlert.showAndWait();
+            if (result.isPresent() && result.get() == javafx.scene.control.ButtonType.OK) {
+                try {
+                    boolean deleted = userService.delete(selected.getUserId());
+
+                    if (deleted) {
+                        // Clean up orphaned roles
+                        List<Role> allRoles = roleService.getAll();
+                        for (Role role : allRoles) {
+                            boolean used = roleService.isRoleUsed(role.getId());
+                            if (!used) {
+                                roleService.delete(role.getId());
+                            }
                         }
+
+                        userList.remove(selected);
+                        System.out.println("Deleted user: " + selected.getName() + " and cleaned up unused roles.");
+                    } else {
+                        System.out.println("Failed to delete user.");
                     }
 
-                    userList.remove(selected);
-                    System.out.println("Deleted user: " + selected.getName() + " and cleaned up unused roles.");
-                } else {
-                    System.out.println("Failed to delete user.");
+                } catch (Exception e) {
+                    System.out.println("Error deleting user: " + e.getMessage());
+                    e.printStackTrace();
                 }
-
-            } catch (Exception e) {
-                System.out.println("Error deleting user: " + e.getMessage());
-                e.printStackTrace();
+            } else {
+                // User cancelled deletion
+                System.out.println("Deletion cancelled for user: " + selected.getName());
             }
-
         } else {
             System.out.println("Select a user to delete.");
         }
     }
+
 
 }

@@ -9,6 +9,7 @@ import com.college.service.RoomService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Optional;
 
 @Component
 public class AdminAddRoomController {
@@ -79,10 +81,25 @@ public class AdminAddRoomController {
                 imageBytes = Files.readAllBytes(selectedImageFile.toPath());
             }
 
+            // Show confirmation dialog before saving
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirm Save");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.setContentText("Are you sure you want to save this room?");
+
+            Optional<ButtonType> result = confirmAlert.showAndWait();
+            if (result.isEmpty() || result.get() != javafx.scene.control.ButtonType.OK) {
+                // User cancelled
+                System.out.println("Room save cancelled.");
+                return;
+            }
+
+            // Create room object
             CustomRoom customRoom = CustomRoomFactory.createCustomRoom(
                     roomID, roomType, pricePerNight, availability, features, imageBytes
             );
 
+            // Save to database
             customRoomService.create(customRoom);
 
             showAlert("Success", "Room added successfully!");
@@ -94,6 +111,7 @@ public class AdminAddRoomController {
             e.printStackTrace();
         }
     }
+
 
 
     private void showAlert(String title, String content) {
