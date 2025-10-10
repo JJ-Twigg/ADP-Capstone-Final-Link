@@ -158,6 +158,8 @@ cause they calling wrong service or something
 ---
 todo:
 ---
+
+
 now u cant close res,
 but if there are no housekeeprs ur stuck in that
 window and then it allows u to have no housekeeper. which cant
@@ -176,7 +178,7 @@ think about adding code to insert 6 rooms when program runs?
 instead of manual insertion
 
 reservation probably needs num of guests, so we not always booking single
-
+Github is trash
 admin add new rooms? uplaod image?
 this is a decision, i can do easy add custom 
 rooms but u cant select the image with the existing code ez.
