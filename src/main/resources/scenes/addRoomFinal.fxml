@@ -8,30 +8,29 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 
-<HBox fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0"
-      minHeight="550.0" minWidth="600.0"
-      prefHeight="550.0" prefWidth="600.0"
+<HBox fx:id="mainFrame"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.AdminAddRoomController">
 
-    <!-- Left blue panel with logo -->
-    <VBox alignment="CENTER" prefWidth="220.0" style="-fx-background-color: #45b6fe;" spacing="20.0">
-        <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true">
+    <VBox alignment="TOP_CENTER"
+          prefWidth="220" minWidth="80" maxWidth="220"
+          style="-fx-background-color: #45b6fe;"
+          spacing="20"
+
+          HBox.hgrow="NEVER">
+
+        <ImageView fitHeight="80" fitWidth="83" pickOnBounds="true">
             <image>
                 <Image url="/images/c.png"/>
             </image>
         </ImageView>
-        <Label text="Hotel Management System" textFill="WHITE" alignment="CENTER">
-            <font>
-                <Font size="15"/>
-            </font>
-        </Label>
-        <Label text="HMS" textFill="WHITE" alignment="CENTER"/>
+
     </VBox>
 
     <!-- Right white panel with input fields -->
-    <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0" style="-fx-background-color: WHITE;">
+    <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0"   HBox.hgrow="ALWAYS"
+          VBox.vgrow="ALWAYS" style="-fx-background-color: WHITE;">
         <Label text="Add New Room" textFill="BLACK" alignment="CENTER">
             <font>
                 <Font size="30"/>
