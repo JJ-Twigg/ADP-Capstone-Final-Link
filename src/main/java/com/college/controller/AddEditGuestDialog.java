@@ -144,6 +144,11 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         root.setPadding(new Insets(20));
         getDialogPane().setContent(root);
 
+        cancelButton.setOnAction(e -> {
+            setResult(null); // optional, for completeness
+            getDialogPane().getScene().getWindow().hide(); // actually closes the dialog
+        });
+
         // Cancel closes dialog
         saveButton.setOnAction(e -> {
             String name = capitalizeFirst(txtName.getText().trim());
