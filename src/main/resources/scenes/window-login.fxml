@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0"
-           prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.UserLoginController">
+<StackPane fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.UserLoginController">
    <children>
       <Pane fx:id="pane2" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
@@ -59,60 +63,35 @@
       </Pane>
       <Pane fx:id="pane1" prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: white;">
          <children>
-            <Label alignment="CENTER" layoutX="218.0" layoutY="32.0" prefHeight="35.0" prefWidth="169.0" text="Sign up" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="337.0" layoutY="42.0" prefHeight="35.0" prefWidth="169.0" text="Log In">
                <font>
                   <Font name="DejaVuMathTeXGyre-Regular" size="30.0" />
                </font>
             </Label>
-            <VBox layoutX="332.0" layoutY="106.0" prefHeight="200.0" prefWidth="220.0">
-               <children>
-                  <TextField fx:id="username" alignment="CENTER" prefHeight="38.0" prefWidth="179.0" promptText="Username">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </TextField>
-                  <PasswordField fx:id="password" alignment="CENTER" prefHeight="40.0" prefWidth="179.0" promptText="Password">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </PasswordField>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginAuth" prefHeight="32.0" prefWidth="227.0" style="-fx-background-color: #45b6fe;" text="Log in" textFill="WHITE">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="DejaVuMathTeXGyre-Regular" size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-
-                  </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="230.0" text="I have an account" textFill="WHITE" underline="true">
-                     <font>
-                        <Font name="DejaVuMathTeXGyre-Regular" size="12.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-               </children>
-            </VBox>
-            <Label fx:id="output_message" alignment="CENTER" layoutX="158.0" layoutY="288.0" prefHeight="35.0" prefWidth="284.0" text="_temp_" textFill="WHITE">
+            <Label layoutX="325.0" layoutY="134.0" prefHeight="18.0" prefWidth="60.0" text="Username:" />
+            <TextField fx:id="username" alignment="CENTER_LEFT" layoutX="396.0" layoutY="124.0" prefHeight="38.0" prefWidth="145.0" style="-fx-background-radius: 3; -fx-border-radius: 3">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </TextField>
+            <PasswordField fx:id="password" alignment="CENTER" layoutX="396.0" layoutY="180.0" prefHeight="40.0" prefWidth="145.0">
                <font>
-                  <Font name="C059-Bold" size="14.0" />
+                  <Font size="12.0" />
                </font>
-            </Label>
-            <Button layoutX="341.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #cc000a;" text="Back" textFill="WHITE">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </PasswordField>
+            <Button fx:id="loginButton" layoutX="333.0" layoutY="251.0" mnemonicParsing="false" onAction="#handleLoginAuth" prefHeight="40.0" prefWidth="214.0" style="-fx-background-color: #45b6fe;" text="Log in" textFill="WHITE">
+               <font>
+                  <Font name="DejaVuMathTeXGyre-Regular" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+
+                        </Button>
+            <Button layoutX="339.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #cc000a;" text="Back" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -135,6 +114,7 @@
                   <Label alignment="CENTER" layoutY="50.0" text="HMS" textFill="WHITE" />
                </children>
             </VBox>
+            <Label layoutX="325.0" layoutY="191.0" prefHeight="18.0" prefWidth="60.0" text="Password:" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

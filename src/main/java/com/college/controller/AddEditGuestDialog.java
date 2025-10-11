@@ -43,16 +43,30 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         headerBox.setPadding(new Insets(0, 0, 10, 0));
 
         // Grid for input fields (no labels, using promptText)
+        // Grid for input fields with labels
         GridPane grid = new GridPane();
         grid.setHgap(15);
         grid.setVgap(15);
         grid.setPadding(new Insets(20));
-        grid.add(txtID, 0, 0);
-        grid.add(txtName, 0, 1);
-        grid.add(txtSurname, 0, 2);
-        grid.add(txtEmail, 0, 3);
-        grid.add(txtContact, 0, 4);
-        grid.add(cbPayment, 0, 5);
+
+// Add labels and inputs
+        grid.add(new Label("Guest ID:"), 0, 0);
+        grid.add(txtID, 1, 0);
+
+        grid.add(new Label("Name:"), 0, 1);
+        grid.add(txtName, 1, 1);
+
+        grid.add(new Label("Surname:"), 0, 2);
+        grid.add(txtSurname, 1, 2);
+
+        grid.add(new Label("Email:"), 0, 3);
+        grid.add(txtEmail, 1, 3);
+
+        grid.add(new Label("Contact Number:"), 0, 4);
+        grid.add(txtContact, 1, 4);
+
+
+        grid.add(cbPayment, 1, 5);
 
         // Input field styles and prompt text
         String inputStyle = "-fx-pref-width: 260px; -fx-padding: 6px; -fx-background-radius: 0; -fx-border-radius: 0;";
@@ -131,9 +145,6 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         getDialogPane().setContent(root);
 
         // Cancel closes dialog
-        cancelButton.setOnAction(e -> setResult(null));
-
-        // Save button validation & result
         saveButton.setOnAction(e -> {
             String name = capitalizeFirst(txtName.getText().trim());
             String surname = capitalizeFirst(txtSurname.getText().trim());
@@ -141,6 +152,7 @@ public class AddEditGuestDialog extends Dialog<Guest> {
             String contact = txtContact.getText().replaceAll("\\s", "");
             String payment = cbPayment.getValue();
 
+            // Validation
             if (name.isEmpty() || surname.isEmpty()) { showAlert("Validation Error", "Name and Surname cannot be empty."); return; }
             if (!email.contains("@") || email.length() < 5) { showAlert("Validation Error", "Email must be valid."); return; }
             if (!contact.matches("\\d{10}")) { showAlert("Validation Error", "Contact must be exactly 10 digits."); return; }
@@ -154,18 +166,34 @@ public class AddEditGuestDialog extends Dialog<Guest> {
                 if (exists) { showAlert("Validation Error", "A guest with this email already exists."); return; }
             } catch (Exception ignored) {}
 
-            Guest.GuestBuilder builder = new Guest.GuestBuilder()
-                    .setName(name)
-                    .setSurname(surname)
-                    .setEmail(email)
-                    .setContactNumber(txtContact.getText())
-                    .setPaymentDetails(payment);
+            // Confirmation alert
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Confirm Save");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to save this guest?");
 
-            if (guest != null) builder.setGuestID(guest.getGuestID());
-            savedGuest = builder.build();
-            if (onSaveCallback != null) onSaveCallback.run();
-            setResult(savedGuest);
+
+            confirm.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    // Build guest and save
+                    Guest.GuestBuilder builder = new Guest.GuestBuilder()
+                            .setName(name)
+                            .setSurname(surname)
+                            .setEmail(email)
+                            .setContactNumber(txtContact.getText())
+                            .setPaymentDetails(payment);
+
+                    if (guest != null) builder.setGuestID(guest.getGuestID());
+                    savedGuest = builder.build();
+                    if (onSaveCallback != null) onSaveCallback.run();
+                    setResult(savedGuest);
+
+                    // Close dialog safely
+                    this.close();
+                }
+            });
         });
+
     }
 
     private String capitalizeFirst(String text) {
