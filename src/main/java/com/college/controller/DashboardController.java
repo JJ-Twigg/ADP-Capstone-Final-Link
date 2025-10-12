@@ -162,7 +162,9 @@ public class DashboardController {
     }
 
     @FXML
-    public void showProfileManager() {safeLoadView("/scenes/profileManagerFinal.fxml", "My Profile");}
+    public void showProfileManager2() {
+        showProfileManager();
+    }
 
     @FXML
     public void showFAQ() {
@@ -427,6 +429,28 @@ public class DashboardController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void showProfileManager() {
+        try {
+            String fxmlPath = "/scenes/profileManagerFinal.fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(MainFinal.getSpringContext()::getBean); // Spring injection
+            Parent view = loader.load();
+
+            // Pass email and name to ProfileController
+            ProfileController controller = loader.getController();
+            controller.setUserEmail(emailLabel.getText());
+            controller.setUserName(name); // optional
+
+            contentArea.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            System.out.println("Error loading Profile view: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
 
 
