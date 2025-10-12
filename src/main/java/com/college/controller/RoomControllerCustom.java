@@ -87,7 +87,7 @@ public class RoomControllerCustom {
     }
 
 
-    private VBox createRoomCard(CustomRoom room) {
+    private VBox createRoomCard(CustomRoom customRoom) {
         VBox card = new VBox(10);
         card.getStyleClass().add("room-card");
         card.setAlignment(Pos.CENTER);
@@ -100,44 +100,38 @@ public class RoomControllerCustom {
         roomImage.setFitHeight(150);
         roomImage.setPreserveRatio(false);
 
-        // --- Load image from CustomRoom's Blob ---
-        if (room.getImage() != null && room.getImage().length > 0) {
-            roomImage.setImage(new Image(new ByteArrayInputStream(room.getImage())));
+        if (customRoom.getImage() != null && customRoom.getImage().length > 0) {
+            roomImage.setImage(new Image(new ByteArrayInputStream(customRoom.getImage())));
         } else {
-            // fallback placeholder
             URL placeholderUrl = getClass().getClassLoader().getResource("images/placeholder.jpg");
             if (placeholderUrl != null) {
                 roomImage.setImage(new Image(placeholderUrl.toExternalForm()));
-            } else {
-                System.err.println("Missing placeholder image for room " + room.getRoomID());
             }
         }
 
         card.getChildren().add(roomImage);
 
-        Label idLabel = new Label("Room ID: " + room.getRoomID());
+        Label idLabel = new Label("Room ID: " + customRoom.getRoomID());
         idLabel.getStyleClass().add("room-title");
         card.getChildren().add(idLabel);
 
-        card.getChildren().add(createEditableField("Price Per Night:", String.valueOf(room.getPricePerNight()), val -> room.setPricePerNight(Float.parseFloat(val))));
-        card.getChildren().add(createEditableField("Room Type:", room.getRoomType(), room::setRoomType));
-        card.getChildren().add(createEditableField("Availability:", room.getAvailability() ? "Yes" : "No", val -> room.setAvailability(val.equalsIgnoreCase("Yes"))));
-        card.getChildren().add(createEditableField("Features:", room.getFeatures(), room::setFeatures));
+        card.getChildren().add(createEditableField("Price Per Night:", String.valueOf(customRoom.getPricePerNight()), val -> customRoom.setPricePerNight(Float.parseFloat(val))));
+        card.getChildren().add(createEditableField("Room Type:", customRoom.getRoomType(), customRoom::setRoomType));
+        card.getChildren().add(createEditableField("Availability:", customRoom.getAvailability() ? "Yes" : "No", val -> customRoom.setAvailability(val.equalsIgnoreCase("Yes"))));
+        card.getChildren().add(createEditableField("Features:", customRoom.getFeatures(), customRoom::setFeatures));
 
+        // --- UPDATE BUTTON ---
         Button updateBtn = new Button("Update Room");
         updateBtn.setMaxWidth(Double.MAX_VALUE);
-
         updateBtn.setStyle(
-                "-fx-background-color: #398F6C;" +      // red background
-                        "-fx-text-fill: white;" +               // white text
+                "-fx-background-color: #398F6C;" +
+                        "-fx-text-fill: white;" +
                         "-fx-font-size: 12px;" +
                         "-fx-font-weight: bold;" +
                         "-fx-padding: 8 16;" +
                         "-fx-background-radius: 3;" +
                         "-fx-cursor: hand;"
         );
-
-// Optional: hover effect inline
         updateBtn.setOnMouseEntered(e -> updateBtn.setStyle(
                 "-fx-background-color: #ADD8E6;" +
                         "-fx-text-fill: white;" +
@@ -156,20 +150,62 @@ public class RoomControllerCustom {
                         "-fx-background-radius: 3;" +
                         "-fx-cursor: hand;"
         ));
-
         updateBtn.setOnAction(event -> {
             try {
-                // Call service to update the room in DB
-                customRoomService.update(room);
-                System.out.println("Room " + room.getRoomID() + " updated successfully.");
+                customRoomService.update(customRoom);
+                System.out.println("CustomRoom " + customRoom.getRoomID() + " updated successfully.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-        card.getChildren().add(updateBtn);
+
+        // --- DELETE BUTTON ---
+        Button deleteBtn = new Button("Delete Room");
+        deleteBtn.setMaxWidth(Double.MAX_VALUE);
+        deleteBtn.setStyle(
+                "-fx-background-color: #D9534F;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 8 16;" +
+                        "-fx-background-radius: 3;" +
+                        "-fx-cursor: hand;"
+        );
+        deleteBtn.setOnMouseEntered(e -> deleteBtn.setStyle(
+                "-fx-background-color: #FF6F61;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 8 16;" +
+                        "-fx-background-radius: 3;" +
+                        "-fx-cursor: hand;"
+        ));
+        deleteBtn.setOnMouseExited(e -> deleteBtn.setStyle(
+                "-fx-background-color: #D9534F;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 8 16;" +
+                        "-fx-background-radius: 3;" +
+                        "-fx-cursor: hand;"
+        ));
+        deleteBtn.setOnAction(event -> {
+            try {
+                customRoomService.delete(customRoom.getRoomID()); // pass ID instead of object
+                roomContainer.getChildren().clear();
+                loadRoomsFromDB();
+                System.out.println("CustomRoom " + customRoom.getRoomID() + " deleted successfully.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Add buttons to card
+        card.getChildren().addAll(updateBtn, deleteBtn);
 
         return card;
     }
+
 
 
     private HBox createEditableField(String labelPrefix, String value, java.util.function.Consumer<String> setter) {
