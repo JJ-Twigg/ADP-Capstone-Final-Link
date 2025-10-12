@@ -436,33 +436,56 @@ public class OverviewController {
     @FXML
     private ToggleButton themeToggleButton;
 
+
+
+    private void styleShiftHoursChartForTheme(boolean darkMode) {
+        if (shiftHoursChart == null) return;
+
+        String barColor = darkMode ? "#f1f1f1" : "#808080"; // light gray for dark, gray for light
+
+        shiftHoursChart.getData().forEach(series -> {
+            series.getData().forEach(data -> {
+                Node node = data.getNode();
+                if (node != null) {
+                    node.setStyle("-fx-bar-fill: " + barColor + ";");
+                }
+            });
+        });
+    }
+
+
+
+
     @FXML
     private void toggleTheme(ActionEvent event) {
+        boolean dark = themeToggleButton.isSelected();
+
+        // change card + other UI themes (you already have this)
         Scene scene = themeToggleButton.getScene();
         scene.getStylesheets().clear();
+        scene.getStylesheets().add(getClass().getResource(dark ? "/css/darkTheme.css" : "/css/lightTheme.css").toExternalForm());
 
-        if (themeToggleButton.isSelected()) {
-            // Dark theme
-            URL darkTheme = getClass().getResource("/css/darkTheme.css");
-            if (darkTheme != null) {
-                scene.getStylesheets().clear(); // remove previous theme
-                scene.getStylesheets().add(darkTheme.toExternalForm());
-                themeToggleButton.setText("Light Mode");
-            } else {
-                System.out.println("Dark theme CSS not found!");
-            }
-        } else {
-            // Light theme
-            URL lightTheme = getClass().getResource("/css/lightTheme.css");
-            if (lightTheme != null) {
-                scene.getStylesheets().clear(); // remove previous theme
-                scene.getStylesheets().add(lightTheme.toExternalForm());
-                themeToggleButton.setText("Dark Mode");
-            } else {
-                System.out.println("Light theme CSS not found!");
-            }
-        }
+        // update chart colors to match cards
+        updateShiftChartColor(dark);
+
+        themeToggleButton.setText(dark ? "Light Mode" : "Dark Mode");
     }
+
+    private void updateShiftChartColor(boolean darkMode) {
+        Platform.runLater(() -> {
+            String color = darkMode ? "#333333" : "#808080"; // dark card vs light card solid color
+
+            for (XYChart.Series<String, Number> series : shiftHoursChart.getData()) {
+                for (XYChart.Data<String, Number> data : series.getData()) {
+                    Node bar = data.getNode();
+                    if (bar != null) {
+                        bar.setStyle("-fx-bar-fill: " + color + ";");
+                    }
+                }
+            }
+        });
+    }
+
 
 
 

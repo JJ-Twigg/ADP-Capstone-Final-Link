@@ -19,3 +19,6 @@
 }
 
 
+.shift-bar {
+    -fx-bar-fill: #f1f1f1; /* light gray for dark mode */
+}

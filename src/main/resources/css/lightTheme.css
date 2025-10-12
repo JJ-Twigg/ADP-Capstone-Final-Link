@@ -18,4 +18,6 @@
     -fx-text-fill: black !important;
 }
 
-
+.shift-bar-light {
+    -fx-bar-fill: #808080; /* gray for light mode */
+}
