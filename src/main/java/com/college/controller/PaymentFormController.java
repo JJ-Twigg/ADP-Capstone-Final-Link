@@ -78,25 +78,37 @@ public class PaymentFormController {
     @FXML
     private void handleSave() {
         try {
-            // Validate input
+
+            // Validate amount
             if (txtAmount.getText().trim().isEmpty()) {
                 showAlert("Please enter an amount");
                 return;
             }
 
-            if (choiceMethod.getValue() == null) {
+            // Validate ChoiceBoxes
+            if (choiceMethod.getValue() == null || "Select Payment Method".equals(choiceMethod.getValue())) {
                 showAlert("Please select a payment method");
                 return;
             }
 
-            if (choiceStatus.getValue() == null) {
+            if (choiceStatus.getValue() == null || "Select Payment Status".equals(choiceStatus.getValue())) {
                 showAlert("Please select a payment status");
                 return;
             }
 
+            // Validate date
             if (datePicker.getValue() == null) {
                 showAlert("Please select a date");
                 return;
+            }
+
+
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirm Save");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.setContentText("Are you sure you want to save this payment?");
+            if (confirmAlert.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+                return; // User cancelled, stop saving
             }
 
             double amount = Double.parseDouble(txtAmount.getText().trim());

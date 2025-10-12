@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,8 +136,20 @@ public class AddReservationController {
         String bookingTypeSelected = comboBoxBookingType.getValue();
 
         if (bookingTypeSelected == null) {
-            System.out.println("Please select a booking type.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Missing Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a booking type.");
+            alert.showAndWait();
             return;
+        }
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Reservation");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to save this reservation?");
+        if (confirmAlert.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+            return; // User clicked Cancel, stop saving
         }
 
         try {
@@ -160,7 +169,11 @@ public class AddReservationController {
                 // Parent Reservation page remains open
             } else if ("Room".equals(bookingTypeSelected)) {
                 if (roomChosen == null) {
-                    System.out.println("Please select a room.");
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Missing Selection");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please select a Room.");
+                    alert.showAndWait();
                     return;
                 }
 

@@ -93,18 +93,33 @@ public class EmployeeSalaryController {
     private void handleDeleteEmployeeSalary() {
         EmployeeSalary selected = employeeSalaryTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            try {
-                employeeSalaryService.delete(selected.getSalaryId());
-                showAlert(Alert.AlertType.INFORMATION, "Employee salary deleted successfully");
-                loadEmployeeSalaries();
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert("Error deleting employee salary: " + e.getMessage());
-            }
+            // Show confirmation dialog
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirm Deletion");
+            confirmAlert.setHeaderText("Are you sure you want to delete this employee salary?");
+            confirmAlert.setContentText("Salary ID: " + selected.getSalaryId());
+
+            // Wait for user response
+            confirmAlert.showAndWait().ifPresent(response -> {
+                if (response == javafx.scene.control.ButtonType.OK) {
+                    try {
+                        employeeSalaryService.delete(selected.getSalaryId());
+                        showAlert(Alert.AlertType.INFORMATION, "Employee salary deleted successfully");
+                        loadEmployeeSalaries();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showAlert("Error deleting employee salary: " + e.getMessage());
+                    }
+                } else {
+                    // User cancelled
+                    System.out.println("Deletion cancelled by user");
+                }
+            });
         } else {
             showAlert("Please select an employee salary to delete");
         }
     }
+
 
     private void openForm(EmployeeSalary employeeSalary) {
         try {

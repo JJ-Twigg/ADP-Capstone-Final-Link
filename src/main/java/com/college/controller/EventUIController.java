@@ -94,6 +94,21 @@ public class EventUIController {
             return;
         }
 
+        if (description.isEmpty()) {
+            showAlert("Validation Error", "Description cannot be empty.");
+            return;
+        }
+
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Save");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to save this event?");
+        if (confirmAlert.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+            return; // User cancelled, do not save
+        }
+
+
         Event event = new Event();
         event.setReason(reason);
         event.setDescription(description);

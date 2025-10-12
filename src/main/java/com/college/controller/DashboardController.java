@@ -308,7 +308,20 @@ public class DashboardController {
 
     @FXML
     public void showSignIn(ActionEvent event) {
-        showSignInPage(event);
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Navigation");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to sign out?");
+
+        // Only proceed if user clicks OK
+        if (confirmAlert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
+            showSignInPage(event);
+        } else {
+            // User clicked Cancel, do nothing
+            System.out.println("Navigation to login canceled by user.");
+        }
+
 //        safeLoadViewOtherPages("/scenes/window-login.fxml", "Login");
     }
 
