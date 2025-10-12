@@ -13,6 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,7 +45,20 @@ public class UserLoginController {
         this.userService = userService;
     }
 
+    @FXML
+    private StackPane mainFrame;
 
+    @FXML
+    private VBox leftPane;
+
+    @FXML
+    private HBox rootHBox;
+
+    @FXML
+    public void initialize() {
+        // Bind left panel width to 40% of the HBox width
+        leftPane.prefWidthProperty().bind(rootHBox.widthProperty().multiply(0.4));
+    }
 
 
     // signIn Button click, Sec Auth

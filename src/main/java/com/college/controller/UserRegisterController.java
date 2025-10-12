@@ -48,15 +48,19 @@ public class UserRegisterController {
     @Autowired
     RoleService roleService;
 
+
+
     @Autowired
     private UserRoleService userRoleService;
 
     @FXML
     public void initialize() {
-        // Hide secondary combo initially
-        if (otherRoleComboBox != null) {
-            otherRoleComboBox.setVisible(false);
-        }
+        // Populate main role ComboBox
+        roleComboBox.getItems().addAll("ADMIN", "MANAGER", "USER");
+
+        // Populate secondary role ComboBox
+        otherRoleComboBox.getItems().addAll("FoodWorker", "MaintenanceWorker", "Housekeeper");
+        otherRoleComboBox.setVisible(false);
 
         // Show/hide secondary combo based on selection
         roleComboBox.setOnAction(event -> {
@@ -69,6 +73,7 @@ public class UserRegisterController {
             }
         });
     }
+
 
     // Signup button click
     @FXML

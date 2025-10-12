@@ -45,6 +45,7 @@ public class MainFinal extends Application {
 
         stage.setScene(scene);
         stage.setTitle("HMS - Room Management");
+        stage.setResizable(true);
         stage.show();
 
         System.out.println("Stage width: " + stage.getWidth());

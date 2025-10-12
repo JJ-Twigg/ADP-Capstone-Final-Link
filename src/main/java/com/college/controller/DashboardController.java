@@ -55,6 +55,11 @@ public class DashboardController {
         }
     }
 
+    //Ammars set user info
+    public void setUserInfo(String email) {
+        emailLabel.setText(email);
+    }
+
     public void setUserInfo(String email, String role) {
         emailLabel.setText(email);
         roleLabel.setText(role);
@@ -234,10 +239,14 @@ public class DashboardController {
             String role = roleLabel.getText();
 
             OverviewController controller = loader.getController();
+
             controller.setUserEmail(email);
             controller.setUserRole(role);
             controller.setDashboardController(this); // for callbacks
             controller.setName(name);
+
+
+
 
             // **Update the dashboard image here, not in OverviewController**
             byte[] userImage = userService.getUserPhoto(email);

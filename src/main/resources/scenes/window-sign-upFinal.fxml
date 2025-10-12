@@ -1,98 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
 
-<HBox fx:id="mainFrame" maxHeight="600.0" maxWidth="600.0" minHeight="550.0" minWidth="600.0" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.UserRegisterController">
+<?import javafx.geometry.Insets?>
+<HBox fx:id="mainFrame"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.college.controller.UserRegisterController"
+      spacing="0"
 
-    <!-- Left blue panel with logo -->
-    <VBox alignment="CENTER" prefWidth="220.0" spacing="20.0" style="-fx-background-color: #45b6fe;">
-        <ImageView fitHeight="186.0" fitWidth="177.0" pickOnBounds="true">
+      HBox.hgrow="ALWAYS">
+
+    <!-- LEFT BLUE PANEL -->
+    <VBox alignment="CENTER"
+          spacing="20.0"
+          style="-fx-background-color: linear-gradient(rgba(69, 182, 254, 0.1),   rgba(69, 100, 254, 1));"
+          minWidth="200"
+          prefWidth="220"
+          HBox.hgrow="NEVER">
+        <ImageView fitHeight="180.0" fitWidth="180.0" preserveRatio="true">
             <image>
-                <Image url="@/images/c.png" />
+                <Image url="@/images/c.png"/>
             </image>
         </ImageView>
-        <Label alignment="CENTER" text="Hotel Management System" textFill="WHITE">
-            <font>
-                <Font size="15" />
-            </font>
+        <Label alignment="CENTER" text="Hotel Management System" textFill="WHITE" textAlignment="CENTER">
+            <font><Font size="15"/></font>
         </Label>
-        <Label alignment="CENTER" text="HMS" textFill="WHITE" />
+        <Label alignment="CENTER" text="HMS" textFill="WHITE"/>
     </VBox>
 
-    <!-- Right white panel with input fields -->
-    <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0" style="-fx-background-color: WHITE;">
-        <Label alignment="CENTER" text="Sign Up" textFill="BLACK">
-            <font>
-                <Font size="30" />
-            </font>
-        </Label>
+    <!-- RIGHT WHITE PANEL -->
+    <ScrollPane fitToWidth="true" fitToHeight="true" HBox.hgrow="ALWAYS" style="-fx-background-color: transparent;">
+        <content>
+            <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: WHITE;" VBox.vgrow="ALWAYS">
+                <!-- FIX padding -->
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
 
-        <!-- Input fields -->
-        <VBox alignment="CENTER" prefWidth="380.0" spacing="10.0">
-            <HBox alignment="CENTER" prefWidth="220" spacing="5">
-                <Label prefHeight="18.0" prefWidth="60.0" text="Email:" />
-                <TextField fx:id="username" alignment="CENTER_LEFT" prefHeight="30" prefWidth="160" style="-fx-background-radius: 3; -fx-border-radius: 3" />
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="220" spacing="5">
-                <Label prefHeight="18.0" prefWidth="60.0" text="Password:" />
-                <PasswordField fx:id="password" alignment="CENTER_LEFT" prefHeight="30" prefWidth="160" style="-fx-background-radius: 3;  -fx-border-radius: 3" />
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="220" spacing="5">
-                <Label prefHeight="18.0" prefWidth="60.0" text="First Name:" />
-                <TextField fx:id="nameField" alignment="CENTER_LEFT" prefHeight="30" prefWidth="160"  style="-fx-background-radius: 3;  -fx-border-radius: 3" />
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="220" spacing="5">
-                <Label prefHeight="18.0" prefWidth="60.0" text="Surname:" />
-                <TextField fx:id="surnameField" alignment="CENTER_LEFT" prefHeight="30" prefWidth="160" style="-fx-background-radius: 3;  -fx-border-radius: 3" />
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="220" spacing="5">
-                <Label prefHeight="18.0" prefWidth="60.0"  text="Age:" />
-                <TextField fx:id="ageField" alignment="CENTER_LEFT" prefHeight="30" prefWidth="160" style="-fx-background-radius: 3;  -fx-border-radius: 3" />
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="220" spacing="5">
-                <Label prefHeight="18.0" prefWidth="60.0" text="Gender:"/>
-                <TextField fx:id="genderField" alignment="CENTER_LEFT"  prefHeight="30" prefWidth="160" style="-fx-background-radius: 3;  -fx-border-radius: 3" />
-            </HBox>
-        </VBox>
+                </padding>
 
-        <!-- ComboBox -->
-        <ComboBox fx:id="roleComboBox" prefHeight="30" prefWidth="220" style="-fx-background-radius: 0; -fx-border-radius: 0;" value="Select Role">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="ADMIN" />
-                    <String fx:value="MANAGER" />
-                    <String fx:value="USER" />
-                </FXCollections>
-            </items>
-        </ComboBox>
+                <Label alignment="CENTER" text="Sign Up" textFill="BLACK">
+                    <font><Font size="30"/></font>
+                </Label>
 
-        <ComboBox fx:id="otherRoleComboBox" prefHeight="30" prefWidth="220" style="-fx-background-radius: 0; -fx-border-radius: 0;" value="Select User Type" visible="false">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="FoodWorker" />
-                    <String fx:value="MaintenanceWorker" />
-                    <String fx:value="Housekeeper" />
-                </FXCollections>
-            </items>
-        </ComboBox>
+                <!-- Input Fields -->
+                <VBox alignment="CENTER" spacing="10.0">
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Label text="Email:" prefWidth="80"/>
+                        <TextField fx:id="username" promptText="Enter email" HBox.hgrow="ALWAYS"
+                                   style="-fx-background-radius: 3; -fx-border-radius: 3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Label text="Password:" prefWidth="80"/>
+                        <PasswordField fx:id="password" promptText="Enter password" HBox.hgrow="ALWAYS"
+                                       style="-fx-background-radius: 3; -fx-border-radius: 3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Label text="First Name:" prefWidth="80"/>
+                        <TextField fx:id="nameField" HBox.hgrow="ALWAYS"
+                                   style="-fx-background-radius: 3; -fx-border-radius: 3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Label text="Surname:" prefWidth="80"/>
+                        <TextField fx:id="surnameField" HBox.hgrow="ALWAYS"
+                                   style="-fx-background-radius: 3; -fx-border-radius: 3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Label text="Age:" prefWidth="80"/>
+                        <TextField fx:id="ageField" HBox.hgrow="ALWAYS"
+                                   style="-fx-background-radius: 3; -fx-border-radius: 3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Label text="Gender:" prefWidth="80"/>
+                        <TextField fx:id="genderField" HBox.hgrow="ALWAYS"
+                                   style="-fx-background-radius: 3; -fx-border-radius: 3;"/>
+                    </HBox>
+                </VBox>
 
-        <Button onAction="#handleSignUp" prefHeight="35" prefWidth="220" style="-fx-background-color:  #45b6fe; -fx-text-fill: white;-fx-background-radius: 10;" text="Sign Up">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
+                <!-- ComboBoxes -->
+                <ComboBox fx:id="roleComboBox" prefHeight="30" HBox.hgrow="ALWAYS" promptText="Select Role"/>
+                <ComboBox fx:id="otherRoleComboBox" prefHeight="30" HBox.hgrow="ALWAYS"
+                          visible="false" promptText="Select User Type"/>
 
-        <Hyperlink onAction="#goToLogin" text="Already have an account?" />
-        <Button onAction="#handleExit" prefHeight="35" prefWidth="220" style="-fx-background-color: #cc000a; -fx-text-fill: white; -fx-background-radius: 0;" text="Exit">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
-    </VBox>
+                <!-- Buttons -->
+                <Button onAction="#handleSignUp" text="Sign Up"
+                        prefHeight="35" HBox.hgrow="ALWAYS"
+                        style="-fx-background-color: #45b6fe; -fx-text-fill: white; -fx-background-radius: 10;">
+                    <cursor><Cursor fx:constant="HAND"/></cursor>
+                </Button>
+
+                <Hyperlink onAction="#goToLogin" text="Already have an account?"/>
+
+                <Button onAction="#handleExit" text="Exit"
+                        prefHeight="35" HBox.hgrow="ALWAYS"
+                        style="-fx-background-color: #cc000a; -fx-text-fill: white; -fx-background-radius: 0;">
+                    <cursor><Cursor fx:constant="HAND"/></cursor>
+                </Button>
+
+            </VBox>
+        </content>
+    </ScrollPane>
+
 </HBox>

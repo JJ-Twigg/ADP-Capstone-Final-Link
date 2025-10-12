@@ -165,6 +165,15 @@ public class AddReservationController {
                 }
 
                 Employee chosenEmployee = comboBoxEmployee.getValue();
+                if (chosenEmployee == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Missing Selection");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please select a housekeeper before saving the reservation.");
+                    alert.showAndWait();
+                    return;
+                }
+
                 Room roomToUpdate = roomService.read(roomChosen);
 
                 if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
