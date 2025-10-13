@@ -28,6 +28,10 @@ public class CustomRoom {
     @JoinColumn(name = "reservation_id", referencedColumnName = "reservationId", nullable = true)
     private Reservation reservation;
 
+    public Reservation getReservation() {
+        return reservation;
+    }
+
     // FK to Employee, one to one means only one housekeeper per 1 room
     @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employeeId", nullable = true)
@@ -69,6 +73,8 @@ public class CustomRoom {
         this.features = builder.features;
         this.image = builder.image;
     }
+
+
 
     public int getRoomID() {
         return roomID;

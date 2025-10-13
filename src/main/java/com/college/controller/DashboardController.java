@@ -143,7 +143,13 @@ public class DashboardController {
 
     @FXML
     public void showReservationSolo() {
-        safeLoadViewOtherPages("/scenes/reservationFinalAll.fxml", "Reservation");
+        safeLoadViewOtherPages("/scenes/reservationFinalAll.fxml", "Reservations");
+    }
+
+
+    @FXML
+    public void showReservationCustomRoom() {
+        safeLoadViewOtherPages("/scenes/reservationFinalAllCustomRoom.fxml", "Custom Reservations");
     }
 
     @FXML

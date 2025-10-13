@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @Component
 public class AddReservationController {
@@ -57,8 +58,15 @@ public class AddReservationController {
 
     private final ReservationService reservationService;
 
-    @FXML private TextField startTimeField;
-    @FXML private TextField endTimeField;
+//    @FXML private TextField startTimeField;
+//    @FXML private TextField endTimeField;
+
+    @FXML
+    private DatePicker startDatePicker;
+
+    @FXML
+    private DatePicker endDatePicker;
+
     @FXML private ComboBox<Integer> comboBoxNumbers;
     @FXML private ComboBox<String> comboBoxBookingType;
     @FXML private ComboBox<Employee> comboBoxEmployee;
@@ -104,9 +112,11 @@ public class AddReservationController {
                         .filter(emp -> roomService.getAll().stream()
                                 .noneMatch(room -> room.getEmployee() != null &&
                                         room.getEmployee().getEmployeeId() == emp.getEmployeeId()))
+                        .filter(emp -> customRoomService.getAll().stream()
+                                .noneMatch(customRoom -> customRoom.getEmployee() != null &&
+                                        customRoom.getEmployee().getEmployeeId() == emp.getEmployeeId()))
                         .toList()
         );
-
 
         comboBoxEmployee.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -121,13 +131,17 @@ public class AddReservationController {
     @FXML
     private void saveReservation() {
 
-        String startTime = startTimeField.getText();
-        String endTime = endTimeField.getText();
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
 
-        if (startTime.isEmpty() || endTime.isEmpty()) {
-            System.out.println("Please fill in all fields.");
+        if (startDate == null || endDate == null) {
+            System.out.println("Please select both dates.");
             return;
         }
+
+// Convert to String (yyyy-MM-dd format)
+        String startTime = startDate.toString();
+        String endTime = endDate.toString();
 
         Integer roomChosen = comboBoxNumbers.getValue();
 
@@ -209,7 +223,11 @@ public class AddReservationController {
 
                 Room roomToUpdate = roomService.read(roomChosen);
 
-                // Custom room booking
+
+
+
+
+                // CUSTOM ROOM BOOKING code
                 if (roomChosen != null && roomChosen == 60) {
                     boolean customRoomExists = customRoomService.getAll().stream()
                             .anyMatch(customRoom -> customRoom.getRoomID() == 60);
@@ -263,30 +281,38 @@ public class AddReservationController {
                 }
 
 
-                if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
-                    roomToUpdate.setAvailability(false);
-
-                    Reservation reservation = new Reservation(startTime, endTime);
-                    reservation.setGuest(this.guest);
-                    savedReservation = reservationService.create(reservation);
-
-                    roomToUpdate.setReservation(savedReservation);
-                    roomToUpdate.setEmployee(chosenEmployee);
-                    roomService.update(roomToUpdate);
-
-                    alertReservationSuccess(roomChosen);
 
 
 
-                    // Open Payment modal
-                    openAddPaymentPage(this.guest, price);
 
-                    // Close AddReservation modal and parent Reservation page
-                    if (stage != null) stage.close();
-                    if (parentStage != null) parentStage.close();
 
-                } else {
-                    alertRoomTaken();
+
+
+
+                if (roomChosen != null && roomChosen <= 59) {
+                    if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
+                        roomToUpdate.setAvailability(false);
+
+                        Reservation reservation = new Reservation(startTime, endTime);
+                        reservation.setGuest(this.guest);
+                        savedReservation = reservationService.create(reservation);
+
+                        roomToUpdate.setReservation(savedReservation);
+                        roomToUpdate.setEmployee(chosenEmployee);
+                        roomService.update(roomToUpdate);
+
+                        alertReservationSuccess(roomChosen);
+
+                        // Open Payment modal
+                        openAddPaymentPage(this.guest, price);
+
+                        // Close AddReservation modal and parent Reservation page
+                        if (stage != null) stage.close();
+                        if (parentStage != null) parentStage.close();
+
+                    } else {
+                        alertRoomTaken();
+                    }
                 }
             }
         } catch (Exception e) {
