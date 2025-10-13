@@ -485,7 +485,7 @@ public class DashboardController {
             // Pass email and name to ProfileController
             ProfileController controller = loader.getController();
             controller.setUserEmail(emailLabel.getText());
-            controller.setUserName(name); // optional
+
 
             contentArea.getChildren().setAll(view);
 

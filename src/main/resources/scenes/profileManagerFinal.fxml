@@ -49,6 +49,22 @@
                 </VBox>
                 <!-- ======================================= -->
             </HBox>
+
+            <!-- clock -->
+            <HBox fx:id="clockBox" alignment="CENTER" maxWidth="400" spacing="10"
+                  style="-fx-background-color: #66BA88; -fx-background-radius: 12; -fx-padding: 10;"
+                  AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+
+                <!-- Clock icon -->
+                <Label style="-fx-font-size: 24px;" text="⏰" />
+
+                <!-- Time & Date -->
+                <Label fx:id="clockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+            </HBox>
+
+
+
             <!-- Profile Image -->
             <ImageView visible="false " fx:id="profileImageView" fitHeight="120" fitWidth="120" preserveRatio="true"
                        style="-fx-background-color: lightgray; -fx-border-radius: 60; -fx-background-radius: 60;" />
@@ -62,18 +78,9 @@
 <!--                    </cursor></Button>-->
 <!--            </HBox>-->
 
-            <!-- clock -->
-            <HBox fx:id="clockBox" alignment="CENTER" maxWidth="400" spacing="10" style="-fx-background-color: #66BA88; -fx-background-radius: 12; -fx-padding: 10;" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
 
-                <!-- Clock icon -->
-                <Label style="-fx-font-size: 24px;" text="⏰" />
 
-                <!-- Time & Date -->
-                <Label fx:id="clockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
-                <cursor>
-                    <Cursor fx:constant="DEFAULT" />
-                </cursor>
-            </HBox>
+
 
 
             <!-- Bottom Row: 2 Charts -->

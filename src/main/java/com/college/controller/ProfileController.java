@@ -3,115 +3,120 @@ package com.college.controller;
 import com.college.domain.User;
 import com.college.repository.UserRepository;
 import com.college.service.UserService;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.apache.tomcat.util.net.openssl.OpenSSLStatus;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-
-import static org.apache.tomcat.util.net.openssl.OpenSSLStatus.setName;
 
 @Component
 public class ProfileController {
-    @FXML
-    private Label  userEmailLabel;
 
+    @FXML private Label userEmailLabel;
+    @FXML private Label clockLabel;
+    @FXML private Label nameLabel;
+    @FXML private ImageView profileImageView;
 
+    @Autowired private UserService userService;
+    @Autowired private UserRepository userRepository;
 
-    @FXML
-    private Label nameLabel;
+    private String userEmail; // currently logged-in user
 
-    @FXML
-    private ImageView profileImageView;
-
-    @Autowired
-    private UserService userService;
-
-    private String userEmail;
-
+    // -----------------------------
     public void setUserEmail(String email) {
         this.userEmail = email;
-
-        if (userEmailLabel != null) {
-            userEmailLabel.setText(email);
-
-
-        }
+        refreshUserInfo();
     }
 
-    public void setUserName(String name) {
-        if (nameLabel != null) nameLabel.setText(name);
-    }
-
-    // --------------------------------------
-
-@Autowired
-    UserRepository userRepository;
-
+    // -----------------------------
     @FXML
     private void updateEmail() {
-        System.out.println("\nonMouseClicked");
+        Optional<User> userOpt = userRepository.findByEmail(userEmail);
+        if (userOpt.isEmpty()) return;
 
-        Optional<User> userObj = userRepository.findByEmail(userEmailLabel.getText());
-        System.out.println("User: " + userObj);
-
-        TextInputDialog dialog = new TextInputDialog(userEmailLabel.getText());
+        User user = userOpt.get();
+        TextInputDialog dialog = new TextInputDialog(user.getEmail());
         dialog.setTitle("Update Email");
         dialog.setHeaderText("Update Email");
 
-        Optional<String> email = dialog.showAndWait();
-        if (email.isEmpty()) return;
+        Optional<String> newEmail = dialog.showAndWait();
+        if (newEmail.isEmpty()) return;
 
-        userObj.get().setEmail(email.get());
-        setUserEmail(email.get());
+        // Save new email
+        user.setEmail(newEmail.get());
+        userRepository.save(user);
 
-        userRepository.save(userObj.get());
-        System.out.println("User updated");
-        System.out.println(userObj.get());
+        // Update current userEmail and refresh
+        this.userEmail = newEmail.get();
+        refreshUserInfo();
     }
 
     @FXML
     private void updateName() {
-        System.out.println("\nonMouseClicked");
-        String nameString = nameLabel.getText();
+        Optional<User> userOpt = userRepository.findByEmail(userEmail);
+        if (userOpt.isEmpty()) return;
 
-        Optional<User> userObj = userRepository.findByEmail(userEmailLabel.getText());
-        System.out.println("User: " + userObj);
-
-//        TextInputDialog dialog = new TextInputDialog();
-        TextInputDialog dialog = new TextInputDialog(nameString);
+        User user = userOpt.get();
+        TextInputDialog dialog = new TextInputDialog(user.getName());
         dialog.setTitle("Update Name");
         dialog.setHeaderText("Update Name");
 
-        Optional<String> name = dialog.showAndWait();
-        if (name.isEmpty()) return;
+        Optional<String> newName = dialog.showAndWait();
+        if (newName.isEmpty()) return;
 
-        userObj.get().setName(name.get());
-        setName(OpenSSLStatus.Name.valueOf(name.get()));
+        // Save new name
+        user.setName(newName.get());
+        userRepository.save(user);
 
-        userRepository.save(userObj.get());
-        System.out.println("User updated");
-        System.out.println(userObj.get());
+        // Refresh labels
+        refreshUserInfo();
     }
-    // --------------------------------------
 
-
+    // -----------------------------
     @FXML
     public void initialize() {
-        // Optional: if setUserEmail was called before initialize
-        if (userEmail != null && userEmailLabel != null) {
-            userEmailLabel.setText(userEmail);
+        startClock();
+        refreshUserInfo();
+    }
 
-            byte[] imageBytes = userService.getUserPhoto(userEmail);
-            if (imageBytes != null) {
-                profileImageView.setImage(new Image(new ByteArrayInputStream(imageBytes)));
-            }
+    private void refreshUserInfo() {
+        if (userEmail == null) return;
+
+        Optional<User> userOpt = userRepository.findByEmail(userEmail);
+        if (userOpt.isEmpty()) return;
+
+        User user = userOpt.get();
+
+        // Update labels
+        if (userEmailLabel != null) userEmailLabel.setText(user.getEmail());
+        if (nameLabel != null) nameLabel.setText(user.getName());
+
+        // Update profile image
+        byte[] imageBytes = userService.getUserPhoto(user.getEmail());
+        if (imageBytes != null && profileImageView != null) {
+            profileImageView.setImage(new Image(new ByteArrayInputStream(imageBytes)));
         }
+    }
+
+    private void startClock() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM dd yyyy  HH:mm:ss");
+        Timeline clock = new Timeline(
+                new KeyFrame(Duration.ZERO, e -> {
+                    if (clockLabel != null) clockLabel.setText(LocalDateTime.now().format(formatter));
+                }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        clock.setCycleCount(Timeline.INDEFINITE);
+        clock.play();
     }
 }
