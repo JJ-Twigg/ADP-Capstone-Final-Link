@@ -204,7 +204,7 @@ public class OverviewController {
         System.out.println("\nonMouseClicked");
 
         Optional<User> userObj = userRepository.findByEmail(userEmailLabel.getText());
-        System.out.println("User: " + userObj);
+        if (userObj.isEmpty()) return;
 
         TextInputDialog dialog = new TextInputDialog(userEmailLabel.getText());
         dialog.setTitle("Update Email");
@@ -213,13 +213,22 @@ public class OverviewController {
         Optional<String> email = dialog.showAndWait();
         if (email.isEmpty()) return;
 
+        // Update user in DB
         userObj.get().setEmail(email.get());
+        userRepository.save(userObj.get());
+
+        // Update local label
         setUserEmail(email.get());
 
-        userRepository.save(userObj.get());
-        System.out.println("User updated");
-        System.out.println(userObj.get());
+        // **Update DashboardController so the new email persists**
+        if (dashboardController != null) {
+            dashboardController.updateEmail(email.get());  // key line
+            dashboardController.setUserInfo(email.get());  // optional: update dashboard label immediately
+        }
+
+        System.out.println("User updated: " + userObj.get());
     }
+
 
     @FXML
     private void updateName() {
@@ -229,7 +238,6 @@ public class OverviewController {
         Optional<User> userObj = userRepository.findByEmail(userEmailLabel.getText());
         System.out.println("User: " + userObj);
 
-//        TextInputDialog dialog = new TextInputDialog();
         TextInputDialog dialog = new TextInputDialog(nameString);
         dialog.setTitle("Update Name");
         dialog.setHeaderText("Update Name");
@@ -237,15 +245,21 @@ public class OverviewController {
         Optional<String> name = dialog.showAndWait();
         if (name.isEmpty()) return;
 
+        // Update user object and save to DB
         userObj.get().setName(name.get());
+        userRepository.save(userObj.get());
+
+        // Update OverviewController label
         setName(name.get());
 
-        userRepository.save(userObj.get());
+        // Update DashboardController so the new name persists
+        if (dashboardController != null) {
+            dashboardController.updateName(name.get());
+        }
+
         System.out.println("User updated");
         System.out.println(userObj.get());
     }
-    // --------------------------------------
-
 
 
     private void setupEmployeePieChart() {

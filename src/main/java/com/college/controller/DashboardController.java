@@ -45,6 +45,31 @@ public class DashboardController {
     @Autowired
     private UserService userService;
 
+
+
+
+    // DashboardController
+    private String currentEmail;
+
+    // DashboardController
+    private String currentName;
+
+
+    // When user edits email
+    public void updateEmail(String newEmail) {
+        currentEmail = newEmail;
+    }
+
+    public void updateName(String newName) {
+        currentName = newName;
+    }
+
+
+
+
+
+
+
     public void setProfileImage(byte[] imageBytes) {
         if (imageBytes != null && imageBytes.length > 0) {
             Image img = new Image(new ByteArrayInputStream(imageBytes));
@@ -212,6 +237,8 @@ public class DashboardController {
             controller.setName(name);
 
             controller.setDashboardController(this);
+            controller.setUserEmail(currentEmail != null ? currentEmail : emailLabel.getText());
+            controller.setName(currentName != null ? currentName : name);
 
             contentArea.getChildren().setAll(view);
 
@@ -244,8 +271,12 @@ public class DashboardController {
 
             controller.setUserEmail(email);
             controller.setUserRole(role);
+
             controller.setDashboardController(this); // for callbacks
             controller.setName(name);
+
+            controller.setUserEmail(currentEmail != null ? currentEmail : email);
+            controller.setName(currentName != null ? currentName : name);
 
 
 
