@@ -1,78 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="faqScrollPane" xmlns:fx="http://javafx.com/fxml" fitToWidth="true">
+<ScrollPane fx:id="faqScrollPane" fitToWidth="true" style="-fx-background-color: #f0f4f7;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1">
     <content>
-        <VBox spacing="15">
+        <VBox alignment="TOP_CENTER" spacing="15" fillWidth="true">
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-
-            <!-- Title -->
-            <Label text="Hotel Management System - FAQ" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-
-            <!-- Login Info -->
-            <TitledPane text="Login Information" expanded="false">
-                <content>
-                    <Label wrapText="true" text="The system allows login for three main users: Admin, Manager, and User.
-Users include subsets such as Housekeeper, Maintenance Worker, and Food Worker."/>
-                </content>
-            </TitledPane>
-
-            <!-- Admin Info -->
-            <TitledPane text="Admin Privileges" expanded="false">
-                <content>
-                    <Label wrapText="true" text="Admins can edit user details, manage all system accounts,
-and print payment summaries or payroll reports for all users. They have full control of the system."/>
-                </content>
-            </TitledPane>
-
-            <!-- Manager Info -->
-            <TitledPane text="Manager Privileges" expanded="false">
-                <content>
-                    <Label wrapText="true" text="Managers can add guests and reservations to the system for rooms or events.
-They can also view payment histories and confirm how guests paid."/>
-                </content>
-            </TitledPane>
-
-            <!-- User Info -->
-            <TitledPane text="User Privileges" expanded="false">
-                <content>
-                    <Label wrapText="true" text="Users (Housekeeper, Maintenance Worker, Food Worker) can view their shifts,
-track total hours worked, and check schedules. They have read-only access to the system for their tasks."/>
-                </content>
-            </TitledPane>
-
-            <!-- Booking and Payment Info -->
-            <TitledPane text="Booking And Payments" expanded="false">
-                <content>
-                    <Label wrapText="true" text="Guests can be booked for rooms or events by managers. All payment details
-and histories are tracked and can be printed by admins. This helps maintain accurate accounting records."/>
-                </content>
-            </TitledPane>
-
-            <!-- General Usage -->
-            <TitledPane text="How to Use the Program" expanded="false">
-                <content>
-                    <Label wrapText="true" text="1. Login with your assigned credentials.
-2. Admins manage users and payments.
-3. Managers add guests, reservations, and check payments.
-4. Users view their shifts and hours worked.
-5. Navigate the menu to access specific modules like Rooms, Guests, or Payments."/>
-                </content>
-            </TitledPane>
-
-            <!-- Additional Notes -->
-            <TitledPane text="Additional Notes" expanded="false">
-                <content>
-                    <Label wrapText="true" text="Always logout when finished. System automatically updates room availability,
-shift schedules, and payment records."/>
-                </content>
-            </TitledPane>
-
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="FAQ" />
+            <FlowPane alignment="TOP_CENTER" hgap="20" vgap="20" prefWrapLength="600">
+                <children>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #A8E6CF, #DCEDC1); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Login Information" />
+                        <Label text="Allows login for Admin, Manager, and User (Housekeeper, Maintenance, Food Worker)." wrapText="true" />
+                    </VBox>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #FFD3B6, #FFAAA5); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Admin Privileges" />
+                        <Label text="Admins can edit users, manage accounts, and print summaries or reports." wrapText="true" />
+                    </VBox>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #FFECB3, #FFE082); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Manager Privileges" />
+                        <Label text="Managers can add guests, handle reservations, and view payment history." wrapText="true" />
+                    </VBox>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #B3E5FC, #81D4FA); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="User Privileges" />
+                        <Label text="Users can view shifts, track hours, and access their schedules (read-only)." wrapText="true" />
+                    </VBox>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #D1C4E9, #B39DDB); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Booking Payments" />
+                        <Label text="Managers record bookings and payments; admins print payment reports." wrapText="true" />
+                    </VBox>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #FFCCBC, #FFAB91); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="How to Use the Program" />
+                        <Label text="Login, navigate menus, manage users or bookings, and always log out after use." wrapText="true" />
+                    </VBox>
+                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #C8E6C9, #A5D6A7); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
+                        <padding>
+                            <Insets bottom="10" left="12" right="12" top="10" />
+                        </padding>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Additional Notes" />
+                        <Label text="Always log out. The system auto-updates room availability and staff schedules." wrapText="true" />
+                    </VBox>
+                </children>
+            </FlowPane>
         </VBox>
     </content>
 </ScrollPane>
