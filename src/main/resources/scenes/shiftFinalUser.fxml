@@ -21,7 +21,7 @@
 
         </columns>
     </TableView>
-        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #E67E22;">
+        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);;">
     <children>
 
 

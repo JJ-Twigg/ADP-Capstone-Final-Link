@@ -12,7 +12,7 @@
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #FFFFFF; -fx-border-color: #FFFFFF;" styleClass="scroll-pane" vbarPolicy="AS_NEEDED">
 
             <AnchorPane>
-                <VBox prefWidth="220" spacing="20" style="-fx-background-color: #45b6fe; -fx-padding: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                <VBox prefWidth="220" spacing="20" style="-fx-background-color:linear-gradient(to bottom, #45b6fe, #a0d4ff); -fx-padding: 20;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
                     <!-- User Profile -->
                     <VBox spacing="10" alignment="CENTER">

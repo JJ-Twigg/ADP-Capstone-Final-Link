@@ -1,10 +1,8 @@
 package com.college.controller;
 
 import com.college.MainFinal;
-import com.college.domain.Employee;
-import com.college.domain.Guest;
-import com.college.domain.Reservation;
-import com.college.domain.Room;
+import com.college.domain.*;
+import com.college.service.CustomRoomService;
 import com.college.service.EmployeeService;
 import com.college.service.ReservationService;
 import com.college.service.RoomService;
@@ -54,6 +52,9 @@ public class AddReservationController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private CustomRoomService customRoomService;
+
     private final ReservationService reservationService;
 
     @FXML private TextField startTimeField;
@@ -80,7 +81,7 @@ public class AddReservationController {
     @FXML
     public void initialize() {
         // Populate room numbers (51-59)
-        for (int i = 51; i <= 56; i++) {
+        for (int i = 51; i <= 60; i++) {
             comboBoxNumbers.getItems().add(i);
         }
         comboBoxNumbers.setValue(52);
@@ -129,6 +130,25 @@ public class AddReservationController {
         }
 
         Integer roomChosen = comboBoxNumbers.getValue();
+
+        //custom room booking
+        if (roomChosen != null && roomChosen == 60) {
+            boolean customRoomExists = customRoomService.getAll().stream()
+                    .anyMatch(customRoom -> customRoom.getRoomID() == 60);
+
+            if (!customRoomExists) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Unavailable Room");
+                alert.setHeaderText(null);
+                alert.setContentText("Room 60 is not available — it’s not registered in Custom Rooms.");
+                alert.showAndWait();
+                return;
+            } else {
+                System.out.println("Room 60 found in CustomRoom table");
+
+
+            }
+        }
 
         float price = (float) getRoomPrice(roomChosen);
         System.out.println("price of that room id is: " + price);
@@ -188,6 +208,60 @@ public class AddReservationController {
                 }
 
                 Room roomToUpdate = roomService.read(roomChosen);
+
+                // Custom room booking
+                if (roomChosen != null && roomChosen == 60) {
+                    boolean customRoomExists = customRoomService.getAll().stream()
+                            .anyMatch(customRoom -> customRoom.getRoomID() == 60);
+
+                    if (!customRoomExists) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Unavailable Room");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Room 60 is not available — it’s not registered in Custom Rooms.");
+                        alert.showAndWait();
+                        return;
+                    } else {
+                        System.out.println("Room 60 found in CustomRoom table");
+
+                        try {
+                            // Create reservation
+                            Reservation reservation = new Reservation(startTime, endTime);
+                            reservation.setGuest(this.guest);
+                            Reservation savedReservation = reservationService.create(reservation);
+
+                            // Link to CustomRoom
+                            CustomRoom customRoom = customRoomService.read(60);
+                            customRoom.setReservation(savedReservation);
+                            customRoom.setEmployee(chosenEmployee);
+                            customRoom.setAvailability(false);
+                            customRoomService.update(customRoom);
+
+                            alertReservationSuccess(roomChosen);
+
+                            double pricee = 0 ;
+
+                            if (roomChosen != null && roomChosen == 60) {
+                                pricee = getCustomRoomPrice(60);
+                            }else {
+                                price = (float) getRoomPrice(roomChosen); // fetch from normal Room table
+                            }
+
+                            // Open payment page
+                            openAddPaymentPage(this.guest, pricee);
+
+                            // Close AddReservation modal and parent Reservation page
+                            if (stage != null) stage.close();
+                            if (parentStage != null) parentStage.close();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            System.out.println("Error saving custom room reservation: " + e.getMessage());
+                            System.out.println("Error saving reservation: " + e.getMessage());
+                        }
+                    }
+                }
+
 
                 if (Boolean.TRUE.equals(roomToUpdate.getAvailability())) {
                     roomToUpdate.setAvailability(false);
@@ -280,17 +354,41 @@ public class AddReservationController {
         }
     }
 
-
     public double getRoomPrice(int roomID) {
         try {
-            Room room = roomService.read(roomID); // Fetch room by ID
-            float price = room.getPricePerNight();
-            System.out.println("recieved price from database for that id: " + price);
+            // If it's the custom room, normal room price should be 0
+            if (roomID == 60) {
+                return 0.0;
+            }
+
+            Room room = roomService.read(roomID); // Fetch normal room by ID
+            if (room == null) {
+                System.out.println("Room with ID " + roomID + " not found!");
+                return 0.0;
+            }
+
+            double price = room.getPricePerNight();
+            System.out.println("Received price from database for room ID " + roomID + ": " + price);
+            return price;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
+
+
+    public double getCustomRoomPrice(int customRoomID) {
+        try {
+            CustomRoom customRoom = customRoomService.read(customRoomID);
+            if (customRoom != null) {
+                double price = customRoom.getPricePerNight();
+                System.out.println("Received price from CustomRoom: " + price);
                 return price;
-
-
-
-
+            } else {
+                System.out.println("CustomRoom with ID " + customRoomID + " not found!");
+                return 0.0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return 0.0;
