@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -129,10 +130,24 @@ public class UserLoginController {
 //
 //    }
 
+    @FXML
+    private void handleHoverEnter(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: rgba(69, 200, 255, 1);"); // example hover effect
+    }
+
+    @FXML
+    private void handleHoverExit(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: rgba(69, 150, 255, 1);"); // revert to normal
+    }
 
 
-
-
+    @FXML
+    private void exitApplication(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();  // closes the current window
+    }
 
 
     //just changes page
@@ -202,7 +217,7 @@ public class UserLoginController {
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
         // Load the register window FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-sign-upFinal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/windowSignupFinal.fxml"));
         loader.setControllerFactory(com.college.MainFinal.getSpringContext()::getBean); // spring context aware
         Parent registerRoot = loader.load();
 

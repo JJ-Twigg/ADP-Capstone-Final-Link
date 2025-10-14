@@ -197,7 +197,7 @@ public class UserRegisterController {
     @FXML
     private void goToLoginPage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/windowLoginFinal.fxml"));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
             Parent loginPage = loader.load();
@@ -218,7 +218,7 @@ public class UserRegisterController {
     @FXML
     private void goToLogin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/windowLoginFinal.fxml"));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
 
             Parent loginPage = loader.load();

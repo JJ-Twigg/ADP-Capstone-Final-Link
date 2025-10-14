@@ -53,6 +53,10 @@ public class ShiftViewController {
 
     }
 
+    // newer //
+    @FXML
+    private Label headerLabel;
+
 
     @FXML
     public void initialize() {
@@ -78,7 +82,7 @@ public class ShiftViewController {
         shiftTable.setItems(shifts);
 
         // Debug: Check if Spring injection worked
-        System.out.println("ShiftViewController initialized");
+        System.out.println("\nShiftViewController initialized");
         System.out.println("ShiftService injected: " + (ShiftService != null));
         System.out.println("ApplicationContext injected: " + (applicationContext != null));
 
@@ -138,7 +142,7 @@ public class ShiftViewController {
 
     private void openForm(Shift shift) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Add_Shift.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dialog_boxes/addShiftFinal.fxml"));
 
             // This is the key fix: Use Spring to create the controller
             loader.setControllerFactory(applicationContext::getBean);
@@ -147,6 +151,9 @@ public class ShiftViewController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle(shift == null ? "Add Shift" : "Update Shift");
             stage.setScene(new Scene(loader.load()));
+//            stage.setWidth(400);
+//            stage.setHeight(400);
+            stage.setResizable(false);
 
             ShiftFormController controller = loader.getController();
             controller.setShift(shift);

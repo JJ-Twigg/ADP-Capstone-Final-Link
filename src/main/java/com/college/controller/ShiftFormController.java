@@ -97,9 +97,32 @@ public class ShiftFormController {
 
     }
 
+    @FXML
+    private Label headerLabel;
+
+    // older //
+//    public void setShift(Shift shift) {
+//        this.shift = shift;
+//        if (shift != null) {
+//            // Populate form with existing shift
+//            datePicker.setValue(shift.getShiftDay());   // entity should use LocalDate
+//            spinnerStartHour.getValueFactory().setValue(shift.getShiftStartTime().getHour());
+//            spinnerStartMinute.getValueFactory().setValue(shift.getShiftStartTime().getMinute());
+//            spinnerEndHour.getValueFactory().setValue(shift.getShiftEndTime().getHour());
+//            spinnerEndMinute.getValueFactory().setValue(shift.getShiftEndTime().getMinute());
+//            chkOvertime.setSelected(shift.getShiftOvertime());
+//        }
+//    }
     public void setShift(Shift shift) {
         this.shift = shift;
-        if (shift != null) {
+
+        if (shift == null) {
+            headerLabel.setText("Add Shift");
+        } else {
+            headerLabel.setText("Update Shift");
+            // populate form fields if editing
+            datePicker.setValue(shift.getShiftDay());
+
             // Populate form with existing shift
             datePicker.setValue(shift.getShiftDay());   // entity should use LocalDate
             spinnerStartHour.getValueFactory().setValue(shift.getShiftStartTime().getHour());
@@ -107,8 +130,14 @@ public class ShiftFormController {
             spinnerEndHour.getValueFactory().setValue(shift.getShiftEndTime().getHour());
             spinnerEndMinute.getValueFactory().setValue(shift.getShiftEndTime().getMinute());
             chkOvertime.setSelected(shift.getShiftOvertime());
+//
+//            startTimeField.setText(shift.getShiftStartTime().toString());
+//            endTimeField.setText(shift.getShiftEndTime().toString());
+//            overtimeCheckbox.setSelected(shift.getShiftOvertime());
+            // other fields if any
         }
     }
+
 
     @FXML
     private void handleSave() {

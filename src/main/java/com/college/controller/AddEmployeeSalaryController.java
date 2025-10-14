@@ -33,6 +33,12 @@ public class AddEmployeeSalaryController {
     @Autowired
     private EmployeeService empService;
 
+
+    // newer //
+    @FXML
+    private Label headerLabel;
+
+
     @FXML
     public void initialize() {
         choiceMethod.getItems().addAll("Cash", "Card", "EFT");
@@ -67,14 +73,32 @@ public class AddEmployeeSalaryController {
         }
     }
 
+//    public void setEmployeeSalary(EmployeeSalary employeeSalary) {
+//        this.employeeSalary = employeeSalary;
+//        if (employeeSalary != null) {
+//            txtAmount.setText(String.valueOf(employeeSalary.getAmount()));
+//            choiceMethod.setValue(employeeSalary.getMethod());
+//            datePicker.setValue(employeeSalary.getDate());
+//        }
+//    }
+
     public void setEmployeeSalary(EmployeeSalary employeeSalary) {
-        this.employeeSalary = employeeSalary;
-        if (employeeSalary != null) {
+        if (employeeSalary == null) {
+            headerLabel.setText("Add Employee Salary");
+        } else {
+            headerLabel.setText("Update Employee Salary");
+
             txtAmount.setText(String.valueOf(employeeSalary.getAmount()));
             choiceMethod.setValue(employeeSalary.getMethod());
             datePicker.setValue(employeeSalary.getDate());
+
+//            amountField.setText(String.valueOf(employeeSalary.getAmount()));
+//            datePicker.setValue(employeeSalary.getDate());
+//            methodComboBox.setValue(employeeSalary.getMethod());
+            // Add any other fields accordingly
         }
     }
+
 
     @FXML
     private void handleSave() {
@@ -115,7 +139,7 @@ public class AddEmployeeSalaryController {
                         .setDate(datePicker.getValue())
                         .build();
 
-                    //add fk to object we just made
+                //add fk to object we just made
                 newSalary.setEmployee(selectedEmployee);
 
                 employeeSalaryService.create(newSalary);

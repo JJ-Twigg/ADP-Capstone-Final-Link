@@ -26,7 +26,7 @@ public class MainFinal extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-sign-upFinal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/windowSignupFinal.fxml"));
         loader.setControllerFactory(springContext::getBean);
         Parent root = loader.load();
 

@@ -456,7 +456,7 @@ public class DashboardController {
     public void showSignInPage(ActionEvent event) {
         try {
             // Load login FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/window-login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/windowLoginFinal.fxml"));
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);
             Parent loginRoot = loader.load();
 

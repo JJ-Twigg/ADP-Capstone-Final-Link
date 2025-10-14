@@ -123,7 +123,7 @@ public class EmployeeSalaryController {
 
     private void openForm(EmployeeSalary employeeSalary) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Add_EmployeeSalary.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dialog_boxes/AddEmployeeSalaryFinal.fxml"));
 
             // Use Spring to inject the controller
             loader.setControllerFactory(MainFinal.getSpringContext()::getBean);

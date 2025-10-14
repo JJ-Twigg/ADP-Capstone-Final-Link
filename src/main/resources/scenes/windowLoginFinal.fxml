@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.college.controller.UserLoginController"
+      fx:id="rootHBox"
+      spacing="0">
+
+    <!-- LEFT PANEL -->
+    <VBox fx:id="leftPane" alignment="CENTER" spacing="10"
+          style="-fx-background-color: linear-gradient(rgba(69,182,254,0.1), rgba(69,100,254,1));"
+          HBox.hgrow="ALWAYS">
+        <children>
+            <ImageView fitHeight="186" fitWidth="177">
+                <image>
+                    <Image url="/images/c.png"/>
+                </image>
+            </ImageView>
+            <Label text="Hotel Management System" textFill="WHITE">
+                <font><Font size="15"/></font>
+            </Label>
+            <Label text="HMS" textFill="WHITE"/>
+        </children>
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+    </VBox>
+
+    <!-- RIGHT PANEL wrapped in StackPane -->
+    <StackPane fx:id="mainFrame" HBox.hgrow="ALWAYS">
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: white;">
+            <children>
+                <Label text="Log in">
+                    <font><Font size="32"/></font>
+                </Label>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Username" prefWidth="80"/>
+                    <TextField fx:id="username" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Password" prefWidth="80"/>
+                    <PasswordField fx:id="password" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <Button text="Log in" fx:id="loginButton" onAction="#handleLoginAuth"
+                        style="-fx-background-color: rgba(69,150,255,1); -fx-text-fill:white;"
+                        HBox.hgrow="ALWAYS" prefHeight="40"/>
+                <Hyperlink text="I don't have an account" onAction="#handleGoBack"/>
+                <Button text="Exit" onAction="#exitApplication"
+                        style="-fx-background-color: black; -fx-text-fill: white;"
+                        prefHeight="40"/>
+            </children>
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </VBox>
+    </StackPane>
+
+</HBox>

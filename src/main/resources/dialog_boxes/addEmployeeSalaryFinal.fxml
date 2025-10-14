@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.AddEmployeeSalaryController">
+   <VBox alignment="TOP_CENTER" layoutX="25.0" prefHeight="400.0" prefWidth="350.0" spacing="10.0">
+      <children>
+      
+          <!-- Heading -->
+          <Label fx:id="headerLabel" style="-fx-font-weight: bold;" text="Add Salary">
+            <font>
+               <Font size="24.0" />
+            </font>
+            <VBox.margin>
+               <Insets bottom="20.0" />
+            </VBox.margin>
+         </Label>
+         <HBox fillHeight="false" prefHeight="20.0" prefWidth="300.0">
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+            <children>
+            
+                <!-- Employee -->
+                <Label prefHeight="20.0" prefWidth="100.0" text="Employee:" />
+                <ComboBox fx:id="employeeComboBox" prefWidth="200.0" promptText="Select Employee" />
+            </children>
+         </HBox>
+         <HBox prefHeight="20.0">
+            <children>
+            
+                <!-- Amount -->
+                <Label prefHeight="20.0" prefWidth="100.0" text="Amount:" />
+                <TextField fx:id="txtAmount" prefWidth="200.0" />
+            </children>
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+         </HBox>
+         <HBox prefHeight="20.0">
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+            <children>
+            
+                <!-- Payment Method -->
+                <Label prefHeight="20.0" prefWidth="100.0" text="Method:" />
+                <ChoiceBox fx:id="choiceMethod" prefHeight="25.0" prefWidth="200.0" />
+            </children>
+         </HBox>
+         <HBox prefHeight="20.0">
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+            <children>
+            
+                <!-- Date -->
+                <Label prefHeight="20.0" prefWidth="100.0" text="Date:" />
+                <DatePicker fx:id="datePicker" prefWidth="200.0" />
+            </children>
+         </HBox>
+         <HBox prefHeight="39.0" prefWidth="310.0" spacing="10.0">
+            <VBox.margin>
+               <Insets bottom="10.0" top="10.0" />
+            </VBox.margin>
+            <children>
+            
+                <!-- Buttons -->
+                <Button fx:id="btnSave" onAction="#handleSave" prefHeight="39.0" prefWidth="148.0" style="-fx-background-color: #2fa0e8;" text="Save" textFill="WHITE">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
+                <Button fx:id="btnCancel" onAction="#handleCancel" prefHeight="39.0" prefWidth="146.0" style="-fx-background-color: black;" text="Cancel" textFill="WHITE">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
+            </children>
+         </HBox>
+      </children>
+      <padding>
+         <Insets left="20.0" right="20.0" top="40.0" />
+      </padding>
+   </VBox>
+
+</AnchorPane>
