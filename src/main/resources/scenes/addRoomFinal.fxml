@@ -51,11 +51,11 @@
                         <String fx:value="63"/>
                         <String fx:value="64"/>
                         <String fx:value="65"/>
-                        <String fx:value="66"/>
-                        <String fx:value="67"/>
-                        <String fx:value="68"/>
-                        <String fx:value="69"/>
-                        <String fx:value="70"/>
+<!--                        <String fx:value="66"/>-->
+<!--                        <String fx:value="67"/>-->
+<!--                        <String fx:value="68"/>-->
+<!--                        <String fx:value="69"/>-->
+<!--                        <String fx:value="70"/>-->
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -70,11 +70,10 @@
                        style="-fx-background-radius: 3; -fx-border-radius: 3"/>
 
             <ComboBox fx:id="availabilityComboBox" prefWidth="220" prefHeight="30"
-                      style="-fx-background-radius: 0; -fx-border-radius: 0;" value="Select Availability">
+                      style="-fx-background-radius: 0; -fx-border-radius: 0;" value="Available">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Available"/>
-                        <String fx:value="Unavailable"/>
                     </FXCollections>
                 </items>
             </ComboBox>

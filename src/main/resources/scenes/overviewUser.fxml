@@ -12,7 +12,7 @@
         <VBox alignment="CENTER" spacing="40" style="-fx-background-color: white;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
             <!-- Header -->
-            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #E67E22;" text="Dashboard Overview" />
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: linear-gradient(to bottom, #36454F, #707880);" text="Dashboard Overview" />
 
 
             <!-- clock -->

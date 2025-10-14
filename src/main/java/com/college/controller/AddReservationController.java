@@ -89,7 +89,7 @@ public class AddReservationController {
     @FXML
     public void initialize() {
         // Populate room numbers (51-59)
-        for (int i = 51; i <= 60; i++) {
+        for (int i = 51; i <= 65; i++) {
             comboBoxNumbers.getItems().add(i);
         }
         comboBoxNumbers.setValue(52);
@@ -227,58 +227,56 @@ public class AddReservationController {
 
 
 
-                // CUSTOM ROOM BOOKING code
-                if (roomChosen != null && roomChosen == 60) {
-                    boolean customRoomExists = customRoomService.getAll().stream()
-                            .anyMatch(customRoom -> customRoom.getRoomID() == 60);
 
-                    if (!customRoomExists) {
+                // CUSTOM ROOM BOOKING code (60-65)
+                if (roomChosen != null && roomChosen >= 60 && roomChosen <= 65) {
+                    CustomRoom customRoom = customRoomService.read(roomChosen);
+
+                    if (customRoom == null) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Unavailable Room");
                         alert.setHeaderText(null);
-                        alert.setContentText("Room 60 is not available — it’s not registered in Custom Rooms.");
+                        alert.setContentText("Room " + roomChosen + " is not available — it’s not registered in Custom Rooms.");
                         alert.showAndWait();
                         return;
-                    } else {
-                        System.out.println("Room 60 found in CustomRoom table");
+                    }
 
-                        try {
-                            // Create reservation
-                            Reservation reservation = new Reservation(startTime, endTime);
-                            reservation.setGuest(this.guest);
-                            Reservation savedReservation = reservationService.create(reservation);
+                    // Check if already reserved
+                    if (!customRoom.getAvailability()) { // or customRoom.getReservation() != null
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Room Already Reserved");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Custom Room " + roomChosen + " is already reserved. Please select another room.");
+                        alert.showAndWait();
+                        return;
+                    }
 
-                            // Link to CustomRoom
-                            CustomRoom customRoom = customRoomService.read(60);
-                            customRoom.setReservation(savedReservation);
-                            customRoom.setEmployee(chosenEmployee);
-                            customRoom.setAvailability(false);
-                            customRoomService.update(customRoom);
+                    // If available, proceed with reservation
+                    try {
+                        Reservation reservation = new Reservation(startTime, endTime);
+                        reservation.setGuest(this.guest);
+                        Reservation savedReservation = reservationService.create(reservation);
 
-                            alertReservationSuccess(roomChosen);
+                        customRoom.setReservation(savedReservation);
+                        customRoom.setEmployee(chosenEmployee);
+                        customRoom.setAvailability(false); // mark as booked
+                        customRoomService.update(customRoom);
 
-                            double pricee = 0 ;
+                        alertReservationSuccess(roomChosen);
 
-                            if (roomChosen != null && roomChosen == 60) {
-                                pricee = getCustomRoomPrice(60);
-                            }else {
-                                price = (float) getRoomPrice(roomChosen); // fetch from normal Room table
-                            }
+                        double pricee = getCustomRoomPrice(roomChosen);
+                        openAddPaymentPage(this.guest, pricee);
 
-                            // Open payment page
-                            openAddPaymentPage(this.guest, pricee);
+                        if (stage != null) stage.close();
+                        if (parentStage != null) parentStage.close();
 
-                            // Close AddReservation modal and parent Reservation page
-                            if (stage != null) stage.close();
-                            if (parentStage != null) parentStage.close();
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            System.out.println("Error saving custom room reservation: " + e.getMessage());
-                            System.out.println("Error saving reservation: " + e.getMessage());
-                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println("Error saving custom room reservation: " + e.getMessage());
                     }
                 }
+
+
 
 
 

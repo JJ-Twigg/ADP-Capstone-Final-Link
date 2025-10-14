@@ -135,9 +135,10 @@ public class RoomController {
         idLabel.getStyleClass().add("room-title");
         card.getChildren().add(idLabel);
 
+        // Editable fields
         card.getChildren().add(createEditableField("Price Per Night:", String.valueOf(room.getPricePerNight()), val -> room.setPricePerNight(Float.parseFloat(val))));
         card.getChildren().add(createEditableField("Room Type:", room.getRoomType(), room::setRoomType));
-        card.getChildren().add(createEditableField("Availability:", room.getAvailability() ? "Yes" : "No", val -> room.setAvailability(val.equalsIgnoreCase("Yes"))));
+        card.getChildren().add(createNonEditableField("Availability:", room.getAvailability() ? "Yes" : "No"));
         card.getChildren().add(createEditableField("Features:", room.getFeatures(), room::setFeatures));
 
         Button updateBtn = new Button("Update Room");
@@ -148,6 +149,7 @@ public class RoomController {
 
         return card;
     }
+
 
     private HBox createEditableField(String labelPrefix, String value, java.util.function.Consumer<String> setter) {
         HBox hbox = new HBox(5);
@@ -184,6 +186,13 @@ public class RoomController {
         });
 
         hbox.getChildren().addAll(label, textField, editIcon);
+        return hbox;
+    }
+
+    private HBox createNonEditableField(String labelPrefix, String value) {
+        HBox hbox = new HBox(5);
+        Label label = new Label(labelPrefix + " " + value);
+        hbox.getChildren().add(label);
         return hbox;
     }
 

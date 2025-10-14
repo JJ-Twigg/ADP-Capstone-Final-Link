@@ -117,7 +117,7 @@ public class RoomControllerCustom {
 
         card.getChildren().add(createEditableField("Price Per Night:", String.valueOf(customRoom.getPricePerNight()), val -> customRoom.setPricePerNight(Float.parseFloat(val))));
         card.getChildren().add(createEditableField("Room Type:", customRoom.getRoomType(), customRoom::setRoomType));
-        card.getChildren().add(createEditableField("Availability:", customRoom.getAvailability() ? "Yes" : "No", val -> customRoom.setAvailability(val.equalsIgnoreCase("Yes"))));
+        card.getChildren().add(createNonEditableField("Availability:", customRoom.getAvailability() ? "Yes" : "No"));
         card.getChildren().add(createEditableField("Features:", customRoom.getFeatures(), customRoom::setFeatures));
 
         // --- UPDATE BUTTON ---
@@ -245,6 +245,14 @@ public class RoomControllerCustom {
         hbox.getChildren().addAll(label, textField, editIcon);
         return hbox;
     }
+
+    private HBox createNonEditableField(String labelPrefix, String value) {
+        HBox hbox = new HBox(5);
+        Label label = new Label(labelPrefix + " " + value);
+        hbox.getChildren().add(label);
+        return hbox;
+    }
+
 
     public void setCustomRoomService(CustomRoomService customRoomService) {
         this.customRoomService = customRoomService;
