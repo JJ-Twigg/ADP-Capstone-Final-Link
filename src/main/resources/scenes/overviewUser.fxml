@@ -30,40 +30,52 @@
 
 
             <!-- Top Row: 3 Statistic Blocks -->
-            <HBox alignment="CENTER" spacing="30">
+            <HBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
 
                 <!-- Total Guests -->
-                <VBox alignment="CENTER" spacing="10">
-                    <VBox styleClass="card-box" style=" -fx-background-color: linear-gradient(to bottom, #36454F, #707880);
-                    -fx-background-radius: 12; -fx-alignment: center"  prefWidth="220" prefHeight="180" minWidth="220" minHeight="180" >
-
+                <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <VBox styleClass="card-box"
+                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880); -fx-background-radius: 12; -fx-alignment: center; -fx-padding: 10;"
+                          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="200" prefWidth="1.0">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="👥" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Email" />
-                        <Label fx:id="userEmailLabel" onMouseClicked="#updateEmail" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="johnDoe@gmail.com" />
-
+                        <Label fx:id="userEmailLabel" onMouseClicked="#updateEmail"
+                               style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
+                               text="johnDoe@gmail.com"
+                               wrapText="true" textAlignment="CENTER"/>
                     </VBox>
                 </VBox>
 
                 <!-- Total Revenue -->
-                <VBox alignment="CENTER" spacing="10">
-                    <VBox styleClass="card-box" style=" -fx-background-color: linear-gradient(to bottom, #36454F, #707880);
-                    -fx-background-radius: 12; -fx-alignment: center"  prefWidth="220" prefHeight="180" minWidth="220" minHeight="180">
+                <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <VBox styleClass="card-box"
+                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880); -fx-background-radius: 12; -fx-alignment: center; -fx-padding: 10;"
+                          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="200" prefWidth="1.0">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Name" />
-                        <Label fx:id="nameLabel" onMouseClicked="#updateName"  style="-fx-text-fill: white;  -fx-font-size: 32px; -fx-font-weight: bold;"  text="johnDoe" />
+                        <Label fx:id="nameLabel" onMouseClicked="#updateName"
+                               style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
+                               text="johnDoe"
+                               wrapText="true" textAlignment="CENTER"/>
                     </VBox>
                 </VBox>
 
                 <!-- Occupancy Rate -->
-                <VBox alignment="CENTER" spacing="10">
-                    <VBox styleClass="card-box" style=" -fx-background-color: linear-gradient(to bottom, #36454F, #707880);
-                    -fx-background-radius: 12;  -fx-alignment: center"  prefWidth="220" prefHeight="180" minWidth="220" minHeight="180">
+                <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <VBox styleClass="card-box"
+                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880); -fx-background-radius: 12; -fx-alignment: center; -fx-padding: 10;"
+                          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="200" prefWidth="1.0">
                         <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="📊" />
                         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Role" />
-                        <Label fx:id="roleLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" text="role" />
+                        <Label fx:id="roleLabel"
+                               style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
+                               text="role"
+                               wrapText="true" textAlignment="CENTER"/>
                     </VBox>
                 </VBox>
+
             </HBox>
+
 
             <HBox alignment="CENTER" spacing="10">
                 <Button text="Upload Image" fx:id="uploadImageButton"
