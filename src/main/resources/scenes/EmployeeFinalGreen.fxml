@@ -1,56 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.college.controller.EmployeeControllerView">
+<HBox prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.college.controller.EmployeeControllerView"
+      stylesheets="@/css/buttonStyle.css">
 
-    <!-- Table -->
-    <TableView fx:id="employeeTable" layoutX="360" layoutY="114.0" prefHeight="332.0" prefWidth="500.0"
-               style="-fx-background-color: white; -fx-border-color: transparent;">
-        <columns>
-            <TableColumn fx:id="colEmployeeId" prefWidth="60" text="Employee ID"
-                         />
-            <TableColumn fx:id="colJobType" prefWidth="150" text="Job Type"
-                         />
-            <TableColumn fx:id="colStartDate" prefWidth="150" text="Start Date"
-                         />
-            <TableColumn fx:id="colUserId" prefWidth="150" text="User ID"
-                         />
-        </columns>
-    </TableView>
+    <!-- Sidebar -->
+    <VBox prefWidth="230.0"
+          alignment="TOP_CENTER"
+          spacing="20.0"
+          style="-fx-background-color: #66BA88; -fx-padding: 30;">
+        <!-- Logo (optional) -->
+        <ImageView fitHeight="80.0" preserveRatio="true">
+            <image>
+                <Image url="/images/c.png" />
+            </image>
+        </ImageView>
 
-    <!-- Side Pane -->
-    <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
-        <children>
+        <!-- Buttons -->
+        <Button text="Update Employee" onAction="#updateEmployee" styleClass="sidebar-btn" />
+        <!-- Uncomment if needed:
+        <Button text="Add Employee" onAction="#addEmployee" styleClass="sidebar-btn" />
+        <Button text="Delete Employee" onAction="#deleteEmployee" styleClass="sidebar-btn-danger" />
+        -->
+    </VBox>
 
-            <!-- Buttons -->
-<!--            <Button layoutX="41.0" layoutY="193.0" prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css" text="Add Employee"-->
-<!--                    textFill="WHITE" onAction="#addEmployee"/>-->
+    <!-- Main Content -->
+    <VBox spacing="20.0" alignment="TOP_CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 20;">
+        <!-- Centered Heading -->
+        <Text text="Employees"
+              style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;" />
 
-            <Button layoutX="40.0" layoutY="275.0" prefHeight="40.0" prefWidth="150.0"
-                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
-                    stylesheets="/css/buttonStyle.css" text="Update Employee"
-                    textFill="WHITE" onAction="#updateEmployee"/>
-
-<!--            <Button layoutX="40.0" layoutY="350.0" prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #E02850;-fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css" text="Delete Employee"-->
-<!--                    textFill="WHITE" onAction="#deleteEmployee"/>-->
-        </children>
-    </Pane>
-
-    <!-- Heading -->
-    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Employees" textAlignment="CENTER" wrappingWidth="188.35">
-        <font>
-            <Font size="32.0"/>
-        </font>
-    </Text>
-</AnchorPane>
+        <!-- Table -->
+        <TableView fx:id="employeeTable" VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-border-color: transparent;">
+            <columns>
+                <TableColumn fx:id="colEmployeeId" text="Employee ID" prefWidth="60" />
+                <TableColumn fx:id="colJobType" text="Job Type" prefWidth="150" />
+                <TableColumn fx:id="colStartDate" text="Start Date" prefWidth="150" />
+                <TableColumn fx:id="colUserId" text="User ID" prefWidth="150" />
+            </columns>
+        </TableView>
+    </VBox>
+</HBox>

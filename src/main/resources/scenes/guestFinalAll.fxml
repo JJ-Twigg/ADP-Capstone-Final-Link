@@ -4,41 +4,59 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.college.controller.GuestUIController"
             style="-fx-background-color: white;">
 
-    <!-- Left Green Panel -->
-    <Pane fx:id="leftPane" style="-fx-background-color: #66BA88;"
+    <!-- Left Sidebar -->
+    <VBox fx:id="leftPane"
+          style="-fx-background-color: #45b6fe;"
           prefWidth="230.0"
           AnchorPane.topAnchor="0.0"
           AnchorPane.bottomAnchor="0.0"
-          AnchorPane.leftAnchor="0.0">
-        <children>
-            <ImageView layoutX="63.0" layoutY="26.0" preserveRatio="true" fitWidth="100">
-                <image>
-                    <Image url="/images/c.png" />
-                </image>
-            </ImageView>
+          AnchorPane.leftAnchor="0.0"
+          spacing="20.0" alignment="TOP_CENTER">
 
-            <Button layoutX="40.0" layoutY="275.0"
+        <!-- Proper padding using Insets -->
+        <padding>
+            <Insets top="30" right="30" bottom="30" left="30"/>
+        </padding>
+
+        <!-- Logo -->
+        <ImageView preserveRatio="true" fitHeight="80">
+            <image>
+                <Image url="/images/c.png"/>
+            </image>
+        </ImageView>
+
+        <!-- Buttons -->
+        <VBox spacing="10.0" alignment="TOP_CENTER">
+<!--            <Button fx:id="btnAddGuest"-->
+<!--                    text="Add Guest"-->
+<!--                    onAction="#handleAddGuest"-->
+<!--                    style="-fx-background-color: #2fa0e8; -fx-background-radius: 15px; -fx-text-fill: white;"-->
+<!--                    prefWidth="150" prefHeight="40"/>-->
+            <Button fx:id="btnEditGuest"
+                    text="Update Guest"
                     onAction="#handleEditGuest"
-                    prefHeight="40.0" prefWidth="150.0"
-                    style="-fx-background-color: #398F6C; -fx-background-radius: 15px;"
-                    text="Update Guest" textFill="WHITE" />
-        </children>
-    </Pane>
+                    style="-fx-background-color: #398F6C; -fx-background-radius: 15px; -fx-text-fill: white;"
+                    prefWidth="150" prefHeight="40"/>
+<!--            <Button fx:id="btnDeleteGuest"-->
+<!--                    text="Delete Guest"-->
+<!--                    onAction="#handleDeleteGuest"-->
+<!--                    style="-fx-background-color: #E02850; -fx-background-radius: 15px; -fx-text-fill: white;"-->
+<!--                    prefWidth="150" prefHeight="40"/>-->
+        </VBox>
+    </VBox>
 
     <!-- Title -->
-    <Text text="Guests" fill="#383838"
+    <Text text="Guests"
+          style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;"
           AnchorPane.topAnchor="30.0"
-          AnchorPane.leftAnchor="250.0">
-        <font>
-            <Font size="32.0" />
-        </font>
-    </Text>
+          AnchorPane.leftAnchor="250.0"/>
 
     <!-- Table -->
     <TableView fx:id="guestTable"

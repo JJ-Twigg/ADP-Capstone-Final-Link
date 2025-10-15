@@ -9,10 +9,12 @@
             xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.college.controller.EventUIController">
 
-    <!-- Left side Pane,inputs and buttons -->
-    <Pane layoutX="0.0" layoutY="0.0" prefHeight="605.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+    <!-- Left side Pane, inputs and buttons -->
+    <Pane prefWidth="230.0" style="-fx-background-color: #66BA88;"
+          AnchorPane.topAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0">
         <children>
-            <!-- inputs,buttons -->
             <VBox layoutX="15.0" layoutY="30.0" spacing="15.0" alignment="TOP_CENTER">
 
                 <!-- Logo at top -->
@@ -27,21 +29,19 @@
                     <TextField fx:id="reasonField" promptText="Reason: Holiday, Work, etc." prefWidth="200.0"/>
                 </HBox>
 
-                <!-- Description input, false visible at first  -->
+                <!-- Description input, false visible at first -->
                 <HBox fx:id="descriptionBox" spacing="10.0" visible="false">
                     <TextField fx:id="descriptionField" promptText="Description: Optional details" prefWidth="200.0"/>
                 </HBox>
 
                 <!-- Buttons -->
                 <VBox spacing="10.0" alignment="TOP_CENTER">
-
                     <Button fx:id="newButton"
                             prefHeight="40.0" prefWidth="150.0"
                             style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
                             stylesheets="/css/buttonStyle.css"
                             text="Enter Event Details" textFill="WHITE"
                             onAction="#showAddEventInputs"/>
-                    <!-- Existing Add Event button -->
                     <Button fx:id="addButton"
                             prefHeight="40.0" prefWidth="150.0"
                             style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
@@ -55,18 +55,25 @@
     </Pane>
 
     <!-- TableView -->
-    <TableView fx:id="eventTable" layoutX="250.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0"
+    <TableView fx:id="eventTable"
+               AnchorPane.topAnchor="50.0"
+               AnchorPane.leftAnchor="250.0"
+               AnchorPane.rightAnchor="20.0"
+               AnchorPane.bottomAnchor="20.0"
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
             <TableColumn fx:id="colId" prefWidth="60" text="ID"/>
-            <TableColumn fx:id="colReservationId"  prefWidth="100" text="Reservation ID" />
+            <TableColumn fx:id="colReservationId" prefWidth="100" text="Reservation ID"/>
             <TableColumn fx:id="colReason" prefWidth="150" text="Reason"/>
-            <TableColumn fx:id="colDescription"  prefWidth="200" text="Description"/>
+            <TableColumn fx:id="colDescription" prefWidth="200" text="Description"/>
         </columns>
     </TableView>
 
     <!-- Title -->
-    <Text fill="#383838" layoutX="529.0" layoutY="15.0" text="Events">
+    <Text fill="#383838"
+          text="Events"
+          AnchorPane.topAnchor="15.0"
+          AnchorPane.leftAnchor="250.0">
         <font>
             <Font size="32.0"/>
         </font>

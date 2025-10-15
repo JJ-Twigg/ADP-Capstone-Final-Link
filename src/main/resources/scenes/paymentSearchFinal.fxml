@@ -6,51 +6,64 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.PaymentViewController"
+            stylesheets="@/css/buttonStyle.css"
+>
 
+    <!-- Sidebar (fixed) -->
+    <Pane fx:id="sidebar"
+          prefWidth="230.0"
+          style="-fx-background-color: #66BA88;"
+          AnchorPane.topAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0">
+        <children>
+            <VBox layoutX="15.0" layoutY="40.0" spacing="20.0" alignment="TOP_CENTER">
+
+                <!-- Logo -->
+                <ImageView fitHeight="80.0" preserveRatio="true">
+                    <image>
+                        <Image url="/images/c.png" />
+                    </image>
+                </ImageView>
+
+                <!-- Buttons -->
+                <Button onAction="#searchTopPayments"
+                        prefHeight="40.0" prefWidth="180.0"
+                        text="Search Top Payments"
+                        textFill="WHITE"
+                        style="-fx-background-color: #398F6C; -fx-background-radius: 10px;" />
+            </VBox>
+        </children>
+    </Pane>
+
+    <!-- Header -->
+    <HBox alignment="CENTER"
+          AnchorPane.topAnchor="25.0"
+          AnchorPane.leftAnchor="250.0"
+          AnchorPane.rightAnchor="0.0">
+        <Text text="Payments"
+              fill="#383838"
+              style="-fx-font-size: 32px; -fx-font-weight: bold;" />
+    </HBox>
 
     <!-- Table -->
-    <TableView fx:id="paymentTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: transparent;">
+    <TableView fx:id="paymentTable"
+               AnchorPane.topAnchor="90.0"
+               AnchorPane.leftAnchor="250.0"
+               AnchorPane.rightAnchor="20.0"
+               AnchorPane.bottomAnchor="20.0"
+               style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
-            <TableColumn fx:id="colId" prefWidth="60"  text="ID" />
-            <TableColumn fx:id="colGuestId" prefWidth="100"  text="Guest ID" />
-
-            <TableColumn fx:id="colAmount" prefWidth="150"  text="Amount" />
-            <TableColumn fx:id="colMethod" prefWidth="150"  text="Method" />
-            <TableColumn fx:id="colStatus" prefWidth="150"  text="Status" />
-            <TableColumn fx:id="colDate" prefWidth="200"  text="Date" />
+            <TableColumn fx:id="colId" text="ID" />
+            <TableColumn fx:id="colGuestId" text="Guest ID" />
+            <TableColumn fx:id="colAmount" text="Amount" />
+            <TableColumn fx:id="colMethod" text="Method" />
+            <TableColumn fx:id="colStatus" text="Status" />
+            <TableColumn fx:id="colDate" text="Date" />
         </columns>
     </TableView>
-        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
-    <children>
 
-
-
-
-
-
-    <!-- Buttons -->
-<!--    <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeletePayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #E02850; -fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Delete Payment" textFill="WHITE" />-->
-
-        <ImageView layoutX="63.0" layoutY="26.0">
-            <image>
-                <Image url="/images/c.png" />
-            </image>
-        </ImageView>
-        <Button layoutX="40.0" layoutY="275.0" onAction="#searchTopPayments" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Search Top Payments" textFill="WHITE" />
-
-<!--        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddPayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Payment" textFill="WHITE" />-->
-
-
-
-
-
-
-    </children>
-        </Pane>
-    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payments" textAlignment="CENTER" wrappingWidth="188.34881591796875">
-        <font>
-            <Font size="32.0" />
-        </font>
-    </Text>
 </AnchorPane>

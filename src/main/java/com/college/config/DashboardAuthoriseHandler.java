@@ -78,6 +78,14 @@ public class DashboardAuthoriseHandler {
             stage.setHeight(600);
             stage.centerOnScreen();
             stage.setResizable(true);
+
+            //Block maximise window for all dashboards
+            stage.maximizedProperty().addListener((obs, wasMaximized, isNowMaximized) -> {
+                if (isNowMaximized) {
+                    stage.setMaximized(false); // immediately cancel maximize
+                }
+            });
+
             stage.show();
 
         } catch (IOException e) {

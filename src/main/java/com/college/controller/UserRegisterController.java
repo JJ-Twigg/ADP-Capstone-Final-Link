@@ -9,6 +9,7 @@ import com.college.service.EmployeeService;
 import com.college.service.RoleService;
 import com.college.service.UserRoleService;
 import com.college.service.UserService;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +73,17 @@ public class UserRegisterController {
                 otherRoleComboBox.getSelectionModel().clearSelection();
             }
         });
+
+        // Prevent maximize
+        Platform.runLater(() -> {
+            Stage stage = (Stage) username.getScene().getWindow();
+            stage.maximizedProperty().addListener((obs, wasMaximized, isNowMaximized) -> {
+                if (isNowMaximized) {
+                    stage.setMaximized(false);
+                }
+            });
+        });
+
     }
 
 

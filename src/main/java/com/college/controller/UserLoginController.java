@@ -4,6 +4,7 @@ import com.college.MainFinal;
 import com.college.config.DashboardAuthoriseHandler;
 import com.college.domain.User;
 import com.college.service.UserService;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +60,17 @@ public class UserLoginController {
     public void initialize() {
         // Bind left panel width to 40% of the HBox width
         leftPane.prefWidthProperty().bind(rootHBox.widthProperty().multiply(0.4));
+
+        // Prevent maximize AFTER scene is attached
+        Platform.runLater(() -> {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.maximizedProperty().addListener((obs, wasMaximized, isNowMaximized) -> {
+                if (isNowMaximized) {
+                    stage.setMaximized(false); // cancel maximize
+                }
+            });
+        });
+
     }
 
 

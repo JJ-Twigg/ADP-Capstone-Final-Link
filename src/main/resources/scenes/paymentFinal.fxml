@@ -5,52 +5,50 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.PaymentViewController">
+<HBox prefHeight="605.0" prefWidth="1030.0"
+      style="-fx-background-color: white;"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.college.controller.PaymentViewController"
+      stylesheets="@/css/buttonStyle.css">
 
-
-    <!-- Table -->
-    <TableView fx:id="paymentTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: transparent;">
-        <columns>
-            <TableColumn fx:id="colId" prefWidth="60" text="ID" />
-            <TableColumn fx:id="colGuestId" prefWidth="100"  text="Guest ID" />
-
-            <TableColumn fx:id="colAmount" prefWidth="150"  text="Amount" />
-            <TableColumn fx:id="colMethod" prefWidth="150"  text="Method" />
-            <TableColumn fx:id="colStatus" prefWidth="150"  text="Status" />
-            <TableColumn fx:id="colDate" prefWidth="200" text="Date" />
-        </columns>
-    </TableView>
-        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #45b6fe;">
-    <children>
-
-
-
-
-
-
-    <!-- Buttons -->
-<!--    <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeletePayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #E02850; -fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Delete Payment" textFill="WHITE" />-->
-
-        <ImageView layoutX="63.0" layoutY="26.0">
+    <!-- Sidebar -->
+    <VBox prefWidth="230.0"
+          alignment="TOP_CENTER"
+          spacing="20.0"
+          style="-fx-background-color: #45b6fe; -fx-padding: 30;">
+        <!-- Logo -->
+        <ImageView fitHeight="80.0" preserveRatio="true">
             <image>
                 <Image url="/images/c.png" />
             </image>
         </ImageView>
-<!--        <Button layoutX="40.0" layoutY="275.0" onAction="#handleUpdatePayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Update Payment" textFill="WHITE" />-->
 
-        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddPayment" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #2fa0e8;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Payment" textFill="WHITE" />
+        <!-- Buttons -->
+        <Button text="Add Payment" onAction="#handleAddPayment" styleClass="sidebar-btn" />
+        <!-- Uncomment if needed:
+        <Button text="Update Payment" onAction="#handleUpdatePayment" styleClass="sidebar-btn" />
+        <Button text="Delete Payment" onAction="#handleDeletePayment" styleClass="sidebar-btn-danger" />
+        -->
+    </VBox>
 
+    <!-- Main Content -->
+    <VBox spacing="20.0" alignment="TOP_CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 20;">
+        <!-- Centered Heading -->
+        <Text text="Payments"
+              style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;" />
 
-
-
-
-
-    </children>
-        </Pane>
-    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payments" textAlignment="CENTER" wrappingWidth="188.34881591796875">
-        <font>
-            <Font size="32.0" />
-        </font>
-    </Text>
-</AnchorPane>
+        <!-- Table -->
+        <TableView fx:id="paymentTable" VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-border-color: transparent;">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                <TableColumn fx:id="colGuestId" text="Guest ID" prefWidth="100" />
+                <TableColumn fx:id="colAmount" text="Amount" prefWidth="150" />
+                <TableColumn fx:id="colMethod" text="Method" prefWidth="150" />
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="150" />
+                <TableColumn fx:id="colDate" text="Date" prefWidth="200" />
+            </columns>
+        </TableView>
+    </VBox>
+</HBox>

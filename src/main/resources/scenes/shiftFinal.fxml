@@ -5,54 +5,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.ShiftViewController">
+<HBox prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.college.controller.ShiftViewController"
+      stylesheets="@/css/buttonStyle.css">
 
-
-    <!-- Table -->
-    <TableView fx:id="shiftTable" layoutX="268.0" layoutY="114.0" prefHeight="332.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: transparent;">
-        <columns>
-            <TableColumn fx:id="colId" prefWidth="60"  text="ID" />
-            <TableColumn fx:id="colEmployee" prefWidth="150" text="Employee Id" />
-            <TableColumn fx:id="colEmployeeName" text="Name" />
-            <TableColumn fx:id="colEmployeeSurname" text="Surname" />
-            <TableColumn fx:id="colDate" prefWidth="200" text="Date" />
-            <TableColumn fx:id="colStartTime" prefWidth="150"  text="Start Time" />
-            <TableColumn fx:id="colEndTime" prefWidth="150"  text="End Time" />
-            <TableColumn fx:id="colOvertime" prefWidth="150" text="Overtime" />
-
-        </columns>
-    </TableView>
-        <Pane layoutX="-7.0" layoutY="-1.0" prefHeight="606.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
-    <children>
-
-
-
-
-
-
-    <!-- Buttons -->
-    <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeleteShift" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #E02850; -fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Delete Shift" textFill="WHITE" />
-
-        <ImageView layoutX="63.0" layoutY="26.0">
+    <!-- Sidebar -->
+    <VBox prefWidth="230.0"
+          alignment="TOP_CENTER"
+          spacing="20.0"
+          style="-fx-background-color: #66BA88; -fx-padding: 30;">
+        <!-- Logo -->
+        <ImageView fitHeight="80.0" preserveRatio="true">
             <image>
                 <Image url="/images/c.png" />
             </image>
         </ImageView>
-        <Button layoutX="40.0" layoutY="275.0" onAction="#handleUpdateShift" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Update Shift" textFill="WHITE" />
 
-        <Button layoutX="41.0" layoutY="193.0" onAction="#handleAddShift" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #398F6C;-fx-background-radius: 15px;" stylesheets="/css/buttonStyle.css" text="Add Shift" textFill="WHITE" />
+        <!-- Buttons -->
+        <Button text="Add Shift" onAction="#handleAddShift" styleClass="sidebar-btn" />
+        <Button text="Update Shift" onAction="#handleUpdateShift" styleClass="sidebar-btn" />
+        <Button text="Delete Shift" onAction="#handleDeleteShift" styleClass="sidebar-btn-danger" />
+    </VBox>
 
+    <!-- Main Content -->
+    <VBox spacing="20.0" alignment="TOP_CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 20;">
+        <!-- Centered Heading -->
+        <Text text="Shifts"
+              style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;" />
 
-
-
-
-
-    </children>
-        </Pane>
-    <Text fill="#383838" layoutX="529.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shifts" textAlignment="CENTER" wrappingWidth="188.34881591796875">
-        <font>
-            <Font size="32.0" />
-        </font>
-    </Text>
-</AnchorPane>
+        <!-- Table -->
+        <TableView fx:id="shiftTable" VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-border-color: transparent;">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                <TableColumn fx:id="colEmployee" text="Employee ID" prefWidth="150" />
+                <TableColumn fx:id="colEmployeeName" text="Name" prefWidth="150" />
+                <TableColumn fx:id="colEmployeeSurname" text="Surname" />
+                <TableColumn fx:id="colDate" text="Date" prefWidth="200" />
+                <TableColumn fx:id="colStartTime" text="Start Time" prefWidth="150" />
+                <TableColumn fx:id="colEndTime" text="End Time" prefWidth="150" />
+                <TableColumn fx:id="colOvertime" text="Overtime" prefWidth="150" />
+            </columns>
+        </TableView>
+    </VBox>
+</HBox>

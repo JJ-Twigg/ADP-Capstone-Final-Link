@@ -21,6 +21,22 @@ git clone --branch [branch-name] https://github.com/ammaar0x01/ADP3_capstone_pro
 ```
 
 
+----------------
+do not allow fullscreen maybe add that.
+fix green border height.
+table responsiveness.
+manage payment manager update is broken
+
+done, then just test and deploy
+
+
+
+
+
+
+
+
+
 ### Execute
 - Load and run the project using the IntelliJ IDE
 ---

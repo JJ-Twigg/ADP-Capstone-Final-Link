@@ -6,10 +6,14 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.EventUIController">
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.college.controller.EventUIController">
 
     <!-- Left side Pane for inputs and buttons -->
-    <Pane layoutX="0.0" layoutY="0.0" prefHeight="605.0" prefWidth="230.0" style="-fx-background-color: #66BA88;">
+    <Pane prefWidth="230.0" style="-fx-background-color: #66BA88;"
+          AnchorPane.topAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0">
         <children>
             <!-- Image at top -->
             <ImageView layoutX="63.0" layoutY="26.0">
@@ -45,29 +49,29 @@
                         stylesheets="/css/buttonStyle.css"
                         text="Update Event" textFill="WHITE"/>
             </VBox>
-            <!-- Delete Event button -->
-<!--            <Button layoutX="40.0" layoutY="350.0" onAction="#handleDeleteEvent"-->
-<!--                    prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #E02850; -fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css"-->
-<!--                    text="Delete Event" textFill="WHITE" />-->
-
         </children>
     </Pane>
 
     <!-- TableView -->
-    <TableView fx:id="eventTable" layoutX="350.0" layoutY="50.0" prefHeight="400.0" prefWidth="500.0"
+    <TableView fx:id="eventTable"
+               AnchorPane.topAnchor="50.0"
+               AnchorPane.leftAnchor="250.0"
+               AnchorPane.rightAnchor="20.0"
+               AnchorPane.bottomAnchor="20.0"
                style="-fx-background-color: white; -fx-border-color: transparent;">
         <columns>
-            <TableColumn fx:id="colId"  prefWidth="60" text="ID" />
-            <TableColumn fx:id="colReservationId"  prefWidth="100" text="Reservation ID" />
-            <TableColumn fx:id="colReason"  prefWidth="150" text="Reason" />
-            <TableColumn fx:id="colDescription"  prefWidth="200" text="Description" />
+            <TableColumn fx:id="colId" prefWidth="60" text="ID" />
+            <TableColumn fx:id="colReservationId" prefWidth="100" text="Reservation ID" />
+            <TableColumn fx:id="colReason" prefWidth="150" text="Reason" />
+            <TableColumn fx:id="colDescription" prefWidth="200" text="Description" />
         </columns>
     </TableView>
 
     <!-- Title -->
-    <Text fill="#383838" layoutX="549.0" layoutY="35.0" text="Events">
+    <Text fill="#383838"
+          text="Events"
+          AnchorPane.topAnchor="15.0"
+          AnchorPane.leftAnchor="250.0">
         <font>
             <Font size="32.0"/>
         </font>
