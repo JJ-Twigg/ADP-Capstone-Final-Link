@@ -15,8 +15,11 @@
 
     <!-- LEFT PANEL -->
     <VBox fx:id="leftPane" alignment="CENTER" spacing="10"
-          style="-fx-background-color: linear-gradient(rgba(69,182,254,0.1), rgba(69,100,254,1));"
+          style="-fx-background-color: linear-gradient(to bottom, #45b6fe, #a0d4ff);"
           HBox.hgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
         <children>
             <ImageView fitHeight="186" fitWidth="177">
                 <image>
@@ -28,14 +31,14 @@
             </Label>
             <Label text="HMS" textFill="WHITE"/>
         </children>
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
     </VBox>
 
-    <!-- RIGHT PANEL wrapped in StackPane -->
+    <!-- RIGHT PANEL -->
     <StackPane fx:id="mainFrame" HBox.hgrow="ALWAYS">
-        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: white;">
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: white;" prefWidth="400">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
             <children>
                 <Label text="Log in">
                     <font><Font size="32"/></font>
@@ -43,26 +46,30 @@
 
                 <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label text="Username" prefWidth="80"/>
-                    <TextField fx:id="username" HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="username" HBox.hgrow="ALWAYS" prefHeight="40"/>
                 </HBox>
 
                 <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label text="Password" prefWidth="80"/>
-                    <PasswordField fx:id="password" HBox.hgrow="ALWAYS"/>
+                    <PasswordField fx:id="password" HBox.hgrow="ALWAYS" prefHeight="40"/>
                 </HBox>
 
-                <Button text="Log in" fx:id="loginButton" onAction="#handleLoginAuth"
-                        style="-fx-background-color: rgba(69,150,255,1); -fx-text-fill:white;"
-                        HBox.hgrow="ALWAYS" prefHeight="40"/>
+                <!-- Spacer to push buttons down -->
+                <Region prefHeight="20"/>
+
+                <!-- Buttons stacked -->
+                <VBox spacing="10" alignment="CENTER">
+                    <Button text="Log in" fx:id="loginButton" onAction="#handleLoginAuth"
+                            style="-fx-background-color: #45b6fe; -fx-text-fill:white;"
+                            prefHeight="40" prefWidth="100"/>
+<!--                    <Button text="Exit" onAction="#exitApplication"-->
+<!--                            style="-fx-background-color: #E02850; -fx-text-fill: white;"-->
+<!--                            prefHeight="40" prefWidth="200"/>-->
+                </VBox>
+
+                <!-- Link below buttons -->
                 <Hyperlink text="I don't have an account" onAction="#handleGoBack"/>
-                <Button text="Exit" onAction="#exitApplication"
-                        style="-fx-background-color: black; -fx-text-fill: white;"
-                        prefHeight="40"/>
             </children>
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
         </VBox>
     </StackPane>
-
 </HBox>

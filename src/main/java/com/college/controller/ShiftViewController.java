@@ -34,6 +34,10 @@ public class ShiftViewController {
     @FXML private TableColumn<Shift, LocalTime> colEndTime;
     @FXML private TableColumn<Shift, Boolean> colOvertime;
 
+    @FXML private TableColumn<Shift, String> colEmployeeName;
+    @FXML private TableColumn<Shift, String> colEmployeeSurname;
+
+
     @Autowired
     private ShiftService ShiftService;
 
@@ -65,6 +69,23 @@ public class ShiftViewController {
         colStartTime.setCellValueFactory(new PropertyValueFactory<>("shiftStartTime"));
         colEndTime.setCellValueFactory(new PropertyValueFactory<>("shiftEndTime"));
         colOvertime.setCellValueFactory(new PropertyValueFactory<>("shiftOvertime"));
+
+
+        colEmployeeName.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getEmployee() != null && cellData.getValue().getEmployee().getUser() != null) {
+                return new SimpleStringProperty(cellData.getValue().getEmployee().getUser().getName());
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
+
+        colEmployeeSurname.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getEmployee() != null && cellData.getValue().getEmployee().getUser() != null) {
+                return new SimpleStringProperty(cellData.getValue().getEmployee().getUser().getSurname());
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
 
         colEmployee.setCellValueFactory(cellData -> {
             if (cellData.getValue().getEmployee() != null) {

@@ -31,6 +31,9 @@ public class EmployeeSalaryController {
     @FXML private TableColumn<EmployeeSalary, String> colMethod;
     @FXML private TableColumn<EmployeeSalary, LocalDate> colDate;
 
+    @FXML private TableColumn<EmployeeSalary, String> colEmployeeName;
+    @FXML private TableColumn<EmployeeSalary, String> colEmployeeSurname;
+
 
     private ObservableList<EmployeeSalary> employeeSalaries = FXCollections.observableArrayList();
 
@@ -44,15 +47,35 @@ public class EmployeeSalaryController {
         colMethod.setCellValueFactory(new PropertyValueFactory<>("method"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        colEmployee.setCellValueFactory(cellData -> {
-            if (cellData.getValue().getEmployee() != null) {
-                return new SimpleStringProperty(
-                        String.valueOf(cellData.getValue().getEmployee().getEmployeeId())
-                );
+        colEmployeeName.setCellValueFactory(cellData -> {
+            Employee emp = cellData.getValue().getEmployee();
+            if (emp != null && emp.getUser() != null) {
+                return new SimpleStringProperty(emp.getUser().getName());
             } else {
                 return new SimpleStringProperty("N/A");
             }
         });
+
+        colEmployeeSurname.setCellValueFactory(cellData -> {
+            Employee emp = cellData.getValue().getEmployee();
+            if (emp != null && emp.getUser() != null) {
+                return new SimpleStringProperty(emp.getUser().getSurname());
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
+
+
+        // Display ID
+        colEmployee.setCellValueFactory(cellData -> {
+            Employee emp = cellData.getValue().getEmployee();
+            if (emp != null) {
+                return new SimpleStringProperty(String.valueOf(emp.getEmployeeId()));
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
+
 
 
         employeeSalaryTable.setItems(employeeSalaries);
@@ -88,6 +111,7 @@ public class EmployeeSalaryController {
             showAlert("Please select an employee salary to update");
         }
     }
+
 
     @FXML
     private void handleDeleteEmployeeSalary() {

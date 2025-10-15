@@ -21,8 +21,9 @@ public class EmployeeSalary {
 
     //FK to employee
     @OneToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId", unique = true)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId", unique = true, nullable = true)
     private Employee employee;
+
 
     public Employee getEmployee() {
         return employee;

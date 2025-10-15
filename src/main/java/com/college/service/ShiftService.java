@@ -4,6 +4,8 @@ import com.college.domain.Shift;
 import com.college.repository.ShiftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +27,18 @@ public class ShiftService implements IShiftService {
         return shiftRepository.save(shift);
     }
 
+    @Transactional
     public void delete(Integer id) {
-        shiftRepository.deleteById(id);
+        shiftRepository.findById(id).ifPresent(shift -> {
+            // Break reference from parent Employee
+            if (shift.getEmployee() != null) {
+                shift.getEmployee().setShift(null); // remove reference to allow deletion
+            }
+
+            // Delete the shift
+            shiftRepository.delete(shift);
+            shiftRepository.flush();
+        });
     }
 
     public java.util.Optional<Shift> findById(Integer id) {

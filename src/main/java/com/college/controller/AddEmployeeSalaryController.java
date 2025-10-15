@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Component
 public class AddEmployeeSalaryController {
@@ -83,6 +84,8 @@ public class AddEmployeeSalaryController {
 //    }
 
     public void setEmployeeSalary(EmployeeSalary employeeSalary) {
+        this.employeeSalary = employeeSalary; // <--- MUST assign here
+
         if (employeeSalary == null) {
             headerLabel.setText("Add Employee Salary");
         } else {
@@ -92,10 +95,8 @@ public class AddEmployeeSalaryController {
             choiceMethod.setValue(employeeSalary.getMethod());
             datePicker.setValue(employeeSalary.getDate());
 
-//            amountField.setText(String.valueOf(employeeSalary.getAmount()));
-//            datePicker.setValue(employeeSalary.getDate());
-//            methodComboBox.setValue(employeeSalary.getMethod());
-            // Add any other fields accordingly
+            // Automatically select the employee in the ComboBox
+            employeeComboBox.getSelectionModel().select(employeeSalary.getEmployee());
         }
     }
 
@@ -118,43 +119,44 @@ public class AddEmployeeSalaryController {
 
             double amount = Double.parseDouble(txtAmount.getText().trim());
 
-            //CHECK IF employee was selected
+            // CHECK IF employee was selected
             Employee selectedEmployee = employeeComboBox.getSelectionModel().getSelectedItem();
             if (selectedEmployee == null) {
                 showAlert("Please select an employee");
                 return;
             }
 
-            // Prevent adding duplicate salary by checking parents getSalary jpa
-            if (selectedEmployee.getSalary() != null) {
-                showAlert("This employee already has a salary assigned!");
-                return;
-            }
-
-
             if (employeeSalary == null) {
+                // ADDING NEW SALARY
+                // Check if employee already has a salary
+                EmployeeSalary existingSalary = employeeSalaryService.findByEmployee(selectedEmployee);
+                if (existingSalary != null) {
+                    showAlert("This employee already has a salary assigned!");
+                    return;
+                }
+
                 EmployeeSalary newSalary = new EmployeeSalary.Builder()
                         .setAmount(amount)
                         .setMethod(choiceMethod.getValue())
                         .setDate(datePicker.getValue())
                         .build();
 
-                //add fk to object we just made
                 newSalary.setEmployee(selectedEmployee);
-
                 employeeSalaryService.create(newSalary);
-
                 showAlert(Alert.AlertType.INFORMATION, "Employee salary created successfully");
 
             } else {
+                // UPDATING EXISTING SALARY
                 employeeSalary.setAmount(amount);
                 employeeSalary.setMethod(choiceMethod.getValue());
                 employeeSalary.setDate(datePicker.getValue());
+                employeeSalary.setEmployee(selectedEmployee); // keep FK updated
                 employeeSalaryService.update(employeeSalary);
                 showAlert(Alert.AlertType.INFORMATION, "Employee salary updated successfully");
             }
 
             closeWindow();
+
         } catch (NumberFormatException e) {
             showAlert("Invalid amount format");
         } catch (Exception e) {
@@ -162,6 +164,7 @@ public class AddEmployeeSalaryController {
             showAlert("Error saving employee salary: " + e.getMessage());
         }
     }
+
 
     @FXML
     private void handleCancel() {

@@ -21,6 +21,8 @@
         <columns>
             <TableColumn fx:id="colId" prefWidth="60"  text="ID" />
             <TableColumn fx:id="colEmployee" prefWidth="150" text="Employee Id"   />
+            <TableColumn fx:id="colEmployeeName" prefWidth="150" text="Name"   />
+            <TableColumn fx:id="colEmployeeSurname" text="Surname"/>
             <TableColumn fx:id="colAmount" prefWidth="150"  text="Amount" />
             <TableColumn fx:id="colMethod" prefWidth="150" text="Method" />
             <TableColumn fx:id="colDate" prefWidth="200"  text="Date" />

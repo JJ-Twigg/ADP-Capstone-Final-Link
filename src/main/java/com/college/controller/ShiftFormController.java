@@ -118,25 +118,26 @@ public class ShiftFormController {
 
         if (shift == null) {
             headerLabel.setText("Add Shift");
+            // Clear the ComboBox selection for a new shift
+            employeeComboBox.getSelectionModel().clearSelection();
         } else {
             headerLabel.setText("Update Shift");
-            // populate form fields if editing
-            datePicker.setValue(shift.getShiftDay());
 
-            // Populate form with existing shift
-            datePicker.setValue(shift.getShiftDay());   // entity should use LocalDate
-            spinnerStartHour.getValueFactory().setValue(shift.getShiftStartTime().getHour());
-            spinnerStartMinute.getValueFactory().setValue(shift.getShiftStartTime().getMinute());
-            spinnerEndHour.getValueFactory().setValue(shift.getShiftEndTime().getHour());
-            spinnerEndMinute.getValueFactory().setValue(shift.getShiftEndTime().getMinute());
-            chkOvertime.setSelected(shift.getShiftOvertime());
-//
-//            startTimeField.setText(shift.getShiftStartTime().toString());
-//            endTimeField.setText(shift.getShiftEndTime().toString());
-//            overtimeCheckbox.setSelected(shift.getShiftOvertime());
-            // other fields if any
+            // Populate form fields
+//            datePicker.setValue(shift.getShiftDay());
+//            spinnerStartHour.getValueFactory().setValue(shift.getShiftStartTime().getHour());
+//            spinnerStartMinute.getValueFactory().setValue(shift.getShiftStartTime().getMinute());
+//            spinnerEndHour.getValueFactory().setValue(shift.getShiftEndTime().getHour());
+//            spinnerEndMinute.getValueFactory().setValue(shift.getShiftEndTime().getMinute());
+//            chkOvertime.setSelected(shift.getShiftOvertime());
+
+            // Select the employee in ComboBox
+            if (shift.getEmployee() != null) {
+                employeeComboBox.getSelectionModel().select(shift.getEmployee());
+            }
         }
     }
+
 
 
     @FXML
@@ -152,8 +153,19 @@ public class ShiftFormController {
             LocalTime end = LocalTime.of(spinnerEndHour.getValue(), spinnerEndMinute.getValue());
             boolean overtime = chkOvertime.isSelected();
 
+            Employee selectedEmployee = employeeComboBox.getSelectionModel().getSelectedItem();
+            if (selectedEmployee == null) {
+                showAlert("Please select an employee");
+                return;
+            }
+
             if (shift == null) {
-                // Create new shift
+                // Creating new shift
+                if (selectedEmployee.getShift() != null) {
+                    showAlert("This employee already has a shift assigned!");
+                    return;
+                }
+
                 Shift newShift = new Shift.Builder()
                         .setShiftDay(date)
                         .setShiftStartTime(start)
@@ -161,45 +173,34 @@ public class ShiftFormController {
                         .setShiftOvertime(overtime)
                         .build();
 
-                Employee selectedEmployee = employeeComboBox.getSelectionModel().getSelectedItem();
-                if (selectedEmployee == null) {
-                    showAlert("Please select an employee");
-                    return;
-                }
-
-
-                //HERE U CHECK: if the employee object, has a shift assigned to it. getShift of employee called. it returns shift object jpa
-                if (selectedEmployee.getShift() != null) {
-                    showAlert("This employee already has a shift assigned!");
-                    return;
-                }
-
                 newShift.setEmployee(selectedEmployee);
-
-
                 shiftService.create(newShift);
-
-
-
                 showAlert(Alert.AlertType.INFORMATION, "Shift created successfully!");
             } else {
-                // Update existing shift
+                // Updating existing shift
                 shift.setShiftDay(date);
                 shift.setShiftStartTime(start);
                 shift.setShiftEndTime(end);
                 shift.setShiftOvertime(overtime);
+                shift.setEmployee(selectedEmployee); // in case employee changed
+
+                // Only block if changing employee to someone who already has a shift
+                if (!selectedEmployee.equals(shift.getEmployee()) && selectedEmployee.getShift() != null) {
+                    showAlert("This employee already has a shift assigned!");
+                    return;
+                }
 
                 shiftService.update(shift);
                 showAlert(Alert.AlertType.INFORMATION, "Shift updated successfully!");
             }
 
             closeWindow();
-
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error saving shift: " + e.getMessage());
         }
     }
+
 
     @FXML
     private void handleCancel() {

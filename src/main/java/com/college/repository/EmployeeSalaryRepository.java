@@ -10,4 +10,7 @@ public interface EmployeeSalaryRepository extends JpaRepository<EmployeeSalary, 
     boolean existsByEmployee_EmployeeId(int employeeId);
 
     EmployeeSalary findByEmployee(Employee employee);
+
+    // Find a salary by employee ID
+    EmployeeSalary findByEmployee_EmployeeId(int employeeId);
 }
