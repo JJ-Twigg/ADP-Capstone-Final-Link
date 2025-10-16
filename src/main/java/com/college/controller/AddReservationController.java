@@ -2,10 +2,7 @@ package com.college.controller;
 
 import com.college.MainFinal;
 import com.college.domain.*;
-import com.college.service.CustomRoomService;
-import com.college.service.EmployeeService;
-import com.college.service.ReservationService;
-import com.college.service.RoomService;
+import com.college.service.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,6 +53,14 @@ public class AddReservationController {
     @Autowired
     private CustomRoomService customRoomService;
 
+    @Autowired
+    private NumGuestCache numGuestCache;
+
+    @FXML
+    private Spinner<Integer> numGuestsSpinner;
+
+
+
     private final ReservationService reservationService;
 
 //    @FXML private TextField startTimeField;
@@ -101,6 +106,9 @@ public class AddReservationController {
             comboBoxNumbers.setVisible(!"Event".equals(type));
             comboBoxEmployee.setVisible(!"Event".equals(type));
         });
+
+        numGuestsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
+
 
         // Employee ComboBox, this just gets all employees and works well.
 //        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees());
@@ -192,6 +200,12 @@ public class AddReservationController {
                 reservation.setGuest(this.guest);
                 savedReservation = reservationService.create(reservation);
 
+                //NUM GUESTS
+                int numGuests = numGuestsSpinner.getValue();
+                numGuestCache.setNumGuests(savedReservation.getReservationId(), numGuests);
+                System.out.println("Stored number of guests for reservation "
+                        + savedReservation.getReservationId() + ": " + numGuests);
+
                 System.out.println("Reservation ID (Event): " + savedReservation.getReservationId());
 
                 // Open Event modal WITHOUT closing parent
@@ -257,6 +271,12 @@ public class AddReservationController {
                         reservation.setGuest(this.guest);
                         Reservation savedReservation = reservationService.create(reservation);
 
+                        //NUM GUESTS
+                        int numGuests = numGuestsSpinner.getValue();
+                        numGuestCache.setNumGuests(savedReservation.getReservationId(), numGuests);
+                        System.out.println("Stored number of guests for reservation "
+                                + savedReservation.getReservationId() + ": " + numGuests);
+
                         customRoom.setReservation(savedReservation);
                         customRoom.setEmployee(chosenEmployee);
                         customRoom.setAvailability(false); // mark as booked
@@ -294,6 +314,12 @@ public class AddReservationController {
                         Reservation reservation = new Reservation(startTime, endTime);
                         reservation.setGuest(this.guest);
                         savedReservation = reservationService.create(reservation);
+
+                        //NUM GUESTS
+                        int numGuests = numGuestsSpinner.getValue();
+                        numGuestCache.setNumGuests(savedReservation.getReservationId(), numGuests);
+                        System.out.println("Stored number of guests for reservation "
+                                + savedReservation.getReservationId() + ": " + numGuests);
 
                         roomToUpdate.setReservation(savedReservation);
                         roomToUpdate.setEmployee(chosenEmployee);

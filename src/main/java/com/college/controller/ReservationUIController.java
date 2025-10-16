@@ -51,6 +51,9 @@ public class ReservationUIController implements Initializable {
     @FXML private TextField searchbar;
     @FXML private Label labelFeedback;
 
+    @FXML private TableColumn<Reservation, Integer> numGuestsColumn;
+
+
 
 
     private Stage stage;
@@ -77,7 +80,8 @@ public class ReservationUIController implements Initializable {
 
 
 
-
+    @Autowired
+    private NumGuestCache numGuestCache;
 
 
 
@@ -131,6 +135,17 @@ public class ReservationUIController implements Initializable {
             Room room = r.getRoom();
             int empId = (room != null && room.getEmployee() != null) ? room.getEmployee().getEmployeeId() : 0;
             return new SimpleIntegerProperty(empId).asObject();
+        });
+
+        //NUM GUESTS
+        numGuestsColumn.setCellValueFactory(cellData -> {
+            Reservation r = cellData.getValue();
+            // Get number of guests from cache, default to 0 if null
+            Integer numGuests = numGuestCache.getNumGuests(r.getReservationId());
+            if (numGuests == null) {
+                numGuests = 0;
+            }
+            return new SimpleIntegerProperty(numGuests).asObject();
         });
 
 
