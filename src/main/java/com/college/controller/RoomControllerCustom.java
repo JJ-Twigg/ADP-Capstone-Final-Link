@@ -1,7 +1,9 @@
 package com.college.controller;
 
 import com.college.domain.CustomRoom;
+import com.college.domain.Reservation;
 import com.college.service.CustomRoomService;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -37,6 +39,7 @@ public class RoomControllerCustom {
     @FXML
     private void initialize() {
         loadRoomsFromDB();
+
     }
 
     private void loadRoomsFromDB() {

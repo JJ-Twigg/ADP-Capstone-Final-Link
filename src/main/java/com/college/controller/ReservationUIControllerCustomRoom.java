@@ -36,6 +36,8 @@ public class ReservationUIControllerCustomRoom implements Initializable {
     @FXML private TableColumn<Reservation, Integer> customRoomIdColumn;
     @FXML private TableColumn<Reservation, Integer> employeeIdColumn;
 
+    @FXML private TableColumn<Reservation, Integer> numGuestsColumn;
+
     @FXML private TextField searchbar;
     @FXML private Label labelFeedback;
 
@@ -46,6 +48,9 @@ public class ReservationUIControllerCustomRoom implements Initializable {
     @Autowired private GuestService guestService;
     @Autowired private PaymentService paymentService;
     @Autowired private EventUIServiceNaked eventService;
+
+    @Autowired
+    private NumGuestCache numGuestCache;
 
     @Autowired
     ReservationService reservationService;
@@ -88,6 +93,18 @@ public class ReservationUIControllerCustomRoom implements Initializable {
 
         reservationList = FXCollections.observableArrayList();
         reservationTable.setItems(reservationList);
+
+
+        //NUM GUESTS
+        numGuestsColumn.setCellValueFactory(cellData -> {
+            Reservation r = cellData.getValue();
+            // Get number of guests from cache, default to 0 if null
+            Integer numGuests = numGuestCache.getNumGuests(r.getReservationId());
+            if (numGuests == null) {
+                numGuests = 0;
+            }
+            return new SimpleIntegerProperty(numGuests).asObject();
+        });
 
         loadReservationData();
     }

@@ -10,7 +10,7 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.ReservationUIController"
-      stylesheets="@css/buttonStyle.css">
+      stylesheets="/css/buttonStyle.css">
 
     <!-- Sidebar -->
     <VBox prefWidth="230.0" spacing="20" alignment="TOP_CENTER"
@@ -50,6 +50,8 @@
                 <TableColumn fx:id="endTimeColumn" text="End Time" prefWidth="140"/>
                 <TableColumn fx:id="roomIdColumn" text="Room ID" prefWidth="100"/>
                 <TableColumn fx:id="employeeIdColumn" text="Employee ID" prefWidth="120"/>
+
+                <TableColumn visible="false" fx:id="numGuestsColumn" text="Guests" prefWidth="80"/>
             </columns>
         </TableView>
     </VBox>

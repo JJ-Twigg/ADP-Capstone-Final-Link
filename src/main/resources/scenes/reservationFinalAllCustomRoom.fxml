@@ -48,6 +48,9 @@
                 <TableColumn fx:id="guestIdColumn" text="Guest ID" prefWidth="120"/>
                 <TableColumn fx:id="startTimeColumn" text="Start Time" prefWidth="140"/>
                 <TableColumn fx:id="endTimeColumn" text="End Time" prefWidth="140"/>
+
+                <TableColumn fx:id="numGuestsColumn" text="Guests" prefWidth="80"/>
+
                 <TableColumn fx:id="customRoomIdColumn" text="Room ID" prefWidth="100"/>
                 <TableColumn fx:id="employeeIdColumn" text="Employee ID" prefWidth="120"/>
             </columns>

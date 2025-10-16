@@ -6,65 +6,97 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="faqScrollPane" fitToWidth="true" style="-fx-background-color: #f0f4f7;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1">
+<ScrollPane fx:id="faqScrollPane" fitToWidth="true" style="-fx-background-color: #f0f4f7;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <content>
-        <VBox alignment="TOP_CENTER" spacing="15" fillWidth="true">
+        <VBox alignment="TOP_CENTER" spacing="20" fillWidth="true">
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
+                <Insets top="25" right="25" bottom="25" left="25"/>
             </padding>
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="FAQ" />
-            <FlowPane alignment="TOP_CENTER" hgap="20" vgap="20" prefWrapLength="600">
-                <children>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #A8E6CF, #DCEDC1); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Login Information" />
-                        <Label text="Allows login for Admin, Manager, and User (Housekeeper, Maintenance, Food Worker)." wrapText="true" />
-                    </VBox>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #FFD3B6, #FFAAA5); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Admin Privileges" />
-                        <Label text="Admins can edit users, manage accounts, and print summaries or reports." wrapText="true" />
-                    </VBox>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #FFECB3, #FFE082); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Manager Privileges" />
-                        <Label text="Managers can add guests, handle reservations, and view payment history." wrapText="true" />
-                    </VBox>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #B3E5FC, #81D4FA); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="User Privileges" />
-                        <Label text="Users can view shifts, track hours, and access their schedules (read-only)." wrapText="true" />
-                    </VBox>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #D1C4E9, #B39DDB); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Booking Payments" />
-                        <Label text="Managers record bookings and payments; admins print payment reports." wrapText="true" />
-                    </VBox>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #FFCCBC, #FFAB91); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="How to Use the Program" />
-                        <Label text="Login, navigate menus, manage users or bookings, and always log out after use." wrapText="true" />
-                    </VBox>
-                    <VBox alignment="TOP_LEFT" spacing="8" style="-fx-background-color: linear-gradient(to bottom right, #C8E6C9, #A5D6A7); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8,0,0,3);" maxWidth="250" minWidth="150">
-                        <padding>
-                            <Insets bottom="10" left="12" right="12" top="10" />
-                        </padding>
-                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Additional Notes" />
-                        <Label text="Always log out. The system auto-updates room availability and staff schedules." wrapText="true" />
-                    </VBox>
-                </children>
+
+            <!-- Header -->
+            <Label text="Frequently Asked Questions (FAQ)"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <!-- FAQ Grid -->
+            <FlowPane alignment="TOP_CENTER" hgap="20" vgap="20" prefWrapLength="700">
+
+                <!-- Card 1: Login Info -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #A8E6CF, #DCEDC1);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="Login Information" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Allows login for Admin, Manager, and User (Housekeeper, Maintenance, Food Worker)." wrapText="true"/>
+                </VBox>
+
+                <!-- Card 2: Admin Privileges -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #FFD3B6, #FFAAA5);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="Admin Privileges" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Admins can edit users, manage accounts, and print summaries or reports." wrapText="true"/>
+                </VBox>
+
+                <!-- Card 3: Manager Privileges -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #FFECB3, #FFE082);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="Manager Privileges" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Managers can add guests, handle reservations, and view payment history." wrapText="true"/>
+                </VBox>
+
+                <!-- Card 4: User Privileges -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #B3E5FC, #81D4FA);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="User Privileges" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Users can view shifts, track hours, and access their schedules (read-only)." wrapText="true"/>
+                </VBox>
+
+                <!-- Card 5: Booking Payments -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #D1C4E9, #B39DDB);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="Booking Payments" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Managers record bookings and payments; admins print payment reports." wrapText="true"/>
+                </VBox>
+
+                <!-- Card 6: How to Use -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #FFCCBC, #FFAB91);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="How to Use the Program" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Login, navigate menus, manage users or bookings, and always log out after use." wrapText="true"/>
+                </VBox>
+
+                <!-- Card 7: Additional Notes -->
+                <VBox alignment="TOP_LEFT" spacing="8"
+                      style="-fx-background-color: linear-gradient(to bottom right, #C8E6C9, #A5D6A7);
+                             -fx-border-radius: 10; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+                      maxWidth="250" minWidth="150">
+                    <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+                    <Label text="Additional Notes" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Always log out. The system auto-updates room availability and staff schedules." wrapText="true"/>
+                </VBox>
+
             </FlowPane>
         </VBox>
     </content>
