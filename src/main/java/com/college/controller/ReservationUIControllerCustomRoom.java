@@ -178,6 +178,18 @@ public class ReservationUIControllerCustomRoom implements Initializable {
                 // Delete payment info if exists
                 paymentService.deleteByGuestId(guestId);
 
+                // Check if guest has any other reservations
+                List<Reservation> remainingReservations = reservationService.getByGuestId(guestId);
+                if (remainingReservations.isEmpty()) {
+                    boolean guestDeleted = guestService.delete(guestId);
+                    if (guestDeleted) {
+                        System.out.println("Guest ID " + guestId + " deleted successfully.");
+                    } else {
+                        System.out.println("Failed to delete Guest ID " + guestId + ".");
+                    }
+                }
+
+                // Feedback to user
                 if (deleted) {
                     labelFeedback.setText("Reservation ID: " + selectedReservation.getReservationId() + " deleted successfully.");
                     loadReservationData();
@@ -193,6 +205,7 @@ public class ReservationUIControllerCustomRoom implements Initializable {
             labelFeedback.setText("Deletion cancelled.");
         }
     }
+
 
     @FXML
     private void update() {

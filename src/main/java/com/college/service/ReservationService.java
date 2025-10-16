@@ -66,6 +66,10 @@ public class ReservationService {
         return true;
     }
 
+    public List<Reservation> getByGuestId(int guestID) {
+        return repo.findByGuestGuestID(guestID);
+    }
+
 
     @Transactional(readOnly = true)
     public List<Reservation> getAllWithRoomAndEmployee() {

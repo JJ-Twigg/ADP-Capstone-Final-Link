@@ -26,7 +26,7 @@ git clone --branch [branch-name] https://github.com/ammaar0x01/ADP3_capstone_pro
 fix green border height.
 
 when delete custom room res, only guest remains taht should be ok to fix
-
+check housekeeprs are returned to the pool with custom res deleted
 done, then just test and deploy
 
 
