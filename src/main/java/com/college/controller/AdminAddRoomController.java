@@ -76,6 +76,12 @@ public class AdminAddRoomController {
             boolean availability = "Available".equalsIgnoreCase(availabilityComboBox.getValue());
             String features = featuresField.getText();
 
+            // Check if room with this ID already exists
+            if (customRoomService.findById(roomID) != null) {
+                showAlert("Error", "A room with ID " + roomID + " already exists.");
+                return;
+            }
+
             byte[] imageBytes = null;
             if (selectedImageFile != null) {
                 imageBytes = Files.readAllBytes(selectedImageFile.toPath());
@@ -86,12 +92,9 @@ public class AdminAddRoomController {
             confirmAlert.setTitle("Confirm Save");
             confirmAlert.setHeaderText(null);
             confirmAlert.setContentText("Are you sure you want to save this room?");
-
             Optional<ButtonType> result = confirmAlert.showAndWait();
-            if (result.isEmpty() || result.get() != javafx.scene.control.ButtonType.OK) {
-                // User cancelled
-                System.out.println("Room save cancelled.");
-                return;
+            if (result.isEmpty() || result.get() != ButtonType.OK) {
+                return; // User cancelled
             }
 
             // Create room object
@@ -111,6 +114,7 @@ public class AdminAddRoomController {
             e.printStackTrace();
         }
     }
+
 
 
 

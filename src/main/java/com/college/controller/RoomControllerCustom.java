@@ -4,6 +4,7 @@ import com.college.domain.CustomRoom;
 import com.college.service.CustomRoomService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -154,6 +155,13 @@ public class RoomControllerCustom {
             try {
                 customRoomService.update(customRoom);
                 System.out.println("CustomRoom " + customRoom.getRoomID() + " updated successfully.");
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Room Updated");
+                alert.setHeaderText(null);
+                alert.setContentText("Room " + customRoom.getRoomID() + " updated successfully.");
+                alert.showAndWait();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -191,10 +199,28 @@ public class RoomControllerCustom {
         ));
         deleteBtn.setOnAction(event -> {
             try {
-                customRoomService.delete(customRoom.getRoomID()); // pass ID instead of object
+                // Prevent deletion if room is unavailable
+                if (!customRoom.getAvailability()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Cannot Delete Room");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Room " + customRoom.getRoomID() + " is Booked and cannot be deleted.");
+                    alert.showAndWait();
+                    return; // stop deletion
+                }
+
+                // Existing delete logic
+                customRoomService.delete(customRoom.getRoomID());
                 roomContainer.getChildren().clear();
                 loadRoomsFromDB();
                 System.out.println("CustomRoom " + customRoom.getRoomID() + " deleted successfully.");
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Room Deleted");
+                alert.setHeaderText(null);
+                alert.setContentText("Room " + customRoom.getRoomID() + " deleted successfully.");
+                alert.showAndWait();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

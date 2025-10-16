@@ -72,6 +72,9 @@ public class PaymentFormController {
             choiceMethod.setValue(payment.getPaymentMethod());
             choiceStatus.setValue(payment.getPaymentStatus());
             datePicker.setValue(payment.getPaymentDate());
+
+            // Preserve the guest
+            this.guest = payment.getGuest();
         }
     }
 
@@ -136,11 +139,15 @@ public class PaymentFormController {
                 payment.setPaymentStatus(choiceStatus.getValue());
                 payment.setPaymentDate(datePicker.getValue());
 
+                //  Preserve guest for updates FIX
+                payment.setGuest(guest);
+
                 paymentService.update(payment);
                 showAlert(Alert.AlertType.INFORMATION, "Payment updated successfully!");
             }
 
-            closeWindow();
+            Stage modalStage = (Stage) txtAmount.getScene().getWindow();  // the modal
+            modalStage.close();
 
         } catch (NumberFormatException e) {
             showAlert("Please enter a valid numeric amount");
@@ -152,7 +159,8 @@ public class PaymentFormController {
 
     @FXML
     private void handleCancel() {
-        closeWindow();
+        Stage modalStage = (Stage) txtAmount.getScene().getWindow();
+        modalStage.close();
     }
 
     private void closeWindow() {

@@ -30,6 +30,10 @@ public class CustomRoomService implements ICustomRoomService {
         return customRoomRepository.findById(integer).orElse(null);
     }
 
+    public CustomRoom findById(int roomId) {
+        return customRoomRepository.findById(roomId).orElse(null);
+    }
+
     @Override
     public CustomRoom update(CustomRoom customRoom) {
         return customRoomRepository.save(customRoom);

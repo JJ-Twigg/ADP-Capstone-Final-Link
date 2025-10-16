@@ -115,19 +115,27 @@ public class PaymentViewController {
     }
 
     @FXML
-    private void handleAddPayment() {
-        openForm(null);
-    }
-
-    @FXML
     private void handleUpdatePayment() {
-        Payment selected = paymentTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            openForm(selected);
+        Payment selectedPayment = paymentTable.getSelectionModel().getSelectedItem();
+        if (selectedPayment != null) {
+            // Grab the Guest from the payment
+            this.guest = selectedPayment.getGuest();
+            openForm(selectedPayment);
         } else {
             showAlert("Please select a payment to update.");
         }
     }
+
+    @FXML
+    private void handleAddPayment() {
+        if (this.guest == null) {
+            showAlert("Please select a payment first to know the guest.");
+            return;
+        }
+        openForm(null); // will use this.guest
+    }
+
+
 
     @FXML
     private void handleDeletePayment() {
@@ -155,34 +163,33 @@ public class PaymentViewController {
     private void openForm(Payment payment) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dialog_boxes/add-payment.fxml"));
-
-            // This is the key fix: Use Spring to create the controller
             loader.setControllerFactory(applicationContext::getBean);
 
             Stage stage = new Stage();
             stage.initOwner((Stage) paymentTable.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
 
-
             stage.setTitle(payment == null ? "Add Payment" : "Update Payment");
             stage.setScene(new Scene(loader.load()));
 
             PaymentFormController controller = loader.getController();
 
+            controller.setGuest(this.guest);  // Guest reference
 
-            controller.setGuest(this.guest);
-
-            if (payment == null) {
+            if (payment != null) {
+                controller.setPayment(payment); // <-- This tells the modal we’re editing
+            } else {
                 controller.setPrice(this.price);
             }
 
             stage.showAndWait();
-            loadPayments(); // Refresh the table
+            loadPayments(); // Refresh table after modal closes
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error opening form: " + e.getMessage());
         }
     }
+
 
 
 
