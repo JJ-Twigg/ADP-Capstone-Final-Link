@@ -9,18 +9,19 @@
 <AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.college.controller.GuestUIController"
-            style="-fx-background-color: white;">
+            style="-fx-background-color: white;"
+            stylesheets="/css/buttonStyle.css"
+>
 
     <!-- Left Sidebar -->
     <VBox fx:id="leftPane"
-          style="-fx-background-color: #45b6fe;"
+          style="-fx-background-color: #66BA88;"
           prefWidth="230.0"
           AnchorPane.topAnchor="0.0"
           AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0"
           spacing="20.0" alignment="TOP_CENTER">
 
-        <!-- Proper padding using Insets -->
         <padding>
             <Insets top="30" right="30" bottom="30" left="30"/>
         </padding>
@@ -34,45 +35,54 @@
 
         <!-- Buttons -->
         <VBox spacing="10.0" alignment="TOP_CENTER">
-<!--            <Button fx:id="btnAddGuest"-->
-<!--                    text="Add Guest"-->
-<!--                    onAction="#handleAddGuest"-->
-<!--                    style="-fx-background-color: #2fa0e8; -fx-background-radius: 15px; -fx-text-fill: white;"-->
-<!--                    prefWidth="150" prefHeight="40"/>-->
+            <!--
+            <Button fx:id="btnAddGuest"
+                    text="Add Guest"
+                    onAction="#handleAddGuest"
+                    style="-fx-background-color: #2fa0e8; -fx-background-radius: 15px; -fx-text-fill: white;"
+                    prefWidth="150" prefHeight="40"/>
+            -->
             <Button fx:id="btnEditGuest"
                     text="Update Guest"
                     onAction="#handleEditGuest"
                     style="-fx-background-color: #398F6C; -fx-background-radius: 15px; -fx-text-fill: white;"
                     prefWidth="150" prefHeight="40"/>
-<!--            <Button fx:id="btnDeleteGuest"-->
-<!--                    text="Delete Guest"-->
-<!--                    onAction="#handleDeleteGuest"-->
-<!--                    style="-fx-background-color: #E02850; -fx-background-radius: 15px; -fx-text-fill: white;"-->
-<!--                    prefWidth="150" prefHeight="40"/>-->
+            <!--
+            <Button fx:id="btnDeleteGuest"
+                    text="Delete Guest"
+                    onAction="#handleDeleteGuest"
+                    style="-fx-background-color: #E02850; -fx-background-radius: 15px; -fx-text-fill: white;"
+                    prefWidth="150" prefHeight="40"/>
+            -->
         </VBox>
     </VBox>
 
-    <!-- Title -->
-    <Text text="Guests"
-          style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;"
-          AnchorPane.topAnchor="30.0"
-          AnchorPane.leftAnchor="250.0"/>
+    <!-- Right-side container -->
+    <VBox AnchorPane.topAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="230.0"
+          AnchorPane.rightAnchor="0.0"
+          spacing="20"
+          alignment="TOP_CENTER">
 
-    <!-- Table -->
-    <TableView fx:id="guestTable"
-               AnchorPane.topAnchor="100.0"
-               AnchorPane.leftAnchor="250.0"
-               AnchorPane.rightAnchor="20.0"
-               AnchorPane.bottomAnchor="20.0"
-               style="-fx-background-color: white; -fx-border-color: transparent;">
-        <columns>
-            <TableColumn fx:id="colGuestID" text="GuestID" prefWidth="60"/>
-            <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
-            <TableColumn fx:id="colSurname" text="Surname" prefWidth="150"/>
-            <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
-            <TableColumn fx:id="colContact" text="Contact" prefWidth="200"/>
-            <TableColumn fx:id="colPayment" text="Payment Method" prefWidth="200"/>
-        </columns>
-    </TableView>
+        <!-- Title (centered horizontally) -->
+        <Text text="Guests"
+              style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;"/>
+
+        <!-- Table -->
+        <TableView fx:id="guestTable"
+                   VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-border-color: transparent;">
+            <columns>
+                <TableColumn fx:id="colGuestID" text="GuestID" prefWidth="60"/>
+                <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="colSurname" text="Surname" prefWidth="150"/>
+                <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+                <TableColumn fx:id="colContact" text="Contact" prefWidth="200"/>
+                <TableColumn fx:id="colPayment" text="Payment Method" prefWidth="200"/>
+            </columns>
+        </TableView>
+
+    </VBox>
 
 </AnchorPane>

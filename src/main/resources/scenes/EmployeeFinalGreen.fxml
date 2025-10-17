@@ -9,10 +9,10 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.EmployeeControllerView"
-      stylesheets="@/css/buttonStyle.css">
+      stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="230.0"
+    <VBox prefWidth="260.0"
           alignment="TOP_CENTER"
           spacing="20.0"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
@@ -24,7 +24,14 @@
         </ImageView>
 
         <!-- Buttons -->
-        <Button text="Update Employee" onAction="#updateEmployee" styleClass="sidebar-btn" />
+
+
+
+<!--        <Button text="Update Employee" onAction="#updateEmployee"  />-->
+
+
+
+
         <!-- Uncomment if needed:
         <Button text="Add Employee" onAction="#addEmployee" styleClass="sidebar-btn" />
         <Button text="Delete Employee" onAction="#deleteEmployee" styleClass="sidebar-btn-danger" />

@@ -14,7 +14,7 @@
 
     <!-- Sidebar -->
     <VBox prefWidth="230.0" spacing="20" alignment="TOP_CENTER"
-          style="-fx-background-color: #66BA88; -fx-padding: 30;">
+          style="-fx-background-color: #45b6fe; -fx-padding: 30;">
         <!-- Logo -->
         <ImageView fitHeight="80.0" preserveRatio="true">
             <image>

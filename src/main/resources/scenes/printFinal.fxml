@@ -24,7 +24,7 @@
 
         <!-- Buttons -->
         <VBox spacing="10.0" alignment="TOP_CENTER">
-            <Button fx:id="btnPrintAll" text="Print Payments" onAction="#handlePrintAllPayments" styleClass="sidebar-btn"/>
+            <Button fx:id="btnPrintAll" text="Print Payments" onAction="#handlePrintAllPayments" styleClass="sidebar-btn"  style="-fx-background-color: #2fa0e8; -fx-text-fill: white;"/>
             <!-- Add more buttons here if needed -->
         </VBox>
     </VBox>

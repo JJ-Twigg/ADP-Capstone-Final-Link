@@ -9,10 +9,10 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.ShiftViewController"
-      stylesheets="@/css/buttonStyle.css">
+      stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="230.0"
+    <VBox prefWidth="260.0"
           alignment="TOP_CENTER"
           spacing="20.0"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
@@ -24,9 +24,9 @@
         </ImageView>
 
         <!-- Buttons -->
-        <Button text="Add Shift" onAction="#handleAddShift" styleClass="sidebar-btn" />
-        <Button text="Update Shift" onAction="#handleUpdateShift" styleClass="sidebar-btn" />
-        <Button text="Delete Shift" onAction="#handleDeleteShift" styleClass="sidebar-btn-danger" />
+        <Button text="Add" onAction="#handleAddShift" styleClass="sidebar-btn" />
+        <Button text="Update" onAction="#handleUpdateShift" styleClass="sidebar-btn" />
+        <Button text="Delete" onAction="#handleDeleteShift" styleClass="sidebar-btn-danger" />
     </VBox>
 
     <!-- Main Content -->

@@ -38,7 +38,7 @@
             <Button fx:id="btnEditGuest"
                     text="Update Guest"
                     onAction="#handleEditGuest"
-                    style="-fx-background-color: #398F6C; -fx-background-radius: 15px; -fx-text-fill: white;"
+                    style="-fx-background-color: #398F6C; -fx-background-radius: 15px; -fx-text-fill: white ; "
                     prefWidth="150" prefHeight="40"/>
             <Button fx:id="btnDeleteGuest"
                     text="Delete Guest"

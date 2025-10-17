@@ -10,10 +10,10 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.GuestUIController"
-      stylesheets="@/css/buttonStyle.css">
+      stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="230.0" spacing="20.0" alignment="TOP_CENTER"
+    <VBox prefWidth="260.0" spacing="20.0" alignment="TOP_CENTER"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
         <!-- Logo -->
         <ImageView fitHeight="80.0" preserveRatio="true">
@@ -24,7 +24,7 @@
 
         <!-- Buttons -->
         <VBox spacing="10.0" alignment="TOP_CENTER">
-            <Button fx:id="btnAddGuest" text="Add Guest" onAction="#handleAddGuest" styleClass="sidebar-btn"/>
+            <Button fx:id="btnAddGuest" text="Add Guest" onAction="#handleAddGuest" style="-fx-background: #317A57"/>
             <!-- Add more buttons here if needed -->
         </VBox>
     </VBox>

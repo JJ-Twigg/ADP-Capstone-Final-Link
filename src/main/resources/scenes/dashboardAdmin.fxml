@@ -42,8 +42,9 @@
                         <Button onAction="#showOverview" styleClass="menu-button" text="Overview" />
                         <Button onAction="#showReservationViewOnly" styleClass="menu-button" text="View Reservations" />
                         <Button onAction="#showGuests" styleClass="menu-button" text="View Guests" />
-                        <Button onAction="#showUsers" styleClass="menu-button" text="Manage Users" />
                         <Button onAction="#showEmployees" styleClass="menu-button" text="Employees" />
+                        <Button onAction="#showUsers" styleClass="menu-button" text="Manage Users" />
+
 <!--                        <Button onAction="#showReservation" styleClass="menu-button" text="Add Reservation" />-->
                         <Button onAction="#showRooms" styleClass="menu-button" text="Rooms" />
 

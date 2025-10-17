@@ -9,11 +9,11 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.EmployeeSalaryController"
-      stylesheets="@/css/buttonStyle.css"
+      stylesheets="/css/buttonStyleFix.css"
 >
 
     <!-- Sidebar -->
-    <VBox prefWidth="230.0"
+    <VBox prefWidth="290.0"
           alignment="TOP_CENTER"
           spacing="20.0"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
@@ -23,15 +23,15 @@
             </image>
         </ImageView>
 
-        <Button text="Add Salary"
+        <Button text="Add "
                 onAction="#handleAddEmployeeSalary"
                 styleClass="sidebar-btn" />
 
-        <Button text="Update Salary"
+        <Button text="Update "
                 onAction="#handleUpdateEmployeeSalary"
                 styleClass="sidebar-btn" />
 
-        <Button text="Delete Salary"
+        <Button text="Delete"
                 onAction="#handleDeleteEmployeeSalary"
                 styleClass="sidebar-btn-danger" />
     </VBox>
