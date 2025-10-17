@@ -322,10 +322,12 @@ public class OverviewController {
         shiftHoursChart.getData().clear();
         shiftHoursChart.getData().add(series);
 
-        // Optional: style the bar
+        // style the bar
         Platform.runLater(() -> {
-            series.getData().forEach(data -> data.getNode().setStyle("-fx-bar-fill: #808080;"));
+            series.getData().forEach(data -> data.getNode().setStyle("-fx-bar-fill: #36454F;"));
         });
+
+        shiftHoursChart.setLegendVisible(false);
     }
 
 
@@ -502,7 +504,7 @@ public class OverviewController {
 
     private void updateShiftChartColor(boolean darkMode) {
         Platform.runLater(() -> {
-            String color = darkMode ? "#333333" : "#808080"; // dark card vs light card solid color
+            String color = darkMode ? "#333333" : "#36454F"; // dark card vs light card solid color
 
             for (XYChart.Series<String, Number> series : shiftHoursChart.getData()) {
                 for (XYChart.Data<String, Number> data : series.getData()) {

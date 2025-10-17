@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -93,6 +94,13 @@ public class UserLoginController {
 
         } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText("Authentication Error");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
+
         }
     }
 

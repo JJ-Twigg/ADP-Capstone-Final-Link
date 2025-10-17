@@ -203,6 +203,12 @@ public class UserRegisterController {
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Register Failed");
+            alert.setHeaderText("Register Error");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
     }
 
