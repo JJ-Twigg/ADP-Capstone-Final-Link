@@ -3,6 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <AnchorPane prefHeight="605.0" prefWidth="1030.0" style="-fx-background-color: white;"
             xmlns="http://javafx.com/javafx/17.0.12"
@@ -15,24 +17,46 @@
           AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0">
         <children>
+            <ImageView fitHeight="80.0" preserveRatio="true"
+                       layoutX="70.0" layoutY="20.0">
+                <image>
+                    <Image url="/images/c.png"/>
+                </image>
+            </ImageView>
 
             <!-- Buttons -->
-            <!--            <Button layoutX="41.0" layoutY="193.0" prefHeight="40.0" prefWidth="150.0"-->
-            <!--                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"-->
-            <!--                    stylesheets="/css/buttonStyle.css" text="Add Employee"-->
-            <!--                    textFill="WHITE" onAction="#addEmployee"/>-->
+            <!--
+            <Button layoutX="41.0" layoutY="193.0" prefHeight="40.0" prefWidth="150.0"
+                    style="-fx-background-color: #398F6C;-fx-background-radius: 15px;"
+                    stylesheets="/css/buttonStyle.css" text="Add Employee"
+                    textFill="WHITE" onAction="#addEmployee"/>
 
-<!--            <Button layoutX="40.0" layoutY="275.0" prefHeight="40.0" prefWidth="150.0"-->
-<!--                    style="-fx-background-color: #2fa0e8;-fx-background-radius: 15px;"-->
-<!--                    stylesheets="/css/buttonStyle.css" text="Update Employee"-->
-<!--                    textFill="WHITE" onAction="#updateEmployee"/>-->
+            <Button layoutX="40.0" layoutY="275.0" prefHeight="40.0" prefWidth="150.0"
+                    style="-fx-background-color: #2fa0e8;-fx-background-radius: 15px;"
+                    stylesheets="/css/buttonStyle.css" text="Update Employee"
+                    textFill="WHITE" onAction="#updateEmployee"/>
 
-            <!--            <Button layoutX="40.0" layoutY="350.0" prefHeight="40.0" prefWidth="150.0"-->
-            <!--                    style="-fx-background-color: #E02850;-fx-background-radius: 15px;"-->
-            <!--                    stylesheets="/css/buttonStyle.css" text="Delete Employee"-->
-            <!--                    textFill="WHITE" onAction="#deleteEmployee"/>-->
+            <Button layoutX="40.0" layoutY="350.0" prefHeight="40.0" prefWidth="150.0"
+                    style="-fx-background-color: #E02850;-fx-background-radius: 15px;"
+                    stylesheets="/css/buttonStyle.css" text="Delete Employee"
+                    textFill="WHITE" onAction="#deleteEmployee"/>
+            -->
         </children>
     </Pane>
+
+    <!-- Heading -->
+    <HBox alignment="CENTER"
+          AnchorPane.topAnchor="30.0"
+          AnchorPane.leftAnchor="250.0"
+          AnchorPane.rightAnchor="20.0">
+        <Text fill="#383838"
+              strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Employees" style="-fx-font-weight: bold;" textAlignment="CENTER">
+            <font>
+                <Font size="32.0"/>
+            </font>
+        </Text>
+    </HBox>
 
     <!-- Table -->
     <TableView fx:id="employeeTable"
@@ -49,14 +73,4 @@
         </columns>
     </TableView>
 
-    <!-- Heading -->
-    <Text fill="#383838"
-          strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Employees" textAlignment="CENTER" wrappingWidth="188.35"
-          AnchorPane.topAnchor="30.0"
-          AnchorPane.leftAnchor="250.0">
-        <font>
-            <Font size="32.0"/>
-        </font>
-    </Text>
 </AnchorPane>

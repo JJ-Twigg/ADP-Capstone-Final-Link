@@ -10,10 +10,10 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.PaymentViewController"
-      stylesheets="@/css/buttonStyle.css">
+      stylesheets="/css/buttonStyle.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="230.0" spacing="20.0" alignment="TOP_CENTER"
+    <VBox prefWidth="270.0" spacing="20.0" alignment="TOP_CENTER"
           style="-fx-background-color: #45b6fe; -fx-padding: 30;">
         <!-- Logo -->
         <ImageView fitHeight="80.0" preserveRatio="true">
@@ -24,7 +24,7 @@
 
         <!-- Buttons -->
         <VBox spacing="10.0" alignment="TOP_CENTER">
-            <Button fx:id="btnPrintAll" text="Print Payments" onAction="#handlePrintAllPayments" styleClass="sidebar-btn"  style="-fx-background-color: #2fa0e8; -fx-text-fill: white;"/>
+            <Button fx:id="btnPrintAll" text="Print Payments" onAction="#handlePrintAllPayments" styleClass="sidebar-btn"      prefHeight="40.0" prefWidth="150.0"  style="-fx-background-color: #2fa0e8; -fx-text-fill: white;-fx-background-radius: 20px;"/>
             <!-- Add more buttons here if needed -->
         </VBox>
     </VBox>

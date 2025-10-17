@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -52,21 +53,14 @@
     </Pane>
 
     <!-- Title -->
-
-    <HBox AnchorPane.topAnchor="30.0"
-          AnchorPane.leftAnchor="0.0"
-          AnchorPane.rightAnchor="0.0"
-          alignment="CENTER">
-        <Text fill="#383838"
-              strokeType="OUTSIDE"
-              strokeWidth="0.0"
-              text="Users"
-              textAlignment="CENTER">
-            <font>
-                <Font size="32.0"/>
-            </font>
-        </Text>
-    </HBox>
+<!--    <HBox AnchorPane.topAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"-->
+<!--          alignment="CENTER">-->
+<!--        <children>-->
+<!--            <Label text="Users" textAlignment="CENTER" alignment="CENTER"-->
+<!--                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #383838;"-->
+<!--                   maxWidth="Infinity"/>-->
+<!--        </children>-->
+<!--    </HBox>-->
 
     <!-- User Table -->
     <TableView fx:id="userTable"
