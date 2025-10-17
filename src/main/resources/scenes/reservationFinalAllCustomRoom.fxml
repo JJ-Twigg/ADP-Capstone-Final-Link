@@ -13,7 +13,8 @@
       stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="270.0" spacing="20.0" alignment="TOP_CENTER"
+    <VBox prefWidth="220.0" spacing="20.0" alignment="TOP_CENTER"
+          minWidth="230.0"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
         <!-- Logo -->
         <ImageView fitHeight="80.0" preserveRatio="true">
@@ -24,9 +25,9 @@
 
         <!-- Buttons -->
         <VBox spacing="10.0" alignment="TOP_CENTER">
-            <Button fx:id="btnEdit" text="Update Reservation" onAction="#update" styleClass="sidebar-btn"/>
+            <Button fx:id="btnEdit" prefWidth="150" prefHeight="40" text="Update Reservation" onAction="#update" styleClass="sidebar-btn"/>
             <!--            <Button fx:id="btnAdd" text="Add Reservation" onAction="#add" styleClass="sidebar-btn"/>-->
-            <Button fx:id="btnDelete" text="Delete Reservation" onAction="#delete" styleClass="sidebar-btn-danger"/>
+            <Button fx:id="btnDelete" prefWidth="150" prefHeight="40" text="Delete Reservation" onAction="#delete" styleClass="sidebar-btn-danger"/>
         </VBox>
 
         <!-- Feedback label -->

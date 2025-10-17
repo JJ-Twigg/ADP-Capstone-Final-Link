@@ -12,7 +12,8 @@
       stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="260.0"
+    <VBox prefWidth="220.0"
+          minWidth="220.0"
           alignment="TOP_CENTER"
           spacing="20.0"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
@@ -24,9 +25,12 @@
         </ImageView>
 
         <!-- Buttons -->
-        <Button text="Add" onAction="#handleAddShift" styleClass="sidebar-btn" />
-        <Button text="Update" onAction="#handleUpdateShift" styleClass="sidebar-btn" />
-        <Button text="Delete" onAction="#handleDeleteShift" styleClass="sidebar-btn-danger" />
+        <Button text="Add" onAction="#handleAddShift" styleClass="sidebar-btn"
+                prefWidth="150" prefHeight="40"/>
+        <Button text="Update" onAction="#handleUpdateShift" styleClass="sidebar-btn"
+                prefWidth="150" prefHeight="40"/>
+        <Button text="Delete" onAction="#handleDeleteShift"
+                prefWidth="150" prefHeight="40"/>
     </VBox>
 
     <!-- Main Content -->

@@ -11,7 +11,7 @@
             fx:controller="com.college.controller.EventUIController">
 
     <!-- Left Sidebar -->
-    <Pane prefWidth="230.0" style="-fx-background-color: #66BA88;"
+    <Pane prefWidth="230.0" minWidth="220.0" style="-fx-background-color: #66BA88;"
           AnchorPane.topAnchor="0.0"
           AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0">

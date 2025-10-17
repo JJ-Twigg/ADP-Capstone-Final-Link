@@ -13,7 +13,7 @@
       stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
-    <VBox prefWidth="260.0" spacing="20.0" alignment="TOP_CENTER"
+    <VBox prefWidth="230.0" minWidth="230.0"  spacing="20.0" alignment="TOP_CENTER"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
         <!-- Logo -->
         <ImageView fitHeight="80.0" preserveRatio="true">
@@ -24,7 +24,7 @@
 
         <!-- Buttons -->
         <VBox spacing="10.0" alignment="TOP_CENTER">
-            <Button fx:id="btnAddGuest" text="Add Guest" onAction="#handleAddGuest" style="-fx-background: #317A57"/>
+            <Button fx:id="btnAddGuest" prefWidth="150" prefHeight="40" text="Add Guest" onAction="#handleAddGuest" style="-fx-background: #317A57"/>
             <!-- Add more buttons here if needed -->
         </VBox>
     </VBox>

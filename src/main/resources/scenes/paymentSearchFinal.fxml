@@ -14,7 +14,8 @@
 
     <!-- Sidebar (fixed) -->
     <Pane fx:id="sidebar"
-          prefWidth="230.0"
+          prefWidth="220.0"
+          minWidth="220.0"
           style="-fx-background-color: #66BA88;"
           AnchorPane.topAnchor="0.0"
           AnchorPane.bottomAnchor="0.0"

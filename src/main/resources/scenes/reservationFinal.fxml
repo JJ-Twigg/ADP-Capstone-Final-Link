@@ -10,7 +10,7 @@
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.college.controller.ReservationUIController"
-      stylesheets="@/css/buttonStyle.css">
+      stylesheets="/css/buttonStyleFix.css">
 
     <!-- Sidebar -->
     <VBox prefWidth="280.0" spacing="20.0" alignment="TOP_CENTER"

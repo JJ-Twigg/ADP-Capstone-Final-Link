@@ -73,7 +73,7 @@
     <Text fill="#383838"
           text="Events"
           AnchorPane.topAnchor="15.0"
-          AnchorPane.leftAnchor="250.0">
+          AnchorPane.leftAnchor="560.0"> <!-- Centered horizontally -->
         <font>
             <Font size="32.0"/>
         </font>

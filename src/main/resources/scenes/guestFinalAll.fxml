@@ -63,6 +63,7 @@
           AnchorPane.leftAnchor="230.0"
           AnchorPane.rightAnchor="0.0"
           spacing="20"
+          style="-fx-padding: 0 30 0 30;"
           alignment="TOP_CENTER">
 
         <!-- Title (centered horizontally) -->

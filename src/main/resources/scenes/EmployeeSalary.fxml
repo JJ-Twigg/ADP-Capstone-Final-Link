@@ -13,7 +13,8 @@
 >
 
     <!-- Sidebar -->
-    <VBox prefWidth="290.0"
+    <VBox prefWidth="220.0"
+          minWidth="220.0"
           alignment="TOP_CENTER"
           spacing="20.0"
           style="-fx-background-color: #66BA88; -fx-padding: 30;">
@@ -25,14 +26,17 @@
 
         <Button text="Add "
                 onAction="#handleAddEmployeeSalary"
+                prefWidth="150" prefHeight="40"
                 styleClass="sidebar-btn" />
 
         <Button text="Update "
                 onAction="#handleUpdateEmployeeSalary"
+                prefWidth="150" prefHeight="40"
                 styleClass="sidebar-btn" />
 
         <Button text="Delete"
                 onAction="#handleDeleteEmployeeSalary"
+                prefWidth="150" prefHeight="40"
                 styleClass="sidebar-btn-danger" />
     </VBox>
 

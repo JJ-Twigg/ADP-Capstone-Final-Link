@@ -16,7 +16,10 @@
     <DatePicker fx:id="endDatePicker" layoutX="145.0" layoutY="126.0" maxWidth="260.0" prefHeight="38.0" prefWidth="190.0" />
 
     <!-- Spinner placed under the dates -->
-    <Spinner fx:id="numGuestsSpinner" layoutX="145.0" layoutY="180.0" prefWidth="100.0" />
+    <!-- Label and Spinner for Number of Guests -->
+    <Label layoutX="60.0" layoutY="185.0" text="Number of Guests:" />
+    <Spinner fx:id="numGuestsSpinner" layoutX="190.0" layoutY="180.0" prefWidth="100.0" />
+
 
     <ComboBox fx:id="comboBoxBookingType" layoutX="57.0" layoutY="230.0" maxWidth="278.0" prefHeight="38.0" prefWidth="278.0" promptText="Select Booking Type" style="-fx-background-radius: 0; -fx-border-radius: 0;" />
     <ComboBox fx:id="comboBoxNumbers" layoutX="57.0" layoutY="282.0" maxWidth="278.0" prefHeight="38.0" prefWidth="278.0" promptText="Select Room Number" style="-fx-background-radius: 0; -fx-border-radius: 0;" />

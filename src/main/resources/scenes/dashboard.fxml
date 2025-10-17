@@ -49,7 +49,7 @@
                         <Button onAction="#showGuestSolo" styleClass="menu-button" text="Manage Guests" />
                         <Button onAction="#showReservationSolo" styleClass="menu-button" text="Manage Reservation" />
 
-                        <Button onAction="#showReservationCustomRoom" styleClass="menu-button" text="Custom Reservations" />
+                        <Button onAction="#showReservationCustomRoom" styleClass="menu-button" text="Custom Reserves" />
 
                         <Button onAction="#showEventsSolo" styleClass="menu-button" text="Manage Events" />
                         <Button onAction="#showPaymentsSolo" styleClass="menu-button" text="Manage Payments" />
