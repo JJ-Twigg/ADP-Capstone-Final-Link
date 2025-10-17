@@ -37,7 +37,7 @@ public class AddEditGuestDialog extends Dialog<Guest> {
 
         // Header
         Label headerLabel = new Label(guest == null ? "Add Guest" : "Edit Guest");
-        headerLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        headerLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill:#66BA88");
         HBox headerBox = new HBox(headerLabel);
         headerBox.setAlignment(Pos.CENTER);
         headerBox.setPadding(new Insets(0, 0, 10, 0));
@@ -128,7 +128,7 @@ public class AddEditGuestDialog extends Dialog<Guest> {
         // Centered buttons with FXML style
         Button saveButton = new Button("Save");
         saveButton.setPrefSize(120, 40);
-        saveButton.setStyle("-fx-background-color: #45b6fe; -fx-text-fill: white; -fx-background-radius: 0;");
+        saveButton.setStyle("-fx-background-color: #66BA88; -fx-text-fill: white; -fx-background-radius: 0;");
         saveButton.setCursor(Cursor.HAND);
 
         Button cancelButton = new Button("Cancel");

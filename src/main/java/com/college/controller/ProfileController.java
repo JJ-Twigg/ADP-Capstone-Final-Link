@@ -52,14 +52,28 @@ public class ProfileController {
         Optional<String> newEmail = dialog.showAndWait();
         if (newEmail.isEmpty()) return;
 
+        String updatedEmail = newEmail.get().trim();
+
+        // Check if the new email is already in use
+        Optional<User> existingUser = userRepository.findByEmail(updatedEmail);
+        if (existingUser.isPresent() && !existingUser.get().getEmail().equals(user.getEmail())) {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+            alert.setTitle("Duplicate Email");
+            alert.setHeaderText(null);
+            alert.setContentText("The email '" + updatedEmail + "' is already in use. Please choose a different one.");
+            alert.showAndWait();
+            return; // stop the update
+        }
+
         // Save new email
-        user.setEmail(newEmail.get());
+        user.setEmail(updatedEmail);
         userRepository.save(user);
 
-        // Update current userEmail and refresh
-        this.userEmail = newEmail.get();
+        // Update current userEmail and refresh labels
+        this.userEmail = updatedEmail;
         refreshUserInfo();
     }
+
 
     @FXML
     private void updateName() {

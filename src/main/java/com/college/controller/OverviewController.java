@@ -213,21 +213,36 @@ public class OverviewController {
         Optional<String> email = dialog.showAndWait();
         if (email.isEmpty()) return;
 
+        String newEmail = email.get().trim();
+
+        // Check if the email already exists
+        Optional<User> existingUser = userRepository.findByEmail(newEmail);
+        if (existingUser.isPresent() && !existingUser.get().getEmail().equals(userEmailLabel.getText())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Duplicate Email");
+            alert.setHeaderText(null);
+            alert.setContentText("The email '" + newEmail + "' is already in use. Please choose a different one.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+            return; // stop here
+        }
+
         // Update user in DB
-        userObj.get().setEmail(email.get());
+        userObj.get().setEmail(newEmail);
         userRepository.save(userObj.get());
 
         // Update local label
-        setUserEmail(email.get());
+        setUserEmail(newEmail);
 
-        // **Update DashboardController so the new email persists**
+        // Update DashboardController so the new email persists
         if (dashboardController != null) {
-            dashboardController.updateEmail(email.get());  // key line
-            dashboardController.setUserInfo(email.get());  // optional: update dashboard label immediately
+            dashboardController.updateEmail(newEmail);
+            dashboardController.setUserInfo(newEmail);
         }
 
         System.out.println("User updated: " + userObj.get());
     }
+
 
 
     @FXML

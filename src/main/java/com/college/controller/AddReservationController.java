@@ -109,6 +109,9 @@ public class AddReservationController {
 
         numGuestsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
 
+        makeDatePickerReadOnly(startDatePicker);
+        makeDatePickerReadOnly(endDatePicker);
+
 
         // Employee ComboBox, this just gets all employees and works well.
 //        comboBoxEmployee.getItems().addAll(employeeService.getAllEmployees());
@@ -445,7 +448,11 @@ public class AddReservationController {
         }
     }
 
-
+    private void makeDatePickerReadOnly(DatePicker datePicker) {
+        datePicker.setEditable(false); // no typing
+        datePicker.getEditor().setDisable(true);
+        datePicker.getEditor().setMouseTransparent(true); //
+    }
 
     @FXML
     private void cancel() {
