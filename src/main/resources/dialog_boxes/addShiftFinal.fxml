@@ -90,7 +90,7 @@
             <children>
             
                 <!-- Buttons -->
-                <Button fx:id="btnSave" onAction="#handleSave" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #2fa0e8;" text="Save" textFill="WHITE">
+                <Button fx:id="btnSave" onAction="#handleSave" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #66BA88;" text="Save" textFill="WHITE">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -101,7 +101,7 @@
                      <Insets right="10.0" />
                   </HBox.margin>
                </Button>
-                <Button fx:id="btnCancel" alignment="CENTER" onAction="#handleCancel" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: black;" text="Cancel" textFill="WHITE">
+                <Button fx:id="btnCancel" alignment="CENTER" onAction="#handleCancel" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #C20010;" text="Cancel" textFill="WHITE">
                   <font>
                      <Font size="14.0" />
                   </font>

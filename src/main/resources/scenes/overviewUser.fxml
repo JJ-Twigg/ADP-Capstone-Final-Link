@@ -15,18 +15,7 @@
             <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: linear-gradient(to bottom, #36454F, #707880);" text="Dashboard Overview" />
 
 
-            <!-- clock -->
-            <HBox fx:id="clockBox" styleClass="clock-box" alignment="CENTER" spacing="10"
-                  style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);; -fx-background-radius: 12; -fx-padding: 10; "  prefWidth="200" minWidth="200" maxWidth="400"
-                  AnchorPane.topAnchor="20" AnchorPane.rightAnchor="20">
 
-                <!-- Clock icon -->
-                <Label text="⏰" style="-fx-font-size: 24px;" />
-
-                <!-- Time & Date -->
-                <Label fx:id="clockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
-
-            </HBox>
 
 
             <!-- Top Row: 3 Statistic Blocks -->
@@ -115,7 +104,18 @@
 
 
 
+            <!-- clock -->
+            <HBox fx:id="clockBox" styleClass="clock-box" alignment="CENTER" spacing="10"
+                  style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);; -fx-background-radius: 12; -fx-padding: 10; "  prefWidth="200" minWidth="200" maxWidth="400"
+                  AnchorPane.topAnchor="20" AnchorPane.rightAnchor="20">
 
+                <!-- Clock icon -->
+                <Label text="⏰" style="-fx-font-size: 24px;" />
+
+                <!-- Time & Date -->
+                <Label fx:id="clockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+            </HBox>
 
 
 
