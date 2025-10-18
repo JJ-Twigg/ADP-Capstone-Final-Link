@@ -237,6 +237,69 @@ rooms db i only show 6 rooms on ui currently 1 page,
 but db has 9 rooms.
 
 
+---
+new
+
+---
+
+INSERT INTO Room (roomID, room_type, price_Per_Night, availability, features, reservation_id)
+VALUES
+(51, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Desk Lamp', NULL),
+(52, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Mini Fridge', NULL),
+(53, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Sofa, Balcony', NULL),
+(54, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Coffee Maker', NULL),
+(55, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Bathtub', NULL),
+(56, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Coffee Maker, Balcony', NULL),
+(57, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Reading Lamp', NULL),
+(58, 'Double', 800.00, TRUE, 'AC, TV, Wifi, Desk, Armchair', NULL),
+(59, 'Suite', 1200.00, TRUE, 'AC, TV, Wifi, Mini Bar, Jacuzzi', NULL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+project setup.
+1. insert all these static rooms into room table in database.
+
+2. make sure there are many housekeeper users 10+, so that u dont run into a situation
+where u cant book rooms because there are 0 housekeeprs avaialbile in presentation cause
+they are all taken. when u delete a res, that housekeeper becomes avaialble 
+again to book a room with them.
+
+3.
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+--- 
+old
+
 INSERT INTO Room (roomID, room_type, price_Per_Night, availability, features, reservation_id)
 VALUES
 (51, 'Single', 500.00, TRUE, 'AC, TV, Wifi, Desk Lamp', NULL),
