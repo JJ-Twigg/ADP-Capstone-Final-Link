@@ -25,7 +25,7 @@
         </ImageView>
 
         <!-- Buttons -->
-        <Button text="Add Payment" onAction="#handleAddPayment" styleClass="sidebar-btn" />
+        <Button text="Add Payment" prefHeight="40.0" prefWidth="150.0" onAction="#handleAddPayment" styleClass="sidebar-btn" />
         <!-- Uncomment if needed:
         <Button text="Update Payment" onAction="#handleUpdatePayment" styleClass="sidebar-btn" />
         <Button text="Delete Payment" onAction="#handleDeletePayment" styleClass="sidebar-btn-danger" />

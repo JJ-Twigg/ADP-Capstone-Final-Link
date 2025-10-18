@@ -5,6 +5,7 @@ import com.college.domain.Event;
 import com.college.domain.Reservation;
 import com.college.service.EventUIService;
 import com.college.service.EventUIServiceNaked;
+import com.college.service.NumGuestCache;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -30,6 +32,11 @@ public class EventUIController {
     @FXML private TableColumn<Event, Integer> colId;
     @FXML
     private TableColumn<Event, Integer> colReservationId;
+
+    @FXML private TableColumn<Event, Integer> colNumGuests;
+
+    @Autowired
+    private NumGuestCache numGuestCache;
 
     @FXML private TableColumn<Event, String> colReason;
     @FXML private TableColumn<Event, String> colDescription;
@@ -71,6 +78,18 @@ public class EventUIController {
 
         colReason.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getReason()));
         colDescription.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDescription()));
+
+
+        // NEW: numGuests column
+        colNumGuests.setCellValueFactory(cellData -> {
+            Event event = cellData.getValue();
+            Reservation r = event.getReservation();
+            int numGuests = 0; // default to 0
+            if (r != null && numGuestCache.getNumGuests(r.getReservationId()) != null) {
+                numGuests = numGuestCache.getNumGuests(r.getReservationId());
+            }
+            return new SimpleIntegerProperty(numGuests).asObject();
+        });
 
         eventTable.setFixedCellSize(35);
         eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
