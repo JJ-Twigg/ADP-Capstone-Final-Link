@@ -52,10 +52,13 @@
     </VBox>
 
     <!-- Title -->
-    <Text text="Shifts"
-          style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;"
-          AnchorPane.topAnchor="30.0"
-          AnchorPane.leftAnchor="250.0"/>
+    <HBox AnchorPane.topAnchor="30.0"
+          AnchorPane.leftAnchor="230.0"
+          AnchorPane.rightAnchor="20.0"
+          alignment="CENTER">
+        <Text text="Shifts"
+              style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #383838;" />
+    </HBox>
 
     <!-- Table -->
     <TableView fx:id="shiftTable"

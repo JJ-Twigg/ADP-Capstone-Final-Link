@@ -4,90 +4,120 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;
- -fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12"
+<ScrollPane fitToHeight="true" fitToWidth="true"
+            style="-fx-background-color: white;"
+            xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/17.0.12"
             fx:controller="com.college.controller.OverviewController">
 
     <AnchorPane style="-fx-padding: 20; -fx-background-color: white;">
-        <VBox alignment="CENTER" spacing="40" style="-fx-background-color: white;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <VBox alignment="TOP_CENTER" spacing="40"
+              style="-fx-background-color: white;"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0">
 
             <!-- Header -->
-            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: linear-gradient(to bottom, #36454F, #707880);" text="Dashboard Overview" />
+            <Label text="User Dashboard Overview"
+                   style="-fx-font-size: 28px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: linear-gradient(to bottom, #36454F, #707880);" />
 
+            <!-- Top Row: Responsive Statistic Cards -->
+            <FlowPane alignment="CENTER" hgap="20" vgap="20" prefWrapLength="800">
 
-
-
-
-            <!-- Top Row: 3 Statistic Blocks -->
-            <HBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
-
-                <!-- Total Guests -->
-                <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                <!-- Email Card -->
+                <VBox alignment="CENTER" spacing="10">
                     <VBox styleClass="card-box"
-                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880); -fx-background-radius: 12; -fx-alignment: center; -fx-padding: 10;"
-                          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="200" prefWidth="1.0">
-                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="👥" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Email" />
-                        <Label fx:id="userEmailLabel" onMouseClicked="#updateEmail"
-                               style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
+                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);
+                                 -fx-background-radius: 12;
+                                 -fx-alignment: center;
+                                 -fx-padding: 20;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);"
+                          minWidth="200" prefWidth="250" maxWidth="300">
+                        <Label text="👥" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+                        <Label text="Email"
+                               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                        <Label fx:id="userEmailLabel"
+                               onMouseClicked="#updateEmail"
                                text="johnDoe@gmail.com"
-                               wrapText="true" textAlignment="CENTER"/>
+                               wrapText="true" textAlignment="CENTER"
+                               style="-fx-text-fill: white;
+                                      -fx-font-size: 28px;
+                                      -fx-font-weight: bold;" />
                     </VBox>
                 </VBox>
 
-                <!-- Total Revenue -->
-                <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                <!-- Name Card -->
+                <VBox alignment="CENTER" spacing="10">
                     <VBox styleClass="card-box"
-                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880); -fx-background-radius: 12; -fx-alignment: center; -fx-padding: 10;"
-                          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="200" prefWidth="1.0">
-                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="💰" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Name" />
-                        <Label fx:id="nameLabel" onMouseClicked="#updateName"
-                               style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
-                               text="johnDoe"
-                               wrapText="true" textAlignment="CENTER"/>
+                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);
+                                 -fx-background-radius: 12;
+                                 -fx-alignment: center;
+                                 -fx-padding: 20;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);"
+                          minWidth="200" prefWidth="250" maxWidth="300">
+                        <Label text="💰" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+                        <Label text="Name"
+                               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                        <Label fx:id="nameLabel"
+                               onMouseClicked="#updateName"
+                               text="John Doe"
+                               wrapText="true" textAlignment="CENTER"
+                               style="-fx-text-fill: white;
+                                      -fx-font-size: 28px;
+                                      -fx-font-weight: bold;" />
                     </VBox>
                 </VBox>
 
-                <!-- Occupancy Rate -->
-                <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                <!-- Role Card -->
+                <VBox alignment="CENTER" spacing="10">
                     <VBox styleClass="card-box"
-                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880); -fx-background-radius: 12; -fx-alignment: center; -fx-padding: 10;"
-                          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="200" prefWidth="1.0">
-                        <Label style="-fx-font-size: 30px; -fx-text-fill: white;" text="📊" />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Role" />
+                          style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);
+                                 -fx-background-radius: 12;
+                                 -fx-alignment: center;
+                                 -fx-padding: 20;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);"
+                          minWidth="200" prefWidth="250" maxWidth="300">
+                        <Label text="📊" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+                        <Label text="Role"
+                               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
                         <Label fx:id="roleLabel"
-                               style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"
-                               text="role"
-                               wrapText="true" textAlignment="CENTER"/>
+                               text="Administrator"
+                               wrapText="true" textAlignment="CENTER"
+                               style="-fx-text-fill: white;
+                                      -fx-font-size: 28px;
+                                      -fx-font-weight: bold;" />
                     </VBox>
                 </VBox>
 
-            </HBox>
+            </FlowPane>
 
-
+            <!-- Buttons Row -->
             <HBox alignment="CENTER" spacing="10">
-                <Button text="Upload Image" fx:id="uploadImageButton"
+                <Button text="Upload Image"
+                        fx:id="uploadImageButton"
                         onAction="#handleUploadImage"
-                        style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);; -fx-text-fill: white; -fx-background-radius: 10;"
-                        prefWidth="220" prefHeight="35"/>
+                        style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);
+                               -fx-text-fill: white;
+                               -fx-background-radius: 10;"
+                        prefWidth="220" prefHeight="35" />
 
-                <ToggleButton fx:id="themeToggleButton" text="Dark Mode" onAction="#toggleTheme"
+                <ToggleButton fx:id="themeToggleButton"
+                              text="Dark Mode"
+                              onAction="#toggleTheme"
                               style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);
-                     -fx-text-fill: white;
-                     -fx-font-weight: bold;
-                     -fx-font-size: 14px;
-                     -fx-background-radius: 5;
-                     -fx-padding: 8 20 8 20;
-                     -fx-cursor: hand;"
+                                     -fx-text-fill: white;
+                                     -fx-font-weight: bold;
+                                     -fx-font-size: 14px;
+                                     -fx-background-radius: 5;
+                                     -fx-padding: 8 20 8 20;
+                                     -fx-cursor: hand;"
                               prefWidth="150" prefHeight="35" />
-
-
             </HBox>
 
-
-
-            <!-- Bottom Row: Shift Hours Chart -->
+            <!-- Shift Hours Chart -->
             <HBox alignment="CENTER" spacing="30">
                 <VBox styleClass="chart-box">
                     <BarChart fx:id="shiftHoursChart" prefHeight="250" prefWidth="400" title="Shift Hours">
@@ -101,78 +131,53 @@
                 </VBox>
             </HBox>
 
-
-
-
-            <!-- clock -->
-            <HBox fx:id="clockBox" styleClass="clock-box" alignment="CENTER" spacing="10"
-                  style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);; -fx-background-radius: 12; -fx-padding: 10; "  prefWidth="200" minWidth="200" maxWidth="400"
+            <!-- Clock -->
+            <HBox fx:id="clockBox"
+                  styleClass="clock-box"
+                  alignment="CENTER"
+                  spacing="10"
+                  style="-fx-background-color: linear-gradient(to bottom, #36454F, #707880);
+                         -fx-background-radius: 12;
+                         -fx-padding: 10;"
+                  prefWidth="200" minWidth="200" maxWidth="400"
                   AnchorPane.topAnchor="20" AnchorPane.rightAnchor="20">
 
-                <!-- Clock icon -->
                 <Label text="⏰" style="-fx-font-size: 24px;" />
-
-                <!-- Time & Date -->
-                <Label fx:id="clockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
-
+                <Label fx:id="clockLabel"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;" />
             </HBox>
 
-
-
-
-
-
-            <!-- Bottom Row: 3 Charts HIDDEN! deleting causes errors in overview controller, DO NOT DELETE THESE 3 they are hidden! -->
+            <!-- Hidden Charts and Labels (keep for controller bindings) -->
             <HBox alignment="CENTER" spacing="30">
-                <!-- Total Guests Chart -->
-                <VBox visible="false" style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                <VBox visible="false">
                     <BarChart fx:id="totalGuestsChart" prefHeight="250" prefWidth="300" title="Total Guests">
-                        <xAxis>
-                            <CategoryAxis label="Month" />
-                        </xAxis>
-                        <yAxis>
-                            <NumberAxis label="Number of Guests" />
-                        </yAxis>
+                        <xAxis><CategoryAxis label="Month"/></xAxis>
+                        <yAxis><NumberAxis label="Number of Guests"/></yAxis>
                     </BarChart>
                 </VBox>
 
-                <!-- Revenue Chart -->
-                <VBox visible="false" style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
+                <VBox visible="false">
                     <BarChart fx:id="revenueBarChart" prefHeight="250" prefWidth="300" title="Revenue">
-                        <xAxis>
-                            <CategoryAxis label="Month" />
-                        </xAxis>
-                        <yAxis>
-                            <NumberAxis label="Revenue (R)" />
-                        </yAxis>
+                        <xAxis><CategoryAxis label="Month"/></xAxis>
+                        <yAxis><NumberAxis label="Revenue (R)"/></yAxis>
                     </BarChart>
                 </VBox>
 
-                <!-- Occupancy Chart -->
-                <VBox visible="false" style="-fx-background-color: #ffffff; -fx-border-color: #27ae60; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10;">
-                    <PieChart fx:id="occupancyPieChart" prefHeight="250" prefWidth="300" title="Occupancy Breakdown" />
+                <VBox visible="false">
+                    <PieChart fx:id="occupancyPieChart" prefHeight="250" prefWidth="300" title="Occupancy Breakdown"/>
                 </VBox>
             </HBox>
 
-
-            <!-- this is hidden and fixes guest label null when calling user, this relates to dashboard admin they both use overview controller-->
-            <!-- they all use same controller, so must have same fxids otherwise u get null errors-->
             <PieChart visible="false" fx:id="totalEmployeesPieChart" title="Total Employees" prefHeight="300" prefWidth="450"/>
-
             <PieChart visible="false" fx:id="reservationsPieChart" title="Reservations" prefHeight="300" prefWidth="350"/>
-
-            <!-- this is hidden and fixes guest label null when calling user, this relates to dashboard admin they both use overview controller-->
-            <Label fx:id="currentGuestsLabel" layoutX="100" layoutY="50" text="0" visible="false"/>
+            <Label fx:id="currentGuestsLabel" text="0" visible="false"/>
 
             <BarChart fx:id="monthlyEarningsBarChart" title="Total Revenue" prefHeight="400" prefWidth="750" visible="false">
-                <xAxis>
-                    <CategoryAxis fx:id="monthsAxis" label="Month"/>
-                </xAxis>
-                <yAxis>
-                    <NumberAxis fx:id="earningsAxis" label="Earnings (k)"/>
-                </yAxis>
+                <xAxis><CategoryAxis fx:id="monthsAxis" label="Month"/></xAxis>
+                <yAxis><NumberAxis fx:id="earningsAxis" label="Earnings (k)"/></yAxis>
             </BarChart>
-
         </VBox>
     </AnchorPane>
 </ScrollPane>

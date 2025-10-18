@@ -90,8 +90,13 @@ public class PaymentViewController {
             ).asObject();
         });
 
+        paymentTable.setFixedCellSize(35);
+        paymentTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 
         paymentTable.setItems(payments);
+
+
 
         // Debug: Check if Spring injection worked
         System.out.println("PaymentViewController initialized");

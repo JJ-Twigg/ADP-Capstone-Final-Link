@@ -72,6 +72,9 @@ public class EventUIController {
         colReason.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getReason()));
         colDescription.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDescription()));
 
+        eventTable.setFixedCellSize(35);
+        eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         loadEvents();
     }
 

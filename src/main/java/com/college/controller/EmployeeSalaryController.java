@@ -76,7 +76,8 @@ public class EmployeeSalaryController {
             }
         });
 
-
+        employeeSalaryTable.setFixedCellSize(35);
+        employeeSalaryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         employeeSalaryTable.setItems(employeeSalaries);
         loadEmployeeSalaries();

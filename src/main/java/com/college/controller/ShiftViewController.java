@@ -71,6 +71,8 @@ public class ShiftViewController {
         colOvertime.setCellValueFactory(new PropertyValueFactory<>("shiftOvertime"));
 
 
+
+
         colEmployeeName.setCellValueFactory(cellData -> {
             if (cellData.getValue().getEmployee() != null && cellData.getValue().getEmployee().getUser() != null) {
                 return new SimpleStringProperty(cellData.getValue().getEmployee().getUser().getName());
@@ -98,7 +100,8 @@ public class ShiftViewController {
         });
 
 
-
+        shiftTable.setFixedCellSize(35);
+        shiftTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         shiftTable.setItems(shifts);
 

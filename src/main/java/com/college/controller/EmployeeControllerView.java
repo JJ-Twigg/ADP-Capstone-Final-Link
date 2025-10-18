@@ -48,6 +48,9 @@ public class EmployeeControllerView {
             ).asObject();
         });
 
+        employeeTable.setFixedCellSize(35);
+        employeeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         loadEmployees();
     }
 

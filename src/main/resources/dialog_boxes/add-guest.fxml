@@ -7,7 +7,7 @@
 <AnchorPane prefHeight="450" prefWidth="400" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.college.controller.AddEditGuestDialogr">
 
      <!-- Heading -->
-     <Label alignment="CENTER" layoutX="151.0" layoutY="27.0" maxWidth="Infinity" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #66BA88;" text="Add Guest" />
+     <Label alignment="CENTER" layoutX="151.0" layoutY="27.0" maxWidth="Infinity" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #66BA88;" text="Add Guest" />
       <TextField fx:id="txtID" editable="false" layoutX="150.0" layoutY="71.0" maxWidth="260" minWidth="172.0" prefHeight="31.0" prefWidth="172.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" />
       <TextField fx:id="txtName" layoutX="150.0" layoutY="116.0" maxWidth="260" minWidth="172.0" prefHeight="38.0" prefWidth="172.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" />
       <TextField fx:id="txtSurname" layoutX="149.0" layoutY="173.0" maxWidth="260" minWidth="172.0" prefHeight="38.0" prefWidth="172.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" />

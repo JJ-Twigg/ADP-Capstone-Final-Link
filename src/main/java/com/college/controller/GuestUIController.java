@@ -68,6 +68,9 @@ public class GuestUIController {
         colPayment.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleStringProperty(data.getValue().getPaymentDetails()));
 
+        guestTable.setFixedCellSize(35);
+        guestTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         loadGuests();
     }
 

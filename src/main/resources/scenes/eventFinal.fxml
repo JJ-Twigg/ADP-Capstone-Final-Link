@@ -26,7 +26,7 @@
 
                 <!-- Reason input, false visible at first-->
                 <HBox fx:id="reasonBox" spacing="10.0" visible="false">
-                    <TextField fx:id="reasonField" promptText="Reason: Holiday, Work, etc." prefWidth="200.0"/>
+                    <TextField fx:id="reasonField" promptText="Event: Party, Conference, Wedding." prefWidth="200.0"/>
                 </HBox>
 
                 <!-- Description input, false visible at first -->
@@ -56,7 +56,7 @@
 
     <!-- TableView -->
     <TableView fx:id="eventTable"
-               AnchorPane.topAnchor="50.0"
+               AnchorPane.topAnchor="70.0"
                AnchorPane.leftAnchor="250.0"
                AnchorPane.rightAnchor="20.0"
                AnchorPane.bottomAnchor="20.0"

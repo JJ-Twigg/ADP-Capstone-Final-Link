@@ -61,6 +61,9 @@ public class UserTableController {
                         : ""
         ));
 
+        userTable.setFixedCellSize(30);
+        userTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         // Load data from DB
         loadUsers();
     }
