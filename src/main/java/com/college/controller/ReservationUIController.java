@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import com.college.domain.CustomRoom;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,6 +74,9 @@ public class ReservationUIController implements Initializable {
 
     @Autowired
     RoomService roomService;
+
+    @Autowired
+    CustomRoomService customRoomService;
 
 
     private final ReservationService reservationService;
@@ -244,8 +248,6 @@ public class ReservationUIController implements Initializable {
 
 
 
-
-
     @FXML
     private void delete() {
         Reservation selectedReservation = reservationTable.getSelectionModel().getSelectedItem();
@@ -255,6 +257,23 @@ public class ReservationUIController implements Initializable {
             return;
         }
 
+        // Check if reservation is linked to a custom room
+        CustomRoom cr = customRoomService.getAll().stream()
+                .filter(room -> room.getReservation() != null &&
+                        room.getReservation().getReservationId() == selectedReservation.getReservationId())
+                .findFirst().orElse(null);
+
+        if (cr != null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Cannot Delete custom room reservation from here");
+            alert.setHeaderText("This is a custom reservation");
+            alert.setContentText("forbidden to delete a custom reservation from this page (Room ID: " + cr.getRoomID() + ").\n" +
+                    "please use custom reserve page");
+            alert.showAndWait();
+            return; // Stop deletion
+        }
+
+        // Proceed with confirmation if safe to delete
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Deletion");
         alert.setHeaderText("Delete Reservation?");
@@ -263,33 +282,27 @@ public class ReservationUIController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                //get fk from parent and child methods
-                int guestId = selectedReservation.getGuest().getGuestID();
+                int guestId = selectedReservation.getGuest().getGuestId();
 
                 if (selectedReservation.getEvent() != null) {
                     eventService.deleteByReservationId(selectedReservation.getReservationId());
                 }
 
-                // Nullify employee FK in the room linked to this reservation
-                if (selectedReservation.getRoom() != null) {
-                    selectedReservation.getRoom().setEmployee(null);
-                    roomService.update(selectedReservation.getRoom()); // persist change
-                }
-
                 boolean deleted = reservationService.delete(selectedReservation.getReservationId());
-                //delete from other tables at the same time too
                 paymentService.deleteByGuestId(guestId);
 
-
+                // Remove guest if no remaining reservations
+                if (reservationService.getByGuestId(guestId).isEmpty()) {
+                    guestService.delete(guestId);
+                }
 
                 if (deleted) {
                     labelFeedback.setText("Reservation ID: " + selectedReservation.getReservationId() + " deleted successfully.");
-                    //delete from other tables at the same time too
-                    guestService.delete(guestId);
                     loadReservationData();
                 } else {
                     labelFeedback.setText("Failed to delete reservation ID: " + selectedReservation.getReservationId() + ".");
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 labelFeedback.setText("Error deleting reservation: " + e.getMessage());
@@ -297,11 +310,10 @@ public class ReservationUIController implements Initializable {
         } else {
             labelFeedback.setText("Deletion cancelled.");
         }
-
-
-
-
     }
+
+
+
 
     @FXML
     private void update() {

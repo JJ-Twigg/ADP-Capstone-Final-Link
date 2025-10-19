@@ -66,6 +66,8 @@
             <TableColumn fx:id="colReservationId" prefWidth="100" text="Reservation ID"/>
             <TableColumn fx:id="colReason" prefWidth="150" text="Reason"/>
             <TableColumn fx:id="colDescription" prefWidth="200" text="Description"/>
+
+            <TableColumn visible="false" fx:id="colNumGuests" text="Guests" prefWidth="80"/>
         </columns>
     </TableView>
 

@@ -76,6 +76,8 @@
                 <TableColumn fx:id="colReason" prefWidth="150" text="Reason" />
                 <TableColumn fx:id="colDescription" prefWidth="200" text="Description" />
                 <TableColumn fx:id="colNumGuests" prefWidth="120" text="Number of Guests" />
+
+
             </columns>
         </TableView>
 
